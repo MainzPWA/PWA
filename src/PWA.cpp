@@ -169,6 +169,15 @@ void Print()
   printf("Mlp  |  Fit (Chi^2/NDF = %6.3f, NDF = %2d)        |  Model               |  Chi'^2\n", ChiSq()/NDF(), NDF());
   printf("-----+--------------------------------------------+----------------------+----------\n");
 
+  if(ONLY_CROSS_S || ONLY_CROSS_F) //Handle special cases for s,p wave imaginary parts in threshold fits
+  {
+    //This is rather dirty, as it works destructive on the loaded model parameters.
+    //However, the overwritten values are never used anyway...
+    maid_Ep[0][eM] = TComplex(maid_Ep[0][eM].Re(), ImE0p());
+    maid_Ep[1][eM] = TComplex(maid_Ep[1][eM].Re(), 0.0);
+    maid_Mp[1][eM] = TComplex(maid_Mp[1][eM].Re(), 0.0);
+    maid_Mm[1][eM] = TComplex(maid_Mm[1][eM].Re(), 0.0);
+  }
   DeviationSq = (Ep[0]-maid_Ep[0][eM]).Rho2()/DEp[0].Rho2();
   printf("E0+  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
           Ep[0].Re(), DEp[0].Re(), Ep[0].Im(), DEp[0].Im(), maid_Ep[0][eM].Re(), maid_Ep[0][eM].Im(), DeviationSq);
