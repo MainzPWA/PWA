@@ -297,6 +297,7 @@ void Init()
   MIN_ENERGY    = 144.7;
   MAX_ENERGY    = 420.0;
   VARIATION     = 0.20;
+  BETA          = 3.43;
   ITERATIONS    = 16;
   SOLUTIONS     = 1;
   MASS_MESON    = MASS_PIZERO;
@@ -335,6 +336,7 @@ void Init()
     if(sscanf(Buffer, "PENALTY_MLP1 %lf", &Double)==1) PENALTY[MLP1] = Double;
     if(sscanf(Buffer, "PENALTY_MLP2 %lf", &Double)==1) PENALTY[MLP2] = Double;
     if(sscanf(Buffer, "SCALING %lf", &Double)==1) SCALING = Double;
+    if(sscanf(Buffer, "BETA %lf", &Double)==1) BETA = Double;
     if(sscanf(Buffer, "VARIATION %lf", &Double)==1) VARIATION = Double;
     if(sscanf(Buffer, "MIN_ENERGY %lf", &Double)==1) MIN_ENERGY = Double;
     if(sscanf(Buffer, "MAX_ENERGY %lf", &Double)==1) MAX_ENERGY = Double;
@@ -384,7 +386,7 @@ void Init()
     printf("Error: FIX_IM_E0P only allowed for ONLY_CROSS_S or ONLY_CROSS_F.\n");
     exit(0);
   }
-  if((ONLY_CROSS_S|| ONLY_CROSS_F) && (FIX_EP_PHASE[0] || FIX_EP_PHASE[1] || FIX_MP_PHASE[1] || FIX_MM_PHASE[1]))
+  if((ONLY_CROSS_S || ONLY_CROSS_F) && (FIX_EP_PHASE[0] || FIX_EP_PHASE[1] || FIX_MP_PHASE[1] || FIX_MM_PHASE[1]))
   {
     printf("Error: ONLY_CROSS_S or ONLY_CROSS_F must not be used with explicit phase fixing.\n");
     exit(0);
@@ -433,6 +435,7 @@ void Init()
   printf("PRINT_PENALTY %1d\n", PRINT_PENALTY);
   printf("ITERATIONS %4d\n", ITERATIONS);
   printf("SOLUTIONS %2d\n", SOLUTIONS);
+  printf("BETA %4.2f\n", BETA);
   printf("VARIATION %5.3f\n", VARIATION);
   printf("MASS_MESON %5.3f\n", MASS_MESON);
   printf("MASS_INITIAL %5.3f\n", MASS_INITIAL);

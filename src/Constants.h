@@ -39,7 +39,6 @@ static const Double_t MASS2_KMINUS     = MASS_KMINUS*MASS_KMINUS;
 static const Double_t MASS2_KZERO      = MASS_KZERO*MASS_KZERO;
 static const Double_t MASS2_ETA        = MASS_ETA*MASS_ETA;
 static const Double_t MASS2_ETAPRIME   = MASS_ETAPRIME*MASS_ETAPRIME;
-static const Double_t BETA_UNITARY = 3.35;
 static const Double_t HBARC = 197.3269; //MeV fm (hbar*c)
 static const Double_t UNIT  = (HBARC/MASS_PIPLUS)*(HBARC/MASS_PIPLUS)*1e-2;
 //'Unit' is the conversion from the multipole's units (10^-3/m_pi+) to cross section unit (ub).

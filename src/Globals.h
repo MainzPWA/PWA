@@ -54,6 +54,7 @@ extern Double_t MASS2_FINAL;
 extern Double_t THRESHOLD;
 extern Double_t EPSILON;
 extern Double_t EPSILON2;
+extern Double_t BETA;
 
 //-----------------------------------------------------------------------------
 

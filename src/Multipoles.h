@@ -98,7 +98,7 @@ inline Double_t W_thres()
 
 inline Double_t ImE0p()
 {
-  return BETA_UNITARY*q_pip(gEnergy)/MASS_PIPLUS;
+  return BETA*q_pip(gEnergy)/MASS_PIPLUS;
 }
 
 //-----------------------------------------------------------------------------

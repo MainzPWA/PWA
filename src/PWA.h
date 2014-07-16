@@ -230,5 +230,6 @@ Double_t MASS2_FINAL;
 Double_t THRESHOLD;
 Double_t EPSILON;
 Double_t EPSILON2;
+Double_t BETA;
 
 //-----------------------------------------------------------------------------
