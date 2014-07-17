@@ -103,14 +103,6 @@ inline Double_t ImE0p()
 
 //-----------------------------------------------------------------------------
 
-//CGLN amplitudes in s,p,d wave approximation
-//inline TComplex F1(Double_t CosTheta){ return Ep[0] + 3.0*CosTheta*(Ep[1] + Mp[1]) + Em[2] + 3.0*Mm[2] + 0.5*(15.0*CosTheta*CosTheta - 3.0)*(Ep[2] + 2.0*Mp[2]); }
-//inline TComplex F2(Double_t CosTheta){ return Mm[1] + 2.0*Mp[1] + 3.0*CosTheta*(2.0*Mm[2] + 3.0*Mp[2]); }
-//inline TComplex F3(Double_t CosTheta){ return 3.0*(Ep[1] - Mp[1]) + 15.0*CosTheta*(Ep[2] - Mp[2]); }
-//inline TComplex F4(Double_t CosTheta){ return 3.0*(Mp[2] - Ep[2] - Mm[2] - Em[2]); }
-
-//-----------------------------------------------------------------------------
-
 //CGLN amplitude F1 in expansion up to l_max
 inline TComplex F1(Double_t CosTheta)
 {
@@ -276,6 +268,58 @@ inline Double_t sigmaE(Double_t Theta, Double_t Omega)
 
 //-----------------------------------------------------------------------------
 
+inline Double_t sigmaCx(Double_t Theta, Double_t Omega)
+{
+  Double_t SinTheta = Sin(Theta*DegToRad());
+  Double_t CosTheta = Cos(Theta*DegToRad());
+
+  TComplex Complex = F1cc(CosTheta)*F1(CosTheta) - F2cc(CosTheta)*F2(CosTheta)
+                   + F1cc(CosTheta)*F3(CosTheta) - F2cc(CosTheta)*F3(CosTheta)
+                   + CosTheta*(F1cc(CosTheta)*F3(CosTheta) - F2cc(CosTheta)*F4(CosTheta));
+  return SinTheta*Complex.Re()*rho(Omega)*UNIT;
+}
+
+//-----------------------------------------------------------------------------
+
+inline Double_t sigmaCz(Double_t Theta, Double_t Omega)
+{
+  Double_t SinTheta = Sin(Theta*DegToRad());
+  Double_t CosTheta = Cos(Theta*DegToRad());
+  Double_t Sin2Theta = SinTheta*SinTheta;
+
+  TComplex Complex = 2.0*F1cc(CosTheta)*F2(CosTheta)
+                   + Sin2Theta*(F1cc(CosTheta)*F3(CosTheta) + F2cc(CosTheta)*F4(CosTheta))
+                   - CosTheta*(F1cc(CosTheta)*F1(CosTheta) + F2cc(CosTheta)*F2(CosTheta));
+  return Complex.Re()*rho(Omega)*UNIT;
+}
+
+//-----------------------------------------------------------------------------
+
+inline Double_t sigmaOx(Double_t Theta, Double_t Omega)
+{
+  Double_t SinTheta = Sin(Theta*DegToRad());
+  Double_t CosTheta = Cos(Theta*DegToRad());
+
+  TComplex Complex = F1cc(CosTheta)*F4(CosTheta) - F2cc(CosTheta)*F3(CosTheta)
+                   + CosTheta*(F1cc(CosTheta)*F3(CosTheta) - F2cc(CosTheta)*F4(CosTheta));
+  return -SinTheta*Complex.Im()*rho(Omega)*UNIT;
+}
+
+
+//-----------------------------------------------------------------------------
+
+inline Double_t sigmaOz(Double_t Theta, Double_t Omega)
+{
+  Double_t SinTheta = Sin(Theta*DegToRad());
+  Double_t CosTheta = Cos(Theta*DegToRad());
+  Double_t Sin2Theta = SinTheta*SinTheta;
+
+  TComplex Complex = F1cc(CosTheta)*F3(CosTheta) + F2cc(CosTheta)*F4(CosTheta);
+  return -Sin2Theta*Complex.Im()*rho(Omega)*UNIT;
+}
+
+//-----------------------------------------------------------------------------
+
 inline Double_t S(Double_t Theta, Double_t Omega)
 {
   return sigmaS(Theta, Omega)/sigma0(Theta, Omega);
@@ -321,6 +365,34 @@ inline Double_t F(Double_t Theta, Double_t Omega)
 inline Double_t E(Double_t Theta, Double_t Omega)
 {
   return sigmaE(Theta, Omega)/sigma0(Theta, Omega);
+}
+
+//-----------------------------------------------------------------------------
+
+inline Double_t Cx(Double_t Theta, Double_t Omega)
+{
+  return sigmaCx(Theta, Omega)/sigma0(Theta, Omega);
+}
+
+//-----------------------------------------------------------------------------
+
+inline Double_t Cz(Double_t Theta, Double_t Omega)
+{
+  return sigmaCz(Theta, Omega)/sigma0(Theta, Omega);
+}
+
+//-----------------------------------------------------------------------------
+
+inline Double_t Ox(Double_t Theta, Double_t Omega)
+{
+  return sigmaOx(Theta, Omega)/sigma0(Theta, Omega);
+}
+
+//-----------------------------------------------------------------------------
+
+inline Double_t Oz(Double_t Theta, Double_t Omega)
+{
+  return sigmaOz(Theta, Omega)/sigma0(Theta, Omega);
 }
 
 //-----------------------------------------------------------------------------
