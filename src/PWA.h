@@ -152,6 +152,86 @@ Int_t H_bin;
 
 //-----------------------------------------------------------------------------
 
+Double_t sgCx_val[EBINS][THBINS];
+Double_t sgCx_err[EBINS][THBINS];
+Double_t sgCx_th[EBINS][THBINS];
+Double_t sgCx_en[EBINS];
+Double_t sgCx_wt[EBINS];
+Double_t sgCx_sy[EBINS];
+Int_t sgCx_pts[EBINS];
+Int_t sgCx_bin;
+
+Double_t Cx_val[EBINS][THBINS];
+Double_t Cx_err[EBINS][THBINS];
+Double_t Cx_th[EBINS][THBINS];
+Double_t Cx_en[EBINS];
+Double_t Cx_wt[EBINS];
+Double_t Cx_sy[EBINS];
+Int_t Cx_pts[EBINS];
+Int_t Cx_bin;
+
+//-----------------------------------------------------------------------------
+
+Double_t sgCz_val[EBINS][THBINS];
+Double_t sgCz_err[EBINS][THBINS];
+Double_t sgCz_th[EBINS][THBINS];
+Double_t sgCz_en[EBINS];
+Double_t sgCz_wt[EBINS];
+Double_t sgCz_sy[EBINS];
+Int_t sgCz_pts[EBINS];
+Int_t sgCz_bin;
+
+Double_t Cz_val[EBINS][THBINS];
+Double_t Cz_err[EBINS][THBINS];
+Double_t Cz_th[EBINS][THBINS];
+Double_t Cz_en[EBINS];
+Double_t Cz_wt[EBINS];
+Double_t Cz_sy[EBINS];
+Int_t Cz_pts[EBINS];
+Int_t Cz_bin;
+
+//-----------------------------------------------------------------------------
+
+Double_t sgOx_val[EBINS][THBINS];
+Double_t sgOx_err[EBINS][THBINS];
+Double_t sgOx_th[EBINS][THBINS];
+Double_t sgOx_en[EBINS];
+Double_t sgOx_wt[EBINS];
+Double_t sgOx_sy[EBINS];
+Int_t sgOx_pts[EBINS];
+Int_t sgOx_bin;
+
+Double_t Ox_val[EBINS][THBINS];
+Double_t Ox_err[EBINS][THBINS];
+Double_t Ox_th[EBINS][THBINS];
+Double_t Ox_en[EBINS];
+Double_t Ox_wt[EBINS];
+Double_t Ox_sy[EBINS];
+Int_t Ox_pts[EBINS];
+Int_t Ox_bin;
+
+//-----------------------------------------------------------------------------
+
+Double_t sgOz_val[EBINS][THBINS];
+Double_t sgOz_err[EBINS][THBINS];
+Double_t sgOz_th[EBINS][THBINS];
+Double_t sgOz_en[EBINS];
+Double_t sgOz_wt[EBINS];
+Double_t sgOz_sy[EBINS];
+Int_t sgOz_pts[EBINS];
+Int_t sgOz_bin;
+
+Double_t Oz_val[EBINS][THBINS];
+Double_t Oz_err[EBINS][THBINS];
+Double_t Oz_th[EBINS][THBINS];
+Double_t Oz_en[EBINS];
+Double_t Oz_wt[EBINS];
+Double_t Oz_sy[EBINS];
+Int_t Oz_pts[EBINS];
+Int_t Oz_bin;
+
+//-----------------------------------------------------------------------------
+
 TComplex maid_Ep[LBINS][EBINS];
 TComplex maid_Em[LBINS][EBINS];
 TComplex maid_Mp[LBINS][EBINS];

@@ -47,13 +47,15 @@ static const Double_t UNIT  = (HBARC/MASS_PIPLUS)*(HBARC/MASS_PIPLUS)*1e-2;
 enum{ MODEL = 1, BORN = 2, NONRES = 3 };
 enum{ CHI2ONLY = 1, CHI2PENALTY = 2, ADAPTIVE = 3 };
 enum{ MLP1 = 1, MLP2 = 2, MLP3 = 3 };
-enum{ SIG_0 =  0,
-      SIG_S =  1, SIG_T =  2, SIG_P =  3, SIG_E =  4, SIG_F =  5, SIG_G =  6, SIG_H =  7,
-      ASY_S =  8, ASY_T =  9, ASY_P = 10, ASY_E = 11, ASY_F = 12, ASY_G = 13, ASY_H = 14 };
+enum{ SIG_0  =  0,
+      SIG_S  =  1, SIG_T  =  2, SIG_P  =  3, SIG_E  =  4, SIG_F  =  5, SIG_G  =  6, SIG_H  =  7,
+      SIG_CX =  8, SIG_CZ =  9, SIG_OX = 10, SIG_OZ = 11,
+      ASY_S  = 12, ASY_T  = 13, ASY_P  = 14, ASY_E  = 15, ASY_F  = 16, ASY_G  = 17, ASY_H  = 18,
+      ASY_CX = 19, ASY_CZ = 20, ASY_OX = 21, ASY_OZ = 22 };
 static const Int_t EBINS  = 2048;
 static const Int_t THBINS = 256;
 static const Int_t LBINS  = 10;
 static const Int_t FINITE = 256;
 static const Int_t SOL = 16;
-static const Int_t OBS = 15;
+static const Int_t OBS = 23;
 #endif

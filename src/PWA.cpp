@@ -10,6 +10,10 @@
 #include "Parse_sgF.h"
 #include "Parse_sgG.h"
 #include "Parse_sgH.h"
+#include "Parse_sgCx.h"
+#include "Parse_sgCz.h"
+#include "Parse_sgOx.h"
+#include "Parse_sgOz.h"
 #include "Parse_S.h"
 #include "Parse_T.h"
 #include "Parse_P.h"
@@ -17,6 +21,10 @@
 #include "Parse_F.h"
 #include "Parse_G.h"
 #include "Parse_H.h"
+#include "Parse_Cx.h"
+#include "Parse_Cz.h"
+#include "Parse_Ox.h"
+#include "Parse_Oz.h"
 #include "Parse_MAID.h"
 #include "PWA.h"
 #include "Version.h"
@@ -215,20 +223,28 @@ void Print()
     printf("sgA  |  Scale           |  A   |  Scale           |\n");
     printf("-----+------------------+------+------------------+---------------------------------\n");
     printf("sg0  |  %5.3f +- %5.3f  |      |                  |\n", f_obs[SIG_0], Df_obs[SIG_0]);
-    printf("sgS  |  %5.3f +- %5.3f  | ",  f_obs[SIG_S], Df_obs[SIG_S]);
-    printf(" S   |  %5.3f +- %5.3f  |\n", f_obs[ASY_S], Df_obs[ASY_S]);
-    printf("sgT  |  %5.3f +- %5.3f  | ",  f_obs[SIG_T], Df_obs[SIG_T]);
-    printf(" T   |  %5.3f +- %5.3f  |\n", f_obs[ASY_T], Df_obs[ASY_T]);
-    printf("sgP  |  %5.3f +- %5.3f  | ",  f_obs[SIG_P], Df_obs[SIG_P]);
-    printf(" P   |  %5.3f +- %5.3f  |\n", f_obs[ASY_P], Df_obs[ASY_P]);
-    printf("sgE  |  %5.3f +- %5.3f  | ",  f_obs[SIG_E], Df_obs[SIG_E]);
-    printf(" E   |  %5.3f +- %5.3f  |\n", f_obs[ASY_E], Df_obs[ASY_E]);
-    printf("sgF  |  %5.3f +- %5.3f  | ",  f_obs[SIG_F], Df_obs[SIG_F]);
-    printf(" F   |  %5.3f +- %5.3f  |\n", f_obs[ASY_F], Df_obs[ASY_F]);
-    printf("sgG  |  %5.3f +- %5.3f  | ",  f_obs[SIG_G], Df_obs[SIG_G]);
-    printf(" G   |  %5.3f +- %5.3f  |\n", f_obs[ASY_G], Df_obs[ASY_G]);
-    printf("sgH  |  %5.3f +- %5.3f  | ",  f_obs[SIG_H], Df_obs[SIG_H]);
-    printf(" H   |  %5.3f +- %5.3f  |\n", f_obs[ASY_H], Df_obs[ASY_H]);
+    printf("sgS  |  %5.3f +- %5.3f  | ",  f_obs[SIG_S],  Df_obs[SIG_S]);
+    printf(" S   |  %5.3f +- %5.3f  |\n", f_obs[ASY_S],  Df_obs[ASY_S]);
+    printf("sgT  |  %5.3f +- %5.3f  | ",  f_obs[SIG_T],  Df_obs[SIG_T]);
+    printf(" T   |  %5.3f +- %5.3f  |\n", f_obs[ASY_T],  Df_obs[ASY_T]);
+    printf("sgP  |  %5.3f +- %5.3f  | ",  f_obs[SIG_P],  Df_obs[SIG_P]);
+    printf(" P   |  %5.3f +- %5.3f  |\n", f_obs[ASY_P],  Df_obs[ASY_P]);
+    printf("sgE  |  %5.3f +- %5.3f  | ",  f_obs[SIG_E],  Df_obs[SIG_E]);
+    printf(" E   |  %5.3f +- %5.3f  |\n", f_obs[ASY_E],  Df_obs[ASY_E]);
+    printf("sgF  |  %5.3f +- %5.3f  | ",  f_obs[SIG_F],  Df_obs[SIG_F]);
+    printf(" F   |  %5.3f +- %5.3f  |\n", f_obs[ASY_F],  Df_obs[ASY_F]);
+    printf("sgG  |  %5.3f +- %5.3f  | ",  f_obs[SIG_G],  Df_obs[SIG_G]);
+    printf(" G   |  %5.3f +- %5.3f  |\n", f_obs[ASY_G],  Df_obs[ASY_G]);
+    printf("sgH  |  %5.3f +- %5.3f  | ",  f_obs[SIG_H],  Df_obs[SIG_H]);
+    printf(" H   |  %5.3f +- %5.3f  |\n", f_obs[ASY_H],  Df_obs[ASY_H]);
+    printf("sgCx |  %5.3f +- %5.3f  | ",  f_obs[SIG_CX], Df_obs[SIG_CX]);
+    printf(" Cx  |  %5.3f +- %5.3f  |\n", f_obs[ASY_CX], Df_obs[ASY_CX]);
+    printf("sgCz |  %5.3f +- %5.3f  | ",  f_obs[SIG_CZ], Df_obs[SIG_CZ]);
+    printf(" Cz  |  %5.3f +- %5.3f  |\n", f_obs[ASY_CZ], Df_obs[ASY_CZ]);
+    printf("sgOx |  %5.3f +- %5.3f  | ",  f_obs[SIG_OX], Df_obs[SIG_OX]);
+    printf(" Ox  |  %5.3f +- %5.3f  |\n", f_obs[ASY_OX], Df_obs[ASY_OX]);
+    printf("sgOz |  %5.3f +- %5.3f  | ",  f_obs[SIG_OZ], Df_obs[SIG_OZ]);
+    printf(" Oz  |  %5.3f +- %5.3f  |\n", f_obs[ASY_OZ], Df_obs[ASY_OZ]);
     printf("------------------------+------+------------------+---------------------------------\n");
   }
 
@@ -464,6 +480,10 @@ void Load()
   Parse_sgF();
   Parse_sgG();
   Parse_sgH();
+  Parse_sgCx();
+  Parse_sgCz();
+  Parse_sgOx();
+  Parse_sgOz();
   Parse_S();
   Parse_T();
   Parse_P();
@@ -471,6 +491,10 @@ void Load()
   Parse_F();
   Parse_G();
   Parse_H();
+  Parse_Cx();
+  Parse_Cz();
+  Parse_Ox();
+  Parse_Oz();
   printf("------------------------------------------------------------------------------------\n");
   Parse_MAID();
   printf("------------------------------------------------------------------------------------\n");
