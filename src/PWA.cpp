@@ -174,7 +174,7 @@ void Print()
 
   printf("\n------------------------------------------------------------------------------------\n");
   printf("omega = %7.3f MeV, W = %8.3f MeV\n", gEnergy, W_cm(gEnergy));
-  printf("Mlp  |  Fit (Chi^2/NDF = %6.3f, NDF = %2d)        |  Model               |  Chi'^2\n", ChiSq()/NDF(), NDF());
+  printf("Mlp  |  Fit (Chi^2/NDF = %6.3f, NDF = %3d)       |  Model               |  Chi'^2\n", ChiSq()/NDF(), NDF());
   printf("-----+--------------------------------------------+----------------------+----------\n");
 
   if(ONLY_CROSS_S || ONLY_CROSS_F) //Handle special cases for s,p wave imaginary parts in threshold fits
