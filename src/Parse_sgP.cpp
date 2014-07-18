@@ -9,7 +9,7 @@ void Parse_sgP()
   Double_t Energy, Weight, System, Theta, sigmaP, DsigmaP;
   FILE* File_sgP;
 
-  printf("Loading sgP data... ");
+  printf("Loading sgP  data... ");
   File_sgP = fopen("data/sgP.txt", "r");
 
   sgP_bin = 0;
@@ -30,7 +30,7 @@ void Parse_sgP()
       sgP_val[EnergyBin][ThetaBin] = sigmaP;
       sgP_err[EnergyBin][ThetaBin] = DsigmaP;
       sgP_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaP!=0.0) && (DsigmaP!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaP!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgP);

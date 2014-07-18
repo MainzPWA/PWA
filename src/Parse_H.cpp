@@ -9,7 +9,7 @@ void Parse_H()
   Double_t Energy, Weight, System, Theta, H, DH;
   FILE* File_H;
 
-  printf("Loading   H data... ");
+  printf("Loading   H  data... ");
   File_H = fopen("data/H.txt", "r");
 
   H_bin = 0;
@@ -30,7 +30,7 @@ void Parse_H()
       H_val[EnergyBin][ThetaBin] = H;
       H_err[EnergyBin][ThetaBin] = DH;
       H_th[EnergyBin][ThetaBin]  = Theta;
-      if((H!=0.0) && (DH!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DH!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_H);

@@ -30,7 +30,7 @@ void Parse_sgOx()
       sgOx_val[EnergyBin][ThetaBin] = sigmaOx;
       sgOx_err[EnergyBin][ThetaBin] = DsigmaOx;
       sgOx_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaOx!=0.0) && (DsigmaOx!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaOx!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgOx);

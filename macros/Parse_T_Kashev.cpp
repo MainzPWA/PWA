@@ -33,7 +33,7 @@ void Parse_T(Char_t* KashevFile, Double_t Weight=1.00, Double_t System=0.05)
       T_val[T_bin][ThetaBin] = T;
       T_err[T_bin][ThetaBin] = DT;
       T_th[T_bin][ThetaBin]  = TMath::ACos(CosTheta)*TMath::RadToDeg();
-      if((T!=0.0) && (DT!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DT!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_T_in);

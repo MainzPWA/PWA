@@ -30,7 +30,7 @@ void Parse_sgOz()
       sgOz_val[EnergyBin][ThetaBin] = sigmaOz;
       sgOz_err[EnergyBin][ThetaBin] = DsigmaOz;
       sgOz_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaOz!=0.0) && (DsigmaOz!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaOz!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgOz);

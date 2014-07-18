@@ -9,7 +9,7 @@ void Parse_S()
   Double_t Energy, Weight, System, Theta, Sigma, DSigma;
   FILE* File_S;
 
-  printf("Loading   S data... ");
+  printf("Loading   S  data... ");
   File_S = fopen("data/S.txt", "r");
 
   S_bin = 0;
@@ -30,7 +30,7 @@ void Parse_S()
       S_val[EnergyBin][ThetaBin] = Sigma;
       S_err[EnergyBin][ThetaBin] = DSigma;
       S_th[EnergyBin][ThetaBin]  = Theta;
-      if((Sigma!=0.0) && (DSigma!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DSigma!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_S);

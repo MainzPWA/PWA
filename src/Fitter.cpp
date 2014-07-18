@@ -95,7 +95,7 @@ Double_t ChiSq()
 
   if(ONLY_CROSS_S) return (ChiSq_0 + ChiSq_S);
   if(ONLY_CROSS_F) return (ChiSq_0 + ChiSq_F);
-  return (ChiSq_0 + ChiSq_S + ChiSq_T + ChiSq_P + ChiSq_E + ChiSq_F + ChiSq_G + ChiSq_H + ChiSq_Cx + ChiSq_Cz + ChiSq_Ox + ChiSq_Oz);
+  return (ChiSq_0 + ChiSq_S + ChiSq_T + ChiSq_P + ChiSq_E + ChiSq_F + ChiSq_G + ChiSq_H);// + ChiSq_Cx + ChiSq_Cz + ChiSq_Ox + ChiSq_Oz);
 }
 
 //-----------------------------------------------------------------------------

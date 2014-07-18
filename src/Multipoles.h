@@ -274,7 +274,7 @@ inline Double_t sigmaCx(Double_t Theta, Double_t Omega)
   Double_t CosTheta = Cos(Theta*DegToRad());
 
   TComplex Complex = F1cc(CosTheta)*F1(CosTheta) - F2cc(CosTheta)*F2(CosTheta)
-                   + F1cc(CosTheta)*F3(CosTheta) - F2cc(CosTheta)*F3(CosTheta)
+                   + F1cc(CosTheta)*F4(CosTheta) - F2cc(CosTheta)*F3(CosTheta)
                    + CosTheta*(F1cc(CosTheta)*F3(CosTheta) - F2cc(CosTheta)*F4(CosTheta));
   return SinTheta*Complex.Re()*rho(Omega)*UNIT;
 }

@@ -39,7 +39,7 @@ void Parse_sg0(Char_t* PrakhovFile, Double_t Weight=1.00, Double_t System=0.05)
       sg0_val[sg0_bin][ThetaBin] = sigma0;
       sg0_err[sg0_bin][ThetaBin] = Dsigma0;
       sg0_th[sg0_bin][ThetaBin]  = Theta;
-      if((sigma0!=0.0) && (Dsigma0!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(Dsigma0!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 2 uninteresting lines
     fgets(Buffer, sizeof(Buffer), File_sg0_in);

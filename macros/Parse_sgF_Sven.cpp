@@ -44,7 +44,7 @@ void Parse_sgF(Char_t* SvenFile, Double_t Weight=1.00, Double_t System=0.05)
       sgF_val[sgF_bin][ThetaBin] = sigmaF;
       sgF_err[sgF_bin][ThetaBin] = DsigmaF;
       sgF_th[sgF_bin][ThetaBin]  = Theta;
-      if((sigmaF!=0.0) && (DsigmaF!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaF!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 5 uninteresting lines
     fgets(Buffer, sizeof(Buffer), File_sgF_in);

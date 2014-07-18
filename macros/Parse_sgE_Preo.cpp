@@ -33,7 +33,7 @@ void Parse_sgE(Char_t* PreoFile, Double_t Weight=1.00, Double_t System=0.05)
       sgE_val[sgE_bin][ThetaBin] = -sigmaE/2.0;
       sgE_err[sgE_bin][ThetaBin] = DsigmaE/2.0;
       sgE_th[sgE_bin][ThetaBin]  = Theta;
-      if((sigmaE!=0.0) && (DsigmaE!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaE!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgE_in);

@@ -44,7 +44,7 @@ void Parse_sgT(Char_t* SvenFile, Double_t Weight=1.00, Double_t System=0.05)
       sgT_val[sgT_bin][ThetaBin] = sigmaT;
       sgT_err[sgT_bin][ThetaBin] = DsigmaT;
       sgT_th[sgT_bin][ThetaBin]  = Theta;
-      if((sigmaT!=0.0) && (DsigmaT!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaT!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 5 uninteresting lines
     fgets(Buffer, sizeof(Buffer), File_sgT_in);

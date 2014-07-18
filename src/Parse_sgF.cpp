@@ -9,7 +9,7 @@ void Parse_sgF()
   Double_t Energy, Weight, System, Theta, sigmaF, DsigmaF;
   FILE* File_sgF;
 
-  printf("Loading sgF data... ");
+  printf("Loading sgF  data... ");
   File_sgF = fopen("data/sgF.txt", "r");
 
   sgF_bin = 0;
@@ -30,7 +30,7 @@ void Parse_sgF()
       sgF_val[EnergyBin][ThetaBin] = sigmaF;
       sgF_err[EnergyBin][ThetaBin] = DsigmaF;
       sgF_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaF!=0.0) && (DsigmaF!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaF!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgF);

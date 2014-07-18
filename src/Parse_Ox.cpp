@@ -30,7 +30,7 @@ void Parse_Ox()
       Ox_val[EnergyBin][ThetaBin] = Ox;
       Ox_err[EnergyBin][ThetaBin] = DOx;
       Ox_th[EnergyBin][ThetaBin]  = Theta;
-      if((Ox!=0.0) && (DOx!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DOx!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_Ox);

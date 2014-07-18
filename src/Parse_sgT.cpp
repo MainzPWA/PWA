@@ -9,7 +9,7 @@ void Parse_sgT()
   Double_t Energy, Weight, System, Theta, sigmaT, DsigmaT;
   FILE* File_sgT;
 
-  printf("Loading sgT data... ");
+  printf("Loading sgT  data... ");
   File_sgT = fopen("data/sgT.txt", "r");
 
   sgT_bin = 0;
@@ -30,7 +30,7 @@ void Parse_sgT()
       sgT_val[EnergyBin][ThetaBin] = sigmaT;
       sgT_err[EnergyBin][ThetaBin] = DsigmaT;
       sgT_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaT!=0.0) && (DsigmaT!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaT!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgT);

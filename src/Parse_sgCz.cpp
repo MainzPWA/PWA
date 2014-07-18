@@ -30,7 +30,7 @@ void Parse_sgCz()
       sgCz_val[EnergyBin][ThetaBin] = sigmaCz;
       sgCz_err[EnergyBin][ThetaBin] = DsigmaCz;
       sgCz_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaCz!=0.0) && (DsigmaCz!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaCz!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgCz);

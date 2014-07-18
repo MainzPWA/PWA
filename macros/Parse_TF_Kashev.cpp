@@ -44,12 +44,12 @@ void Parse_TF(Char_t* KashevFile, Double_t Weight=1.00, Double_t System=0.05)
       F_val[F_bin][ThetaBinF] = F;
       F_err[F_bin][ThetaBinF] = DF;
       F_th[F_bin][ThetaBinF]  = Theta;
-      if((F!=0.0) && (DF!=0.0)) ThetaBinF++; //Accept only 'existing' data points
+      if(DF!=0.0) ThetaBinF++; //Accept only 'existing' data points
 
       T_val[T_bin][ThetaBinT] = T;
       T_err[T_bin][ThetaBinT] = DT;
       T_th[T_bin][ThetaBinT]  = Theta;
-      if((T!=0.0) && (DT!=0.0)) ThetaBinT++; //Accept only 'existing' data points
+      if(DT!=0.0) ThetaBinT++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_TF_in);

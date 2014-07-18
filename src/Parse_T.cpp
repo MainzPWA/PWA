@@ -9,7 +9,7 @@ void Parse_T()
   Double_t Energy, Weight, System, Theta, T, DT;
   FILE* File_T;
 
-  printf("Loading   T data... ");
+  printf("Loading   T  data... ");
   File_T = fopen("data/T.txt", "r");
 
   T_bin = 0;
@@ -30,7 +30,7 @@ void Parse_T()
       T_val[EnergyBin][ThetaBin] = T;
       T_err[EnergyBin][ThetaBin] = DT;
       T_th[EnergyBin][ThetaBin]  = Theta;
-      if((T!=0.0) && (DT!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DT!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_T);

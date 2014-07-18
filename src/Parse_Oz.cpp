@@ -30,7 +30,7 @@ void Parse_Oz()
       Oz_val[EnergyBin][ThetaBin] = Oz;
       Oz_err[EnergyBin][ThetaBin] = DOz;
       Oz_th[EnergyBin][ThetaBin]  = Theta;
-      if((Oz!=0.0) && (DOz!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DOz!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_Oz);

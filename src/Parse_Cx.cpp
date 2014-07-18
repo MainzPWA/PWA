@@ -30,7 +30,7 @@ void Parse_Cx()
       Cx_val[EnergyBin][ThetaBin] = Cx;
       Cx_err[EnergyBin][ThetaBin] = DCx;
       Cx_th[EnergyBin][ThetaBin]  = Theta;
-      if((Cx!=0.0) && (DCx!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DCx!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_Cx);

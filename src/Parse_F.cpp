@@ -9,7 +9,7 @@ void Parse_F()
   Double_t Energy, Weight, System, Theta, F, DF;
   FILE* File_F;
 
-  printf("Loading   F data... ");
+  printf("Loading   F  data... ");
   File_F = fopen("data/F.txt", "r");
 
   F_bin = 0;
@@ -30,7 +30,7 @@ void Parse_F()
       F_val[EnergyBin][ThetaBin] = F;
       F_err[EnergyBin][ThetaBin] = DF;
       F_th[EnergyBin][ThetaBin]  = Theta;
-      if((F!=0.0) && (DF!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DF!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_F);

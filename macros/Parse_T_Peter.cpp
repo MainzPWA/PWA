@@ -35,7 +35,7 @@ void Parse_T(Char_t* PeterFile, Double_t Weight=1.00, Double_t System=0.05)
       T_err[T_bin][ThetaBin[Chan]] = DT;
       T_th[T_bin][ThetaBin[Chan]]  = Theta;
       T_en[T_bin] = GetBeamEnergy(Chan);
-      if((T!=0.0) && (DT!=0.0))
+      if(DT!=0.0)
       {
         ThetaBin[Chan]++; //Accept only 'existing' data points
         T_pts[T_bin] = ThetaBin[Chan];

@@ -30,7 +30,7 @@ void Parse_sgCx()
       sgCx_val[EnergyBin][ThetaBin] = sigmaCx;
       sgCx_err[EnergyBin][ThetaBin] = DsigmaCx;
       sgCx_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaCx!=0.0) && (DsigmaCx!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaCx!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgCx);

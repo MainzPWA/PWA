@@ -9,7 +9,7 @@ void Parse_sgE()
   Double_t Energy, Weight, System, Theta, sigmaE, DsigmaE;
   FILE* File_sgE;
 
-  printf("Loading sgE data... ");
+  printf("Loading sgE  data... ");
   File_sgE = fopen("data/sgE.txt", "r");
 
   sgE_bin = 0;
@@ -30,7 +30,7 @@ void Parse_sgE()
       sgE_val[EnergyBin][ThetaBin] = sigmaE;
       sgE_err[EnergyBin][ThetaBin] = DsigmaE;
       sgE_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaE!=0.0) && (DsigmaE!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaE!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgE);

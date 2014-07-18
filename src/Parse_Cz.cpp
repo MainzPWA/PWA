@@ -30,7 +30,7 @@ void Parse_Cz()
       Cz_val[EnergyBin][ThetaBin] = Cz;
       Cz_err[EnergyBin][ThetaBin] = DCz;
       Cz_th[EnergyBin][ThetaBin]  = Theta;
-      if((Cz!=0.0) && (DCz!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DCz!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_Cz);

@@ -9,7 +9,7 @@ void Parse_sgH()
   Double_t Energy, Weight, System, Theta, sigmaH, DsigmaH;
   FILE* File_sgH;
 
-  printf("Loading sgH data... ");
+  printf("Loading sgH  data... ");
   File_sgH = fopen("data/sgH.txt", "r");
 
   sgH_bin = 0;
@@ -30,7 +30,7 @@ void Parse_sgH()
       sgH_val[EnergyBin][ThetaBin] = sigmaH;
       sgH_err[EnergyBin][ThetaBin] = DsigmaH;
       sgH_th[EnergyBin][ThetaBin]  = Theta;
-      if((sigmaH!=0.0) && (DsigmaH!=0.0)) ThetaBin++; //Accept only 'existing' data points
+      if(DsigmaH!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
     //Skip 1 uninteresting line
     fgets(Buffer, sizeof(Buffer), File_sgH);
