@@ -111,8 +111,8 @@ Double_t GetChiSq_Oz()
   for(Int_t th=0; th<Oz_pts[eO]; th++)
   {
     Theta = Oz_th[eO][th];
-    Meas  = Oz_val[eO][th]*f_obs[SIG_0];
-    Error = Oz_err[eO][th]*f_obs[SIG_0];
+    Meas  = Oz_val[eO][th]*f_obs[ASY_OZ];
+    Error = Oz_err[eO][th]*f_obs[ASY_OZ];
     Theo  = Oz(Theta, Omega);
     //printf("Oz: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
     ChiSq_Oz+=((Meas-Theo)*(Meas-Theo)/(Error*Error));
@@ -126,7 +126,7 @@ Double_t GetChiSq_Oz()
 Double_t GetScale_Oz()
 {
   Int_t eO = GetEnergyBin_Oz();
-  Double_t Scale_Oz = (1.0*Oz_pts[eO])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(Oz_sy[eO]*Oz_sy[eO]);
+  Double_t Scale_Oz = (1.0*Oz_pts[eO])*(f_obs[ASY_OZ]-1.0)*(f_obs[ASY_OZ]-1.0)/(Oz_sy[eO]*Oz_sy[eO]);
   return Scale_Oz;
 }
 

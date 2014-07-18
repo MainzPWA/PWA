@@ -111,8 +111,8 @@ Double_t GetChiSq_sgCz()
   for(Int_t th=0; th<sgCz_pts[eC]; th++)
   {
     Theta = sgCz_th[eC][th];
-    Meas  = sgCz_val[eC][th]*f_obs[SIG_0];
-    Error = sgCz_err[eC][th]*f_obs[SIG_0];
+    Meas  = sgCz_val[eC][th]*f_obs[SIG_CZ];
+    Error = sgCz_err[eC][th]*f_obs[SIG_CZ];
     Theo  = sigmaCz(Theta, Omega);
     //printf("sgCz: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
     ChiSq_sgCz+=((Meas-Theo)*(Meas-Theo)/(Error*Error));
@@ -126,7 +126,7 @@ Double_t GetChiSq_sgCz()
 Double_t GetScale_sgCz()
 {
   Int_t eC = GetEnergyBin_sgCz();
-  Double_t Scale_sgCz = (1.0*sgCz_pts[eC])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(sgCz_sy[eC]*sgCz_sy[eC]);
+  Double_t Scale_sgCz = (1.0*sgCz_pts[eC])*(f_obs[SIG_CZ]-1.0)*(f_obs[SIG_CZ]-1.0)/(sgCz_sy[eC]*sgCz_sy[eC]);
   return Scale_sgCz;
 }
 

@@ -111,8 +111,8 @@ Double_t GetChiSq_sgCx()
   for(Int_t th=0; th<sgCx_pts[eC]; th++)
   {
     Theta = sgCx_th[eC][th];
-    Meas  = sgCx_val[eC][th]*f_obs[SIG_0];
-    Error = sgCx_err[eC][th]*f_obs[SIG_0];
+    Meas  = sgCx_val[eC][th]*f_obs[SIG_CX];
+    Error = sgCx_err[eC][th]*f_obs[SIG_CX];
     Theo  = sigmaCx(Theta, Omega);
     //printf("sgCx: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
     ChiSq_sgCx+=((Meas-Theo)*(Meas-Theo)/(Error*Error));
@@ -126,7 +126,7 @@ Double_t GetChiSq_sgCx()
 Double_t GetScale_sgCx()
 {
   Int_t eC = GetEnergyBin_sgCx();
-  Double_t Scale_sgCx = (1.0*sgCx_pts[eC])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(sgCx_sy[eC]*sgCx_sy[eC]);
+  Double_t Scale_sgCx = (1.0*sgCx_pts[eC])*(f_obs[SIG_CX]-1.0)*(f_obs[SIG_CX]-1.0)/(sgCx_sy[eC]*sgCx_sy[eC]);
   return Scale_sgCx;
 }
 

@@ -111,8 +111,8 @@ Double_t GetChiSq_Cx()
   for(Int_t th=0; th<Cx_pts[eC]; th++)
   {
     Theta = Cx_th[eC][th];
-    Meas  = Cx_val[eC][th]*f_obs[SIG_0];
-    Error = Cx_err[eC][th]*f_obs[SIG_0];
+    Meas  = Cx_val[eC][th]*f_obs[ASY_CX];
+    Error = Cx_err[eC][th]*f_obs[ASY_CX];
     Theo  = Cx(Theta, Omega);
     //printf("Cx: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
     ChiSq_Cx+=((Meas-Theo)*(Meas-Theo)/(Error*Error));
@@ -126,7 +126,7 @@ Double_t GetChiSq_Cx()
 Double_t GetScale_Cx()
 {
   Int_t eC = GetEnergyBin_Cx();
-  Double_t Scale_Cx = (1.0*Cx_pts[eC])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(Cx_sy[eC]*Cx_sy[eC]);
+  Double_t Scale_Cx = (1.0*Cx_pts[eC])*(f_obs[ASY_CX]-1.0)*(f_obs[ASY_CX]-1.0)/(Cx_sy[eC]*Cx_sy[eC]);
   return Scale_Cx;
 }
 

@@ -111,8 +111,8 @@ Double_t GetChiSq_sgOz()
   for(Int_t th=0; th<sgOz_pts[eO]; th++)
   {
     Theta = sgOz_th[eO][th];
-    Meas  = sgOz_val[eO][th]*f_obs[SIG_0];
-    Error = sgOz_err[eO][th]*f_obs[SIG_0];
+    Meas  = sgOz_val[eO][th]*f_obs[SIG_OZ];
+    Error = sgOz_err[eO][th]*f_obs[SIG_OZ];
     Theo  = sigmaOz(Theta, Omega);
     //printf("sgOz: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
     ChiSq_sgOz+=((Meas-Theo)*(Meas-Theo)/(Error*Error));
@@ -126,7 +126,7 @@ Double_t GetChiSq_sgOz()
 Double_t GetScale_sgOz()
 {
   Int_t eO = GetEnergyBin_sgOz();
-  Double_t Scale_sgOz = (1.0*sgOz_pts[eO])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(sgOz_sy[eO]*sgOz_sy[eO]);
+  Double_t Scale_sgOz = (1.0*sgOz_pts[eO])*(f_obs[SIG_OZ]-1.0)*(f_obs[SIG_OZ]-1.0)/(sgOz_sy[eO]*sgOz_sy[eO]);
   return Scale_sgOz;
 }
 
