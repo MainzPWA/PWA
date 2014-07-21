@@ -106,16 +106,16 @@ void Plot(Int_t s)
     Fit = new TGraphErrors(Fit_pts[s], Fit_en[s], Fit_val[s][t], NULL, Fit_err[s][t]);
     Fit->SetTitle(Title);
     Fit->SetName(Name);
-    Fit->SetMarkerSize(0.8);
+    Fit->SetMarkerSize(0.7);
     if(t%2)
     {
-      Fit->SetMarkerStyle(24);
+      Fit->SetMarkerStyle(21);
       Fit->SetMarkerColor(kBlue+2);
       Fit->SetLineColor(kBlue+2);
     }
     else
     {
-      Fit->SetMarkerStyle(20);
+      Fit->SetMarkerStyle(21);
       Fit->SetMarkerColor(kRed+2);
       Fit->SetLineColor(kRed+2);
     }
@@ -142,8 +142,8 @@ void Plot(Int_t s)
   Chi = new TGraph(Fit_pts[s], Fit_en[s], Fit_chi[s]);
   Chi->SetTitle("Chi2");
   Chi->SetName("Chi2");
-  Chi->SetMarkerSize(0.8);
-  Chi->SetMarkerStyle(20);
+  Chi->SetMarkerSize(0.7);
+  Chi->SetMarkerStyle(21);
   Chi->Draw("APZ");
   Chi->GetXaxis()->SetTitle("#omega / MeV");
   sprintf(Filename, "plots.%1d/Chi2.root", s);
@@ -155,8 +155,8 @@ void Plot(Int_t s)
   Pen = new TGraph(Fit_pts[s], Fit_en[s], Fit_pen[s]);
   Pen->SetTitle("Penalty");
   Pen->SetName("Penalty");
-  Pen->SetMarkerSize(0.8);
-  Pen->SetMarkerStyle(20);
+  Pen->SetMarkerSize(0.7);
+  Pen->SetMarkerStyle(21);
   Pen->Draw("APZ");
   Pen->GetXaxis()->SetTitle("#omega / MeV");
   sprintf(Filename, "plots.%1d/Penalty.root", s);

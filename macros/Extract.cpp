@@ -700,3 +700,79 @@ void Model(Char_t* Mlp, Bool_t W=true, Bool_t SAVE=false, Double_t Lo=0.0, Doubl
 }
 
 //-----------------------------------------------------------------------------
+
+void Chi2(Int_t SOLUTION=0, Double_t MASS_INITIAL=938.2720)
+{
+  Double_t MASS2_INITIAL = MASS_INITIAL*MASS_INITIAL;
+
+  Char_t Buffer[256];
+  Double_t InE, InChi2;
+  TFile* Chi2File;
+  TGraph* Chi2GraphE;
+  TGraph* Chi2GraphW;
+  TCanvas* Canvas;
+  Double_t Chi2[N_MAX];
+  Double_t W[N_MAX];
+  Int_t Chi2Pts;
+
+  sprintf(Buffer, "plots.%d/Chi2.root", SOLUTION);
+  Chi2File = new TFile(Buffer);
+  Chi2GraphE = (TGraph*)((TCanvas*)Chi2File->Get("Chi2"))->GetPrimitive("Chi2");
+
+  Chi2Pts = Chi2GraphE->GetN();
+  for(Int_t n=0; n<Chi2Pts; n++)
+  {
+    Chi2GraphE->GetPoint(n, InE, InChi2);
+    W[n] = TMath::Sqrt(2.0*InE*MASS_INITIAL + MASS2_INITIAL);
+    Chi2[n] = InChi2;
+  }
+  Chi2File->Close();
+
+  Canvas = new TCanvas();
+  Chi2GraphW = new TGraph(Chi2Pts, W, Chi2);
+  Chi2GraphW->SetMarkerStyle(21);
+  Chi2GraphW->SetMarkerSize(0.7);
+  Chi2GraphW->SetName("Chi2");
+  Chi2GraphW->SetTitle("Chi2");
+  Chi2GraphW->Draw("APZ");
+}
+
+//-----------------------------------------------------------------------------
+
+void Penalty(Int_t SOLUTION=0, Double_t MASS_INITIAL=938.2720)
+{
+  Double_t MASS2_INITIAL = MASS_INITIAL*MASS_INITIAL;
+
+  Char_t Buffer[256];
+  Double_t InE, InPen;
+  TFile* PenFile;
+  TGraph* PenGraphE;
+  TGraph* PenGraphW;
+  TCanvas* Canvas;
+  Double_t Pen[N_MAX];
+  Double_t W[N_MAX];
+  Int_t PenPts;
+
+  sprintf(Buffer, "plots.%d/Penalty.root", SOLUTION);
+  PenFile = new TFile(Buffer);
+  PenGraphE = (TGraph*)((TCanvas*)PenFile->Get("Penalty"))->GetPrimitive("Penalty");
+
+  PenPts = PenGraphE->GetN();
+  for(Int_t n=0; n<PenPts; n++)
+  {
+    PenGraphE->GetPoint(n, InE, InPen);
+    W[n] = TMath::Sqrt(2.0*InE*MASS_INITIAL + MASS2_INITIAL);
+    Pen[n] = InPen;
+  }
+  PenFile->Close();
+
+  Canvas = new TCanvas();
+  PenGraphW = new TGraph(PenPts, W, Pen);
+  PenGraphW->SetMarkerStyle(21);
+  PenGraphW->SetMarkerSize(0.7);
+  PenGraphW->SetName("Penalty");
+  PenGraphW->SetTitle("Penalty");
+  PenGraphW->Draw("APZ");
+}
+
+//-----------------------------------------------------------------------------
