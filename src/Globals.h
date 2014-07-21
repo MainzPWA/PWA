@@ -42,7 +42,7 @@ extern Int_t ITERATIONS;
 extern Int_t SOLUTIONS;
 extern Double_t PENALTY[4];
 extern Double_t SCALING;
-extern Double_t VARIATION;
+extern Double_t VARIATION[2];
 extern Double_t MIN_ENERGY;
 extern Double_t MAX_ENERGY;
 extern Double_t MASS_MESON;

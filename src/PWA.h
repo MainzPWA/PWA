@@ -298,7 +298,7 @@ Int_t ITERATIONS;
 Int_t SOLUTIONS;
 Double_t PENALTY[4];
 Double_t SCALING;
-Double_t VARIATION;
+Double_t VARIATION[2];
 Double_t MIN_ENERGY;
 Double_t MAX_ENERGY;
 Double_t MASS_MESON;

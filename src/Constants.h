@@ -44,6 +44,7 @@ static const Double_t UNIT  = (HBARC/MASS_PIPLUS)*(HBARC/MASS_PIPLUS)*1e-2;
 //'Unit' is the conversion from the multipole's units (10^-3/m_pi+) to cross section unit (ub).
 //Cross sections are proportional to the square of multipoles.
 
+enum{ REL = 0, ABS = 1 };
 enum{ MODEL = 1, BORN = 2, NONRES = 3 };
 enum{ CHI2ONLY = 1, CHI2PENALTY = 2, ADAPTIVE = 3 };
 enum{ MLP1 = 1, MLP2 = 2, MLP3 = 3 };

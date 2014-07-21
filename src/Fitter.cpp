@@ -361,9 +361,16 @@ Int_t NDF()
 
 //-----------------------------------------------------------------------------
 
-Double_t Variate()
+Double_t VariateRel()
 {
-  return (1.0 - VARIATION + gRandom->Rndm()*2.0*VARIATION);
+  return (1.0 - VARIATION[REL] + gRandom->Rndm()*2.0*VARIATION[REL]);
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t VariateAbs()
+{
+  return (gRandom->Rndm()*2.0*VARIATION[ABS] - VARIATION[ABS]);
 }
 
 //-----------------------------------------------------------------------------
@@ -752,57 +759,70 @@ void FixUnitarity()
 
 void SetParameters()
 {
-  Double_t Variat[2];
+  Double_t VariatRel[2];
+  Double_t VariatAbs[2];
   Char_t Buffer[64];
   Int_t Index;
 
   //Set start values for s,p waves (depending on Re/Im or magnitude/phase parametrisation)
-  if(FIX_EP[0]) { Variat[0] = 1.0; Variat[1] = 1.0; } else { Variat[0] = Variate(); Variat[1] = Variate(); } //Random variations if this multipole is fitted
+  if(FIX_EP[0]) //Random variations if this multipole is fitted
+  { VariatRel[0] = 1.0;          VariatRel[1] = 1.0;          VariatAbs[0] = 0.0;          VariatAbs[1] = 0.0;          }
+  else
+  { VariatRel[0] = VariateRel(); VariatRel[1] = VariateRel(); VariatAbs[0] = VariateAbs(); VariatAbs[1] = VariateAbs(); }
   if(FIX_EP_PHASE[0])
   {
-    gMinuit->mnparm(0, "MagE0p", vstart[0]*Variat[0], step[0], 0, 0, ierflg); //s wave
-    gMinuit->mnparm(1, "PhsE0p", vstart[1],           step[1], 0, 0, ierflg);
+    gMinuit->mnparm(0, "MagE0p", vstart[0]*VariatRel[0]+VariatAbs[0], step[0], 0, 0, ierflg); //s wave
+    gMinuit->mnparm(1, "PhsE0p", vstart[1],                           step[1], 0, 0, ierflg);
   }
   else
   {
-    gMinuit->mnparm(0, "ReE0p",  vstart[0]*Variat[0], step[0], 0, 0, ierflg); //s wave
-    gMinuit->mnparm(1, "ImE0p",  vstart[1]*Variat[1], step[1], 0, 0, ierflg);
+    gMinuit->mnparm(0, "ReE0p",  vstart[0]*VariatRel[0]+VariatAbs[0], step[0], 0, 0, ierflg); //s wave
+    gMinuit->mnparm(1, "ImE0p",  vstart[1]*VariatRel[1]+VariatAbs[1], step[1], 0, 0, ierflg);
   }
 
-  if(FIX_EP[1]) { Variat[0] = 1.0; Variat[1] = 1.0; } else { Variat[0] = Variate(); Variat[1] = Variate(); } //Random variation if this multipole is fitted
+  if(FIX_EP[1]) //Random variations if this multipole is fitted
+  { VariatRel[0] = 1.0;          VariatRel[1] = 1.0;          VariatAbs[0] = 0.0;          VariatAbs[1] = 0.0;          }
+  else
+  { VariatRel[0] = VariateRel(); VariatRel[1] = VariateRel(); VariatAbs[0] = VariateAbs(); VariatAbs[1] = VariateAbs(); }
   if(FIX_EP_PHASE[1])
   {
-    gMinuit->mnparm(2, "MagE1p", vstart[2]*Variat[0], step[2], 0, 0, ierflg); //p wave
-    gMinuit->mnparm(3, "PhsE1p", vstart[3],           step[3], 0, 0, ierflg);
+    gMinuit->mnparm(2, "MagE1p", vstart[2]*VariatRel[0]+VariatAbs[0], step[2], 0, 0, ierflg); //p wave
+    gMinuit->mnparm(3, "PhsE1p", vstart[3],                           step[3], 0, 0, ierflg);
   }
   else
   {
-    gMinuit->mnparm(2, "ReE1p",  vstart[2]*Variat[0], step[2], 0, 0, ierflg); //p wave
-    gMinuit->mnparm(3, "ImE1p",  vstart[3]*Variat[1], step[3], 0, 0, ierflg);
+    gMinuit->mnparm(2, "ReE1p",  vstart[2]*VariatRel[0]+VariatAbs[0], step[2], 0, 0, ierflg); //p wave
+    gMinuit->mnparm(3, "ImE1p",  vstart[3]*VariatRel[1]+VariatAbs[1], step[3], 0, 0, ierflg);
   }
 
-  if(FIX_MP[1]) { Variat[0] = 1.0; Variat[1] = 1.0; } else { Variat[0] = Variate(); Variat[1] = Variate(); } //Random variation if this multipole is fitted
+  if(FIX_MP[1]) //Random variations if this multipole is fitted
+  { VariatRel[0] = 1.0;          VariatRel[1] = 1.0;          VariatAbs[0] = 0.0;          VariatAbs[1] = 0.0;          }
+  else
+  { VariatRel[0] = VariateRel(); VariatRel[1] = VariateRel(); VariatAbs[0] = VariateAbs(); VariatAbs[1] = VariateAbs(); }
   if(FIX_MP_PHASE[1])
   {
-    gMinuit->mnparm(4, "MagM1p", vstart[4]*Variat[0], step[4], 0, 0, ierflg); //p wave
-    gMinuit->mnparm(5, "PhsM1p", vstart[5],           step[5], 0, 0, ierflg);
+    gMinuit->mnparm(4, "MagM1p", vstart[4]*VariatRel[0]+VariatAbs[0], step[4], 0, 0, ierflg); //p wave
+    gMinuit->mnparm(5, "PhsM1p", vstart[5],                           step[5], 0, 0, ierflg);
   }
   else
   {
-    gMinuit->mnparm(4, "ReM1m",  vstart[4]*Variat[0], step[4], 0, 0, ierflg); //p wave
-    gMinuit->mnparm(5, "ImM1m",  vstart[5]*Variat[1], step[5], 0, 0, ierflg);
+    gMinuit->mnparm(4, "ReM1m",  vstart[4]*VariatRel[0]+VariatAbs[0], step[4], 0, 0, ierflg); //p wave
+    gMinuit->mnparm(5, "ImM1m",  vstart[5]*VariatRel[1]+VariatAbs[1], step[5], 0, 0, ierflg);
   }
 
-  if(FIX_MM[1]) { Variat[0] = 1.0; Variat[1] = 1.0; } else { Variat[0] = Variate(); Variat[1] = Variate(); } //Random variation if this multipole is fitted
+  if(FIX_MM[1]) //Random variations if this multipole is fitted
+  { VariatRel[0] = 1.0;          VariatRel[1] = 1.0;          VariatAbs[0] = 0.0;          VariatAbs[1] = 0.0;          }
+  else
+  { VariatRel[0] = VariateRel(); VariatRel[1] = VariateRel(); VariatAbs[0] = VariateAbs(); VariatAbs[1] = VariateAbs(); }
   if(FIX_MM_PHASE[1])
   {
-    gMinuit->mnparm(6, "MagM1m", vstart[6]*Variat[0], step[6], 0, 0, ierflg); //p wave
-    gMinuit->mnparm(7, "PhsM1m", vstart[7],           step[7], 0, 0, ierflg);
+    gMinuit->mnparm(6, "MagM1m", vstart[6]*VariatRel[0]+VariatAbs[0], step[6], 0, 0, ierflg); //p wave
+    gMinuit->mnparm(7, "PhsM1m", vstart[7],                           step[7], 0, 0, ierflg);
   }
   else
   {
-    gMinuit->mnparm(6, "ReM1m",  vstart[6]*Variat[0], step[6], 0, 0, ierflg); //p wave
-    gMinuit->mnparm(7, "ImM1m",  vstart[7]*Variat[1], step[7], 0, 0, ierflg);
+    gMinuit->mnparm(6, "ReM1m",  vstart[6]*VariatRel[0]+VariatAbs[0], step[6], 0, 0, ierflg); //p wave
+    gMinuit->mnparm(7, "ImM1m",  vstart[7]*VariatRel[1]+VariatAbs[1], step[7], 0, 0, ierflg);
   }
 
   //No variation on imaginary parts of s,p waves for threshold fits
@@ -815,56 +835,69 @@ void SetParameters()
     gMinuit->mnparm(7, "ImM1m",  vstart[7], step[7], 0, 0, ierflg);
   }
 
-  //Set start values for d,f,... waves
+  //Set start values for d,f,... waves (depending on Re/Im or magnitude/phase parametrisation)
   for(Int_t l=2; l<L_MAX+1; l++)
   {
     Index = 8*(l-1);
-    if(FIX_EP[l]) { Variat[0] = 1.0; Variat[1] = 1.0; } else { Variat[0] = Variate(); Variat[1] = Variate(); } //Random variations if this multipole is fitted
+
+    if(FIX_EP[l]) //Random variations if this multipole is fitted
+    { VariatRel[0] = 1.0;          VariatRel[1] = 1.0;          VariatAbs[0] = 0.0;          VariatAbs[1] = 0.0;          }
+    else
+    { VariatRel[0] = VariateRel(); VariatRel[1] = VariateRel(); VariatAbs[0] = VariateAbs(); VariatAbs[1] = VariateAbs(); }
     if(FIX_EP_PHASE[l])
     {
-      sprintf(Buffer, "MagE%dp", l); gMinuit->mnparm(0+Index, Buffer, vstart[0+Index]*Variat[0], step[0+Index], 0, 0, ierflg);
-      sprintf(Buffer, "PhsE%dp", l); gMinuit->mnparm(1+Index, Buffer, vstart[1+Index],           step[1+Index], 0, 0, ierflg);
+      sprintf(Buffer, "MagE%dp", l); gMinuit->mnparm(0+Index, Buffer, vstart[0+Index]*VariatRel[0]+VariatAbs[0], step[0+Index], 0, 0, ierflg);
+      sprintf(Buffer, "PhsE%dp", l); gMinuit->mnparm(1+Index, Buffer, vstart[1+Index],                           step[1+Index], 0, 0, ierflg);
     }
     else
     {
-      sprintf(Buffer, "ReE%dp",  l); gMinuit->mnparm(0+Index, Buffer, vstart[0+Index]*Variat[0], step[0+Index], 0, 0, ierflg);
-      sprintf(Buffer, "ImE%dp",  l); gMinuit->mnparm(1+Index, Buffer, vstart[1+Index]*Variat[1], step[1+Index], 0, 0, ierflg);
+      sprintf(Buffer, "ReE%dp",  l); gMinuit->mnparm(0+Index, Buffer, vstart[0+Index]*VariatRel[0]+VariatAbs[0], step[0+Index], 0, 0, ierflg);
+      sprintf(Buffer, "ImE%dp",  l); gMinuit->mnparm(1+Index, Buffer, vstart[1+Index]*VariatRel[1]+VariatAbs[1], step[1+Index], 0, 0, ierflg);
     }
 
-    if(FIX_MP[l]) { Variat[0] = 1.0; Variat[1] = 1.0; } else { Variat[0] = Variate(); Variat[1] = Variate(); } //Random variation if this multipole is fitted
+    if(FIX_MP[l]) //Random variations if this multipole is fitted
+    { VariatRel[0] = 1.0;          VariatRel[1] = 1.0;          VariatAbs[0] = 0.0;          VariatAbs[1] = 0.0;          }
+    else
+    { VariatRel[0] = VariateRel(); VariatRel[1] = VariateRel(); VariatAbs[0] = VariateAbs(); VariatAbs[1] = VariateAbs(); }
     if(FIX_MP_PHASE[l])
     {
-      sprintf(Buffer, "MagM%dp", l); gMinuit->mnparm(2+Index, Buffer, vstart[2+Index]*Variat[0], step[2+Index], 0, 0, ierflg);
-      sprintf(Buffer, "PhsM%dp", l); gMinuit->mnparm(3+Index, Buffer, vstart[3+Index],           step[3+Index], 0, 0, ierflg);
+      sprintf(Buffer, "MagM%dp", l); gMinuit->mnparm(2+Index, Buffer, vstart[2+Index]*VariatRel[0]+VariatAbs[0], step[2+Index], 0, 0, ierflg);
+      sprintf(Buffer, "PhsM%dp", l); gMinuit->mnparm(3+Index, Buffer, vstart[3+Index],                           step[3+Index], 0, 0, ierflg);
     }
     else
     {
-      sprintf(Buffer, "ReM%dp",  l); gMinuit->mnparm(2+Index, Buffer, vstart[2+Index]*Variat[0], step[2+Index], 0, 0, ierflg);
-      sprintf(Buffer, "ImM%dp",  l); gMinuit->mnparm(3+Index, Buffer, vstart[3+Index]*Variat[1], step[3+Index], 0, 0, ierflg);
+      sprintf(Buffer, "ReM%dp",  l); gMinuit->mnparm(2+Index, Buffer, vstart[2+Index]*VariatRel[0]+VariatAbs[0], step[2+Index], 0, 0, ierflg);
+      sprintf(Buffer, "ImM%dp",  l); gMinuit->mnparm(3+Index, Buffer, vstart[3+Index]*VariatRel[1]+VariatAbs[1], step[3+Index], 0, 0, ierflg);
     }
 
-    if(FIX_EM[l]) { Variat[0] = 1.0; Variat[1] = 1.0; } else { Variat[0] = Variate(); Variat[1] = Variate(); } //Random variation if this multipole is fitted
+    if(FIX_EM[l]) //Random variations if this multipole is fitted
+    { VariatRel[0] = 1.0;          VariatRel[1] = 1.0;          VariatAbs[0] = 0.0;          VariatAbs[1] = 0.0;          }
+    else
+    { VariatRel[0] = VariateRel(); VariatRel[1] = VariateRel(); VariatAbs[0] = VariateAbs(); VariatAbs[1] = VariateAbs(); }
     if(FIX_EM_PHASE[l])
     {
-      sprintf(Buffer, "MagE%dm", l); gMinuit->mnparm(4+Index, Buffer, vstart[4+Index]*Variat[0], step[4+Index], 0, 0, ierflg);
-      sprintf(Buffer, "PhsE%dm", l); gMinuit->mnparm(5+Index, Buffer, vstart[5+Index],           step[5+Index], 0, 0, ierflg);
+      sprintf(Buffer, "MagE%dm", l); gMinuit->mnparm(4+Index, Buffer, vstart[4+Index]*VariatRel[0]+VariatAbs[0], step[4+Index], 0, 0, ierflg);
+      sprintf(Buffer, "PhsE%dm", l); gMinuit->mnparm(5+Index, Buffer, vstart[5+Index],                           step[5+Index], 0, 0, ierflg);
     }
     else
     {
-      sprintf(Buffer, "ReE%dm",  l); gMinuit->mnparm(4+Index, Buffer, vstart[4+Index]*Variat[0], step[4+Index], 0, 0, ierflg);
-      sprintf(Buffer, "ImE%dm",  l); gMinuit->mnparm(5+Index, Buffer, vstart[5+Index]*Variat[1], step[5+Index], 0, 0, ierflg);
+      sprintf(Buffer, "ReE%dm",  l); gMinuit->mnparm(4+Index, Buffer, vstart[4+Index]*VariatRel[0]+VariatAbs[0], step[4+Index], 0, 0, ierflg);
+      sprintf(Buffer, "ImE%dm",  l); gMinuit->mnparm(5+Index, Buffer, vstart[5+Index]*VariatRel[1]+VariatAbs[1], step[5+Index], 0, 0, ierflg);
     }
 
-    if(FIX_MM[l]) { Variat[0] = 1.0; Variat[1] = 1.0; } else { Variat[0] = Variate(); Variat[1] = Variate(); } //Random variation if this multipole is fitted
+    if(FIX_MM[l]) //Random variations if this multipole is fitted
+    { VariatRel[0] = 1.0;          VariatRel[1] = 1.0;          VariatAbs[0] = 0.0;          VariatAbs[1] = 0.0;          }
+    else
+    { VariatRel[0] = VariateRel(); VariatRel[1] = VariateRel(); VariatAbs[0] = VariateAbs(); VariatAbs[1] = VariateAbs(); }
     if(FIX_MM_PHASE[l])
     {
-      sprintf(Buffer, "MagM%dm", l); gMinuit->mnparm(6+Index, Buffer, vstart[6+Index]*Variat[0], step[6+Index], 0, 0, ierflg);
-      sprintf(Buffer, "PhsM%dm", l); gMinuit->mnparm(7+Index, Buffer, vstart[7+Index],           step[7+Index], 0, 0, ierflg);
+      sprintf(Buffer, "MagM%dm", l); gMinuit->mnparm(6+Index, Buffer, vstart[6+Index]*VariatRel[0]+VariatAbs[0], step[6+Index], 0, 0, ierflg);
+      sprintf(Buffer, "PhsM%dm", l); gMinuit->mnparm(7+Index, Buffer, vstart[7+Index],                           step[7+Index], 0, 0, ierflg);
     }
     else
     {
-      sprintf(Buffer, "ReM%dm",  l); gMinuit->mnparm(6+Index, Buffer, vstart[6+Index]*Variat[0], step[6+Index], 0, 0, ierflg);
-      sprintf(Buffer, "ImM%dm",  l); gMinuit->mnparm(7+Index, Buffer, vstart[7+Index]*Variat[1], step[7+Index], 0, 0, ierflg);
+      sprintf(Buffer, "ReM%dm",  l); gMinuit->mnparm(6+Index, Buffer, vstart[6+Index]*VariatRel[0]+VariatAbs[0], step[6+Index], 0, 0, ierflg);
+      sprintf(Buffer, "ImM%dm",  l); gMinuit->mnparm(7+Index, Buffer, vstart[7+Index]*VariatRel[1]+VariatAbs[1], step[7+Index], 0, 0, ierflg);
     }
   }
 
