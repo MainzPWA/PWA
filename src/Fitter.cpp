@@ -102,6 +102,8 @@ Double_t ChiSq()
 
 Double_t Scale()
 {
+  if(FIX_SCALES) return 0.0;
+
   Double_t Scale_0,  Scale_S,  Scale_T,  Scale_P;
   Double_t Scale_E,  Scale_F,  Scale_G,  Scale_H;
   Double_t Scale_Cx, Scale_Cz, Scale_Ox, Scale_Oz;
@@ -303,9 +305,8 @@ Int_t NPts()
 
 Int_t NMlp()
 {
-  Int_t NMlp;
+  Int_t NMlp = L_MAX*8; //We start with 4 multipoles (8 real numbers) per angular momentum (L=0,1 combined), ...
 
-  NMlp = L_MAX*8; //We start with 4 multipoles (8 real numbers) per angular momentum (L=0,1 combined), ...
   if(FIX_EP_PHASE[0]) NMlp-=1; //... the phase of the E0+ multipole can be fixed, ...
   if(FIX_EP_PHASE[1]) NMlp-=1; //... the phase of the E1+ multipole can be fixed, ...
   if(FIX_MP_PHASE[1]) NMlp-=1; //... the phase of the M1+ multipole can be fixed, ...
@@ -332,51 +333,50 @@ Int_t NMlp()
 
 Int_t NSca()
 {
+  if(FIX_SCALES) return 0;
+
   Int_t NSca = 0;
 
-  //If observable scalings are not fixed, we get additional parameters, ...
-  if(!FIX_SCALES)
+  //Handle special cases first
+  if(ONLY_CROSS_S)
   {
-    //...namely one parameter for each scalable observable (i.e. observables with data)
-    if(ONLY_CROSS_S) //Handle special cases first
-    {
-      if(sg0_pts[GetEnergyBin_sg0()]) NSca+=1;
-      if(sgS_pts[GetEnergyBin_sgS()]) NSca+=1;
-      if(S_pts[GetEnergyBin_S()])     NSca+=1;
-      return NSca;
-    }
-    if(ONLY_CROSS_F)
-    {
-      if(sg0_pts[GetEnergyBin_sg0()]) NSca+=1;
-      if(sgF_pts[GetEnergyBin_sgF()]) NSca+=1;
-      if(F_pts[GetEnergyBin_F()])     NSca+=1;
-      return NSca;
-    }
-    //General expression using all possible observables
-    if(sg0_pts[GetEnergyBin_sg0()])   NSca+=1;
-    if(sgS_pts[GetEnergyBin_sgS()])   NSca+=1;
-    if(sgT_pts[GetEnergyBin_sgT()])   NSca+=1;
-    if(sgP_pts[GetEnergyBin_sgP()])   NSca+=1;
-    if(sgE_pts[GetEnergyBin_sgE()])   NSca+=1;
-    if(sgF_pts[GetEnergyBin_sgF()])   NSca+=1;
-    if(sgG_pts[GetEnergyBin_sgG()])   NSca+=1;
-    if(sgH_pts[GetEnergyBin_sgH()])   NSca+=1;
-    if(sgCx_pts[GetEnergyBin_sgCx()]) NSca+=1;
-    if(sgCz_pts[GetEnergyBin_sgCz()]) NSca+=1;
-    if(sgOx_pts[GetEnergyBin_sgOx()]) NSca+=1;
-    if(sgOz_pts[GetEnergyBin_sgOz()]) NSca+=1;
-    if(S_pts[GetEnergyBin_S()])       NSca+=1;
-    if(T_pts[GetEnergyBin_T()])       NSca+=1;
-    if(P_pts[GetEnergyBin_P()])       NSca+=1;
-    if(E_pts[GetEnergyBin_E()])       NSca+=1;
-    if(F_pts[GetEnergyBin_F()])       NSca+=1;
-    if(G_pts[GetEnergyBin_G()])       NSca+=1;
-    if(H_pts[GetEnergyBin_H()])       NSca+=1;
-    if(Cx_pts[GetEnergyBin_Cx()])     NSca+=1;
-    if(Cz_pts[GetEnergyBin_Cz()])     NSca+=1;
-    if(Ox_pts[GetEnergyBin_Ox()])     NSca+=1;
-    if(Oz_pts[GetEnergyBin_Oz()])     NSca+=1;
+    if(sg0_pts[GetEnergyBin_sg0()]) NSca+=1;
+    if(sgS_pts[GetEnergyBin_sgS()]) NSca+=1;
+    if(S_pts[GetEnergyBin_S()])     NSca+=1;
+    return NSca;
   }
+  if(ONLY_CROSS_F)
+  {
+    if(sg0_pts[GetEnergyBin_sg0()]) NSca+=1;
+    if(sgF_pts[GetEnergyBin_sgF()]) NSca+=1;
+    if(F_pts[GetEnergyBin_F()])     NSca+=1;
+    return NSca;
+  }
+
+  //If observable scalings are not fixed, we get one parameter for each scalable observable (i.e. observable with data)
+  if(sg0_pts[GetEnergyBin_sg0()])   NSca+=1;
+  if(sgS_pts[GetEnergyBin_sgS()])   NSca+=1;
+  if(sgT_pts[GetEnergyBin_sgT()])   NSca+=1;
+  if(sgP_pts[GetEnergyBin_sgP()])   NSca+=1;
+  if(sgE_pts[GetEnergyBin_sgE()])   NSca+=1;
+  if(sgF_pts[GetEnergyBin_sgF()])   NSca+=1;
+  if(sgG_pts[GetEnergyBin_sgG()])   NSca+=1;
+  if(sgH_pts[GetEnergyBin_sgH()])   NSca+=1;
+  if(sgCx_pts[GetEnergyBin_sgCx()]) NSca+=1;
+  if(sgCz_pts[GetEnergyBin_sgCz()]) NSca+=1;
+  if(sgOx_pts[GetEnergyBin_sgOx()]) NSca+=1;
+  if(sgOz_pts[GetEnergyBin_sgOz()]) NSca+=1;
+  if(S_pts[GetEnergyBin_S()])       NSca+=1;
+  if(T_pts[GetEnergyBin_T()])       NSca+=1;
+  if(P_pts[GetEnergyBin_P()])       NSca+=1;
+  if(E_pts[GetEnergyBin_E()])       NSca+=1;
+  if(F_pts[GetEnergyBin_F()])       NSca+=1;
+  if(G_pts[GetEnergyBin_G()])       NSca+=1;
+  if(H_pts[GetEnergyBin_H()])       NSca+=1;
+  if(Cx_pts[GetEnergyBin_Cx()])     NSca+=1;
+  if(Cz_pts[GetEnergyBin_Cz()])     NSca+=1;
+  if(Ox_pts[GetEnergyBin_Ox()])     NSca+=1;
+  if(Oz_pts[GetEnergyBin_Oz()])     NSca+=1;
 
   return NSca;
 }
@@ -1194,17 +1194,17 @@ void FixScalings()
     if(!sgCz_pts[GetEnergyBin_sgCz()]) gMinuit->FixParameter(8*L_MAX + SIG_CZ);
     if(!sgOx_pts[GetEnergyBin_sgOx()]) gMinuit->FixParameter(8*L_MAX + SIG_OX);
     if(!sgOz_pts[GetEnergyBin_sgOz()]) gMinuit->FixParameter(8*L_MAX + SIG_OZ);
-    if(!S_pts[GetEnergyBin_S()])   gMinuit->FixParameter(8*L_MAX + ASY_S);
-    if(!T_pts[GetEnergyBin_T()])   gMinuit->FixParameter(8*L_MAX + ASY_T);
-    if(!P_pts[GetEnergyBin_P()])   gMinuit->FixParameter(8*L_MAX + ASY_P);
-    if(!E_pts[GetEnergyBin_E()])   gMinuit->FixParameter(8*L_MAX + ASY_E);
-    if(!F_pts[GetEnergyBin_F()])   gMinuit->FixParameter(8*L_MAX + ASY_F);
-    if(!G_pts[GetEnergyBin_G()])   gMinuit->FixParameter(8*L_MAX + ASY_G);
-    if(!H_pts[GetEnergyBin_H()])   gMinuit->FixParameter(8*L_MAX + ASY_H);
-    if(!Cx_pts[GetEnergyBin_Cx()]) gMinuit->FixParameter(8*L_MAX + ASY_CX);
-    if(!Cz_pts[GetEnergyBin_Cz()]) gMinuit->FixParameter(8*L_MAX + ASY_CZ);
-    if(!Ox_pts[GetEnergyBin_Ox()]) gMinuit->FixParameter(8*L_MAX + ASY_OX);
-    if(!Oz_pts[GetEnergyBin_Oz()]) gMinuit->FixParameter(8*L_MAX + ASY_OZ);
+    if(!S_pts[GetEnergyBin_S()])       gMinuit->FixParameter(8*L_MAX + ASY_S);
+    if(!T_pts[GetEnergyBin_T()])       gMinuit->FixParameter(8*L_MAX + ASY_T);
+    if(!P_pts[GetEnergyBin_P()])       gMinuit->FixParameter(8*L_MAX + ASY_P);
+    if(!E_pts[GetEnergyBin_E()])       gMinuit->FixParameter(8*L_MAX + ASY_E);
+    if(!F_pts[GetEnergyBin_F()])       gMinuit->FixParameter(8*L_MAX + ASY_F);
+    if(!G_pts[GetEnergyBin_G()])       gMinuit->FixParameter(8*L_MAX + ASY_G);
+    if(!H_pts[GetEnergyBin_H()])       gMinuit->FixParameter(8*L_MAX + ASY_H);
+    if(!Cx_pts[GetEnergyBin_Cx()])     gMinuit->FixParameter(8*L_MAX + ASY_CX);
+    if(!Cz_pts[GetEnergyBin_Cz()])     gMinuit->FixParameter(8*L_MAX + ASY_CZ);
+    if(!Ox_pts[GetEnergyBin_Ox()])     gMinuit->FixParameter(8*L_MAX + ASY_OX);
+    if(!Oz_pts[GetEnergyBin_Oz()])     gMinuit->FixParameter(8*L_MAX + ASY_OZ);
   }
 }
 
