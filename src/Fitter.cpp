@@ -353,18 +353,23 @@ Int_t NSca()
       return NSca;
     }
     //General expression using all possible observables
+    if(sg0_pts[GetEnergyBin_sg0()])   NSca+=1;
+    if(sgS_pts[GetEnergyBin_sgS()])   NSca+=1;
     if(sgT_pts[GetEnergyBin_sgT()])   NSca+=1;
     if(sgP_pts[GetEnergyBin_sgP()])   NSca+=1;
     if(sgE_pts[GetEnergyBin_sgE()])   NSca+=1;
+    if(sgF_pts[GetEnergyBin_sgF()])   NSca+=1;
     if(sgG_pts[GetEnergyBin_sgG()])   NSca+=1;
     if(sgH_pts[GetEnergyBin_sgH()])   NSca+=1;
     if(sgCx_pts[GetEnergyBin_sgCx()]) NSca+=1;
     if(sgCz_pts[GetEnergyBin_sgCz()]) NSca+=1;
     if(sgOx_pts[GetEnergyBin_sgOx()]) NSca+=1;
     if(sgOz_pts[GetEnergyBin_sgOz()]) NSca+=1;
+    if(S_pts[GetEnergyBin_S()])       NSca+=1;
     if(T_pts[GetEnergyBin_T()])       NSca+=1;
     if(P_pts[GetEnergyBin_P()])       NSca+=1;
     if(E_pts[GetEnergyBin_E()])       NSca+=1;
+    if(F_pts[GetEnergyBin_F()])       NSca+=1;
     if(G_pts[GetEnergyBin_G()])       NSca+=1;
     if(H_pts[GetEnergyBin_H()])       NSca+=1;
     if(Cx_pts[GetEnergyBin_Cx()])     NSca+=1;
