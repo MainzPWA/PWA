@@ -121,7 +121,12 @@ Double_t Scale()
 
   if(ONLY_CROSS_S) return SCALING*(Scale_0 + Scale_S);
   if(ONLY_CROSS_F) return SCALING*(Scale_0 + Scale_F);
-  return SCALING*(Scale_0 + Scale_S + Scale_T + Scale_P + Scale_E + Scale_F + Scale_G + Scale_H + Scale_Cx + Scale_Cz + Scale_Ox + Scale_Oz);
+
+  //Without additional weighting (SCALING), the penalty should be comparable to chi^2.
+  //So, it is divided by the number of scaling parameters (NScap) that are taken into
+  //account (i.e. normalise the penalty to a single parameter case) and multiplied by
+  //the number of data points (NPts) that are used for chi^2.
+  return SCALING*(NPts()/NSca())*(Scale_0 + Scale_S + Scale_T + Scale_P + Scale_E + Scale_F + Scale_G + Scale_H + Scale_Cx + Scale_Cz + Scale_Ox + Scale_Oz);
 }
 
 //-----------------------------------------------------------------------------
@@ -207,11 +212,11 @@ Double_t PenaltyMLP1()
   MagnSq/=(8.0*L_MAX);
 
   //Without additional weighting (PENALTY), the penalty should be comparable to chi^2.
-  //So, it is divided by the number of model parameters (NPar) that are taken into
+  //So, it is divided by the number of multipole parameters (NMlp) that are taken into
   //account (i.e. normalise the penalty to a single parameter case) and multiplied by
-  //the number of data points (NPts) that are used for chi^2.  Also, it is normalised
+  //the number of data points (NPts) that are used for chi^2. Also, it is normalised
   //to an average magnitude^2 of a single real (or imaginary) part of model multipoles.
-  return PENALTY[MLP1]*(DiffSq/MagnSq)*(NPts()/NPar());
+  return PENALTY[MLP1]*(DiffSq/MagnSq)*(NPts()/NMlp());
 }
 
 //-----------------------------------------------------------------------------
@@ -259,10 +264,10 @@ Double_t PenaltyMLP2()
   }
 
   //Without additional weighting (PENALTY), the penalty should be comparable to chi^2.
-  //So, it is divided by the number of model parameters (NPar) that are taken into
+  //So, it is divided by the number of multipole parameters (NMlp) that are taken into
   //account (i.e. normalise the penalty to a single parameter case) and multiplied by
   //the number of data points (NPts) that are used for chi^2.
-  return PENALTY[MLP2]*SumSq*(NPts()/NPar());
+  return PENALTY[MLP2]*SumSq*(NPts()/NMlp());
 }
 
 //-----------------------------------------------------------------------------
@@ -296,60 +301,86 @@ Int_t NPts()
 
 //-----------------------------------------------------------------------------
 
-Int_t NPar()
+Int_t NMlp()
 {
-  Int_t NPar;
+  Int_t NMlp;
 
-  NPar = L_MAX*8; //We start with 4 multipoles (8 real numbers) per angular momentum (L=0,1 combined), ...
-  if(FIX_EP_PHASE[0]) NPar-=1; //... the phase of the E0+ multipole can be fixed, ...
-  if(FIX_EP_PHASE[1]) NPar-=1; //... the phase of the E1+ multipole can be fixed, ...
-  if(FIX_MP_PHASE[1]) NPar-=1; //... the phase of the M1+ multipole can be fixed, ...
-  if(FIX_MM_PHASE[1]) NPar-=1; //... the phase of the M1- multipole can be fixed, ...
+  NMlp = L_MAX*8; //We start with 4 multipoles (8 real numbers) per angular momentum (L=0,1 combined), ...
+  if(FIX_EP_PHASE[0]) NMlp-=1; //... the phase of the E0+ multipole can be fixed, ...
+  if(FIX_EP_PHASE[1]) NMlp-=1; //... the phase of the E1+ multipole can be fixed, ...
+  if(FIX_MP_PHASE[1]) NMlp-=1; //... the phase of the M1+ multipole can be fixed, ...
+  if(FIX_MM_PHASE[1]) NMlp-=1; //... the phase of the M1- multipole can be fixed, ...
   for(Int_t l=2; l<L_MAX+1; l++)
   {
-    if(FIX_EP[l]) NPar-=2; //... the El+ multipole can be fixed, ...
-    if(FIX_MP[l]) NPar-=2; //... the Ml+ multipole can be fixed, ...
-    if(FIX_EM[l]) NPar-=2; //... the El- multipole can be fixed, ...
-    if(FIX_MM[l]) NPar-=2; //... the Ml- multipole can be fixed, ...
+    if(FIX_EP[l]) NMlp-=2; //... the El+ multipole can be fixed, ...
+    if(FIX_MP[l]) NMlp-=2; //... the Ml+ multipole can be fixed, ...
+    if(FIX_EM[l]) NMlp-=2; //... the El- multipole can be fixed, ...
+    if(FIX_MM[l]) NMlp-=2; //... the Ml- multipole can be fixed, ...
     //Fixed phases may decrease parameter count only, if complete wave not already fixed
-    if(FIX_EP_PHASE[l] && !FIX_EP[l]) NPar-=1; //... the El+ phase can be fixed, ...
-    if(FIX_MP_PHASE[l] && !FIX_MP[l]) NPar-=1; //... the Ml+ phase can be fixed, ...
-    if(FIX_EM_PHASE[l] && !FIX_EM[l]) NPar-=1; //... the El- phase can be fixed, ...
-    if(FIX_MM_PHASE[l] && !FIX_MM[l]) NPar-=1; //... the Ml- phase can be fixed, ...
+    if(FIX_EP_PHASE[l] && !FIX_EP[l]) NMlp-=1; //... the El+ phase can be fixed, ...
+    if(FIX_MP_PHASE[l] && !FIX_MP[l]) NMlp-=1; //... the Ml+ phase can be fixed, ...
+    if(FIX_EM_PHASE[l] && !FIX_EM[l]) NMlp-=1; //... the El- phase can be fixed, ...
+    if(FIX_MM_PHASE[l] && !FIX_MM[l]) NMlp-=1; //... the Ml- phase can be fixed, ...
   }
-  if(ONLY_CROSS_S || ONLY_CROSS_F) NPar-=3; //... the imaginary parts of three p waves can be fixed, ...
-  if(FIX_IM_E0P) NPar-=1; //... the imaginary part of one s wave can be fixed.
+  if(ONLY_CROSS_S || ONLY_CROSS_F) NMlp-=3; //... the imaginary parts of three p waves can be fixed, ...
+  if(FIX_IM_E0P) NMlp-=1; //... the imaginary part of one s wave can be fixed.
+
+  return NMlp;
+}
+
+//-----------------------------------------------------------------------------
+
+Int_t NSca()
+{
+  Int_t NSca = 0;
 
   //If observable scalings are not fixed, we get additional parameters, ...
   if(!FIX_SCALES)
   {
     //...namely one parameter for each scalable observable (i.e. observables with data)
-    if(sg0_pts[GetEnergyBin_sg0()])   NPar+=1;
-    if(sgS_pts[GetEnergyBin_sgS()])   NPar+=1;
-    if(sgT_pts[GetEnergyBin_sgT()])   NPar+=1;
-    if(sgP_pts[GetEnergyBin_sgP()])   NPar+=1;
-    if(sgE_pts[GetEnergyBin_sgE()])   NPar+=1;
-    if(sgF_pts[GetEnergyBin_sgF()])   NPar+=1;
-    if(sgG_pts[GetEnergyBin_sgG()])   NPar+=1;
-    if(sgH_pts[GetEnergyBin_sgH()])   NPar+=1;
-    if(sgCx_pts[GetEnergyBin_sgCx()]) NPar+=1;
-    if(sgCz_pts[GetEnergyBin_sgCz()]) NPar+=1;
-    if(sgOx_pts[GetEnergyBin_sgOx()]) NPar+=1;
-    if(sgOz_pts[GetEnergyBin_sgOz()]) NPar+=1;
-    if(S_pts[GetEnergyBin_S()])   NPar+=1;
-    if(T_pts[GetEnergyBin_T()])   NPar+=1;
-    if(P_pts[GetEnergyBin_P()])   NPar+=1;
-    if(E_pts[GetEnergyBin_E()])   NPar+=1;
-    if(F_pts[GetEnergyBin_F()])   NPar+=1;
-    if(G_pts[GetEnergyBin_G()])   NPar+=1;
-    if(H_pts[GetEnergyBin_H()])   NPar+=1;
-    if(Cx_pts[GetEnergyBin_Cx()]) NPar+=1;
-    if(Cz_pts[GetEnergyBin_Cz()]) NPar+=1;
-    if(Ox_pts[GetEnergyBin_Ox()]) NPar+=1;
-    if(Oz_pts[GetEnergyBin_Oz()]) NPar+=1;
+    if(ONLY_CROSS_S) //Handle special cases first
+    {
+      if(sg0_pts[GetEnergyBin_sg0()]) NSca+=1;
+      if(sgS_pts[GetEnergyBin_sgS()]) NSca+=1;
+      if(S_pts[GetEnergyBin_S()])     NSca+=1;
+      return NSca;
+    }
+    if(ONLY_CROSS_F)
+    {
+      if(sg0_pts[GetEnergyBin_sg0()]) NSca+=1;
+      if(sgF_pts[GetEnergyBin_sgF()]) NSca+=1;
+      if(F_pts[GetEnergyBin_F()])     NSca+=1;
+      return NSca;
+    }
+    //General expression using all possible observables
+    if(sgT_pts[GetEnergyBin_sgT()])   NSca+=1;
+    if(sgP_pts[GetEnergyBin_sgP()])   NSca+=1;
+    if(sgE_pts[GetEnergyBin_sgE()])   NSca+=1;
+    if(sgG_pts[GetEnergyBin_sgG()])   NSca+=1;
+    if(sgH_pts[GetEnergyBin_sgH()])   NSca+=1;
+    if(sgCx_pts[GetEnergyBin_sgCx()]) NSca+=1;
+    if(sgCz_pts[GetEnergyBin_sgCz()]) NSca+=1;
+    if(sgOx_pts[GetEnergyBin_sgOx()]) NSca+=1;
+    if(sgOz_pts[GetEnergyBin_sgOz()]) NSca+=1;
+    if(T_pts[GetEnergyBin_T()])       NSca+=1;
+    if(P_pts[GetEnergyBin_P()])       NSca+=1;
+    if(E_pts[GetEnergyBin_E()])       NSca+=1;
+    if(G_pts[GetEnergyBin_G()])       NSca+=1;
+    if(H_pts[GetEnergyBin_H()])       NSca+=1;
+    if(Cx_pts[GetEnergyBin_Cx()])     NSca+=1;
+    if(Cz_pts[GetEnergyBin_Cz()])     NSca+=1;
+    if(Ox_pts[GetEnergyBin_Ox()])     NSca+=1;
+    if(Oz_pts[GetEnergyBin_Oz()])     NSca+=1;
   }
 
-  return NPar;
+  return NSca;
+}
+
+//-----------------------------------------------------------------------------
+
+Int_t NPar()
+{
+  return NMlp()+NSca();
 }
 
 //-----------------------------------------------------------------------------
@@ -503,7 +534,7 @@ Double_t ErrorBase(Double_t* Par, Double_t* Err)
   for(Int_t l=0; l<L_MAX*8; l++)
     Mean+=Err[l];
 
-  return Mean/NPar();
+  return Mean/NMlp();
 }
 
 //-----------------------------------------------------------------------------

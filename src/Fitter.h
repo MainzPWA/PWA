@@ -77,6 +77,8 @@ Double_t GetErrors(Double_t* Par, Double_t* Err);
 Double_t ErrorBase(Double_t* Par, Double_t* Err);
 Int_t NPts();
 Int_t NPar();
+Int_t NMlp();
+Int_t NSca();
 Int_t NDF();
 
 //-----------------------------------------------------------------------------
