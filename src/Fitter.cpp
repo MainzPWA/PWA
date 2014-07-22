@@ -123,7 +123,7 @@ Double_t Scale()
   if(ONLY_CROSS_F) return SCALING*(Scale_0 + Scale_F);
 
   //Without additional weighting (SCALING), the penalty should be comparable to chi^2.
-  //So, it is divided by the number of scaling parameters (NScap) that are taken into
+  //So, it is divided by the number of scaling parameters (NSca) that are taken into
   //account (i.e. normalise the penalty to a single parameter case) and multiplied by
   //the number of data points (NPts) that are used for chi^2.
   return SCALING*(NPts()/NSca())*(Scale_0 + Scale_S + Scale_T + Scale_P + Scale_E + Scale_F + Scale_G + Scale_H + Scale_Cx + Scale_Cz + Scale_Ox + Scale_Oz);
