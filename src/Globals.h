@@ -28,6 +28,7 @@ extern Bool_t FIX_MM[LBINS];
 extern Bool_t FIX_IM_E0P;
 extern Bool_t ONLY_CROSS_S;
 extern Bool_t ONLY_CROSS_F;
+extern Bool_t SGT_ENERGIES;
 extern Bool_t FIX_EP_PHASE[LBINS];
 extern Bool_t FIX_EM_PHASE[LBINS];
 extern Bool_t FIX_MP_PHASE[LBINS];

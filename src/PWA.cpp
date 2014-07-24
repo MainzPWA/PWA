@@ -260,19 +260,30 @@ void Print()
 
 void PWA()
 {
+  Double_t* sgX_en;
+  Int_t* sgX_pts;
+  Int_t sgX_bin;
+
   for(Int_t s=0; s<SOLUTIONS; s++) Fit_pts[s] = 0;
   Model_pts = 0;
 
-  for(Int_t e0=0; e0<sg0_bin; e0++)
+  //Use either sgT or sg0 as 'master' observable for defining the global energy
+  if(SGT_ENERGIES)
+  { sgX_en = sgT_en; sgX_pts = sgT_pts; sgX_bin = sgT_bin; }
+  else
+  { sgX_en = sg0_en; sgX_pts = sg0_pts; sgX_bin = sg0_bin; }
+
+  //Perform single energy fits for each energy point of 'master' observable (sgT or sg0)
+  for(Int_t eX=0; eX<sgX_bin; eX++)
   {
-    //Set global energy to cross section energy
-    gEnergy = sg0_en[e0];
+    //Set global energy to 'master' observable energy
+    gEnergy = sgX_en[eX];
     //Fit only within selected energy range
     if((gEnergy < MIN_ENERGY) || (gEnergy > MAX_ENERGY)) continue;
     //Fit only if enough data available
     if(NDF() < 1) continue;
-    //Fit only if cross section data available
-    if(sg0_pts[e0]==0) continue;
+    //Fit only if 'master' observable data available
+    if(sgX_pts[eX]==0) continue;
 
     //Perform fit
     Fit();
@@ -311,6 +322,7 @@ void Init()
   FIX_IM_E0P     = false;
   ONLY_CROSS_S   = false;
   ONLY_CROSS_F   = false;
+  SGT_ENERGIES   = false;
   PRINT_PENALTY  = false;
   ERROR_MODE     = ADAPTIVE;
   PENALTY_MODE   = MLP1;
@@ -358,6 +370,7 @@ void Init()
     if(sscanf(Buffer, "FIX_SCALES %d", &Bool)==1) FIX_SCALES = Bool;
     if(sscanf(Buffer, "ONLY_CROSS_S %d", &Bool)==1) ONLY_CROSS_S = Bool;
     if(sscanf(Buffer, "ONLY_CROSS_F %d", &Bool)==1) ONLY_CROSS_F = Bool;
+    if(sscanf(Buffer, "SGT_ENERGIES %d", &Bool)==1) SGT_ENERGIES = Bool;
     if(sscanf(Buffer, "PRINT_PENALTY %d", &Bool)==1) PRINT_PENALTY = Bool;
     if(sscanf(Buffer, "PENALTY_MLP1 %lf", &Double)==1) PENALTY[MLP1] = Double;
     if(sscanf(Buffer, "PENALTY_MLP2 %lf", &Double)==1) PENALTY[MLP2] = Double;
@@ -454,6 +467,7 @@ void Init()
   printf("D_WAVES %1d\n", D_WAVES);
   printf("ONLY_CROSS_S %1d\n", ONLY_CROSS_S);
   printf("ONLY_CROSS_F %1d\n", ONLY_CROSS_F);
+  printf("SGT_ENERGIES %1d\n", SGT_ENERGIES);
   printf("PENALTY_MLP1 %6.3f\n", PENALTY[MLP1]);
   printf("PENALTY_MLP2 %6.3f\n", PENALTY[MLP2]);
   printf("SCALING %6.3f\n", SCALING);

@@ -46,6 +46,7 @@ void Parse_sgT()
   }
 
   fclose(File_sgT);
+  Sort_sgT(0, sgT_bin-1);
   //Count data points and (used) energy bins
   Int_t n = 0; for(Int_t t=0; t<sgT_bin; t++) n+=sgT_pts[t];
   Int_t m = 0; for(Int_t t=0; t<sgT_bin; t++) if(sgT_pts[t]) m++;
@@ -119,6 +120,47 @@ Double_t GetChiSq_sgT()
   }
 
   return sgT_wt[eT]*ChiSq_sgT; //Apply weight factor for each dataset
+}
+
+//-----------------------------------------------------------------------------
+
+void Sort_sgT(Int_t l, Int_t r) //Quicksort implementation on sgT data arrays
+{
+  if(r > l)
+  {
+    Int_t i = l-1;
+    Int_t j = r;
+
+   for(;;)
+   {
+     while(sgT_en[++i] < sgT_en[r]);
+     while((sgT_en[--j] > sgT_en[r]) && (j>i));
+     if(i>=j) break;
+     Swap(&sgT_en[i],  &sgT_en[j]);
+     Swap(&sgT_wt[i],  &sgT_wt[j]);
+     Swap(&sgT_sy[i],  &sgT_sy[j]);
+     Swap(&sgT_pts[i], &sgT_pts[j]);
+     for(Int_t n=0; n<THBINS; n++)
+     {
+        Swap(&sgT_val[i][n], &sgT_val[j][n]);
+        Swap(&sgT_err[i][n], &sgT_err[j][n]);
+        Swap(&sgT_th[i][n],  &sgT_th[j][n]);
+     }
+   }
+   Swap(&sgT_en[i],  &sgT_en[r]);
+   Swap(&sgT_wt[i],  &sgT_wt[r]);
+   Swap(&sgT_sy[i],  &sgT_sy[r]);
+   Swap(&sgT_pts[i], &sgT_pts[r]);
+   for(Int_t n=0; n<THBINS; n++)
+   {
+      Swap(&sgT_val[i][n], &sgT_val[r][n]);
+      Swap(&sgT_err[i][n], &sgT_err[r][n]);
+      Swap(&sgT_th[i][n],  &sgT_th[r][n]);
+   }
+
+   Sort_sgT(l, i-1);
+   Sort_sgT(i+1, r);
+  }
 }
 
 //-----------------------------------------------------------------------------

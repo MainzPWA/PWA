@@ -21,6 +21,7 @@ extern Double_t f_obs[OBS];
 //-----------------------------------------------------------------------------
 
 void Parse_sgT();
+void Sort_sgT(Int_t l, Int_t r);
 Int_t GetEnergyBin_sgT();
 Int_t ExistEnergyBin_sgT(Double_t);
 Double_t GetChiSq_sgT();

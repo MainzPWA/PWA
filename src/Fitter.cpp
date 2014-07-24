@@ -1127,7 +1127,12 @@ void SortFits(Double_t* Quality, Double_t* MeanErr, Int_t* Attempt, Int_t l, Int
 void StoreFit(Int_t Sol)
 {
   Int_t Index;
-  Int_t e0 = GetEnergyBin_sg0();
+
+  //Piuck up energies depending on 'master' observable (sgT or sg0)
+  if(SGT_ENERGIES)
+    Fit_en[Sol][Fit_pts[Sol]] = sgT_en[GetEnergyBin_sgT()];
+  else
+    Fit_en[Sol][Fit_pts[Sol]] = sg0_en[GetEnergyBin_sg0()];
 
   //Store fit data for graph plots
   Fit_val[Sol][0][Fit_pts[Sol]] = Ep[0].Re(); Fit_val[Sol][1][Fit_pts[Sol]] = Ep[0].Im(); Fit_err[Sol][0][Fit_pts[Sol]] = DEp[0].Re(); Fit_err[Sol][1][Fit_pts[Sol]] = DEp[0].Im();
@@ -1144,7 +1149,6 @@ void StoreFit(Int_t Sol)
   }
   Fit_chi[Sol][Fit_pts[Sol]] = ChiSq()/NDF();
   Fit_pen[Sol][Fit_pts[Sol]] = Penalty()/NDF();
-  Fit_en[Sol][Fit_pts[Sol]] = sg0_en[e0];
   Fit_pts[Sol]++;
 }
 
