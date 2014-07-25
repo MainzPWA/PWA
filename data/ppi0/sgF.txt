@@ -1,1 +1,1 @@
-datafiles/sigmaF_Sven_2ChanShift0.txt
+datafiles/sigmaF_Sven_1ChanShift0.txt
