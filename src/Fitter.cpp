@@ -137,13 +137,13 @@ Double_t Penalty()
 {
   switch(PENALTY_MODE)
   {
-   case MLP3:
-    return PenaltyMLP1() + PenaltyMLP2();
+   case MLP1:
+    return PenaltyMLP1();
    case MLP2:
     return PenaltyMLP2();
-   case MLP1:
+   case MLP3:
    default:
-    return PenaltyMLP1();
+    return PenaltyMLP1() + PenaltyMLP2();
   }
 }
 
