@@ -7,7 +7,7 @@ static Double_t step[8*(LBINS-1) + OBS];
 
 //-----------------------------------------------------------------------------
 
-void fcn_main(Int_t &npar, Double_t *par)
+void fcn_main(Double_t *par)
 {
   Int_t Index;
 
@@ -54,7 +54,7 @@ void fcn_main(Int_t &npar, Double_t *par)
 void fcn_chi_pen(Int_t &npar, Double_t *gin, Double_t &f, Double_t *par, Int_t iflag)
 {
   //Call main part of fcn routine
-  fcn_main(npar, par);
+  fcn_main(par);
 
   //Return sum of chi^2 and penalties from multipoles and observable scaling to fitter
   f = ChiSq() + Penalty() + Scale();
@@ -65,7 +65,7 @@ void fcn_chi_pen(Int_t &npar, Double_t *gin, Double_t &f, Double_t *par, Int_t i
 void fcn_chi(Int_t &npar, Double_t *gin, Double_t &f, Double_t *par, Int_t iflag)
 {
   //Call main part of fcn routine
-  fcn_main(npar, par);
+  fcn_main(par);
 
   //Return only chi^2 to fitter
   f = ChiSq();
@@ -135,9 +135,16 @@ Double_t Scale()
 
 Double_t Penalty()
 {
-  if(PENALTY_MODE==MLP1) return PenaltyMLP1();
-  if(PENALTY_MODE==MLP2) return PenaltyMLP2();
-  if(PENALTY_MODE==MLP3) return PenaltyMLP1() + PenaltyMLP2();
+  switch(PENALTY_MODE)
+  {
+   case MLP3:
+    return PenaltyMLP1() + PenaltyMLP2();
+   case MLP2:
+    return PenaltyMLP2();
+   case MLP1:
+   default:
+    return PenaltyMLP1();
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -476,12 +483,14 @@ Double_t GetErrors(Double_t* Par, Double_t* Err)
 {
   Double_t Mean[2];
 
-  if(ERROR_MODE==CHI2ONLY)
-    return ErrorChi2(Par, Err);
-  if(ERROR_MODE==CHI2PENALTY)
-    return ErrorChi2Penalty(Par, Err);
-  if(ERROR_MODE==ADAPTIVE)
+  switch(ERROR_MODE)
   {
+   case CHI2ONLY:
+    return ErrorChi2(Par, Err);
+   case CHI2PENALTY:
+    return ErrorChi2Penalty(Par, Err);
+   case ADAPTIVE:
+   default:
     Mean[0] = ErrorChi2(Par, Err);
     Mean[1] = ErrorChi2Penalty(Par, Err);
     if(Mean[1] < Mean[0])

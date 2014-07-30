@@ -231,7 +231,8 @@ Int_t GetEnergyBin_maid()
 {
   //Get energy bin for sigma0 for given global energy
   Double_t Min = 1e38;
-  Int_t eM;
+  Int_t eM = 0;
+
   for(Int_t e=0; e<maid_bin; e++)
     if(fabs(maid_en[e] - gEnergy) < Min)
     {

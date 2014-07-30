@@ -303,7 +303,7 @@ void Init()
   FILE* Config;
   Char_t Buffer[1024];
   Double_t Double;
-  Bool_t Bool;
+  Int_t Bool; //Used to read 'boolean' values with (s)scanf
   Int_t Int;
 
   //Configuration options for fitting process

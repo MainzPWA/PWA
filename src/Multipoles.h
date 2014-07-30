@@ -220,7 +220,6 @@ inline Double_t sigmaH(Double_t Theta, Double_t Omega)
 {
   Double_t SinTheta = Sin(Theta*DegToRad());
   Double_t CosTheta = Cos(Theta*DegToRad());
-  Double_t Sin2Theta = SinTheta*SinTheta;
 
   TComplex Complex = 2.0*F1cc(CosTheta)*F2(CosTheta) + F1cc(CosTheta)*F3(CosTheta) - F2cc(CosTheta)*F4(CosTheta)
                    + CosTheta*(F1cc(CosTheta)*F4(CosTheta) - F2cc(CosTheta)*F3(CosTheta));
@@ -245,7 +244,6 @@ inline Double_t sigmaF(Double_t Theta, Double_t Omega)
 {
   Double_t SinTheta = Sin(Theta*DegToRad());
   Double_t CosTheta = Cos(Theta*DegToRad());
-  Double_t Sin2Theta = SinTheta*SinTheta;
 
   TComplex Complex = F1cc(CosTheta)*F3(CosTheta) - F2cc(CosTheta)*F4(CosTheta)
                    - CosTheta*(F2cc(CosTheta)*F3(CosTheta) - F1cc(CosTheta)*F4(CosTheta));

@@ -44,7 +44,7 @@ extern Double_t Df_obs[OBS];
 
 //-----------------------------------------------------------------------------
 
-void fcn_main(Int_t &npar, Double_t *par);
+void fcn_main(Double_t *par);
 void fcn_chi_pen(Int_t &npar, Double_t *gin, Double_t &f, Double_t *par, Int_t iflag);
 void fcn_chi(Int_t &npar, Double_t *gin, Double_t &f, Double_t *par, Int_t iflag);
 void InitMinuit();
