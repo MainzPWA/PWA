@@ -483,6 +483,13 @@ void Init()
   printf("MASS_INITIAL %5.3f\n", MASS_INITIAL);
   printf("MASS_FINAL %5.3f\n", MASS_FINAL);
   printf("------------------------------------------------------------------------------------\n");
+
+  //Create output directories for all selected solutions
+  for(Int_t s=0; s<SOLUTIONS; s++)
+  {
+    sprintf(Buffer, "plots.%d", s);
+    mkdir(Buffer, 0755);
+  }
 }
 
 //-----------------------------------------------------------------------------
