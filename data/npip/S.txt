@@ -1,1 +1,1 @@
-datafiles/Sigma_DatabaseGWU.txt
+datafiles/combined_Sigma_DatabaseGWU.txt

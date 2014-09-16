@@ -1,1 +1,1 @@
-datafiles/G_DatabaseGWU.txt
+datafiles/combined_G_DatabaseGWU.txt
