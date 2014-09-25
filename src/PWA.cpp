@@ -32,6 +32,38 @@
 
 //-----------------------------------------------------------------------------
 
+Bool_t HasShm()
+{
+  DIR* Shm = opendir("/dev/shm");
+  if(Shm)
+  {
+    closedir(Shm);
+    return true;
+  }
+  return false;
+}
+
+//-----------------------------------------------------------------------------
+
+void SaveObjectAs(TObject* Object, Char_t* Filename)
+{
+  Char_t FilenameShm[256];
+  Char_t Command[256];
+
+  if(HasShm())
+  {
+    sprintf(FilenameShm, "/dev/shm/PWA_%4x/%s", getpid(), Filename);
+    gDirectory->SaveObjectAs(Object, FilenameShm, "q");
+    sprintf(Command, "cp %s %s", FilenameShm, Filename);
+    gSystem->Exec(Command);
+  }
+  else
+    gDirectory->SaveObjectAs(Object, Filename, "q");
+}
+
+
+//-----------------------------------------------------------------------------
+
 void PlotFilename(Char_t* Buffer, Int_t p, Int_t s)
 {
   if(p==0) sprintf(Buffer, "plots.%d/ReE0p.root", s);
@@ -132,8 +164,7 @@ void Plot(Int_t s)
       Model->SetLineColor(kRed);
     Model->SetLineWidth(2);
     Model->Draw("L");
-
-    gDirectory->SaveObjectAs(Plot, Filename, "q");
+    SaveObjectAs(Plot, Filename);
     delete Plot;
   }
 
@@ -147,7 +178,7 @@ void Plot(Int_t s)
   Chi->Draw("APZ");
   Chi->GetXaxis()->SetTitle("#omega / MeV");
   sprintf(Filename, "plots.%1d/Chi2.root", s);
-  gDirectory->SaveObjectAs(Plot, Filename, "q");
+  SaveObjectAs(Plot, Filename);
   delete Plot;
 
   //Plot penalty
@@ -160,7 +191,7 @@ void Plot(Int_t s)
   Pen->Draw("APZ");
   Pen->GetXaxis()->SetTitle("#omega / MeV");
   sprintf(Filename, "plots.%1d/Penalty.root", s);
-  gDirectory->SaveObjectAs(Plot, Filename, "q");
+  SaveObjectAs(Plot, Filename);
   delete Plot;
 }
 
@@ -485,10 +516,33 @@ void Init()
   printf("------------------------------------------------------------------------------------\n");
 
   //Create output directories for all selected solutions
+  if(HasShm())
+  {
+    sprintf(Buffer, "/dev/shm/PWA_%4x", getpid());
+    mkdir(Buffer, 0755);
+  }
   for(Int_t s=0; s<SOLUTIONS; s++)
   {
     sprintf(Buffer, "plots.%d", s);
     mkdir(Buffer, 0755);
+    if(HasShm())
+    {
+      sprintf(Buffer, "/dev/shm/PWA_%4x/plots.%d", getpid(), s);
+      mkdir(Buffer, 0755);
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------
+
+void Cleanup()
+{
+  Char_t Command[256];
+
+  if(HasShm())
+  {
+    sprintf(Command, "rm -rf /dev/shm/PWA_%4x", getpid());
+    gSystem->Exec(Command);
   }
 }
 
@@ -545,6 +599,7 @@ int main(int argc, char **argv)
   Init();
   Load();
   PWA();
+  Cleanup();
 }
 
 //-----------------------------------------------------------------------------
