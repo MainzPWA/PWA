@@ -52,7 +52,7 @@ void SaveObjectAs(TObject* Object, Char_t* Filename)
 
   if(HasShm())
   {
-    sprintf(FilenameShm, "/dev/shm/PWA_%4x_%4x.root", getpid(), rand());
+    sprintf(FilenameShm, "/dev/shm/PWA_%4x_%8x.root", getpid(), rand());
     gDirectory->SaveObjectAs(Object, FilenameShm, "q");
     sprintf(Command, "mv %s %s", FilenameShm, Filename);
     gSystem->Exec(Command);
