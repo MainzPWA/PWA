@@ -52,9 +52,9 @@ void SaveObjectAs(TObject* Object, Char_t* Filename)
 
   if(HasShm())
   {
-    sprintf(FilenameShm, "/dev/shm/PWA_%4x/%s", getpid(), Filename);
+    sprintf(FilenameShm, "/dev/shm/PWA_%4x_%4x.root", getpid(), rand());
     gDirectory->SaveObjectAs(Object, FilenameShm, "q");
-    sprintf(Command, "cp %s %s", FilenameShm, Filename);
+    sprintf(Command, "mv %s %s", FilenameShm, Filename);
     gSystem->Exec(Command);
   }
   else
@@ -516,34 +516,13 @@ void Init()
   printf("------------------------------------------------------------------------------------\n");
 
   //Create output directories for all selected solutions
-  if(HasShm())
-  {
-    sprintf(Buffer, "/dev/shm/PWA_%4x", getpid());
-    mkdir(Buffer, 0755);
-  }
   for(Int_t s=0; s<SOLUTIONS; s++)
   {
     sprintf(Buffer, "plots.%d", s);
     mkdir(Buffer, 0755);
-    if(HasShm())
-    {
-      sprintf(Buffer, "/dev/shm/PWA_%4x/plots.%d", getpid(), s);
-      mkdir(Buffer, 0755);
-    }
   }
-}
-
-//-----------------------------------------------------------------------------
-
-void Cleanup()
-{
-  Char_t Command[256];
-
-  if(HasShm())
-  {
-    sprintf(Command, "rm -rf /dev/shm/PWA_%4x", getpid());
-    gSystem->Exec(Command);
-  }
+  //Set seed for RNG used to create unique file names
+  srand(getpid());
 }
 
 //-----------------------------------------------------------------------------
@@ -599,7 +578,6 @@ int main(int argc, char **argv)
   Init();
   Load();
   PWA();
-  Cleanup();
 }
 
 //-----------------------------------------------------------------------------
