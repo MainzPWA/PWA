@@ -464,6 +464,16 @@ void Init()
     printf("Error: ONLY_CROSS_S or ONLY_CROSS_F must not be used with explicit phase fixing.\n");
     exit(0);
   }
+  if((FIX_IM_E0P && FIX_EP[0]) || (FIX_RE_E0P && FIX_EP[0]))
+  {
+    printf("Error: FIX_E0P not allowed with FIX_RE_E0P or FIX_IM_E0P.\n");
+    exit(0);
+  }
+  if((FIX_IM_E0P && FIX_EP_PHASE[0]) || (FIX_RE_E0P && FIX_EP_PHASE[0]))
+  {
+    printf("Error: FIX_E0P_PHASE not allowed with FIX_RE_E0P or FIX_IM_E0P.\n");
+    exit(0);
+  }
   Bool = FIX_EP_PHASE[0] || FIX_EP_PHASE[1] || FIX_MP_PHASE[1] || FIX_MM_PHASE[1];
   for(Int_t l=2; l<L_MAX+1; l++)
   {
