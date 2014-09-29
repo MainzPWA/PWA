@@ -338,10 +338,10 @@ void Init()
   Int_t Int;
 
   //Configuration options for fitting process
-  FIX_EP_PHASE[0] = false;
-  FIX_EP_PHASE[1] = false;
-  FIX_MP_PHASE[1] = false;
-  FIX_MM_PHASE[1] = false;
+  FIX_EP[0] = false; FIX_EP_PHASE[0] = false;
+  FIX_EP[1] = false; FIX_EP_PHASE[1] = false;
+  FIX_MP[1] = false; FIX_MP_PHASE[1] = false;
+  FIX_MM[1] = false; FIX_MM_PHASE[1] = false;
   for(Int_t l=2; l<LBINS; l++)
   {
     FIX_EP[l] = true; FIX_EP_PHASE[l] = false;
@@ -350,6 +350,7 @@ void Init()
     FIX_MM[l] = true; FIX_MM_PHASE[l] = false;
   }
   FIX_SCALES     = false;
+  FIX_RE_E0P     = false;
   FIX_IM_E0P     = false;
   ONLY_CROSS_S   = false;
   ONLY_CROSS_F   = false;
@@ -393,6 +394,7 @@ void Init()
     if(sscanf(Buffer, "FIX_M%dP %d", &Int, &Bool)==2) FIX_MP[Int] = Bool;
     if(sscanf(Buffer, "FIX_E%dM %d", &Int, &Bool)==2) FIX_EM[Int] = Bool;
     if(sscanf(Buffer, "FIX_M%dM %d", &Int, &Bool)==2) FIX_MM[Int] = Bool;
+    if(sscanf(Buffer, "FIX_RE_E0P %d", &Bool)==1) FIX_RE_E0P = Bool;
     if(sscanf(Buffer, "FIX_IM_E0P %d", &Bool)==1) FIX_IM_E0P = Bool;
     if(sscanf(Buffer, "FIX_E%dP_PHASE %d", &Int, &Bool)==2) FIX_EP_PHASE[Int] = Bool;
     if(sscanf(Buffer, "FIX_E%dM_PHASE %d", &Int, &Bool)==2) FIX_EM_PHASE[Int] = Bool;
@@ -472,6 +474,10 @@ void Init()
     printf("Warning: Fixing at least one phase might be necessary.\n");
 
   printf("------------------------------------------------------------------------------------\n");
+  printf("FIX_E0P %1d\n", FIX_EP[0]);
+  printf("FIX_E1P %1d\n", FIX_EP[1]);
+  printf("FIX_M1P %1d\n", FIX_MP[1]);
+  printf("FIX_M1M %1d\n", FIX_MM[1]);
   for(Int_t l=2; l<L_MAX+1; l++)
   {
     printf("FIX_E%dP %1d\n", l, FIX_EP[l]);
@@ -479,7 +485,6 @@ void Init()
     printf("FIX_E%dM %1d\n", l, FIX_EM[l]);
     printf("FIX_M%dM %1d\n", l, FIX_MM[l]);
   }
-  printf("FIX_IM_E0P %1d\n", FIX_IM_E0P);
   printf("FIX_E0P_PHASE %1d\n", FIX_EP_PHASE[0]);
   printf("FIX_E1P_PHASE %1d\n", FIX_EP_PHASE[1]);
   printf("FIX_M1P_PHASE %1d\n", FIX_MP_PHASE[1]);
@@ -491,6 +496,8 @@ void Init()
     printf("FIX_E%dM_PHASE %1d\n", l, FIX_EM_PHASE[l]);
     printf("FIX_M%dM_PHASE %1d\n", l, FIX_MM_PHASE[l]);
   }
+  printf("FIX_RE_E0P %1d\n", FIX_RE_E0P);
+  printf("FIX_IM_E0P %1d\n", FIX_IM_E0P);
   printf("FIX_SCALES %1d\n", FIX_SCALES);
   printf("L_MAX %1d\n", L_MAX);
   printf("MIN_ENERGY %6.1f\n", MIN_ENERGY);

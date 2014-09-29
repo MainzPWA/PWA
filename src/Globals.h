@@ -25,6 +25,7 @@ extern Bool_t FIX_EP[LBINS];
 extern Bool_t FIX_EM[LBINS];
 extern Bool_t FIX_MP[LBINS];
 extern Bool_t FIX_MM[LBINS];
+extern Bool_t FIX_RE_E0P;
 extern Bool_t FIX_IM_E0P;
 extern Bool_t ONLY_CROSS_S;
 extern Bool_t ONLY_CROSS_F;

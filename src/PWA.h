@@ -281,6 +281,7 @@ Bool_t FIX_EP[LBINS];
 Bool_t FIX_EM[LBINS];
 Bool_t FIX_MP[LBINS];
 Bool_t FIX_MM[LBINS];
+Bool_t FIX_RE_E0P;
 Bool_t FIX_IM_E0P;
 Bool_t ONLY_CROSS_S;
 Bool_t ONLY_CROSS_F;

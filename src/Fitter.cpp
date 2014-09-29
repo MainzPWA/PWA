@@ -314,10 +314,15 @@ Int_t NMlp()
 {
   Int_t NMlp = L_MAX*8; //We start with 4 multipoles (8 real numbers) per angular momentum (L=0,1 combined), ...
 
-  if(FIX_EP_PHASE[0]) NMlp-=1; //... the phase of the E0+ multipole can be fixed, ...
-  if(FIX_EP_PHASE[1]) NMlp-=1; //... the phase of the E1+ multipole can be fixed, ...
-  if(FIX_MP_PHASE[1]) NMlp-=1; //... the phase of the M1+ multipole can be fixed, ...
-  if(FIX_MM_PHASE[1]) NMlp-=1; //... the phase of the M1- multipole can be fixed, ...
+  if(FIX_EP[0]) NMlp-=2; //... the E0+ multipole can be fixed, ...
+  if(FIX_EP[1]) NMlp-=2; //... the E1+ multipole can be fixed, ...
+  if(FIX_MP[1]) NMlp-=2; //... the M1+ multipole can be fixed, ...
+  if(FIX_MM[1]) NMlp-=2; //... the M1- multipole can be fixed, ...
+  //Fixed phases may decrease parameter count only, if complete wave not already fixed
+  if(FIX_EP_PHASE[0] && !FIX_EP[0]) NMlp-=1; //... the phase of the E0+ multipole can be fixed, ...
+  if(FIX_EP_PHASE[1] && !FIX_EP[1]) NMlp-=1; //... the phase of the E1+ multipole can be fixed, ...
+  if(FIX_MP_PHASE[1] && !FIX_MP[1]) NMlp-=1; //... the phase of the M1+ multipole can be fixed, ...
+  if(FIX_MM_PHASE[1] && !FIX_MM[1]) NMlp-=1; //... the phase of the M1- multipole can be fixed, ...
   for(Int_t l=2; l<L_MAX+1; l++)
   {
     if(FIX_EP[l]) NMlp-=2; //... the El+ multipole can be fixed, ...
@@ -331,6 +336,7 @@ Int_t NMlp()
     if(FIX_MM_PHASE[l] && !FIX_MM[l]) NMlp-=1; //... the Ml- phase can be fixed, ...
   }
   if(ONLY_CROSS_S || ONLY_CROSS_F) NMlp-=3; //... the imaginary parts of three p waves can be fixed, ...
+  if(FIX_RE_E0P) NMlp-=1; //... the real part of one s wave can be fixed.
   if(FIX_IM_E0P) NMlp-=1; //... the imaginary part of one s wave can be fixed.
 
   return NMlp;
@@ -440,8 +446,9 @@ Bool_t SingleFit()
   //Set fitting start parameters in Minuit
   SetParameters();
 
-  //Fix s,p phases (global phase needs to be fixed) during the fitting process to their MAID values
+  //Fix s,p waves ore phases during the fitting process
   FixSPPhases();
+  FixSPWaves();
   //Fix d,f,... waves or phases during the fitting process when requested (fit contains not enough data to constrain all waves simultaneously)
   for(Int_t l=2; l<L_MAX+1; l++)
   {
@@ -451,10 +458,12 @@ Bool_t SingleFit()
   //Fix observable scalings
   FixScalings();
 
-  //When fitting threshold data, fix remaining p waves to be real...
+  //When fitting threshold data, fix remaining p waves to be real,...
   if(ONLY_CROSS_S || ONLY_CROSS_F) FixRealPWaves();
-  //...and fix imaginary part of E0+ to its unitarity value
+  //...,fix imaginary part of E0+ to its unitarity value,...
   if(ONLY_CROSS_S || ONLY_CROSS_F) FixUnitarity();
+  //...fix real part of E0+ to model value
+  FixThreshold();
 
   //Perform minimisation with MIGRAD technique
   arglist[0] = 1e+09;
@@ -531,10 +540,12 @@ Double_t ErrorBase(Double_t* Par, Double_t* Err)
   //Fix observabe scalings
   FixScalings();
 
-  //When fitting threshold data, fix remaining p waves to be real...
+  //When fitting threshold data, fix remaining p waves to be real,...
   if(ONLY_CROSS_S || ONLY_CROSS_F) FixRealPWaves();
-  //...and fix imaginary part of E0+ to its unitarity value
+  //...,fix imaginary part of E0+ to its unitarity value,...
   if(ONLY_CROSS_S || ONLY_CROSS_F) FixUnitarity();
+  //...fix real part of E0+ to model value
+  FixThreshold();
 
   //Calculate covariance matrix
   arglist[0] = 1e+09;
@@ -749,6 +760,17 @@ void SetUnitarity()
 
 //-----------------------------------------------------------------------------
 
+void FixSPWaves()
+{
+  //Fix phases (global phase needs to be fixed) during the fitting process to MAID values
+  if(FIX_EP[0]) { gMinuit->FixParameter(0); gMinuit->FixParameter(1); } //E0+
+  if(FIX_EP[1]) { gMinuit->FixParameter(2); gMinuit->FixParameter(3); } //E1+
+  if(FIX_MP[1]) { gMinuit->FixParameter(4); gMinuit->FixParameter(5); } //M1+
+  if(FIX_MM[1]) { gMinuit->FixParameter(6); gMinuit->FixParameter(7); } //M1-
+}
+
+//-----------------------------------------------------------------------------
+
 void FixSPPhases()
 {
   //Fix phases (global phase needs to be fixed) during the fitting process to MAID values
@@ -798,6 +820,14 @@ void FixUnitarity()
 {
   //Fix imaginary part of E0+ for threshold data fits
   if(FIX_IM_E0P) gMinuit->FixParameter(1);
+}
+
+//-----------------------------------------------------------------------------
+
+void FixThreshold()
+{
+  //Fix real part of E0+ for threshold data fits
+  if(FIX_RE_E0P) gMinuit->FixParameter(0);
 }
 
 //-----------------------------------------------------------------------------
@@ -871,7 +901,9 @@ void SetParameters()
   }
 
   //No variation on imaginary parts of s,p waves for threshold fits
-  if(FIX_IM_E0P) //E0+ fixed to unitary parametrisation
+  if(FIX_RE_E0P) //ReE0+ fixed
+    gMinuit->mnparm(0, "ReE0p",  vstart[0], step[0], 0, 0, ierflg);
+  if(FIX_IM_E0P) //ImE0+ fixed to unitary parametrisation
     gMinuit->mnparm(1, "ImE0p",  vstart[1], step[1], 0, 0, ierflg);
   if(ONLY_CROSS_S || ONLY_CROSS_F) //Real p waves
   {
