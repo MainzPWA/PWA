@@ -217,16 +217,16 @@ void Print()
     maid_Mp[1][eM] = TComplex(maid_Mp[1][eM].Re(), 0.0);
     maid_Mm[1][eM] = TComplex(maid_Mm[1][eM].Re(), 0.0);
   }
-  DeviationSq = (Ep[0]-maid_Ep[0][eM]).Rho2()/DEp[0].Rho2();
+  if(FIX_EP[0]) DeviationSq = 0.0; else DeviationSq = (Ep[0]-maid_Ep[0][eM]).Rho2()/DEp[0].Rho2();
   printf("E0+  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
           Ep[0].Re(), DEp[0].Re(), Ep[0].Im(), DEp[0].Im(), maid_Ep[0][eM].Re(), maid_Ep[0][eM].Im(), DeviationSq);
-  DeviationSq = (Ep[1]-maid_Ep[1][eM]).Rho2()/DEp[1].Rho2();
+  if(FIX_EP[1]) DeviationSq = 0.0; else DeviationSq = (Ep[1]-maid_Ep[1][eM]).Rho2()/DEp[1].Rho2();
   printf("E1+  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
           Ep[1].Re(), DEp[1].Re(), Ep[1].Im(), DEp[1].Im(), maid_Ep[1][eM].Re(), maid_Ep[1][eM].Im(), DeviationSq);
-  DeviationSq = (Mp[1]-maid_Mp[1][eM]).Rho2()/DMp[1].Rho2();
+  if(FIX_MP[1]) DeviationSq = 0.0; else DeviationSq = (Mp[1]-maid_Mp[1][eM]).Rho2()/DMp[1].Rho2();
   printf("M1+  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
           Mp[1].Re(), DMp[1].Re(), Mp[1].Im(), DMp[1].Im(), maid_Mp[1][eM].Re(), maid_Mp[1][eM].Im(), DeviationSq);
-  DeviationSq = (Mm[1]-maid_Mm[1][eM]).Rho2()/DMm[1].Rho2();
+  if(FIX_MM[1]) DeviationSq = 0.0; else DeviationSq = (Mm[1]-maid_Mm[1][eM]).Rho2()/DMm[1].Rho2();
   printf("M1-  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
           Mm[1].Re(), DMm[1].Re(), Mm[1].Im(), DMm[1].Im(), maid_Mm[1][eM].Re(), maid_Mm[1][eM].Im(), DeviationSq);
 

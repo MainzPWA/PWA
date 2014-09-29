@@ -529,8 +529,9 @@ Double_t ErrorBase(Double_t* Par, Double_t* Err)
     gMinuit->mnparm(L_MAX*8 + o, Buffer, Par[L_MAX*8 + o], step[L_MAX*8 + o], 0, 0, ierflg);
   }
 
-  //Fix s,p phases (global phase needs to be fixed) during the fitting process to their MAID values
+  //Fix s,p waves ore phases during the fitting process
   FixSPPhases();
+  FixSPWaves();
   //Fix d,f,... waves or phases during the fitting process when requested (fit contains not enough data to constrain all waves simultaneously)
   for(Int_t l=2; l<L_MAX+1; l++)
   {
