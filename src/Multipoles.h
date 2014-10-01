@@ -171,6 +171,7 @@ inline Double_t sigma0(Double_t Theta, Double_t Omega)
   TComplex Complex = F1(CosTheta).Rho2() + F2(CosTheta).Rho2()
                    + Sin2Theta*(0.5*F3(CosTheta).Rho2() + 0.5*F4(CosTheta).Rho2() + F2cc(CosTheta)*F3(CosTheta) + F1cc(CosTheta)*F4(CosTheta) + CosTheta*F3cc(CosTheta)*F4(CosTheta))
                    - 2.0*CosTheta*F1cc(CosTheta)*F2(CosTheta);
+
   return Complex.Re()*rho(Omega)*UNIT;
 }
 

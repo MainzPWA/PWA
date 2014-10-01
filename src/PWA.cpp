@@ -285,6 +285,21 @@ void Print()
            ChiSq(), Penalty(), Scale(), NPts(), NPar(), NDF());
     printf("------------------------------------------------------------------------------------\n");
   }
+
+  //FILE* sg0_out = fopen("sg0_model.txt", "a");
+  //fprintf(sg0_out, "E = %8.3f MeV\n", gEnergy);
+  //Ep[0] = maid_Ep[0][eM];
+  //Ep[1] = maid_Ep[1][eM];
+  //Mp[1] = maid_Mp[1][eM];
+  //Mm[1] = maid_Mm[1][eM];
+  //Ep[2] = maid_Ep[2][eM];
+  //Em[2] = maid_Em[2][eM];
+  //Mp[2] = maid_Mp[2][eM];
+  //Mm[2] = maid_Mm[2][eM];
+  //for(Int_t t=0; t<18; t++)
+  //  fprintf(sg0_out, "%7.3f  %10.6f\n", 10.0*t+5.0, sigma0(10.0*t+5.0, gEnergy));
+  //fprintf(sg0_out, "--------------------\n");
+  //fclose(sg0_out);
 }
 
 //-----------------------------------------------------------------------------
@@ -309,6 +324,7 @@ void PWA()
   {
     //Set global energy to 'master' observable energy
     gEnergy = sgX_en[eX];
+
     //Fit only within selected energy range
     if((gEnergy < MIN_ENERGY) || (gEnergy > MAX_ENERGY)) continue;
     //Fit only if enough data available
