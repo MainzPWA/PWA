@@ -288,7 +288,7 @@ inline Double_t sigmaCz(Double_t Theta, Double_t Omega)
 
   TComplex Complex = 2.0*F1cc(CosTheta)*F2(CosTheta)
                    + Sin2Theta*(F1cc(CosTheta)*F3(CosTheta) + F2cc(CosTheta)*F4(CosTheta))
-                   - CosTheta*(F1cc(CosTheta)*F1(CosTheta) + F2cc(CosTheta)*F2(CosTheta));
+                   - CosTheta*(F1(CosTheta).Rho2() + F2(CosTheta).Rho2());
   return Complex.Re()*rho(Omega)*UNIT;
 }
 
