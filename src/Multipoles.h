@@ -259,7 +259,7 @@ inline Double_t sigmaE(Double_t Theta, Double_t Omega)
   Double_t CosTheta = Cos(Theta*DegToRad());
   Double_t Sin2Theta = SinTheta*SinTheta;
 
-  TComplex Complex = F1cc(CosTheta)*F1(CosTheta) + F2cc(CosTheta)*F2(CosTheta)
+  TComplex Complex = F1(CosTheta).Rho2() + F2(CosTheta).Rho2()
                    - 2.0*CosTheta*F1cc(CosTheta)*F2(CosTheta)
                    + Sin2Theta*(F2cc(CosTheta)*F3(CosTheta) + F1cc(CosTheta)*F4(CosTheta));
   return Complex.Re()*rho(Omega)*UNIT;
@@ -272,7 +272,7 @@ inline Double_t sigmaCx(Double_t Theta, Double_t Omega)
   Double_t SinTheta = Sin(Theta*DegToRad());
   Double_t CosTheta = Cos(Theta*DegToRad());
 
-  TComplex Complex = F1cc(CosTheta)*F1(CosTheta) - F2cc(CosTheta)*F2(CosTheta)
+  TComplex Complex = F1(CosTheta).Rho2() - F2(CosTheta).Rho2()
                    + F1cc(CosTheta)*F4(CosTheta) - F2cc(CosTheta)*F3(CosTheta)
                    + CosTheta*(F1cc(CosTheta)*F3(CosTheta) - F2cc(CosTheta)*F4(CosTheta));
   return SinTheta*Complex.Re()*rho(Omega)*UNIT;
