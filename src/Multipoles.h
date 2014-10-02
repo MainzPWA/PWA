@@ -304,7 +304,6 @@ inline Double_t sigmaOx(Double_t Theta, Double_t Omega)
   return -SinTheta*Complex.Im()*rho(Omega)*UNIT;
 }
 
-
 //-----------------------------------------------------------------------------
 
 inline Double_t sigmaOz(Double_t Theta, Double_t Omega)
