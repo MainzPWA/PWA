@@ -377,9 +377,10 @@ Double_t PenaltyAMPL()
   for(Int_t t=0; t<  Oz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Oz_th[eX][t]*DegToRad()), eM);
 
   //Without additional weighting, the penalty should be comparable to chi^2.
-  //So, it is divided by 8 (4 complex amplitudes F1...F4)
-  //and multiplied by the number of data points (NPts) that are used for chi^2.
-  return SumSq*(NPts()/8.0);
+  //Here it is summed up over all theta points from all observables 
+  //(i.e. NPts data points are used) and EvaluateAMPL() normalises to the sum
+  //of F1...F4 magnitudes. Hence, no further normalisation is required.
+  return SumSq;
 }
 
 //-----------------------------------------------------------------------------
