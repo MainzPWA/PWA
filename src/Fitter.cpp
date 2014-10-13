@@ -301,7 +301,7 @@ Double_t PenaltyAMPL()
     eX = GetEnergyBin_S();
     for(Int_t t=0; t<S_pts[eX];   t++)  SumSq+=EvaluateAMPL(Cos(  S_th[eX][t]*DegToRad()), eM);
 
-    return SumSq*(NPts()/8.0);
+    return SumSq;
   }
 
   if(ONLY_CROSS_F)
@@ -314,7 +314,7 @@ Double_t PenaltyAMPL()
     eX = GetEnergyBin_F();
     for(Int_t t=0; t<F_pts[eX];   t++)  SumSq+=EvaluateAMPL(Cos(  F_th[eX][t]*DegToRad()), eM);
 
-    return SumSq*(NPts()/8.0);
+    return SumSq;
   }
 
   //Sum up F1...F4 amplitude deviations at all theta points from different observable data
