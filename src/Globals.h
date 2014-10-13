@@ -43,6 +43,7 @@ extern Int_t L_MAX;
 extern Int_t ITERATIONS;
 extern Int_t SOLUTIONS;
 extern Double_t PENALTY[4];
+extern Double_t WEIGHT[5];
 extern Double_t SCALING;
 extern Double_t VARIATION[2];
 extern Double_t MIN_ENERGY;

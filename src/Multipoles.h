@@ -155,10 +155,40 @@ inline TComplex F4(Double_t CosTheta)
 
 //-----------------------------------------------------------------------------
 
+//Wrapper for explicit CGLN amplitudes F_i
+inline TComplex F(Int_t i, Double_t CosTheta)
+{
+  switch(i)
+  {
+    case 1: return F1(CosTheta);
+    case 2: return F2(CosTheta);
+    case 3: return F3(CosTheta);
+    case 4: return F4(CosTheta);
+    default: return TComplex(0.0, 0.0);
+  }
+}
+
+//-----------------------------------------------------------------------------
+
 inline TComplex F1cc(Double_t CosTheta){ return TComplex::Conjugate(F1(CosTheta)); }
 inline TComplex F2cc(Double_t CosTheta){ return TComplex::Conjugate(F2(CosTheta)); }
 inline TComplex F3cc(Double_t CosTheta){ return TComplex::Conjugate(F3(CosTheta)); }
 inline TComplex F4cc(Double_t CosTheta){ return TComplex::Conjugate(F4(CosTheta)); }
+
+//-----------------------------------------------------------------------------
+
+//Wrapper for explicit CGLN amplitudes F_i*
+inline TComplex Fcc(Int_t i, Double_t CosTheta)
+{
+  switch(i)
+  {
+    case 1: return F1cc(CosTheta);
+    case 2: return F2cc(CosTheta);
+    case 3: return F3cc(CosTheta);
+    case 4: return F4cc(CosTheta);
+    default: return TComplex(0.0, 0.0);
+  }
+}
 
 //-----------------------------------------------------------------------------
 

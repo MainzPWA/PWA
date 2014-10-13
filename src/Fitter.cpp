@@ -142,8 +142,12 @@ Double_t Penalty()
    case MLP2:
     return PenaltyMLP2();
    case MLP3:
-   default:
     return PenaltyMLP1() + PenaltyMLP2();
+   case AMPL:
+    return PenaltyAMPL();
+   case NONE:
+   default:
+    return 0.0;
   }
 }
 
@@ -277,6 +281,105 @@ Double_t PenaltyMLP2()
   //account (i.e. normalise the penalty to a single parameter case) and multiplied by
   //the number of data points (NPts) that are used for chi^2.
   return PENALTY[MLP2]*SumSq*(NPts()/NMlp());
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t PenaltyAMPL()
+{
+  Int_t eM = GetEnergyBin_maid();
+  Int_t eX;
+  Double_t SumSq = 0.0;
+
+  if(ONLY_CROSS_S)
+  {
+    eX = GetEnergyBin_sg0();
+    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateAMPL(Cos(sg0_th[eX][t]*DegToRad()), eM);
+
+    eX = GetEnergyBin_sgS();
+    for(Int_t t=0; t<sgS_pts[eX]; t++)  SumSq+=EvaluateAMPL(Cos(sgS_th[eX][t]*DegToRad()), eM);
+    eX = GetEnergyBin_S();
+    for(Int_t t=0; t<S_pts[eX];   t++)  SumSq+=EvaluateAMPL(Cos(  S_th[eX][t]*DegToRad()), eM);
+
+    return SumSq*(NPts()/8.0);
+  }
+
+  if(ONLY_CROSS_F)
+  {
+    eX = GetEnergyBin_sg0();
+    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateAMPL(Cos(sg0_th[eX][t]*DegToRad()), eM);
+
+    eX = GetEnergyBin_sgF();
+    for(Int_t t=0; t<sgF_pts[eX]; t++)  SumSq+=EvaluateAMPL(Cos(sgF_th[eX][t]*DegToRad()), eM);
+    eX = GetEnergyBin_F();
+    for(Int_t t=0; t<F_pts[eX];   t++)  SumSq+=EvaluateAMPL(Cos(  F_th[eX][t]*DegToRad()), eM);
+
+    return SumSq*(NPts()/8.0);
+  }
+
+  //Sum up F1...F4 amplitude deviations at all theta points from different observable data
+  eX = GetEnergyBin_sg0();
+  for(Int_t t=0; t<sg0_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sg0_th[eX][t]*DegToRad()),  eM);
+
+  eX = GetEnergyBin_sgS();
+  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgS_th[eX][t]*DegToRad()),  eM);
+  eX = GetEnergyBin_S();
+  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  S_th[eX][t]*DegToRad()),  eM);
+
+  eX = GetEnergyBin_sgT();
+  for(Int_t t=0; t<sgT_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgT_th[eX][t]*DegToRad()),  eM);
+  eX = GetEnergyBin_T();
+  for(Int_t t=0; t<  T_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  T_th[eX][t]*DegToRad()),  eM);
+
+  eX = GetEnergyBin_sgP();
+  for(Int_t t=0; t<sgP_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgP_th[eX][t]*DegToRad()),  eM);
+  eX = GetEnergyBin_P();
+  for(Int_t t=0; t<  P_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  P_th[eX][t]*DegToRad()),  eM);
+
+  eX = GetEnergyBin_sgE();
+  for(Int_t t=0; t<sgE_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgE_th[eX][t]*DegToRad()),  eM);
+  eX = GetEnergyBin_E();
+  for(Int_t t=0; t<  E_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  E_th[eX][t]*DegToRad()),  eM);
+
+  eX = GetEnergyBin_sgF();
+  for(Int_t t=0; t<sgF_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgF_th[eX][t]*DegToRad()),  eM);
+  eX = GetEnergyBin_F();
+  for(Int_t t=0; t<  F_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  F_th[eX][t]*DegToRad()),  eM);
+
+  eX = GetEnergyBin_sgG();
+  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgG_th[eX][t]*DegToRad()),  eM);
+  eX = GetEnergyBin_G();
+  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  G_th[eX][t]*DegToRad()),  eM);
+
+  eX = GetEnergyBin_sgH();
+  for(Int_t t=0; t<sgH_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgH_th[eX][t]*DegToRad()),  eM);
+  eX = GetEnergyBin_H();
+  for(Int_t t=0; t<  H_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  H_th[eX][t]*DegToRad()),  eM);
+
+  eX = GetEnergyBin_sgCx();
+  for(Int_t t=0; t<sgCx_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(sgCx_th[eX][t]*DegToRad()), eM);
+  eX = GetEnergyBin_Cx();
+  for(Int_t t=0; t<  Cx_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Cx_th[eX][t]*DegToRad()), eM);
+
+  eX = GetEnergyBin_sgCz();
+  for(Int_t t=0; t<sgCz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(sgCz_th[eX][t]*DegToRad()), eM);
+  eX = GetEnergyBin_Cz();
+  for(Int_t t=0; t<  Cz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Cz_th[eX][t]*DegToRad()), eM);
+
+  eX = GetEnergyBin_sgOx();
+  for(Int_t t=0; t<sgOx_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(sgOx_th[eX][t]*DegToRad()), eM);
+  eX = GetEnergyBin_Ox();
+  for(Int_t t=0; t<  Ox_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Ox_th[eX][t]*DegToRad()), eM);
+
+  eX = GetEnergyBin_sgOz();
+  for(Int_t t=0; t<sgOz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(sgOz_th[eX][t]*DegToRad()), eM);
+  eX = GetEnergyBin_Oz();
+  for(Int_t t=0; t<  Oz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Oz_th[eX][t]*DegToRad()), eM);
+
+  //Without additional weighting, the penalty should be comparable to chi^2.
+  //So, it is divided by 8 (4 complex amplitudes F1...F4)
+  //and multiplied by the number of data points (NPts) that are used for chi^2.
+  return SumSq*(NPts()/8.0);
 }
 
 //-----------------------------------------------------------------------------
@@ -1187,7 +1290,7 @@ void StoreFit(Int_t Sol)
     Fit_val[Sol][Index+0][Fit_pts[Sol]] = Ep[l].Re(); Fit_val[Sol][Index+1][Fit_pts[Sol]] = Ep[l].Im(); Fit_err[Sol][Index+0][Fit_pts[Sol]] = DEp[l].Re(); Fit_err[Sol][Index+1][Fit_pts[Sol]] = DEp[l].Im();
     Fit_val[Sol][Index+2][Fit_pts[Sol]] = Mp[l].Re(); Fit_val[Sol][Index+3][Fit_pts[Sol]] = Mp[l].Im(); Fit_err[Sol][Index+2][Fit_pts[Sol]] = DMp[l].Re(); Fit_err[Sol][Index+3][Fit_pts[Sol]] = DMp[l].Im();
     Fit_val[Sol][Index+4][Fit_pts[Sol]] = Em[l].Re(); Fit_val[Sol][Index+5][Fit_pts[Sol]] = Em[l].Im(); Fit_err[Sol][Index+4][Fit_pts[Sol]] = DEm[l].Re(); Fit_err[Sol][Index+5][Fit_pts[Sol]] = DEm[l].Im();
-    Fit_val[Sol][Index+6][Fit_pts[Sol]] = Mm[l].Re(); Fit_val[Sol][Index+7][Fit_pts[Sol]] = Mm[l].Im(); Fit_err[Sol][Index+6][Fit_pts[Sol]] = DMm[l].Re(); Fit_err[Sol][Index+7][Fit_pts[Sol]] = DMm[l].Im(); 
+    Fit_val[Sol][Index+6][Fit_pts[Sol]] = Mm[l].Re(); Fit_val[Sol][Index+7][Fit_pts[Sol]] = Mm[l].Im(); Fit_err[Sol][Index+6][Fit_pts[Sol]] = DMm[l].Re(); Fit_err[Sol][Index+7][Fit_pts[Sol]] = DMm[l].Im();
   }
   Fit_chi[Sol][Fit_pts[Sol]] = ChiSq()/NDF();
   Fit_pen[Sol][Fit_pts[Sol]] = Penalty()/NDF();
@@ -1226,7 +1329,7 @@ void FixScalings()
   if(FIX_SCALES)
     for(Int_t o=0; o<OBS; o++) gMinuit->FixParameter(8*L_MAX + o);
   //...or fix observable scales for observables without data
-  else 
+  else
   {
     if(!sg0_pts[GetEnergyBin_sg0()])   gMinuit->FixParameter(8*L_MAX + SIG_0);
     if(!sgS_pts[GetEnergyBin_sgS()])   gMinuit->FixParameter(8*L_MAX + SIG_S);
