@@ -143,8 +143,8 @@ Double_t Penalty()
     return PenaltyMLP2();
    case MLP3:
     return PenaltyMLP1() + PenaltyMLP2();
-   case AMPL:
-    return PenaltyAMPL();
+   case CGLN:
+    return PenaltyCGLN();
    case NONE:
    default:
     return 0.0;
@@ -285,7 +285,7 @@ Double_t PenaltyMLP2()
 
 //-----------------------------------------------------------------------------
 
-Double_t PenaltyAMPL()
+Double_t PenaltyCGLN()
 {
   Int_t eM = GetEnergyBin_maid();
   Int_t eX;
@@ -294,12 +294,12 @@ Double_t PenaltyAMPL()
   if(ONLY_CROSS_S)
   {
     eX = GetEnergyBin_sg0();
-    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateAMPL(Cos(sg0_th[eX][t]*DegToRad()), eM);
+    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateCGLN(Cos(sg0_th[eX][t]*DegToRad()), eM);
 
     eX = GetEnergyBin_sgS();
-    for(Int_t t=0; t<sgS_pts[eX]; t++)  SumSq+=EvaluateAMPL(Cos(sgS_th[eX][t]*DegToRad()), eM);
+    for(Int_t t=0; t<sgS_pts[eX]; t++)  SumSq+=EvaluateCGLN(Cos(sgS_th[eX][t]*DegToRad()), eM);
     eX = GetEnergyBin_S();
-    for(Int_t t=0; t<S_pts[eX];   t++)  SumSq+=EvaluateAMPL(Cos(  S_th[eX][t]*DegToRad()), eM);
+    for(Int_t t=0; t<S_pts[eX];   t++)  SumSq+=EvaluateCGLN(Cos(  S_th[eX][t]*DegToRad()), eM);
 
     return SumSq;
   }
@@ -307,78 +307,78 @@ Double_t PenaltyAMPL()
   if(ONLY_CROSS_F)
   {
     eX = GetEnergyBin_sg0();
-    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateAMPL(Cos(sg0_th[eX][t]*DegToRad()), eM);
+    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateCGLN(Cos(sg0_th[eX][t]*DegToRad()), eM);
 
     eX = GetEnergyBin_sgF();
-    for(Int_t t=0; t<sgF_pts[eX]; t++)  SumSq+=EvaluateAMPL(Cos(sgF_th[eX][t]*DegToRad()), eM);
+    for(Int_t t=0; t<sgF_pts[eX]; t++)  SumSq+=EvaluateCGLN(Cos(sgF_th[eX][t]*DegToRad()), eM);
     eX = GetEnergyBin_F();
-    for(Int_t t=0; t<F_pts[eX];   t++)  SumSq+=EvaluateAMPL(Cos(  F_th[eX][t]*DegToRad()), eM);
+    for(Int_t t=0; t<F_pts[eX];   t++)  SumSq+=EvaluateCGLN(Cos(  F_th[eX][t]*DegToRad()), eM);
 
     return SumSq;
   }
 
   //Sum up F1...F4 amplitude deviations at all theta points from different observable data
   eX = GetEnergyBin_sg0();
-  for(Int_t t=0; t<sg0_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sg0_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<sg0_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sg0_th[eX][t]*DegToRad()),  eM);
 
   eX = GetEnergyBin_sgS();
-  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgS_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgS_th[eX][t]*DegToRad()),  eM);
   eX = GetEnergyBin_S();
-  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  S_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  S_th[eX][t]*DegToRad()),  eM);
 
   eX = GetEnergyBin_sgT();
-  for(Int_t t=0; t<sgT_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgT_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<sgT_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgT_th[eX][t]*DegToRad()),  eM);
   eX = GetEnergyBin_T();
-  for(Int_t t=0; t<  T_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  T_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<  T_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  T_th[eX][t]*DegToRad()),  eM);
 
   eX = GetEnergyBin_sgP();
-  for(Int_t t=0; t<sgP_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgP_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<sgP_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgP_th[eX][t]*DegToRad()),  eM);
   eX = GetEnergyBin_P();
-  for(Int_t t=0; t<  P_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  P_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<  P_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  P_th[eX][t]*DegToRad()),  eM);
 
   eX = GetEnergyBin_sgE();
-  for(Int_t t=0; t<sgE_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgE_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<sgE_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgE_th[eX][t]*DegToRad()),  eM);
   eX = GetEnergyBin_E();
-  for(Int_t t=0; t<  E_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  E_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<  E_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  E_th[eX][t]*DegToRad()),  eM);
 
   eX = GetEnergyBin_sgF();
-  for(Int_t t=0; t<sgF_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgF_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<sgF_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgF_th[eX][t]*DegToRad()),  eM);
   eX = GetEnergyBin_F();
-  for(Int_t t=0; t<  F_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  F_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<  F_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  F_th[eX][t]*DegToRad()),  eM);
 
   eX = GetEnergyBin_sgG();
-  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgG_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgG_th[eX][t]*DegToRad()),  eM);
   eX = GetEnergyBin_G();
-  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  G_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  G_th[eX][t]*DegToRad()),  eM);
 
   eX = GetEnergyBin_sgH();
-  for(Int_t t=0; t<sgH_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(sgH_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<sgH_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgH_th[eX][t]*DegToRad()),  eM);
   eX = GetEnergyBin_H();
-  for(Int_t t=0; t<  H_pts[eX];  t++) SumSq+=EvaluateAMPL(Cos(  H_th[eX][t]*DegToRad()),  eM);
+  for(Int_t t=0; t<  H_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  H_th[eX][t]*DegToRad()),  eM);
 
   eX = GetEnergyBin_sgCx();
-  for(Int_t t=0; t<sgCx_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(sgCx_th[eX][t]*DegToRad()), eM);
+  for(Int_t t=0; t<sgCx_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(sgCx_th[eX][t]*DegToRad()), eM);
   eX = GetEnergyBin_Cx();
-  for(Int_t t=0; t<  Cx_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Cx_th[eX][t]*DegToRad()), eM);
+  for(Int_t t=0; t<  Cx_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(  Cx_th[eX][t]*DegToRad()), eM);
 
   eX = GetEnergyBin_sgCz();
-  for(Int_t t=0; t<sgCz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(sgCz_th[eX][t]*DegToRad()), eM);
+  for(Int_t t=0; t<sgCz_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(sgCz_th[eX][t]*DegToRad()), eM);
   eX = GetEnergyBin_Cz();
-  for(Int_t t=0; t<  Cz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Cz_th[eX][t]*DegToRad()), eM);
+  for(Int_t t=0; t<  Cz_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(  Cz_th[eX][t]*DegToRad()), eM);
 
   eX = GetEnergyBin_sgOx();
-  for(Int_t t=0; t<sgOx_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(sgOx_th[eX][t]*DegToRad()), eM);
+  for(Int_t t=0; t<sgOx_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(sgOx_th[eX][t]*DegToRad()), eM);
   eX = GetEnergyBin_Ox();
-  for(Int_t t=0; t<  Ox_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Ox_th[eX][t]*DegToRad()), eM);
+  for(Int_t t=0; t<  Ox_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(  Ox_th[eX][t]*DegToRad()), eM);
 
   eX = GetEnergyBin_sgOz();
-  for(Int_t t=0; t<sgOz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(sgOz_th[eX][t]*DegToRad()), eM);
+  for(Int_t t=0; t<sgOz_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(sgOz_th[eX][t]*DegToRad()), eM);
   eX = GetEnergyBin_Oz();
-  for(Int_t t=0; t<  Oz_pts[eX]; t++) SumSq+=EvaluateAMPL(Cos(  Oz_th[eX][t]*DegToRad()), eM);
+  for(Int_t t=0; t<  Oz_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(  Oz_th[eX][t]*DegToRad()), eM);
 
   //Without additional weighting, the penalty should be comparable to chi^2.
   //Here it is summed up over all theta points from all observables 
-  //(i.e. NPts data points are used) and EvaluateAMPL() normalises to the sum
+  //(i.e. NPts data points are used) and EvaluateCGLN() normalises to the sum
   //of F1...F4 magnitudes. Hence, no further normalisation is required.
   return SumSq;
 }
