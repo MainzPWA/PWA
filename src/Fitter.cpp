@@ -156,80 +156,80 @@ Double_t Penalty()
 Double_t PenaltyMLP1()
 {
   Int_t eM = GetEnergyBin_maid();
-  Double_t DiffSq = 0.0;
-  Double_t MagnSq = 0.0;
+  Double_t SumSq = 0.0;
+  Double_t MagSq = 0.0;
 
   //Calculate deviation from model for s,p wave real parts
-  DiffSq+=(Ep[0].Re() - maid_Ep[0][eM].Re())*(Ep[0].Re() - maid_Ep[0][eM].Re());
-  DiffSq+=(Ep[1].Re() - maid_Ep[1][eM].Re())*(Ep[1].Re() - maid_Ep[1][eM].Re());
-  DiffSq+=(Mp[1].Re() - maid_Mp[1][eM].Re())*(Mp[1].Re() - maid_Mp[1][eM].Re());
-  DiffSq+=(Mm[1].Re() - maid_Mm[1][eM].Re())*(Mm[1].Re() - maid_Mm[1][eM].Re());
+  SumSq+=(Ep[0].Re() - maid_Ep[0][eM].Re())*(Ep[0].Re() - maid_Ep[0][eM].Re());
+  SumSq+=(Ep[1].Re() - maid_Ep[1][eM].Re())*(Ep[1].Re() - maid_Ep[1][eM].Re());
+  SumSq+=(Mp[1].Re() - maid_Mp[1][eM].Re())*(Mp[1].Re() - maid_Mp[1][eM].Re());
+  SumSq+=(Mm[1].Re() - maid_Mm[1][eM].Re())*(Mm[1].Re() - maid_Mm[1][eM].Re());
   if(ONLY_CROSS_S || ONLY_CROSS_F) //When p waves are kept real...
   {
     //Calculate deviation from unitary value for s wave imaginary parts
-    DiffSq+=(Ep[0].Im() - ImE0p())*(Ep[0].Im() - ImE0p());
+    SumSq+=(Ep[0].Im() - ImE0p())*(Ep[0].Im() - ImE0p());
     //Calculate deviation from 0 for p wave imaginary parts
-    DiffSq+=Ep[1].Im()*Ep[1].Im();
-    DiffSq+=Mp[1].Im()*Mp[1].Im();
-    DiffSq+=Mm[1].Im()*Mm[1].Im();
+    SumSq+=Ep[1].Im()*Ep[1].Im();
+    SumSq+=Mp[1].Im()*Mp[1].Im();
+    SumSq+=Mm[1].Im()*Mm[1].Im();
   }
   else
   {
     //Calculate deviation from model for s,p wave imaginary parts
-    DiffSq+=(Ep[1].Im() - maid_Ep[1][eM].Im())*(Ep[1].Im() - maid_Ep[1][eM].Im());
-    DiffSq+=(Mp[1].Im() - maid_Mp[1][eM].Im())*(Mp[1].Im() - maid_Mp[1][eM].Im());
-    DiffSq+=(Mm[1].Im() - maid_Mm[1][eM].Im())*(Mm[1].Im() - maid_Mm[1][eM].Im());
-    DiffSq+=(Ep[0].Im() - maid_Ep[0][eM].Im())*(Ep[0].Im() - maid_Ep[0][eM].Im());
+    SumSq+=(Ep[1].Im() - maid_Ep[1][eM].Im())*(Ep[1].Im() - maid_Ep[1][eM].Im());
+    SumSq+=(Mp[1].Im() - maid_Mp[1][eM].Im())*(Mp[1].Im() - maid_Mp[1][eM].Im());
+    SumSq+=(Mm[1].Im() - maid_Mm[1][eM].Im())*(Mm[1].Im() - maid_Mm[1][eM].Im());
+    SumSq+=(Ep[0].Im() - maid_Ep[0][eM].Im())*(Ep[0].Im() - maid_Ep[0][eM].Im());
   }
 
   //Calculate deviations for d,f,... waves
   for(Int_t l=2; l<L_MAX+1; l++)
   {
     //Calculate deviation from model for d,f,... waves
-    DiffSq+=(Ep[l].Re() - maid_Ep[l][eM].Re())*(Ep[l].Re() - maid_Ep[l][eM].Re());
-    DiffSq+=(Mp[l].Re() - maid_Mp[l][eM].Re())*(Mp[l].Re() - maid_Mp[l][eM].Re());
-    DiffSq+=(Em[l].Re() - maid_Em[l][eM].Re())*(Em[l].Re() - maid_Em[l][eM].Re());
-    DiffSq+=(Mm[l].Re() - maid_Mm[l][eM].Re())*(Mm[l].Re() - maid_Mm[l][eM].Re());
-    DiffSq+=(Ep[l].Im() - maid_Ep[l][eM].Im())*(Ep[l].Im() - maid_Ep[l][eM].Im());
-    DiffSq+=(Mp[l].Im() - maid_Mp[l][eM].Im())*(Mp[l].Im() - maid_Mp[l][eM].Im());
-    DiffSq+=(Em[l].Im() - maid_Em[l][eM].Im())*(Em[l].Im() - maid_Em[l][eM].Im());
-    DiffSq+=(Mm[l].Im() - maid_Mm[l][eM].Im())*(Mm[l].Im() - maid_Mm[l][eM].Im());
+    SumSq+=(Ep[l].Re() - maid_Ep[l][eM].Re())*(Ep[l].Re() - maid_Ep[l][eM].Re());
+    SumSq+=(Mp[l].Re() - maid_Mp[l][eM].Re())*(Mp[l].Re() - maid_Mp[l][eM].Re());
+    SumSq+=(Em[l].Re() - maid_Em[l][eM].Re())*(Em[l].Re() - maid_Em[l][eM].Re());
+    SumSq+=(Mm[l].Re() - maid_Mm[l][eM].Re())*(Mm[l].Re() - maid_Mm[l][eM].Re());
+    SumSq+=(Ep[l].Im() - maid_Ep[l][eM].Im())*(Ep[l].Im() - maid_Ep[l][eM].Im());
+    SumSq+=(Mp[l].Im() - maid_Mp[l][eM].Im())*(Mp[l].Im() - maid_Mp[l][eM].Im());
+    SumSq+=(Em[l].Im() - maid_Em[l][eM].Im())*(Em[l].Im() - maid_Em[l][eM].Im());
+    SumSq+=(Mm[l].Im() - maid_Mm[l][eM].Im())*(Mm[l].Im() - maid_Mm[l][eM].Im());
   }
 
   if(ONLY_CROSS_S || ONLY_CROSS_F) //When p waves are kept real...
   {
     //Sum up magnitude^2 of s wave model multipole with unitary s wave
-    MagnSq+=(maid_Ep[0][eM].Re()*maid_Ep[0][eM].Re() + ImE0p()*ImE0p());
+    MagSq+=(maid_Ep[0][eM].Re()*maid_Ep[0][eM].Re() + ImE0p()*ImE0p());
     //Sum up magnitudes^2 of p wave model multipole with real p waves
-    MagnSq+=maid_Ep[1][eM].Re()*maid_Ep[1][eM].Re();
-    MagnSq+=maid_Mp[1][eM].Re()*maid_Mp[1][eM].Re();
-    MagnSq+=maid_Mm[1][eM].Re()*maid_Mm[1][eM].Re();
+    MagSq+=maid_Ep[1][eM].Re()*maid_Ep[1][eM].Re();
+    MagSq+=maid_Mp[1][eM].Re()*maid_Mp[1][eM].Re();
+    MagSq+=maid_Mm[1][eM].Re()*maid_Mm[1][eM].Re();
   }
   else
   {
     //Sum up magnitudes^2 of s,p wave model multipoles
-    MagnSq+=maid_Ep[0][eM].Rho2();
-    MagnSq+=maid_Ep[1][eM].Rho2();
-    MagnSq+=maid_Mp[1][eM].Rho2();
-    MagnSq+=maid_Mm[1][eM].Rho2();
+    MagSq+=maid_Ep[0][eM].Rho2();
+    MagSq+=maid_Ep[1][eM].Rho2();
+    MagSq+=maid_Mp[1][eM].Rho2();
+    MagSq+=maid_Mm[1][eM].Rho2();
   }
   for(Int_t l=2; l<L_MAX+1; l++)
   {
     //Sum up magnitudes^2 of d,f,... wave model multipoles
-    MagnSq+=maid_Ep[l][eM].Rho2();
-    MagnSq+=maid_Mp[l][eM].Rho2();
-    MagnSq+=maid_Em[l][eM].Rho2();
-    MagnSq+=maid_Mm[l][eM].Rho2();
+    MagSq+=maid_Ep[l][eM].Rho2();
+    MagSq+=maid_Mp[l][eM].Rho2();
+    MagSq+=maid_Em[l][eM].Rho2();
+    MagSq+=maid_Mm[l][eM].Rho2();
   }
   //Calculate average magnitude^2 of a single real or imaginary part of model multipoles
-  MagnSq/=(8.0*L_MAX);
+  MagSq/=(8.0*L_MAX);
 
   //Without additional weighting (PENALTY), the penalty should be comparable to chi^2.
   //So, it is divided by the number of multipole parameters (NMlp) that are taken into
   //account (i.e. normalise the penalty to a single parameter case) and multiplied by
   //the number of data points (NPts) that are used for chi^2. Also, it is normalised
   //to an average magnitude^2 of a single real (or imaginary) part of model multipoles.
-  return PENALTY[MLP1]*(DiffSq/MagnSq)*(NPts()/NMlp());
+  return PENALTY[MLP1]*(SumSq/MagSq)*(NPts()/NMlp());
 }
 
 //-----------------------------------------------------------------------------
