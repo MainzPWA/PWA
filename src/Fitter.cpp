@@ -145,8 +145,6 @@ Double_t Penalty()
     return PenaltyMLP1() + PenaltyMLP2();
    case CGLN:
     return PenaltyCGLN();
-   case DISP: 
-    return PenaltyDISP();
    case NONE:
    default:
     return 0.0;
@@ -381,106 +379,6 @@ Double_t PenaltyCGLN()
   //Without additional weighting, the penalty should be comparable to chi^2.
   //Here it is summed up over all theta points from all observables 
   //(i.e. NPts data points are used) and EvaluateCGLN() normalises to the sum
-  //of F1...F4 magnitudes. Hence, no further normalisation is required.
-  return SumSq;
-}
-
-//-----------------------------------------------------------------------------
-
-Double_t PenaltyDISP()
-{
-  Int_t eM = GetEnergyBin_maid();
-  Int_t eX;
-  Double_t SumSq = 0.0;
-
-  if(ONLY_CROSS_S)
-  {
-    eX = GetEnergyBin_sg0();
-    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateDISP(Cos(sg0_th[eX][t]*DegToRad()), eM);
-
-    eX = GetEnergyBin_sgS();
-    for(Int_t t=0; t<sgS_pts[eX]; t++)  SumSq+=EvaluateDISP(Cos(sgS_th[eX][t]*DegToRad()), eM);
-    eX = GetEnergyBin_S();
-    for(Int_t t=0; t<S_pts[eX];   t++)  SumSq+=EvaluateDISP(Cos(  S_th[eX][t]*DegToRad()), eM);
-
-    return SumSq;
-  }
-
-  if(ONLY_CROSS_F)
-  {
-    eX = GetEnergyBin_sg0();
-    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateDISP(Cos(sg0_th[eX][t]*DegToRad()), eM);
-
-    eX = GetEnergyBin_sgF();
-    for(Int_t t=0; t<sgF_pts[eX]; t++)  SumSq+=EvaluateDISP(Cos(sgF_th[eX][t]*DegToRad()), eM);
-    eX = GetEnergyBin_F();
-    for(Int_t t=0; t<F_pts[eX];   t++)  SumSq+=EvaluateDISP(Cos(  F_th[eX][t]*DegToRad()), eM);
-
-    return SumSq;
-  }
-
-  //Sum up F1...F4 amplitude deviations at all theta points from different observable data
-  eX = GetEnergyBin_sg0();
-  for(Int_t t=0; t<sg0_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(sg0_th[eX][t]*DegToRad()),  eM);
-
-  eX = GetEnergyBin_sgS();
-  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(sgS_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_S();
-  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(  S_th[eX][t]*DegToRad()),  eM);
-
-  eX = GetEnergyBin_sgT();
-  for(Int_t t=0; t<sgT_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(sgT_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_T();
-  for(Int_t t=0; t<  T_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(  T_th[eX][t]*DegToRad()),  eM);
-
-  eX = GetEnergyBin_sgP();
-  for(Int_t t=0; t<sgP_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(sgP_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_P();
-  for(Int_t t=0; t<  P_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(  P_th[eX][t]*DegToRad()),  eM);
-
-  eX = GetEnergyBin_sgE();
-  for(Int_t t=0; t<sgE_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(sgE_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_E();
-  for(Int_t t=0; t<  E_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(  E_th[eX][t]*DegToRad()),  eM);
-
-  eX = GetEnergyBin_sgF();
-  for(Int_t t=0; t<sgF_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(sgF_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_F();
-  for(Int_t t=0; t<  F_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(  F_th[eX][t]*DegToRad()),  eM);
-
-  eX = GetEnergyBin_sgG();
-  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(sgG_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_G();
-  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(  G_th[eX][t]*DegToRad()),  eM);
-
-  eX = GetEnergyBin_sgH();
-  for(Int_t t=0; t<sgH_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(sgH_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_H();
-  for(Int_t t=0; t<  H_pts[eX];  t++) SumSq+=EvaluateDISP(Cos(  H_th[eX][t]*DegToRad()),  eM);
-
-  eX = GetEnergyBin_sgCx();
-  for(Int_t t=0; t<sgCx_pts[eX]; t++) SumSq+=EvaluateDISP(Cos(sgCx_th[eX][t]*DegToRad()), eM);
-  eX = GetEnergyBin_Cx();
-  for(Int_t t=0; t<  Cx_pts[eX]; t++) SumSq+=EvaluateDISP(Cos(  Cx_th[eX][t]*DegToRad()), eM);
-
-  eX = GetEnergyBin_sgCz();
-  for(Int_t t=0; t<sgCz_pts[eX]; t++) SumSq+=EvaluateDISP(Cos(sgCz_th[eX][t]*DegToRad()), eM);
-  eX = GetEnergyBin_Cz();
-  for(Int_t t=0; t<  Cz_pts[eX]; t++) SumSq+=EvaluateDISP(Cos(  Cz_th[eX][t]*DegToRad()), eM);
-
-  eX = GetEnergyBin_sgOx();
-  for(Int_t t=0; t<sgOx_pts[eX]; t++) SumSq+=EvaluateDISP(Cos(sgOx_th[eX][t]*DegToRad()), eM);
-  eX = GetEnergyBin_Ox();
-  for(Int_t t=0; t<  Ox_pts[eX]; t++) SumSq+=EvaluateDISP(Cos(  Ox_th[eX][t]*DegToRad()), eM);
-
-  eX = GetEnergyBin_sgOz();
-  for(Int_t t=0; t<sgOz_pts[eX]; t++) SumSq+=EvaluateDISP(Cos(sgOz_th[eX][t]*DegToRad()), eM);
-  eX = GetEnergyBin_Oz();
-  for(Int_t t=0; t<  Oz_pts[eX]; t++) SumSq+=EvaluateDISP(Cos(  Oz_th[eX][t]*DegToRad()), eM);
-
-  //Without additional weighting, the penalty should be comparable to chi^2.
-  //Here it is summed up over all theta points from all observables
-  //(i.e. NPts data points are used) and EvaluateDISP() normalises to the sum
   //of F1...F4 magnitudes. Hence, no further normalisation is required.
   return SumSq;
 }
