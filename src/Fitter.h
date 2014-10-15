@@ -74,6 +74,7 @@ Double_t Penalty();
 Double_t PenaltyMLP1();
 Double_t PenaltyMLP2();
 Double_t PenaltyCGLN();
+Double_t PenaltyDISP();
 Double_t VariateRel();
 Double_t VariateAbs();
 Double_t GetErrors(Double_t* Par, Double_t* Err);
@@ -123,8 +124,31 @@ inline Double_t EvaluateCGLN(Double_t CosTheta, Int_t eM)
     F_maid = maid_F(i, CosTheta, eM);
     //Sum up all squared amplitude deviations with adjustable weight factor
     SumSq+=(F_data - F_maid).Rho2()/(WEIGHT[i]*WEIGHT[i]);
-    //Sum up model amplitude magnitudes (will be used as normalisation factor)
+    //Sum up squared model amplitude magnitudes (will be used as normalisation factor)
     MagSq+=F_maid.Rho2();
+  }
+  return SumSq/MagSq;
+}
+
+//-----------------------------------------------------------------------------
+
+inline Double_t EvaluateDISP(Double_t CosTheta, Int_t eM)
+{
+  Double_t SumSq = 0.0;
+  Double_t MagSq = 0.0;
+  Double_t ReF_data;
+  Double_t ReF_maid;
+
+  //Sum up F1...F4 amplitudes
+  for(Int_t i=1; i<5; i++)
+  {
+    //Get real parts of amplitudes from current fit parameters and model values
+    ReF_data = F(i, CosTheta).Re();
+    ReF_maid = maid_F(i, CosTheta, eM).Re();
+    //Sum up all squared amplitude real part deviations with adjustable weight factor
+    SumSq+=(ReF_data - ReF_maid)*(ReF_data - ReF_maid)/(WEIGHT[i]*WEIGHT[i]);
+    //Sum up squared model amplitude real parts (will be used as normalisation factor)
+    MagSq+=ReF_maid*ReF_maid;
   }
   return SumSq/MagSq;
 }

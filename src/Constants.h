@@ -47,7 +47,7 @@ static const Double_t UNIT  = (HBARC/MASS_PIPLUS)*(HBARC/MASS_PIPLUS)*1e-2;
 enum{ REL = 0, ABS = 1 };
 enum{ MODEL = 1, BORN = 2, NONRES = 3 };
 enum{ CHI2ONLY = 1, CHI2PENALTY = 2, ADAPTIVE = 3 };
-enum{ NONE = 0, MLP1 = 1, MLP2 = 2, MLP3 = 3, CGLN = 4 };
+enum{ NONE = 0, MLP1 = 1, MLP2 = 2, MLP3 = 3, CGLN = 4, DISP = 5 };
 enum{ SIG_0  =  0,
       SIG_S  =  1, SIG_T  =  2, SIG_P  =  3, SIG_E  =  4, SIG_F  =  5, SIG_G  =  6, SIG_H  =  7,
       SIG_CX =  8, SIG_CZ =  9, SIG_OX = 10, SIG_OZ = 11,
