@@ -6,7 +6,7 @@ void Parse_sgCx()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, sigmaCx, DsigmaCx;
+  Double_t Energy, Weight, System, Theta, sigmaCx, DsigmaCx, Dummy;
   FILE* File_sgCx;
 
   printf("Loading sgCx data... ");
@@ -25,7 +25,7 @@ void Parse_sgCx()
     else //This energy already exists...
       ThetaBin = sgCx_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgCx, "%lf %lf %lf\n", &Theta, &sigmaCx, &DsigmaCx)==3)
+    while(fscanf(File_sgCx, "%lf %lf %lf\n", &Theta, &sigmaCx, &DsigmaCx, &Dummy)>=3)
     {
       sgCx_val[EnergyBin][ThetaBin] = sigmaCx;
       sgCx_err[EnergyBin][ThetaBin] = DsigmaCx;

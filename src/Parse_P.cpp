@@ -6,7 +6,7 @@ void Parse_P()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, P, DP;
+  Double_t Energy, Weight, System, Theta, P, DP, Dummy;
   FILE* File_P;
 
   printf("Loading   P  data... ");
@@ -25,7 +25,7 @@ void Parse_P()
     else //This energy already exists...
       ThetaBin = P_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_P, "%lf %lf %lf\n", &Theta, &P, &DP)==3)
+    while(fscanf(File_P, "%lf %lf %lf\n", &Theta, &P, &DP, &Dummy)>=3)
     {
       P_val[EnergyBin][ThetaBin] = P;
       P_err[EnergyBin][ThetaBin] = DP;

@@ -6,7 +6,7 @@ void Parse_Cz()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, Cz, DCz;
+  Double_t Energy, Weight, System, Theta, Cz, DCz, Dummy;
   FILE* File_Cz;
 
   printf("Loading   Cz data... ");
@@ -25,7 +25,7 @@ void Parse_Cz()
     else //This energy already exists...
       ThetaBin = Cz_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_Cz, "%lf %lf %lf\n", &Theta, &Cz, &DCz)==3)
+    while(fscanf(File_Cz, "%lf %lf %lf\n", &Theta, &Cz, &DCz, &Dummy)>=3)
     {
       Cz_val[EnergyBin][ThetaBin] = Cz;
       Cz_err[EnergyBin][ThetaBin] = DCz;

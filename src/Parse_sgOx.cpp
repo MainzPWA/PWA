@@ -6,7 +6,7 @@ void Parse_sgOx()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, sigmaOx, DsigmaOx;
+  Double_t Energy, Weight, System, Theta, sigmaOx, DsigmaOx, Dummy;
   FILE* File_sgOx;
 
   printf("Loading sgOx data... ");
@@ -25,7 +25,7 @@ void Parse_sgOx()
     else //This energy already exists...
       ThetaBin = sgOx_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgOx, "%lf %lf %lf\n", &Theta, &sigmaOx, &DsigmaOx)==3)
+    while(fscanf(File_sgOx, "%lf %lf %lf\n", &Theta, &sigmaOx, &DsigmaOx, &Dummy)>=3)
     {
       sgOx_val[EnergyBin][ThetaBin] = sigmaOx;
       sgOx_err[EnergyBin][ThetaBin] = DsigmaOx;

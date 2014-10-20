@@ -6,7 +6,7 @@ void Parse_G()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, G, DG;
+  Double_t Energy, Weight, System, Theta, G, DG, Dummy;
   FILE* File_G;
 
   printf("Loading   G  data... ");
@@ -25,7 +25,7 @@ void Parse_G()
     else //This energy already exists...
       ThetaBin = G_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_G, "%lf %lf %lf\n", &Theta, &G, &DG)==3)
+    while(fscanf(File_G, "%lf %lf %lf\n", &Theta, &G, &DG, &Dummy)>=3)
     {
       G_val[EnergyBin][ThetaBin] = G;
       G_err[EnergyBin][ThetaBin] = DG;

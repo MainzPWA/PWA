@@ -6,7 +6,7 @@ void Parse_sgOz()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, sigmaOz, DsigmaOz;
+  Double_t Energy, Weight, System, Theta, sigmaOz, DsigmaOz, Dummy;
   FILE* File_sgOz;
 
   printf("Loading sgOz data... ");
@@ -25,7 +25,7 @@ void Parse_sgOz()
     else //This energy already exists...
       ThetaBin = sgOz_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgOz, "%lf %lf %lf\n", &Theta, &sigmaOz, &DsigmaOz)==3)
+    while(fscanf(File_sgOz, "%lf %lf %lf\n", &Theta, &sigmaOz, &DsigmaOz, &Dummy)>=3)
     {
       sgOz_val[EnergyBin][ThetaBin] = sigmaOz;
       sgOz_err[EnergyBin][ThetaBin] = DsigmaOz;

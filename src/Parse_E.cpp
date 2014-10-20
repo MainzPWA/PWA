@@ -6,7 +6,7 @@ void Parse_E()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, E, DE;
+  Double_t Energy, Weight, System, Theta, E, DE, Dummy;
   FILE* File_E;
 
   printf("Loading   E  data... ");
@@ -25,7 +25,7 @@ void Parse_E()
     else //This energy already exists...
       ThetaBin = E_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_E, "%lf %lf %lf\n", &Theta, &E, &DE)==3)
+    while(fscanf(File_E, "%lf %lf %lf\n", &Theta, &E, &DE, &Dummy)>=3)
     {
       E_val[EnergyBin][ThetaBin] = E;
       E_err[EnergyBin][ThetaBin] = DE;

@@ -6,7 +6,7 @@ void Parse_sgE()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, sigmaE, DsigmaE;
+  Double_t Energy, Weight, System, Theta, sigmaE, DsigmaE, Dummy;
   FILE* File_sgE;
 
   printf("Loading sgE  data... ");
@@ -25,7 +25,7 @@ void Parse_sgE()
     else //This energy already exists...
       ThetaBin = sgE_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgE, "%lf %lf %lf\n", &Theta, &sigmaE, &DsigmaE)==3)
+    while(fscanf(File_sgE, "%lf %lf %lf\n", &Theta, &sigmaE, &DsigmaE, &Dummy)>=3)
     {
       sgE_val[EnergyBin][ThetaBin] = sigmaE;
       sgE_err[EnergyBin][ThetaBin] = DsigmaE;

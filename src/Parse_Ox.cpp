@@ -6,7 +6,7 @@ void Parse_Ox()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, Ox, DOx;
+  Double_t Energy, Weight, System, Theta, Ox, DOx, Dummy;
   FILE* File_Ox;
 
   printf("Loading   Ox data... ");
@@ -25,7 +25,7 @@ void Parse_Ox()
     else //This energy already exists...
       ThetaBin = Ox_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_Ox, "%lf %lf %lf\n", &Theta, &Ox, &DOx)==3)
+    while(fscanf(File_Ox, "%lf %lf %lf\n", &Theta, &Ox, &DOx, &Dummy)>=3)
     {
       Ox_val[EnergyBin][ThetaBin] = Ox;
       Ox_err[EnergyBin][ThetaBin] = DOx;

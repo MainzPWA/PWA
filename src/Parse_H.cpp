@@ -6,7 +6,7 @@ void Parse_H()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, H, DH;
+  Double_t Energy, Weight, System, Theta, H, DH, Dummy;
   FILE* File_H;
 
   printf("Loading   H  data... ");
@@ -25,7 +25,7 @@ void Parse_H()
     else //This energy already exists...
       ThetaBin = H_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_H, "%lf %lf %lf\n", &Theta, &H, &DH)==3)
+    while(fscanf(File_H, "%lf %lf %lf\n", &Theta, &H, &DH, &Dummy)>=3)
     {
       H_val[EnergyBin][ThetaBin] = H;
       H_err[EnergyBin][ThetaBin] = DH;

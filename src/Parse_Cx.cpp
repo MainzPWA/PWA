@@ -6,7 +6,7 @@ void Parse_Cx()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, Cx, DCx;
+  Double_t Energy, Weight, System, Theta, Cx, DCx, Dummy;
   FILE* File_Cx;
 
   printf("Loading   Cx data... ");
@@ -25,7 +25,7 @@ void Parse_Cx()
     else //This energy already exists...
       ThetaBin = Cx_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_Cx, "%lf %lf %lf\n", &Theta, &Cx, &DCx)==3)
+    while(fscanf(File_Cx, "%lf %lf %lf\n", &Theta, &Cx, &DCx, &Dummy)>=3)
     {
       Cx_val[EnergyBin][ThetaBin] = Cx;
       Cx_err[EnergyBin][ThetaBin] = DCx;
