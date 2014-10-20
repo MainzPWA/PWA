@@ -6,7 +6,7 @@ void Parse_sgF()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, sigmaF, DsigmaF, Dummy;
+  Double_t Energy, Weight, System, Theta, sigmaF, DsigmaF;
   FILE* File_sgF;
 
   printf("Loading sgF  data... ");
@@ -25,7 +25,7 @@ void Parse_sgF()
     else //This energy already exists...
       ThetaBin = sgF_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgF, "%lf %lf %lf\n", &Theta, &sigmaF, &DsigmaF, &Dummy)>=3)
+    while(fscanf(File_sgF, "%lf %lf %lf %*\n", &Theta, &sigmaF, &DsigmaF)==3)
     {
       sgF_val[EnergyBin][ThetaBin] = sigmaF;
       sgF_err[EnergyBin][ThetaBin] = DsigmaF;

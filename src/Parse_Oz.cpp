@@ -6,7 +6,7 @@ void Parse_Oz()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, Oz, DOz, Dummy;
+  Double_t Energy, Weight, System, Theta, Oz, DOz;
   FILE* File_Oz;
 
   printf("Loading   Oz data... ");
@@ -25,7 +25,7 @@ void Parse_Oz()
     else //This energy already exists...
       ThetaBin = Oz_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_Oz, "%lf %lf %lf\n", &Theta, &Oz, &DOz, &Dummy)>=3)
+    while(fscanf(File_Oz, "%lf %lf %lf %*\n", &Theta, &Oz, &DOz)==3)
     {
       Oz_val[EnergyBin][ThetaBin] = Oz;
       Oz_err[EnergyBin][ThetaBin] = DOz;

@@ -6,7 +6,7 @@ void Parse_sgT()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, sigmaT, DsigmaT, Dummy;
+  Double_t Energy, Weight, System, Theta, sigmaT, DsigmaT;
   FILE* File_sgT;
 
   printf("Loading sgT  data... ");
@@ -25,7 +25,7 @@ void Parse_sgT()
     else //This energy already exists...
       ThetaBin = sgT_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgT, "%lf %lf %lf\n", &Theta, &sigmaT, &DsigmaT, &Dummy)>=3)
+    while(fscanf(File_sgT, "%lf %lf %lf %*\n", &Theta, &sigmaT, &DsigmaT)==3)
     {
       sgT_val[EnergyBin][ThetaBin] = sigmaT;
       sgT_err[EnergyBin][ThetaBin] = DsigmaT;

@@ -6,7 +6,7 @@ void Parse_sgH()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, sigmaH, DsigmaH, Dummy;
+  Double_t Energy, Weight, System, Theta, sigmaH, DsigmaH;
   FILE* File_sgH;
 
   printf("Loading sgH  data... ");
@@ -25,7 +25,7 @@ void Parse_sgH()
     else //This energy already exists...
       ThetaBin = sgH_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgH, "%lf %lf %lf\n", &Theta, &sigmaH, &DsigmaH, &Dummy)>=3)
+    while(fscanf(File_sgH, "%lf %lf %lf %*\n", &Theta, &sigmaH, &DsigmaH)==3)
     {
       sgH_val[EnergyBin][ThetaBin] = sigmaH;
       sgH_err[EnergyBin][ThetaBin] = DsigmaH;

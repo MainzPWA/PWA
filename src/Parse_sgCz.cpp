@@ -6,7 +6,7 @@ void Parse_sgCz()
 {
   Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
-  Double_t Energy, Weight, System, Theta, sigmaCz, DsigmaCz, Dummy;
+  Double_t Energy, Weight, System, Theta, sigmaCz, DsigmaCz;
   FILE* File_sgCz;
 
   printf("Loading sgCz data... ");
@@ -25,7 +25,7 @@ void Parse_sgCz()
     else //This energy already exists...
       ThetaBin = sgCz_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgCz, "%lf %lf %lf\n", &Theta, &sigmaCz, &DsigmaCz, &Dummy)>=3)
+    while(fscanf(File_sgCz, "%lf %lf %lf %*\n", &Theta, &sigmaCz, &DsigmaCz)==3)
     {
       sgCz_val[EnergyBin][ThetaBin] = sigmaCz;
       sgCz_err[EnergyBin][ThetaBin] = DsigmaCz;
