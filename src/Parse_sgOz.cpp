@@ -4,7 +4,6 @@
 
 void Parse_sgOz()
 {
-  Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
   Double_t Energy, Weight, System, Theta, sigmaOz, DsigmaOz;
   FILE* File_sgOz;
@@ -25,15 +24,14 @@ void Parse_sgOz()
     else //This energy already exists...
       ThetaBin = sgOz_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgOz, "%lf %lf %lf %*\n", &Theta, &sigmaOz, &DsigmaOz)==3)
+    //This will read lines from file until end-of-entry marker (e.g. "---...---" line) is found
+    while(ReadLine_sgOz(File_sgOz, &Theta, &sigmaOz, &DsigmaOz)==3)
     {
       sgOz_val[EnergyBin][ThetaBin] = sigmaOz;
       sgOz_err[EnergyBin][ThetaBin] = DsigmaOz;
       sgOz_th[EnergyBin][ThetaBin]  = Theta;
       if(DsigmaOz!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
-    //Skip 1 uninteresting line
-    fgets(Buffer, sizeof(Buffer), File_sgOz);
 
     sgOz_pts[EnergyBin] = ThetaBin;
     sgOz_en[EnergyBin] = Energy;
@@ -128,6 +126,16 @@ Double_t GetScale_sgOz()
   Int_t eO = GetEnergyBin_sgOz();
   Double_t Scale_sgOz = (1.0*sgOz_pts[eO])*(f_obs[SIG_OZ]-1.0)*(f_obs[SIG_OZ]-1.0)/(sgOz_sy[eO]*sgOz_sy[eO]);
   return Scale_sgOz;
+}
+
+//-----------------------------------------------------------------------------
+
+Int_t ReadLine_sgOz(FILE* File_sgOz, Double_t* Theta, Double_t* sigmaOz, Double_t* DsigmaOz)
+{
+  Char_t Buffer[1024];
+
+  fgets(Buffer, sizeof(Buffer), File_sgOz);
+  return sscanf(Buffer, "%lf %lf %lf", Theta, sigmaOz, DsigmaOz);
 }
 
 //-----------------------------------------------------------------------------

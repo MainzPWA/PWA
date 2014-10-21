@@ -4,7 +4,6 @@
 
 void Parse_Cx()
 {
-  Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
   Double_t Energy, Weight, System, Theta, Cx, DCx;
   FILE* File_Cx;
@@ -25,15 +24,14 @@ void Parse_Cx()
     else //This energy already exists...
       ThetaBin = Cx_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_Cx, "%lf %lf %lf %*\n", &Theta, &Cx, &DCx)==3)
+    //This will read lines from file until end-of-entry marker (e.g. "---...---" line) is found
+    while(ReadLine_Cx(File_Cx, &Theta, &Cx, &DCx)==3)
     {
       Cx_val[EnergyBin][ThetaBin] = Cx;
       Cx_err[EnergyBin][ThetaBin] = DCx;
       Cx_th[EnergyBin][ThetaBin]  = Theta;
       if(DCx!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
-    //Skip 1 uninteresting line
-    fgets(Buffer, sizeof(Buffer), File_Cx);
 
     Cx_pts[EnergyBin] = ThetaBin;
     Cx_en[EnergyBin] = Energy;
@@ -128,6 +126,16 @@ Double_t GetScale_Cx()
   Int_t eC = GetEnergyBin_Cx();
   Double_t Scale_Cx = (1.0*Cx_pts[eC])*(f_obs[ASY_CX]-1.0)*(f_obs[ASY_CX]-1.0)/(Cx_sy[eC]*Cx_sy[eC]);
   return Scale_Cx;
+}
+
+//-----------------------------------------------------------------------------
+
+Int_t ReadLine_Cx(FILE* File_Cx, Double_t* Theta, Double_t* Cx, Double_t* DCx)
+{
+  Char_t Buffer[1024];
+
+  fgets(Buffer, sizeof(Buffer), File_Cx);
+  return sscanf(Buffer, "%lf %lf %lf", Theta, Cx, DCx);
 }
 
 //-----------------------------------------------------------------------------

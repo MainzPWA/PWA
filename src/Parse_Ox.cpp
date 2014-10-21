@@ -4,7 +4,6 @@
 
 void Parse_Ox()
 {
-  Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
   Double_t Energy, Weight, System, Theta, Ox, DOx;
   FILE* File_Ox;
@@ -25,15 +24,14 @@ void Parse_Ox()
     else //This energy already exists...
       ThetaBin = Ox_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_Ox, "%lf %lf %lf %*\n", &Theta, &Ox, &DOx)==3)
+    //This will read lines from file until end-of-entry marker (e.g. "---...---" line) is found
+    while(ReadLine_Ox(File_Ox, &Theta, &Ox, &DOx)==3)
     {
       Ox_val[EnergyBin][ThetaBin] = Ox;
       Ox_err[EnergyBin][ThetaBin] = DOx;
       Ox_th[EnergyBin][ThetaBin]  = Theta;
       if(DOx!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
-    //Skip 1 uninteresting line
-    fgets(Buffer, sizeof(Buffer), File_Ox);
 
     Ox_pts[EnergyBin] = ThetaBin;
     Ox_en[EnergyBin] = Energy;
@@ -128,6 +126,16 @@ Double_t GetScale_Ox()
   Int_t eO = GetEnergyBin_Ox();
   Double_t Scale_Ox = (1.0*Ox_pts[eO])*(f_obs[ASY_OX]-1.0)*(f_obs[ASY_OX]-1.0)/(Ox_sy[eO]*Ox_sy[eO]);
   return Scale_Ox;
+}
+
+//-----------------------------------------------------------------------------
+
+Int_t ReadLine_Ox(FILE* File_Ox, Double_t* Theta, Double_t* Ox, Double_t* DOx)
+{
+  Char_t Buffer[1024];
+
+  fgets(Buffer, sizeof(Buffer), File_Ox);
+  return sscanf(Buffer, "%lf %lf %lf", Theta, Ox, DOx);
 }
 
 //-----------------------------------------------------------------------------

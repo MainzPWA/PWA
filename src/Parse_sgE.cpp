@@ -4,7 +4,6 @@
 
 void Parse_sgE()
 {
-  Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
   Double_t Energy, Weight, System, Theta, sigmaE, DsigmaE;
   FILE* File_sgE;
@@ -25,15 +24,14 @@ void Parse_sgE()
     else //This energy already exists...
       ThetaBin = sgE_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgE, "%lf %lf %lf %*\n", &Theta, &sigmaE, &DsigmaE)==3)
+    //This will read lines from file until end-of-entry marker (e.g. "---...---" line) is found
+    while(ReadLine_sgE(File_sgE, &Theta, &sigmaE, &DsigmaE)==3)
     {
       sgE_val[EnergyBin][ThetaBin] = sigmaE;
       sgE_err[EnergyBin][ThetaBin] = DsigmaE;
       sgE_th[EnergyBin][ThetaBin]  = Theta;
       if(DsigmaE!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
-    //Skip 1 uninteresting line
-    fgets(Buffer, sizeof(Buffer), File_sgE);
 
     sgE_pts[EnergyBin] = ThetaBin;
     sgE_en[EnergyBin] = Energy;
@@ -128,6 +126,16 @@ Double_t GetScale_sgE()
   Int_t eE = GetEnergyBin_sgE();
   Double_t Scale_sgE = (1.0*sgE_pts[eE])*(f_obs[SIG_E]-1.0)*(f_obs[SIG_E]-1.0)/(sgE_sy[eE]*sgE_sy[eE]);
   return Scale_sgE;
+}
+
+//-----------------------------------------------------------------------------
+
+Int_t ReadLine_sgE(FILE* File_sgE, Double_t* Theta, Double_t* sigmaE, Double_t* DsigmaE)
+{
+  Char_t Buffer[1024];
+
+  fgets(Buffer, sizeof(Buffer), File_sgE);
+  return sscanf(Buffer, "%lf %lf %lf", Theta, sigmaE, DsigmaE);
 }
 
 //-----------------------------------------------------------------------------

@@ -24,6 +24,7 @@ void Parse_sg0();
 void Sort_sg0(Int_t l, Int_t r);
 Int_t GetEnergyBin_sg0();
 Int_t ExistEnergyBin_sg0(Double_t);
+Int_t ReadLine_sg0(FILE*, Double_t*, Double_t*, Double_t*);
 Double_t GetChiSq_sg0();
 Double_t GetScale_sg0();
 

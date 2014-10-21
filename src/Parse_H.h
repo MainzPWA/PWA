@@ -23,6 +23,7 @@ extern Double_t f_obs[OBS];
 void Parse_H();
 Int_t GetEnergyBin_H();
 Int_t ExistEnergyBin_H(Double_t);
+Int_t ReadLine_H(FILE*, Double_t*, Double_t*, Double_t*);
 Double_t GetChiSq_H();
 Double_t GetScale_H();
 

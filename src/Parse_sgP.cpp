@@ -4,7 +4,6 @@
 
 void Parse_sgP()
 {
-  Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
   Double_t Energy, Weight, System, Theta, sigmaP, DsigmaP;
   FILE* File_sgP;
@@ -25,15 +24,14 @@ void Parse_sgP()
     else //This energy already exists...
       ThetaBin = sgP_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgP, "%lf %lf %lf %*\n", &Theta, &sigmaP, &DsigmaP)==3)
+    //This will read lines from file until end-of-entry marker (e.g. "---...---" line) is found
+    while(ReadLine_sgP(File_sgP, &Theta, &sigmaP, &DsigmaP)==3)
     {
       sgP_val[EnergyBin][ThetaBin] = sigmaP;
       sgP_err[EnergyBin][ThetaBin] = DsigmaP;
       sgP_th[EnergyBin][ThetaBin]  = Theta;
       if(DsigmaP!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
-    //Skip 1 uninteresting line
-    fgets(Buffer, sizeof(Buffer), File_sgP);
 
     sgP_pts[EnergyBin] = ThetaBin;
     sgP_en[EnergyBin] = Energy;
@@ -128,6 +126,16 @@ Double_t GetScale_sgP()
   Int_t eP = GetEnergyBin_sgP();
   Double_t Scale_sgP = (1.0*sgP_pts[eP])*(f_obs[SIG_P]-1.0)*(f_obs[SIG_P]-1.0)/(sgP_sy[eP]*sgP_sy[eP]);
   return Scale_sgP;
+}
+
+//-----------------------------------------------------------------------------
+
+Int_t ReadLine_sgP(FILE* File_sgP, Double_t* Theta, Double_t* sigmaP, Double_t* DsigmaP)
+{
+  Char_t Buffer[1024];
+
+  fgets(Buffer, sizeof(Buffer), File_sgP);
+  return sscanf(Buffer, "%lf %lf %lf", Theta, sigmaP, DsigmaP);
 }
 
 //-----------------------------------------------------------------------------

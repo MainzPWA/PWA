@@ -4,7 +4,6 @@
 
 void Parse_sgCz()
 {
-  Char_t Buffer[1024];
   Int_t ThetaBin, EnergyBin;
   Double_t Energy, Weight, System, Theta, sigmaCz, DsigmaCz;
   FILE* File_sgCz;
@@ -25,15 +24,14 @@ void Parse_sgCz()
     else //This energy already exists...
       ThetaBin = sgCz_pts[EnergyBin]; //..hence we append to the existing energy bin
 
-    while(fscanf(File_sgCz, "%lf %lf %lf %*\n", &Theta, &sigmaCz, &DsigmaCz)==3)
+    //This will read lines from file until end-of-entry marker (e.g. "---...---" line) is found
+    while(ReadLine_sgCz(File_sgCz, &Theta, &sigmaCz, &DsigmaCz)==3)
     {
       sgCz_val[EnergyBin][ThetaBin] = sigmaCz;
       sgCz_err[EnergyBin][ThetaBin] = DsigmaCz;
       sgCz_th[EnergyBin][ThetaBin]  = Theta;
       if(DsigmaCz!=0.0) ThetaBin++; //Accept only 'existing' data points
     }
-    //Skip 1 uninteresting line
-    fgets(Buffer, sizeof(Buffer), File_sgCz);
 
     sgCz_pts[EnergyBin] = ThetaBin;
     sgCz_en[EnergyBin] = Energy;
@@ -128,6 +126,16 @@ Double_t GetScale_sgCz()
   Int_t eC = GetEnergyBin_sgCz();
   Double_t Scale_sgCz = (1.0*sgCz_pts[eC])*(f_obs[SIG_CZ]-1.0)*(f_obs[SIG_CZ]-1.0)/(sgCz_sy[eC]*sgCz_sy[eC]);
   return Scale_sgCz;
+}
+
+//-----------------------------------------------------------------------------
+
+Int_t ReadLine_sgCz(FILE* File_sgCz, Double_t* Theta, Double_t* sigmaCz, Double_t* DsigmaCz)
+{
+  Char_t Buffer[1024];
+
+  fgets(Buffer, sizeof(Buffer), File_sgCz);
+  return sscanf(Buffer, "%lf %lf %lf", Theta, sigmaCz, DsigmaCz);
 }
 
 //-----------------------------------------------------------------------------

@@ -23,6 +23,7 @@ extern Double_t f_obs[OBS];
 void Parse_Cx();
 Int_t GetEnergyBin_Cx();
 Int_t ExistEnergyBin_Cx(Double_t);
+Int_t ReadLine_Cx(FILE*, Double_t*, Double_t*, Double_t*);
 Double_t GetChiSq_Cx();
 Double_t GetScale_Cx();
 

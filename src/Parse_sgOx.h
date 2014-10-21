@@ -23,6 +23,7 @@ extern Double_t f_obs[OBS];
 void Parse_sgOx();
 Int_t GetEnergyBin_sgOx();
 Int_t ExistEnergyBin_sgOx(Double_t);
+Int_t ReadLine_sgOx(FILE*, Double_t*, Double_t*, Double_t*);
 Double_t GetChiSq_sgOx();
 Double_t GetScale_sgOx();
 
