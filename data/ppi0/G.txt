@@ -1,1 +1,0 @@
-datafiles/combined_G_RostLo_ThielHi.txt
