@@ -121,14 +121,14 @@ Double_t Scale()
   Scale_Ox = GetScale_sgOx() + GetScale_Ox();
   Scale_Oz = GetScale_sgOz() + GetScale_Oz();
 
-  if(ONLY_CROSS_S) return SCALING*(NPts()/NSca())*(Scale_0 + Scale_S);
-  if(ONLY_CROSS_F) return SCALING*(NPts()/NSca())*(Scale_0 + Scale_F);
+  if(ONLY_CROSS_S) return SCALING*(Scale_0 + Scale_S)/NSca();
+  if(ONLY_CROSS_F) return SCALING*(Scale_0 + Scale_F)/NSca();
 
   //Without additional weighting (SCALING), the penalty should be comparable to chi^2.
   //So, it is divided by the number of scaling parameters (NSca) that are taken into
-  //account (i.e. normalise the penalty to a single parameter case) and multiplied by
-  //the number of data points (NPts) that are used for chi^2.
-  return SCALING*(NPts()/NSca())*(Scale_0 + Scale_S + Scale_T + Scale_P + Scale_E + Scale_F + Scale_G + Scale_H + Scale_Cx + Scale_Cz + Scale_Ox + Scale_Oz);
+  //account (i.e. normalise the penalty to a single parameter case). The number of data
+  //points is already considered when calculating the individual contributions.
+  return SCALING*(Scale_0 + Scale_S + Scale_T + Scale_P + Scale_E + Scale_F + Scale_G + Scale_H + Scale_Cx + Scale_Cz + Scale_Ox + Scale_Oz)/NSca();
 }
 
 //-----------------------------------------------------------------------------
@@ -288,93 +288,123 @@ Double_t PenaltyMLP2()
 Double_t PenaltyCGLN()
 {
   Int_t eM = GetEnergyBin_maid();
-  Int_t eX;
+  Int_t eX[EBINS];
+  Int_t nX;
   Double_t SumSq = 0.0;
 
   if(ONLY_CROSS_S)
   {
-    eX = GetEnergyBin_sg0();
-    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateCGLN(Cos(sg0_th[eX][t]*DegToRad()), eM);
+    nX = GetEnergyBins_sg0(eX);
+    for(Int_t i=0; i<nX; i++)
+      for(Int_t t=0; t<sg0_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sg0_th[eX[i]][t]*DegToRad()), eM);
 
-    eX = GetEnergyBin_sgS();
-    for(Int_t t=0; t<sgS_pts[eX]; t++)  SumSq+=EvaluateCGLN(Cos(sgS_th[eX][t]*DegToRad()), eM);
-    eX = GetEnergyBin_S();
-    for(Int_t t=0; t<S_pts[eX];   t++)  SumSq+=EvaluateCGLN(Cos(  S_th[eX][t]*DegToRad()), eM);
+    nX = GetEnergyBins_sgS(eX);
+    for(Int_t i=0; i<nX; i++)
+      for(Int_t t=0; t<sgS_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgS_th[eX[i]][t]*DegToRad()), eM);
+    nX = GetEnergyBins_S(eX);
+    for(Int_t i=0; i<nX; i++)
+      for(Int_t t=0; t<S_pts[eX[i]];   t++) SumSq+=EvaluateCGLN(Cos(  S_th[eX[i]][t]*DegToRad()), eM);
 
     return SumSq;
   }
 
   if(ONLY_CROSS_F)
   {
-    eX = GetEnergyBin_sg0();
-    for(Int_t t=0; t<sg0_pts[eX]; t++)  SumSq+=EvaluateCGLN(Cos(sg0_th[eX][t]*DegToRad()), eM);
+    nX = GetEnergyBins_sg0(eX);
+    for(Int_t i=0; i<nX; i++)
+      for(Int_t t=0; t<sg0_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sg0_th[eX[i]][t]*DegToRad()), eM);
 
-    eX = GetEnergyBin_sgF();
-    for(Int_t t=0; t<sgF_pts[eX]; t++)  SumSq+=EvaluateCGLN(Cos(sgF_th[eX][t]*DegToRad()), eM);
-    eX = GetEnergyBin_F();
-    for(Int_t t=0; t<F_pts[eX];   t++)  SumSq+=EvaluateCGLN(Cos(  F_th[eX][t]*DegToRad()), eM);
+    nX = GetEnergyBins_sgF(eX);
+    for(Int_t i=0; i<nX; i++)
+      for(Int_t t=0; t<sgF_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgF_th[eX[i]][t]*DegToRad()), eM);
+    nX = GetEnergyBins_F(eX);
+    for(Int_t i=0; i<nX; i++)
+      for(Int_t t=0; t<F_pts[eX[i]];   t++) SumSq+=EvaluateCGLN(Cos(  F_th[eX[i]][t]*DegToRad()), eM);
 
     return SumSq;
   }
 
   //Sum up F1...F4 amplitude deviations at all theta points from different observable data
-  eX = GetEnergyBin_sg0();
-  for(Int_t t=0; t<sg0_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sg0_th[eX][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_sg0(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sg0_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sg0_th[eX[i]][t]*DegToRad()),  eM);
 
-  eX = GetEnergyBin_sgS();
-  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgS_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_S();
-  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  S_th[eX][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_sgS(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgS_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgS_th[eX[i]][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_S(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  S_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  S_th[eX[i]][t]*DegToRad()),  eM);
 
-  eX = GetEnergyBin_sgT();
-  for(Int_t t=0; t<sgT_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgT_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_T();
-  for(Int_t t=0; t<  T_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  T_th[eX][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_sgT(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgT_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgT_th[eX[i]][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_T(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  T_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  T_th[eX[i]][t]*DegToRad()),  eM);
 
-  eX = GetEnergyBin_sgP();
-  for(Int_t t=0; t<sgP_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgP_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_P();
-  for(Int_t t=0; t<  P_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  P_th[eX][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_sgP(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgP_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgP_th[eX[i]][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_P(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  P_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  P_th[eX[i]][t]*DegToRad()),  eM);
 
-  eX = GetEnergyBin_sgE();
-  for(Int_t t=0; t<sgE_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgE_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_E();
-  for(Int_t t=0; t<  E_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  E_th[eX][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_sgE(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgE_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgE_th[eX[i]][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_E(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  E_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  E_th[eX[i]][t]*DegToRad()),  eM);
 
-  eX = GetEnergyBin_sgF();
-  for(Int_t t=0; t<sgF_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgF_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_F();
-  for(Int_t t=0; t<  F_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  F_th[eX][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_sgF(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgF_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgF_th[eX[i]][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_F(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  F_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  F_th[eX[i]][t]*DegToRad()),  eM);
 
-  eX = GetEnergyBin_sgG();
-  for(Int_t t=0; t<sgS_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgG_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_G();
-  for(Int_t t=0; t<  S_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  G_th[eX][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_sgG(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgS_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgG_th[eX[i]][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_G();
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  S_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  G_th[eX[i]][t]*DegToRad()),  eM);
 
-  eX = GetEnergyBin_sgH();
-  for(Int_t t=0; t<sgH_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(sgH_th[eX][t]*DegToRad()),  eM);
-  eX = GetEnergyBin_H();
-  for(Int_t t=0; t<  H_pts[eX];  t++) SumSq+=EvaluateCGLN(Cos(  H_th[eX][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_sgH(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgH_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgH_th[eX[i]][t]*DegToRad()),  eM);
+  nX = GetEnergyBins_H(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  H_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  H_th[eX[i]][t]*DegToRad()),  eM);
 
-  eX = GetEnergyBin_sgCx();
-  for(Int_t t=0; t<sgCx_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(sgCx_th[eX][t]*DegToRad()), eM);
-  eX = GetEnergyBin_Cx();
-  for(Int_t t=0; t<  Cx_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(  Cx_th[eX][t]*DegToRad()), eM);
+  nX = GetEnergyBins_sgCx(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgCx_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgCx_th[eX[i]][t]*DegToRad()), eM);
+  nX = GetEnergyBins_Cx(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  Cx_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Cx_th[eX[i]][t]*DegToRad()), eM);
 
-  eX = GetEnergyBin_sgCz();
-  for(Int_t t=0; t<sgCz_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(sgCz_th[eX][t]*DegToRad()), eM);
-  eX = GetEnergyBin_Cz();
-  for(Int_t t=0; t<  Cz_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(  Cz_th[eX][t]*DegToRad()), eM);
+  nX = GetEnergyBins_sgCz(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgCz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgCz_th[eX[i]][t]*DegToRad()), eM);
+  nX = GetEnergyBins_Cz(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  Cz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Cz_th[eX[i]][t]*DegToRad()), eM);
 
-  eX = GetEnergyBin_sgOx();
-  for(Int_t t=0; t<sgOx_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(sgOx_th[eX][t]*DegToRad()), eM);
-  eX = GetEnergyBin_Ox();
-  for(Int_t t=0; t<  Ox_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(  Ox_th[eX][t]*DegToRad()), eM);
+  nX = GetEnergyBins_sgOx();
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgOx_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgOx_th[eX[i]][t]*DegToRad()), eM);
+  nX = GetEnergyBins_Ox();
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  Ox_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Ox_th[eX[i]][t]*DegToRad()), eM);
 
-  eX = GetEnergyBin_sgOz();
-  for(Int_t t=0; t<sgOz_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(sgOz_th[eX][t]*DegToRad()), eM);
-  eX = GetEnergyBin_Oz();
-  for(Int_t t=0; t<  Oz_pts[eX]; t++) SumSq+=EvaluateCGLN(Cos(  Oz_th[eX][t]*DegToRad()), eM);
+  nX = GetEnergyBins_sgOz(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<sgOz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgOz_th[eX[i]][t]*DegToRad()), eM);
+  nX = GetEnergyBins_Oz(eX);
+  for(Int_t i=0; i<nX; i++)
+    for(Int_t t=0; t<  Oz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Oz_th[eX[i]][t]*DegToRad()), eM);
 
   //Without additional weighting, the penalty should be comparable to chi^2.
   //Here it is summed up over all theta points from all observables 
@@ -390,26 +420,24 @@ Int_t NPts()
   Int_t NPts_0,  NPts_S,  NPts_T,  NPts_P;
   Int_t NPts_E,  NPts_F,  NPts_G,  NPts_H;
   Int_t NPts_Cx, NPts_Cz, NPts_Ox, NPts_Oz;
-  Int_t NPts;
 
-  NPts_0 = sg0_pts[GetEnergyBin_sg0()];
-  NPts_T = sgT_pts[GetEnergyBin_sgT()]    + T_pts[GetEnergyBin_T()];
-  NPts_S = sgS_pts[GetEnergyBin_sgS()]    + S_pts[GetEnergyBin_S()];
-  NPts_P = sgP_pts[GetEnergyBin_sgS()]    + P_pts[GetEnergyBin_P()];
-  NPts_E = sgE_pts[GetEnergyBin_sgE()]    + E_pts[GetEnergyBin_E()];
-  NPts_F = sgF_pts[GetEnergyBin_sgF()]    + F_pts[GetEnergyBin_F()];
-  NPts_G = sgG_pts[GetEnergyBin_sgG()]    + G_pts[GetEnergyBin_G()];
-  NPts_H = sgH_pts[GetEnergyBin_sgH()]    + H_pts[GetEnergyBin_H()];
-  NPts_Cx = sgCx_pts[GetEnergyBin_sgCx()] + Cx_pts[GetEnergyBin_Cx()];
-  NPts_Cz = sgCz_pts[GetEnergyBin_sgCz()] + Cz_pts[GetEnergyBin_Cz()];
-  NPts_Ox = sgOx_pts[GetEnergyBin_sgOx()] + Ox_pts[GetEnergyBin_Ox()];
-  NPts_Oz = sgOz_pts[GetEnergyBin_sgOz()] + Oz_pts[GetEnergyBin_Oz()];
+  NPts_0  = GetNPts_sg0();
+  NPts_S  = GetNPts_sgS()  + GetNPts_S();
+  NPts_T  = GetNPts_sgT()  + GetNPts_T();
+  NPts_P  = GetNPts_sgP()  + GetNPts_P();
+  NPts_E  = GetNPts_sgE()  + GetNPts_E();
+  NPts_F  = GetNPts_sgF()  + GetNPts_F();
+  NPts_G  = GetNPts_sgG()  + GetNPts_G();
+  NPts_H  = GetNPts_sgH()  + GetNPts_H();
+  NPts_Cx = GetNPts_sgCx() + GetNPts_Cx();
+  NPts_Cz = GetNPts_sgCz() + GetNPts_Cz();
+  NPts_Ox = GetNPts_sgOx() + GetNPts_Ox();
+  NPts_Oz = GetNPts_sgOz() + GetNPts_Oz();
 
-  NPts = NPts_0 + NPts_S + NPts_T + NPts_P + NPts_E + NPts_F + NPts_G + NPts_H + NPts_Cx + NPts_Cz + NPts_Ox + NPts_Oz;
-  if(ONLY_CROSS_S) NPts = NPts_0 + NPts_S;
-  if(ONLY_CROSS_F) NPts = NPts_0 + NPts_F;
+  if(ONLY_CROSS_S) return (NPts_0 + NPts_S);
+  if(ONLY_CROSS_F) return (NPts_0 + NPts_F);
 
-  return NPts;
+  return (NPts_0 + NPts_S + NPts_T + NPts_P + NPts_E + NPts_F + NPts_G + NPts_H + NPts_Cx + NPts_Cz + NPts_Ox + NPts_Oz);
 }
 
 //-----------------------------------------------------------------------------
@@ -457,43 +485,43 @@ Int_t NSca()
   //Handle special cases first
   if(ONLY_CROSS_S)
   {
-    if(sg0_pts[GetEnergyBin_sg0()]) NSca+=1;
-    if(sgS_pts[GetEnergyBin_sgS()]) NSca+=1;
-    if(S_pts[GetEnergyBin_S()])     NSca+=1;
+    if(GetNPts_sg0()) NSca+=1;
+    if(GetNPts_sgS()) NSca+=1;
+    if(GetNPts_S())   NSca+=1;
     return NSca;
   }
   if(ONLY_CROSS_F)
   {
-    if(sg0_pts[GetEnergyBin_sg0()]) NSca+=1;
-    if(sgF_pts[GetEnergyBin_sgF()]) NSca+=1;
-    if(F_pts[GetEnergyBin_F()])     NSca+=1;
+    if(GetNPts_sg0()) NSca+=1;
+    if(GetNPts_sgF()) NSca+=1;
+    if(GetNPts_F())   NSca+=1;
     return NSca;
   }
 
   //If observable scalings are not fixed, we get one parameter for each scalable observable (i.e. observable with data)
-  if(sg0_pts[GetEnergyBin_sg0()])   NSca+=1;
-  if(sgS_pts[GetEnergyBin_sgS()])   NSca+=1;
-  if(sgT_pts[GetEnergyBin_sgT()])   NSca+=1;
-  if(sgP_pts[GetEnergyBin_sgP()])   NSca+=1;
-  if(sgE_pts[GetEnergyBin_sgE()])   NSca+=1;
-  if(sgF_pts[GetEnergyBin_sgF()])   NSca+=1;
-  if(sgG_pts[GetEnergyBin_sgG()])   NSca+=1;
-  if(sgH_pts[GetEnergyBin_sgH()])   NSca+=1;
-  if(sgCx_pts[GetEnergyBin_sgCx()]) NSca+=1;
-  if(sgCz_pts[GetEnergyBin_sgCz()]) NSca+=1;
-  if(sgOx_pts[GetEnergyBin_sgOx()]) NSca+=1;
-  if(sgOz_pts[GetEnergyBin_sgOz()]) NSca+=1;
-  if(S_pts[GetEnergyBin_S()])       NSca+=1;
-  if(T_pts[GetEnergyBin_T()])       NSca+=1;
-  if(P_pts[GetEnergyBin_P()])       NSca+=1;
-  if(E_pts[GetEnergyBin_E()])       NSca+=1;
-  if(F_pts[GetEnergyBin_F()])       NSca+=1;
-  if(G_pts[GetEnergyBin_G()])       NSca+=1;
-  if(H_pts[GetEnergyBin_H()])       NSca+=1;
-  if(Cx_pts[GetEnergyBin_Cx()])     NSca+=1;
-  if(Cz_pts[GetEnergyBin_Cz()])     NSca+=1;
-  if(Ox_pts[GetEnergyBin_Ox()])     NSca+=1;
-  if(Oz_pts[GetEnergyBin_Oz()])     NSca+=1;
+  if(GetNPts_sg0())  NSca+=1;
+  if(GetNPts_sgS())  NSca+=1;
+  if(GetNPts_sgT())  NSca+=1;
+  if(GetNPts_sgP())  NSca+=1;
+  if(GetNPts_sgE())  NSca+=1;
+  if(GetNPts_sgF())  NSca+=1;
+  if(GetNPts_sgG())  NSca+=1;
+  if(GetNPts_sgH())  NSca+=1;
+  if(GetNPts_sgCx()) NSca+=1;
+  if(GetNPts_sgCz()) NSca+=1;
+  if(GetNPts_sgOx()) NSca+=1;
+  if(GetNPts_sgOz()) NSca+=1;
+  if(GetNPts_S())    NSca+=1;
+  if(GetNPts_T())    NSca+=1;
+  if(GetNPts_P())    NSca+=1;
+  if(GetNPts_E())    NSca+=1;
+  if(GetNPts_F())    NSca+=1;
+  if(GetNPts_G())    NSca+=1;
+  if(GetNPts_H())    NSca+=1;
+  if(GetNPts_Cx())   NSca+=1;
+  if(GetNPts_Cz())   NSca+=1;
+  if(GetNPts_Ox())   NSca+=1;
+  if(GetNPts_Oz())   NSca+=1;
 
   return NSca;
 }
@@ -1274,11 +1302,7 @@ void StoreFit(Int_t Sol)
 {
   Int_t Index;
 
-  //Piuck up energies depending on 'master' observable (sgT or sg0)
-  if(SGT_ENERGIES)
-    Fit_en[Sol][Fit_pts[Sol]] = sgT_en[GetEnergyBin_sgT()];
-  else
-    Fit_en[Sol][Fit_pts[Sol]] = sg0_en[GetEnergyBin_sg0()];
+  Fit_en[Sol][Fit_pts[Sol]] = gEnergy;
 
   //Store fit data for graph plots
   Fit_val[Sol][0][Fit_pts[Sol]] = Ep[0].Re(); Fit_val[Sol][1][Fit_pts[Sol]] = Ep[0].Im(); Fit_err[Sol][0][Fit_pts[Sol]] = DEp[0].Re(); Fit_err[Sol][1][Fit_pts[Sol]] = DEp[0].Im();
@@ -1332,29 +1356,29 @@ void FixScalings()
   //...or fix observable scales for observables without data
   else
   {
-    if(!sg0_pts[GetEnergyBin_sg0()])   gMinuit->FixParameter(8*L_MAX + SIG_0);
-    if(!sgS_pts[GetEnergyBin_sgS()])   gMinuit->FixParameter(8*L_MAX + SIG_S);
-    if(!sgT_pts[GetEnergyBin_sgT()])   gMinuit->FixParameter(8*L_MAX + SIG_T);
-    if(!sgP_pts[GetEnergyBin_sgP()])   gMinuit->FixParameter(8*L_MAX + SIG_P);
-    if(!sgE_pts[GetEnergyBin_sgE()])   gMinuit->FixParameter(8*L_MAX + SIG_E);
-    if(!sgF_pts[GetEnergyBin_sgF()])   gMinuit->FixParameter(8*L_MAX + SIG_F);
-    if(!sgG_pts[GetEnergyBin_sgG()])   gMinuit->FixParameter(8*L_MAX + SIG_G);
-    if(!sgH_pts[GetEnergyBin_sgH()])   gMinuit->FixParameter(8*L_MAX + SIG_H);
-    if(!sgCx_pts[GetEnergyBin_sgCx()]) gMinuit->FixParameter(8*L_MAX + SIG_CX);
-    if(!sgCz_pts[GetEnergyBin_sgCz()]) gMinuit->FixParameter(8*L_MAX + SIG_CZ);
-    if(!sgOx_pts[GetEnergyBin_sgOx()]) gMinuit->FixParameter(8*L_MAX + SIG_OX);
-    if(!sgOz_pts[GetEnergyBin_sgOz()]) gMinuit->FixParameter(8*L_MAX + SIG_OZ);
-    if(!S_pts[GetEnergyBin_S()])       gMinuit->FixParameter(8*L_MAX + ASY_S);
-    if(!T_pts[GetEnergyBin_T()])       gMinuit->FixParameter(8*L_MAX + ASY_T);
-    if(!P_pts[GetEnergyBin_P()])       gMinuit->FixParameter(8*L_MAX + ASY_P);
-    if(!E_pts[GetEnergyBin_E()])       gMinuit->FixParameter(8*L_MAX + ASY_E);
-    if(!F_pts[GetEnergyBin_F()])       gMinuit->FixParameter(8*L_MAX + ASY_F);
-    if(!G_pts[GetEnergyBin_G()])       gMinuit->FixParameter(8*L_MAX + ASY_G);
-    if(!H_pts[GetEnergyBin_H()])       gMinuit->FixParameter(8*L_MAX + ASY_H);
-    if(!Cx_pts[GetEnergyBin_Cx()])     gMinuit->FixParameter(8*L_MAX + ASY_CX);
-    if(!Cz_pts[GetEnergyBin_Cz()])     gMinuit->FixParameter(8*L_MAX + ASY_CZ);
-    if(!Ox_pts[GetEnergyBin_Ox()])     gMinuit->FixParameter(8*L_MAX + ASY_OX);
-    if(!Oz_pts[GetEnergyBin_Oz()])     gMinuit->FixParameter(8*L_MAX + ASY_OZ);
+    if(!sg0_pts[GetEnergyBins_sg0()])   gMinuit->FixParameter(8*L_MAX + SIG_0);
+    if(!sgS_pts[GetEnergyBins_sgS()])   gMinuit->FixParameter(8*L_MAX + SIG_S);
+    if(!sgT_pts[GetEnergyBins_sgT()])   gMinuit->FixParameter(8*L_MAX + SIG_T);
+    if(!sgP_pts[GetEnergyBins_sgP()])   gMinuit->FixParameter(8*L_MAX + SIG_P);
+    if(!sgE_pts[GetEnergyBins_sgE()])   gMinuit->FixParameter(8*L_MAX + SIG_E);
+    if(!sgF_pts[GetEnergyBins_sgF()])   gMinuit->FixParameter(8*L_MAX + SIG_F);
+    if(!sgG_pts[GetEnergyBins_sgG()])   gMinuit->FixParameter(8*L_MAX + SIG_G);
+    if(!sgH_pts[GetEnergyBins_sgH()])   gMinuit->FixParameter(8*L_MAX + SIG_H);
+    if(!sgCx_pts[GetEnergyBins_sgCx()]) gMinuit->FixParameter(8*L_MAX + SIG_CX);
+    if(!sgCz_pts[GetEnergyBins_sgCz()]) gMinuit->FixParameter(8*L_MAX + SIG_CZ);
+    if(!sgOx_pts[GetEnergyBins_sgOx()]) gMinuit->FixParameter(8*L_MAX + SIG_OX);
+    if(!sgOz_pts[GetEnergyBins_sgOz()]) gMinuit->FixParameter(8*L_MAX + SIG_OZ);
+    if(!S_pts[GetEnergyBins_S()])       gMinuit->FixParameter(8*L_MAX + ASY_S);
+    if(!T_pts[GetEnergyBins_T()])       gMinuit->FixParameter(8*L_MAX + ASY_T);
+    if(!P_pts[GetEnergyBins_P()])       gMinuit->FixParameter(8*L_MAX + ASY_P);
+    if(!E_pts[GetEnergyBins_E()])       gMinuit->FixParameter(8*L_MAX + ASY_E);
+    if(!F_pts[GetEnergyBins_F()])       gMinuit->FixParameter(8*L_MAX + ASY_F);
+    if(!G_pts[GetEnergyBins_G()])       gMinuit->FixParameter(8*L_MAX + ASY_G);
+    if(!H_pts[GetEnergyBins_H()])       gMinuit->FixParameter(8*L_MAX + ASY_H);
+    if(!Cx_pts[GetEnergyBins_Cx()])     gMinuit->FixParameter(8*L_MAX + ASY_CX);
+    if(!Cz_pts[GetEnergyBins_Cz()])     gMinuit->FixParameter(8*L_MAX + ASY_CZ);
+    if(!Ox_pts[GetEnergyBins_Ox()])     gMinuit->FixParameter(8*L_MAX + ASY_OX);
+    if(!Oz_pts[GetEnergyBins_Oz()])     gMinuit->FixParameter(8*L_MAX + ASY_OZ);
   }
 }
 

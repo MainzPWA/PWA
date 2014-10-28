@@ -1,1 +1,0 @@
-datafiles/Sigma_Graal.txt

@@ -2,29 +2,29 @@
 #include "Globals.h"
 #include "Multipoles.h"
 #include "Fitter.h"
-#include "Parse_sg0.h"
-#include "Parse_sgS.h"
-#include "Parse_sgT.h"
-#include "Parse_sgP.h"
-#include "Parse_sgE.h"
-#include "Parse_sgF.h"
-#include "Parse_sgG.h"
-#include "Parse_sgH.h"
-#include "Parse_sgCx.h"
-#include "Parse_sgCz.h"
-#include "Parse_sgOx.h"
-#include "Parse_sgOz.h"
-#include "Parse_S.h"
-#include "Parse_T.h"
-#include "Parse_P.h"
-#include "Parse_E.h"
-#include "Parse_F.h"
-#include "Parse_G.h"
-#include "Parse_H.h"
-#include "Parse_Cx.h"
-#include "Parse_Cz.h"
-#include "Parse_Ox.h"
-#include "Parse_Oz.h"
+#include "Provide_sg0.h"
+#include "Provide_sgS.h"
+#include "Provide_sgT.h"
+#include "Provide_sgP.h"
+#include "Provide_sgE.h"
+#include "Provide_sgF.h"
+#include "Provide_sgG.h"
+#include "Provide_sgH.h"
+#include "Provide_sgCx.h"
+#include "Provide_sgCz.h"
+#include "Provide_sgOx.h"
+#include "Provide_sgOz.h"
+#include "Provide_S.h"
+#include "Provide_T.h"
+#include "Provide_P.h"
+#include "Provide_E.h"
+#include "Provide_F.h"
+#include "Provide_G.h"
+#include "Provide_H.h"
+#include "Provide_Cx.h"
+#include "Provide_Cz.h"
+#include "Provide_Ox.h"
+#include "Provide_Oz.h"
 #include "Parse_MAID.h"
 #include "PWA.h"
 #include "Version.h"
@@ -165,6 +165,8 @@ void Plot(Int_t s)
     Model->SetLineWidth(2);
     Model->Draw("L");
     SaveObjectAs(Plot, Filename);
+    delete Fit;
+    delete Model;
     delete Plot;
   }
 
@@ -179,6 +181,7 @@ void Plot(Int_t s)
   Chi->GetXaxis()->SetTitle("#omega / MeV");
   sprintf(Filename, "plots.%1d/Chi2.root", s);
   SaveObjectAs(Plot, Filename);
+  delete Chi;
   delete Plot;
 
   //Plot penalty
@@ -192,6 +195,7 @@ void Plot(Int_t s)
   Pen->GetXaxis()->SetTitle("#omega / MeV");
   sprintf(Filename, "plots.%1d/Penalty.root", s);
   SaveObjectAs(Plot, Filename);
+  delete Pen;
   delete Plot;
 }
 
@@ -202,6 +206,7 @@ void Print()
   //Select MAID energy closest to cross section energy
   Int_t eM = GetEnergyBin_maid();
   Double_t DeviationSq;
+  Char_t Blank;
 
   printf("\n------------------------------------------------------------------------------------\n");
   printf("omega = %7.3f MeV, W = %8.3f MeV\n", gEnergy, W_cm(gEnergy));
@@ -232,18 +237,19 @@ void Print()
 
   for(Int_t l=2; l<L_MAX+1; l++)
   {
+    if(l<10) Blank = ' '; else Blank = '\0';
     if(FIX_EP[l]) DeviationSq = 0.0; else DeviationSq = (Ep[l]-maid_Ep[l][eM]).Rho2()/DEp[l].Rho2();
-    printf("E%d+  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
-            l, Ep[l].Re(), DEp[l].Re(), Ep[l].Im(), DEp[l].Im(), maid_Ep[l][eM].Re(), maid_Ep[l][eM].Im(), DeviationSq);
+    printf("E%d+%c |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
+            l, Blank, Ep[l].Re(), DEp[l].Re(), Ep[l].Im(), DEp[l].Im(), maid_Ep[l][eM].Re(), maid_Ep[l][eM].Im(), DeviationSq);
     if(FIX_EM[l]) DeviationSq = 0.0; else DeviationSq = (Em[l]-maid_Em[l][eM]).Rho2()/DEm[l].Rho2();
-    printf("E%d-  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
-            l, Em[l].Re(), DEm[l].Re(), Em[l].Im(), DEm[l].Im(), maid_Em[l][eM].Re(), maid_Em[l][eM].Im(), DeviationSq);
+    printf("E%d-%c |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
+            l, Blank, Em[l].Re(), DEm[l].Re(), Em[l].Im(), DEm[l].Im(), maid_Em[l][eM].Re(), maid_Em[l][eM].Im(), DeviationSq);
     if(FIX_MP[l]) DeviationSq = 0.0; else DeviationSq = (Mp[l]-maid_Mp[l][eM]).Rho2()/DMp[l].Rho2();
-    printf("M%d+  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
-            l, Mp[l].Re(), DMp[l].Re(), Mp[l].Im(), DMp[l].Im(), maid_Mp[l][eM].Re(), maid_Mp[l][eM].Im(), DeviationSq);
+    printf("M%d+%c |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
+            l, Blank, Mp[l].Re(), DMp[l].Re(), Mp[l].Im(), DMp[l].Im(), maid_Mp[l][eM].Re(), maid_Mp[l][eM].Im(), DeviationSq);
     if(FIX_MM[l]) DeviationSq = 0.0; else DeviationSq = (Mm[l]-maid_Mm[l][eM]).Rho2()/DMm[l].Rho2();
-    printf("M%d-  |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
-            l, Mm[l].Re(), DMm[l].Re(), Mm[l].Im(), DMm[l].Im(), maid_Mm[l][eM].Re(), maid_Mm[l][eM].Im(), DeviationSq);
+    printf("M%d-%c |  (%7.3f +- %5.3f) + (%7.3f +- %5.3f)i  |  %7.3f + %7.3fi  |  %8.4f\n",
+            l, Blank, Mm[l].Re(), DMm[l].Re(), Mm[l].Im(), DMm[l].Im(), maid_Mm[l][eM].Re(), maid_Mm[l][eM].Im(), DeviationSq);
   }
 
   if(FIX_SCALES)
@@ -365,35 +371,36 @@ void Init()
     FIX_MP[l] = true; FIX_MP_PHASE[l] = false;
     FIX_MM[l] = true; FIX_MM_PHASE[l] = false;
   }
-  FIX_SCALES     = false;
-  FIX_RE_E0P     = false;
-  FIX_IM_E0P     = false;
-  ONLY_CROSS_S   = false;
-  ONLY_CROSS_F   = false;
-  SGT_ENERGIES   = false;
-  PRINT_PENALTY  = false;
-  ERROR_MODE     = ADAPTIVE;
-  PENALTY_MODE   = MLP1;
-  D_WAVES        = MODEL;
-  L_MAX          = 2;
-  PENALTY[MLP1]  = 1.0;
-  PENALTY[MLP2]  = 1.0;
+  FIX_SCALES      = false;
+  FIX_RE_E0P      = false;
+  FIX_IM_E0P      = false;
+  ONLY_CROSS_S    = false;
+  ONLY_CROSS_F    = false;
+  SGT_ENERGIES    = false;
+  PRINT_PENALTY   = false;
+  USE_PRELIMINARY = true;
+  ERROR_MODE      = ADAPTIVE;
+  PENALTY_MODE    = MLP1;
+  D_WAVES         = MODEL;
+  L_MAX           = 2;
+  PENALTY[MLP1]   = 1.0;
+  PENALTY[MLP2]   = 1.0;
   for(Int_t i=1; i<5; i++) WEIGHT[i] = 1.0;
-  SCALING        = 0.1;
-  MIN_ENERGY     = 144.7;
-  MAX_ENERGY     = 420.0;
-  VARIATION[REL] = 0.20;
-  VARIATION[ABS] = 0.00;
-  BETA           = 3.43;
-  ITERATIONS     = 16;
-  SOLUTIONS      = 1;
-  MASS_MESON     = MASS_PIZERO;
-  MASS_INITIAL   = MASS_PROTON;
-  MASS_FINAL     = MASS_PROTON;
-  MASS2_MESON    = MASS2_PIZERO;
-  MASS2_INITIAL  = MASS2_PROTON;
-  MASS2_FINAL    = MASS2_PROTON;
-  THRESHOLD      = W_thres();
+  SCALING         = 0.1;
+  MIN_ENERGY      = 144.7;
+  MAX_ENERGY      = 420.0;
+  VARIATION[REL]  = 0.20;
+  VARIATION[ABS]  = 0.00;
+  BETA            = 3.43;
+  ITERATIONS      = 16;
+  SOLUTIONS       = 1;
+  MASS_MESON      = MASS_PIZERO;
+  MASS_INITIAL    = MASS_PROTON;
+  MASS_FINAL      = MASS_PROTON;
+  MASS2_MESON     = MASS2_PIZERO;
+  MASS2_INITIAL   = MASS2_PROTON;
+  MASS2_FINAL     = MASS2_PROTON;
+  THRESHOLD       = W_thres();
 
   Config = fopen("PWA.cfg", "r");
   if(!Config) return;
@@ -422,6 +429,7 @@ void Init()
     if(sscanf(Buffer, "ONLY_CROSS_F %d", &Bool)==1) ONLY_CROSS_F = Bool;
     if(sscanf(Buffer, "SGT_ENERGIES %d", &Bool)==1) SGT_ENERGIES = Bool;
     if(sscanf(Buffer, "PRINT_PENALTY %d", &Bool)==1) PRINT_PENALTY = Bool;
+    if(sscanf(Buffer, "USE_PRELIMINARY %d", &Bool)==1) USE_PRELIMINARY = Bool;
     if(sscanf(Buffer, "PENALTY_MLP1 %lf", &Double)==1) PENALTY[MLP1] = Double;
     if(sscanf(Buffer, "PENALTY_MLP2 %lf", &Double)==1) PENALTY[MLP2] = Double;
     if(sscanf(Buffer, "WEIGHT_F%d %lf", &Int, &Double)==2) WEIGHT[Int] = Double;
@@ -541,6 +549,7 @@ void Init()
   printf("ERROR_MODE %1d\n", ERROR_MODE);
   printf("PENALTY_MODE %1d\n", PENALTY_MODE);
   printf("PRINT_PENALTY %1d\n", PRINT_PENALTY);
+  printf("USE_PRELIMINARY %1d\n", USE_PRELIMINARY);
   printf("ITERATIONS %4d\n", ITERATIONS);
   printf("SOLUTIONS %2d\n", SOLUTIONS);
   printf("BETA %4.2f\n", BETA);
@@ -565,29 +574,54 @@ void Init()
 
 void Load()
 {
-  Parse_sg0();
-  Parse_sgS();
-  Parse_sgT();
-  Parse_sgP();
-  Parse_sgE();
-  Parse_sgF();
-  Parse_sgG();
-  Parse_sgH();
-  Parse_sgCx();
-  Parse_sgCz();
-  Parse_sgOx();
-  Parse_sgOz();
-  Parse_S();
-  Parse_T();
-  Parse_P();
-  Parse_E();
-  Parse_F();
-  Parse_G();
-  Parse_H();
-  Parse_Cx();
-  Parse_Cz();
-  Parse_Ox();
-  Parse_Oz();
+  FILE* Config;
+  Char_t Buffer[1024];
+  Char_t Filename[256];
+  Double_t Weight, Scale;
+
+  //Initialise cross section data
+  sg0_bin  = 0; sgS_bin  = 0; sgT_bin  = 0; sgP_bin  = 0;
+  sgE_bin  = 0; sgF_bin  = 0; sgG_bin  = 0; sgH_bin  = 0;
+  sgCx_bin = 0; sgCz_bin = 0; sgOx_bin = 0; sgOz_bin = 0;
+  //Initialise asymmetry data
+  S_bin  = 0; T_bin  = 0; P_bin  = 0;
+  E_bin  = 0; F_bin  = 0; G_bin  = 0; H_bin  = 0;
+  Cx_bin = 0; Cz_bin = 0; Ox_bin = 0; Oz_bin = 0;
+
+  Config = fopen("PWA.cfg", "r");
+  if(!Config) return;
+
+  while(!feof(Config))
+  {
+    fgets(Buffer, sizeof(Buffer), Config);
+
+    if(sscanf(Buffer, "SG0_FILE %s %lf %lf",  Filename, &Weight, &Scale)==3) Load_sg0(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "SGS_FILE %s %lf %lf",  Filename, &Weight, &Scale)==3) Load_sgS(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "SGT_FILE %s %lf %lf",  Filename, &Weight, &Scale)==3) Load_sgT(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "SGP_FILE %s %lf %lf",  Filename, &Weight, &Scale)==3) Load_sgP(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "SGE_FILE %s %lf %lf",  Filename, &Weight, &Scale)==3) Load_sgE(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "SGF_FILE %s %lf %lf",  Filename, &Weight, &Scale)==3) Load_sgF(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "SGG_FILE %s %lf %lf",  Filename, &Weight, &Scale)==3) Load_sgG(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "SGH_FILE %s %lf %lf",  Filename, &Weight, &Scale)==3) Load_sgH(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "SGCX_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgCx(Filename, Weight, Scale);
+    if(sscanf(Buffer, "SGCZ_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgCz(Filename, Weight, Scale);
+    if(sscanf(Buffer, "SGOX_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgOx(Filename, Weight, Scale);
+    if(sscanf(Buffer, "SGOZ_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgOz(Filename, Weight, Scale);
+
+    if(sscanf(Buffer, "S_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_S(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "T_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_T(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "P_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_P(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "E_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_E(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "F_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_F(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "G_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_G(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "H_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_H(Filename,  Weight, Scale);
+    if(sscanf(Buffer, "CX_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Cx(Filename, Weight, Scale);
+    if(sscanf(Buffer, "CZ_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Cz(Filename, Weight, Scale);
+    if(sscanf(Buffer, "OX_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Ox(Filename, Weight, Scale);
+    if(sscanf(Buffer, "OZ_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Oz(Filename, Weight, Scale);
+  }
+  fclose(Config);
+
   printf("------------------------------------------------------------------------------------\n");
   Parse_MAID();
   printf("------------------------------------------------------------------------------------\n");

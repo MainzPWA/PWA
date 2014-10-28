@@ -36,6 +36,7 @@ extern Bool_t FIX_MP_PHASE[LBINS];
 extern Bool_t FIX_MM_PHASE[LBINS];
 extern Bool_t FIX_SCALES;
 extern Bool_t PRINT_PENALTY;
+extern Bool_t USE_PRELIMINARY;
 extern Int_t ERROR_MODE;
 extern Int_t PENALTY_MODE;
 extern Int_t D_WAVES;
