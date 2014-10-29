@@ -74,6 +74,7 @@ Double_t Penalty();
 Double_t PenaltyMLP1();
 Double_t PenaltyMLP2();
 Double_t PenaltyCGLN();
+Double_t PenaltyCGLN_exp();
 Double_t VariateRel();
 Double_t VariateAbs();
 Double_t GetErrors(Double_t* Par, Double_t* Err);

@@ -288,6 +288,29 @@ Double_t PenaltyMLP2()
 Double_t PenaltyCGLN()
 {
   Int_t eM = GetEnergyBin_maid();
+  Int_t Nsteps = NPts();
+  Double_t CosTheta, DCosTheta;
+  Double_t SumSq = 0.0;
+
+  DCosTheta = 2.0/Nsteps; //Calculate costheta step size
+  for(Int_t n=0; n<Nsteps; n++)
+  {
+    CosTheta = DCosTheta*n + DCosTheta/2.0 - 1.0; //Calculate central position of current costheta step
+    SumSq+=EvaluateCGLN(CosTheta, eM);
+  }
+
+  //Without additional weighting, the penalty should be comparable to chi^2.
+  //Here it is summed up to the number of theta points from all observables
+  //(i.e. NPts costheta positions are used) and EvaluateCGLN() normalises to
+  //the sum of F1...F4 magnitudes. Hence, no further normalisation is required.
+  return SumSq;
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t PenaltyCGLN_exp()
+{
+  Int_t eM = GetEnergyBin_maid();
   Int_t eX[EBINS];
   Int_t nX;
   Double_t SumSq = 0.0;
@@ -407,7 +430,7 @@ Double_t PenaltyCGLN()
     for(Int_t t=0; t<  Oz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Oz_th[eX[i]][t]*DegToRad()), eM);
 
   //Without additional weighting, the penalty should be comparable to chi^2.
-  //Here it is summed up over all theta points from all observables 
+  //Here it is summed up over all theta points from all observables
   //(i.e. NPts data points are used) and EvaluateCGLN() normalises to the sum
   //of F1...F4 magnitudes. Hence, no further normalisation is required.
   return SumSq;
