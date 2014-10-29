@@ -287,7 +287,7 @@ void Print()
 
   if(PRINT_PENALTY)
   {
-    printf("Chi^2 = %7.3f, Penalty = %7.3f, Scale = %7.3f, NPts = %2d, NPar = %2d, NDF = %2d\n",
+    printf("Chi^2 = %7.2f, Penalty = %7.2f, Scale = %5.2f, NPts = %3d, NPar = %2d, NDF = %3d\n",
            ChiSq(), Penalty(), Scale(), NPts(), NPar(), NDF());
     printf("------------------------------------------------------------------------------------\n");
   }
