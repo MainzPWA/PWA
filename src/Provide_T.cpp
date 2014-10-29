@@ -105,7 +105,7 @@ Double_t GetChiSq_T()
       Meas  = T_sc[eT[n]]*T_val[eT[n]][th]*f_obs[SIG_0];
       Error = T_sc[eT[n]]*T_err[eT[n]][th]*f_obs[SIG_0];
       Theo  = T(Theta, Omega);
-      printf("T: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
+      //printf("T: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
       ChiSq_T+=(T_wt[eT[n]]*((Meas-Theo)*(Meas-Theo)/(Error*Error)));
     }
   }
