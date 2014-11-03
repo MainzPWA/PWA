@@ -402,7 +402,8 @@ void Init()
   MASS2_FINAL     = MASS2_PROTON;
   THRESHOLD       = W_thres();
 
-  Config = fopen("PWA.cfg", "r");
+  printf("Loading configuration from %s\n", gConfig);
+  Config = fopen(gConfig, "r");
   if(!Config) return;
 
   while(!feof(Config))
@@ -588,7 +589,7 @@ void Load()
   E_bin  = 0; F_bin  = 0; G_bin  = 0; H_bin  = 0;
   Cx_bin = 0; Cz_bin = 0; Ox_bin = 0; Oz_bin = 0;
 
-  Config = fopen("PWA.cfg", "r");
+  Config = fopen(gConfig, "r");
   if(!Config) return;
 
   while(!feof(Config))
@@ -638,6 +639,11 @@ void Load()
 int main(int argc, char **argv)
 {
   printf("\nPWA multipole fitter, version %.1f, build %d\n", VERSION, BUILD);
+
+  if(argc > 1)
+    strcpy(gConfig, argv[1]);
+  else
+    strcpy(gConfig, "PWA.cfg");
 
   gRandom->SetSeed(0);
   gROOT->SetStyle("Plain");
