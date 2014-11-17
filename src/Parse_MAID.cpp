@@ -2,7 +2,7 @@
 
 //-----------------------------------------------------------------------------
 
-void Parse_MAID()
+void Parse_MAID(Char_t* Path)
 {
   Char_t Buffer[1024];
   Double_t Energy, Re, Im;
@@ -13,42 +13,43 @@ void Parse_MAID()
 
   EPSILON = 1e38; //Initialize for search
 
+  printf("------------------------------------------------------------------------------------\n");
   printf("Loading model multipoles... ");
 
   //Open s,p waves
-  MAID_Ep[0] = fopen("model/E0p.txt", "r");
-  MAID_Ep[1] = fopen("model/E1p.txt", "r");
-  MAID_Mp[1] = fopen("model/M1p.txt", "r");
-  MAID_Mm[1] = fopen("model/M1m.txt", "r");
+  sprintf(Buffer, "%s/E0p.txt", Path); MAID_Ep[0] = fopen(Buffer, "r");
+  sprintf(Buffer, "%s/E1p.txt", Path); MAID_Ep[1] = fopen(Buffer, "r");
+  sprintf(Buffer, "%s/M1p.txt", Path); MAID_Mp[1] = fopen(Buffer, "r");
+  sprintf(Buffer, "%s/M1m.txt", Path); MAID_Mm[1] = fopen(Buffer, "r");
   //Open d waves (depending on parametrisation)
   switch(D_WAVES)
   {
    case BORN: //Born terms only (in the strict sense)
-    MAID_Ep[2] = fopen("model/E2p_Born.txt", "r");
-    MAID_Em[2] = fopen("model/E2m_Born.txt", "r");
-    MAID_Mp[2] = fopen("model/M2p_Born.txt", "r");
-    MAID_Mm[2] = fopen("model/M2m_Born.txt", "r");
+    sprintf(Buffer, "%s/E2p_Born.txt", Path); MAID_Ep[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/E2m_Born.txt", Path); MAID_Em[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/M2p_Born.txt", Path); MAID_Mp[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/M2m_Born.txt", Path); MAID_Mm[2] = fopen(Buffer, "r");
     break;
    case NONRES: //Born, rho, omega terms (=non-resonant contributions)
-    MAID_Ep[2] = fopen("model/E2p_BornRhoOmega.txt", "r");
-    MAID_Em[2] = fopen("model/E2m_BornRhoOmega.txt", "r");
-    MAID_Mp[2] = fopen("model/M2p_BornRhoOmega.txt", "r");
-    MAID_Mm[2] = fopen("model/M2m_BornRhoOmega.txt", "r");
+    sprintf(Buffer, "%s/E2p_BornRhoOmega.txt", Path); MAID_Ep[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/E2m_BornRhoOmega.txt", Path); MAID_Em[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/M2p_BornRhoOmega.txt", Path); MAID_Mp[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/M2m_BornRhoOmega.txt", Path); MAID_Mm[2] = fopen(Buffer, "r");
     break;
    default: //Full model prediction
-    MAID_Ep[2] = fopen("model/E2p.txt", "r");
-    MAID_Em[2] = fopen("model/E2m.txt", "r");
-    MAID_Mp[2] = fopen("model/M2p.txt", "r");
-    MAID_Mm[2] = fopen("model/M2m.txt", "r");
+    sprintf(Buffer, "%s/E2p.txt", Path); MAID_Ep[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/E2m.txt", Path); MAID_Em[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/M2p.txt", Path); MAID_Mp[2] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/M2m.txt", Path); MAID_Mm[2] = fopen(Buffer, "r");
     break;
   }
   //Open f,g,... waves
   for(Int_t l=3; l<L_MAX+1; l++)
   {
-    sprintf(Buffer, "model/E%dp.txt", l); MAID_Ep[l] = fopen(Buffer, "r");
-    sprintf(Buffer, "model/E%dm.txt", l); MAID_Em[l] = fopen(Buffer, "r");
-    sprintf(Buffer, "model/M%dp.txt", l); MAID_Mp[l] = fopen(Buffer, "r");
-    sprintf(Buffer, "model/M%dm.txt", l); MAID_Mm[l] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/E%dp.txt", Path, l); MAID_Ep[l] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/E%dm.txt", Path, l); MAID_Em[l] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/M%dp.txt", Path, l); MAID_Mp[l] = fopen(Buffer, "r");
+    sprintf(Buffer, "%s/M%dm.txt", Path, l); MAID_Mm[l] = fopen(Buffer, "r");
   }
 
   //Load E0+ multipole
@@ -211,6 +212,7 @@ void Parse_MAID()
   EPSILON2 = EPSILON*EPSILON;
 
   printf("%2d multipoles at %4d energies loaded\n", 4*L_MAX, maid_bin);
+  printf("------------------------------------------------------------------------------------\n");
   return;
 
   //Debug output

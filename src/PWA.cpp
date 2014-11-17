@@ -578,6 +578,7 @@ void Load()
   FILE* Config;
   Char_t Buffer[1024];
   Char_t Filename[256];
+  Char_t Pathname[256];
   Double_t Weight, Scale;
 
   //Initialise cross section data
@@ -620,13 +621,10 @@ void Load()
     if(sscanf(Buffer, "CZ_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Cz(Filename, Weight, Scale);
     if(sscanf(Buffer, "OX_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Ox(Filename, Weight, Scale);
     if(sscanf(Buffer, "OZ_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Oz(Filename, Weight, Scale);
+
+    if(sscanf(Buffer, "MODEL_PATH %s", Pathname)==1) Parse_MAID(Pathname);
   }
   fclose(Config);
-
-  printf("------------------------------------------------------------------------------------\n");
-  Parse_MAID();
-  printf("------------------------------------------------------------------------------------\n");
-
   return;
 
   //Debug output
