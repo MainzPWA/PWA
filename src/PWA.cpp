@@ -433,7 +433,7 @@ void Init()
     if(sscanf(Buffer, "USE_PRELIMINARY %d", &Bool)==1) USE_PRELIMINARY = Bool;
     if(sscanf(Buffer, "PENALTY_MLP1 %lf", &Double)==1) PENALTY[MLP1] = Double;
     if(sscanf(Buffer, "PENALTY_MLP2 %lf", &Double)==1) PENALTY[MLP2] = Double;
-    if(sscanf(Buffer, "WEIGHT_F%d %lf", &Int, &Double)==2) WEIGHT[Int] = Double;
+    if(sscanf(Buffer, "WEIGHT_A%d %lf", &Int, &Double)==2) WEIGHT[Int] = Double;
     if(sscanf(Buffer, "SCALING %lf", &Double)==1) SCALING = Double;
     if(sscanf(Buffer, "BETA %lf", &Double)==1) BETA = Double;
     if(sscanf(Buffer, "VARIATION_REL %lf", &Double)==1) VARIATION[REL] = Double;
@@ -545,7 +545,7 @@ void Init()
   printf("SGT_ENERGIES %1d\n", SGT_ENERGIES);
   printf("PENALTY_MLP1 %6.3f\n", PENALTY[MLP1]);
   printf("PENALTY_MLP2 %6.3f\n", PENALTY[MLP2]);
-  for(Int_t i=1; i<5; i++) printf("WEIGHT_F%d %6.3f\n", i, WEIGHT[i]);
+  for(Int_t i=1; i<5; i++) printf("WEIGHT_A%d %6.3f\n", i, WEIGHT[i]);
   printf("SCALING %6.3f\n", SCALING);
   printf("ERROR_MODE %1d\n", ERROR_MODE);
   printf("PENALTY_MODE %1d\n", PENALTY_MODE);

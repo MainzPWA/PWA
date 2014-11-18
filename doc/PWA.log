@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=latex 2012.2.1)  17 NOV 2014 18:01
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=latex 2012.2.1)  18 NOV 2014 15:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -344,56 +344,56 @@ File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 
 ] [2]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 303.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 309.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 320.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 326.
 
 
 (/usr/share/texmf/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 309.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 326.
  [3] [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 636--641
+Underfull \hbox (badness 10000) in paragraph at lines 654--659
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 643--687
+Underfull \hbox (badness 10000) in paragraph at lines 661--705
 
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 724--728
+[7] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 742--746
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 730--744
-
- []
-
-[8]
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 824.
-
-Underfull \hbox (badness 10000) in paragraph at lines 830--846
+Underfull \hbox (badness 10000) in paragraph at lines 748--762
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 848--856
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 842.
+
+Underfull \hbox (badness 10000) in paragraph at lines 848--864
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 866--874
 
  []
 
 [10] [11] (./PWA.aux) ) 
 Here is how much of TeX's memory you used:
- 3279 strings out of 493634
- 39546 string characters out of 3150863
- 108057 words of memory out of 3500000
- 6467 multiletter control sequences out of 15000+200000
+ 3280 strings out of 493634
+ 39556 string characters out of 3150863
+ 108067 words of memory out of 3500000
+ 6468 multiletter control sequences out of 15000+200000
  27791 words of font info for 88 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 27i,12n,24p,238b,227s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,12n,24p,238b,239s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on PWA.dvi (11 pages, 63252 bytes).
+Output written on PWA.dvi (11 pages, 64824 bytes).

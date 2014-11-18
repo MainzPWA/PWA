@@ -192,6 +192,89 @@ inline TComplex Fcc(Int_t i, Double_t CosTheta)
 
 //-----------------------------------------------------------------------------
 
+//Helicity amplitude H1 (transformed from CGLN amplitudes)
+inline TComplex H1(Double_t CosTheta)
+{
+  Double_t SinTheta = Sqrt(1.0 - CosTheta*CosTheta);
+  Double_t CosThetaHalf = Sqrt(0.5*(1.0 + CosTheta));
+  Double_t Sqrt2 = Sqrt(2.0);
+
+  return (-1.0/Sqrt2)*SinTheta*CosThetaHalf*(F3(CosTheta) + F4(CosTheta));
+}
+
+//-----------------------------------------------------------------------------
+
+//Helicity amplitude H2 (transformed from CGLN amplitudes)
+inline TComplex H2(Double_t CosTheta)
+{
+  Double_t CosThetaHalf = Sqrt(0.5*(1.0 + CosTheta));
+  Double_t Sqrt2 = Sqrt(2.0);
+
+  return Sqrt2*CosThetaHalf*((F2(CosTheta) - F1(CosTheta)) + 0.5*(1.0-CosTheta)*(F3(CosTheta) - F4(CosTheta)));
+}
+
+//-----------------------------------------------------------------------------
+
+//Helicity amplitude H3 (transformed from CGLN amplitudes)
+inline TComplex H3(Double_t CosTheta)
+{
+  Double_t SinTheta = Sqrt(1.0 - CosTheta*CosTheta);
+  Double_t SinThetaHalf = Sqrt(0.5*(1.0 - CosTheta));
+  Double_t Sqrt2 = Sqrt(2.0);
+
+  return (+1.0/Sqrt2)*SinTheta*SinThetaHalf*(F3(CosTheta) - F4(CosTheta));
+}
+
+//-----------------------------------------------------------------------------
+
+//Helicity amplitude H4 (transformed from CGLN amplitudes)
+inline TComplex H4(Double_t CosTheta)
+{
+  Double_t SinThetaHalf = Sqrt(0.5*(1.0 - CosTheta));
+  Double_t Sqrt2 = Sqrt(2.0);
+
+  return Sqrt2*SinThetaHalf*((F1(CosTheta) + F2(CosTheta)) + 0.5*(1.0+CosTheta)*(F3(CosTheta) + F4(CosTheta)));
+}
+
+//-----------------------------------------------------------------------------
+
+//Wrapper for explicit helicity amplitudes H_i
+inline TComplex H(Int_t i, Double_t CosTheta)
+{
+  switch(i)
+  {
+    case 1: return H1(CosTheta);
+    case 2: return H2(CosTheta);
+    case 3: return H3(CosTheta);
+    case 4: return H4(CosTheta);
+    default: return TComplex(0.0, 0.0);
+  }
+}
+
+//-----------------------------------------------------------------------------
+
+inline TComplex H1cc(Double_t CosTheta){ return TComplex::Conjugate(H1(CosTheta)); }
+inline TComplex H2cc(Double_t CosTheta){ return TComplex::Conjugate(H2(CosTheta)); }
+inline TComplex H3cc(Double_t CosTheta){ return TComplex::Conjugate(H3(CosTheta)); }
+inline TComplex H4cc(Double_t CosTheta){ return TComplex::Conjugate(H4(CosTheta)); }
+
+//-----------------------------------------------------------------------------
+
+//Wrapper for explicit helicity amplitudes H_i*
+inline TComplex Hcc(Int_t i, Double_t CosTheta)
+{
+  switch(i)
+  {
+    case 1: return H1cc(CosTheta);
+    case 2: return H2cc(CosTheta);
+    case 3: return H3cc(CosTheta);
+    case 4: return H4cc(CosTheta);
+    default: return TComplex(0.0, 0.0);
+  }
+}
+
+//-----------------------------------------------------------------------------
+
 inline Double_t sigma0(Double_t Theta, Double_t Omega)
 {
   Double_t SinTheta = Sin(Theta*DegToRad());

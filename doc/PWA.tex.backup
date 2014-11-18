@@ -300,10 +300,27 @@ Q_3 = Q_1 + Q_2
 \frac{|F_i(x_j)^\mathrm{fit} - F_i(x_j)^\mathrm{sol}|^2}{f_i^2}
 \end{displaymath}
 
+\subsection{Penalty mode \textit{HELI}}
+
+\begin{displaymath}
+ Q_5 =\sum_{i=1}^4
+\sum_{j=1}^{N_\mathrm{pts}}
+\frac{|H_i(x_j)^\mathrm{fit} - H_i(x_j)^\mathrm{sol}|^2}{h_i^2}
+\end{displaymath}
+with
+\begin{displaymath}\label{frm_Heli}
+\begin{array}{l}
+H_1 = -\sqrt{\dfrac{1}{2}}\sin\theta\cos\frac{\theta}{2} \left(F_3 + F_4\right) \\
+H_2 = \sqrt{2}\cos\frac{\theta}{2}\left[ (F_2 - F_1) \right] \\
+H_3 = \phantom{-}\sqrt{\dfrac{1}{2}}\sin\theta\sin\frac{\theta}{2} \left(F_3 - F_4\right) \\
+H_4 = \\
+\end{array}
+\end{displaymath}
+
 \section{Setting up a work directory for \PWA}
 
 It is recommended to set up a special work directory for your \PWA SE fits. This directory should contain
-all necessary experimental data, model inputs used for the fits, and a configuration file for \PWA.
+all necessary experimental data, model inputs used for the fits, and a configuration file for \tt PWA\rm.
 A typical work directory consists of the follwing entries:
 \begin{itemize}
 \item A directory \tt model\rm\ containing model values for electromagnetic multipoles, which are used
@@ -333,7 +350,8 @@ which normally can be found under \tt build/bin/PWA\rm\ or to include \PWA  in y
 \end{itemize}
 During the fits \PWA will create additional \tt plots.\textit{n}\rm\ directories holding the fit results.
 The number of \tt plots.\textit{n}\rm\ directories depends on the amount of solutions you want \PWA to store.
-
+An example of such a work directory for $p \pi^0$ data and fits based on MAID can be found in
+\tt work/ppi0/MAID\rm\ in the main directory of the \PWA package.
 
 \section{Configuration options}\label{sc_config}
 
@@ -420,10 +438,11 @@ will reduce the number of fit parameters by one and only fit the magnitude for t
 Selects a penalty mode for use during the minimisation process. Possible values for $\enn$ are
 \vspace{-0.5em}\begin{enumerate}
 \item[0\:\:] No penalty contribution
-\item[1\:\:] \textit{MLP1} penalty mode
-\item[2\:\:] \textit{MLP2} penalty mode
-\item[3\:\:] \textit{MLP3} penalty mode
+\item[1\:\:] \textit{MLP1}\hspace{0.16em} penalty mode
+\item[2\:\:] \textit{MLP2}\hspace{0.16em} penalty mode
+\item[3\:\:] \textit{MLP3}\hspace{0.17em} penalty mode
 \item[4\:\:] \textit{CGLN} penalty mode
+\item[5\:\:] \textit{HELI}\hspace{0.43em} penalty mode
 \end{enumerate}
 
 \item
@@ -436,9 +455,9 @@ Sets the weight factor $q_2$ to the given value. This value will be used for for
 Typical values are around $q_2 = 0.5$.
 
 \item
-\tt WEIGHT\_F\textit{n} \textit{value}\rm\\
-Sets the individual weight factors for CGLN amplitude $\mbox{\tt\textit{n}\rm} = 1...4$ to the given value. These values will be used
-in CGLN penalty mode only. Typical values are around $f_n = 1.0$.
+\tt WEIGHT\_A\textit{n} \textit{value}\rm\\
+Sets the individual weight factors for CGLN or helicity amplitude $\mbox{\tt\textit{n}\rm} = 1...4$ to the given value. These values will be used
+in CGLN or HELI penalty mode only. Typical values are around $f_n = 1.0$.
 
 \item
 \tt PRINT\_PENALTY 0/1\rm\\
@@ -782,7 +801,7 @@ and
 respectively.
 All filenames are case-sensitive.
 
-Currently, for $p \pi^0$ the following models are provided:\\% \vspace{-0.25em}\\
+Currently, for $p \pi^0$ the following models are provided: \vspace{-0.25em}\\
 \begin{tabular}{ll}
 \hspace{-0.5em}\tt model/ppi0/BG2011-01\rm & Bonn-Gatchina PWA (solution 2011-01) \cite{Model_BnGa} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/BG2011-02\rm & Bonn-Gatchina PWA (solution 2011-02) \cite{Model_BnGa} \vspace{-0.5em}\\
@@ -793,7 +812,7 @@ Currently, for $p \pi^0$ the following models are provided:\\% \vspace{-0.25em}\
 \hspace{-0.5em}\tt model/ppi0/ThrChPT4\rm & $\chi$PT (4$^\mathrm{th}$ order) \cite{Model_ChPT4} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/ThrHBChPT4\rm & Heavy-baryon $\chi$PT (4$^\mathrm{th}$ order) \cite{Model_HBChPT4} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/ThrHDT97\rm & Hanstein, Drechsel, Tiator solution \cite{Model_HDT97} \vspace{-0.5em}\\
-\hspace{-0.5em}\tt model/ppi0/ThrLG\rm & Lutz, Gasparyan calculation \cite{Model_LG}%\vspace{-0.1em}\\
+\hspace{-0.5em}\tt model/ppi0/ThrLG\rm & Lutz, Gasparyan calculation \cite{Model_LG} \vspace{-0.1em}\\
 \end{tabular}
 
 Any models prefixed with \tt Thr\rm\ are only supposed to be used within the $\pi$ threshold region up to

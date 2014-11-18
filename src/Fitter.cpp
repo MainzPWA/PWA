@@ -145,6 +145,8 @@ Double_t Penalty()
     return PenaltyMLP1() + PenaltyMLP2();
    case CGLN:
     return PenaltyCGLN();
+   case HELI:
+    return PenaltyHELI();
    case NONE:
    default:
     return 0.0;
@@ -308,131 +310,24 @@ Double_t PenaltyCGLN()
 
 //-----------------------------------------------------------------------------
 
-Double_t PenaltyCGLN_exp()
+Double_t PenaltyHELI()
 {
   Int_t eM = GetEnergyBin_maid();
-  Int_t eX[EBINS];
-  Int_t nX;
+  Int_t Nsteps = NPts();
+  Double_t CosTheta, DCosTheta;
   Double_t SumSq = 0.0;
 
-  if(ONLY_CROSS_S)
+  DCosTheta = 2.0/Nsteps; //Calculate costheta step size
+  for(Int_t n=0; n<Nsteps; n++)
   {
-    nX = GetEnergyBins_sg0(eX);
-    for(Int_t i=0; i<nX; i++)
-      for(Int_t t=0; t<sg0_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sg0_th[eX[i]][t]*DegToRad()), eM);
-
-    nX = GetEnergyBins_sgS(eX);
-    for(Int_t i=0; i<nX; i++)
-      for(Int_t t=0; t<sgS_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgS_th[eX[i]][t]*DegToRad()), eM);
-    nX = GetEnergyBins_S(eX);
-    for(Int_t i=0; i<nX; i++)
-      for(Int_t t=0; t<S_pts[eX[i]];   t++) SumSq+=EvaluateCGLN(Cos(  S_th[eX[i]][t]*DegToRad()), eM);
-
-    return SumSq;
+    CosTheta = DCosTheta*n + DCosTheta/2.0 - 1.0; //Calculate central position of current costheta step
+    SumSq+=EvaluateHELI(CosTheta, eM);
   }
-
-  if(ONLY_CROSS_F)
-  {
-    nX = GetEnergyBins_sg0(eX);
-    for(Int_t i=0; i<nX; i++)
-      for(Int_t t=0; t<sg0_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sg0_th[eX[i]][t]*DegToRad()), eM);
-
-    nX = GetEnergyBins_sgF(eX);
-    for(Int_t i=0; i<nX; i++)
-      for(Int_t t=0; t<sgF_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgF_th[eX[i]][t]*DegToRad()), eM);
-    nX = GetEnergyBins_F(eX);
-    for(Int_t i=0; i<nX; i++)
-      for(Int_t t=0; t<F_pts[eX[i]];   t++) SumSq+=EvaluateCGLN(Cos(  F_th[eX[i]][t]*DegToRad()), eM);
-
-    return SumSq;
-  }
-
-  //Sum up F1...F4 amplitude deviations at all theta points from different observable data
-  nX = GetEnergyBins_sg0(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sg0_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sg0_th[eX[i]][t]*DegToRad()),  eM);
-
-  nX = GetEnergyBins_sgS(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgS_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgS_th[eX[i]][t]*DegToRad()),  eM);
-  nX = GetEnergyBins_S(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  S_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  S_th[eX[i]][t]*DegToRad()),  eM);
-
-  nX = GetEnergyBins_sgT(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgT_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgT_th[eX[i]][t]*DegToRad()),  eM);
-  nX = GetEnergyBins_T(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  T_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  T_th[eX[i]][t]*DegToRad()),  eM);
-
-  nX = GetEnergyBins_sgP(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgP_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgP_th[eX[i]][t]*DegToRad()),  eM);
-  nX = GetEnergyBins_P(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  P_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  P_th[eX[i]][t]*DegToRad()),  eM);
-
-  nX = GetEnergyBins_sgE(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgE_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgE_th[eX[i]][t]*DegToRad()),  eM);
-  nX = GetEnergyBins_E(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  E_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  E_th[eX[i]][t]*DegToRad()),  eM);
-
-  nX = GetEnergyBins_sgF(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgF_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgF_th[eX[i]][t]*DegToRad()),  eM);
-  nX = GetEnergyBins_F(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  F_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  F_th[eX[i]][t]*DegToRad()),  eM);
-
-  nX = GetEnergyBins_sgG(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgS_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgG_th[eX[i]][t]*DegToRad()),  eM);
-  nX = GetEnergyBins_G();
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  S_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  G_th[eX[i]][t]*DegToRad()),  eM);
-
-  nX = GetEnergyBins_sgH(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgH_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(sgH_th[eX[i]][t]*DegToRad()),  eM);
-  nX = GetEnergyBins_H(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  H_pts[eX[i]];  t++) SumSq+=EvaluateCGLN(Cos(  H_th[eX[i]][t]*DegToRad()),  eM);
-
-  nX = GetEnergyBins_sgCx(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgCx_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgCx_th[eX[i]][t]*DegToRad()), eM);
-  nX = GetEnergyBins_Cx(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  Cx_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Cx_th[eX[i]][t]*DegToRad()), eM);
-
-  nX = GetEnergyBins_sgCz(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgCz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgCz_th[eX[i]][t]*DegToRad()), eM);
-  nX = GetEnergyBins_Cz(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  Cz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Cz_th[eX[i]][t]*DegToRad()), eM);
-
-  nX = GetEnergyBins_sgOx();
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgOx_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgOx_th[eX[i]][t]*DegToRad()), eM);
-  nX = GetEnergyBins_Ox();
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  Ox_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Ox_th[eX[i]][t]*DegToRad()), eM);
-
-  nX = GetEnergyBins_sgOz(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<sgOz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(sgOz_th[eX[i]][t]*DegToRad()), eM);
-  nX = GetEnergyBins_Oz(eX);
-  for(Int_t i=0; i<nX; i++)
-    for(Int_t t=0; t<  Oz_pts[eX[i]]; t++) SumSq+=EvaluateCGLN(Cos(  Oz_th[eX[i]][t]*DegToRad()), eM);
 
   //Without additional weighting, the penalty should be comparable to chi^2.
-  //Here it is summed up over all theta points from all observables
-  //(i.e. NPts data points are used) and EvaluateCGLN() normalises to the sum
-  //of F1...F4 magnitudes. Hence, no further normalisation is required.
+  //Here it is summed up to the number of theta points from all observables
+  //(i.e. NPts costheta positions are used) and EvaluateHELI() normalises to
+  //the sum of H1...H4 magnitudes. Hence, no further normalisation is required.
   return SumSq;
 }
 
@@ -601,7 +496,7 @@ Bool_t SingleFit()
   //Set fitting start parameters in Minuit
   SetParameters();
 
-  //Fix s,p waves ore phases during the fitting process
+  //Fix s,p waves or phases during the fitting process
   FixSPPhases();
   FixSPWaves();
   //Fix d,f,... waves or phases during the fitting process when requested (fit contains not enough data to constrain all waves simultaneously)

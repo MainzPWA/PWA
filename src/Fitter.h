@@ -74,7 +74,7 @@ Double_t Penalty();
 Double_t PenaltyMLP1();
 Double_t PenaltyMLP2();
 Double_t PenaltyCGLN();
-Double_t PenaltyCGLN_exp();
+Double_t PenaltyHELI();
 Double_t VariateRel();
 Double_t VariateAbs();
 Double_t GetErrors(Double_t* Par, Double_t* Err);
@@ -126,6 +126,29 @@ inline Double_t EvaluateCGLN(Double_t CosTheta, Int_t eM)
     SumSq+=(F_data - F_maid).Rho2()/(WEIGHT[i]*WEIGHT[i]);
     //Sum up squared model amplitude magnitudes (will be used as normalisation factor)
     MagSq+=F_maid.Rho2();
+  }
+  return SumSq/MagSq;
+}
+
+//-----------------------------------------------------------------------------
+
+inline Double_t EvaluateHELI(Double_t CosTheta, Int_t eM)
+{
+  Double_t SumSq = 0.0;
+  Double_t MagSq = 0.0;
+  TComplex H_data;
+  TComplex H_maid;
+
+  //Sum up H1...H4 amplitudes
+  for(Int_t i=1; i<5; i++)
+  {
+    //Get amplitudes from current fit parameters and model values
+    H_data = H(i, CosTheta);
+    H_maid = maid_H(i, CosTheta, eM);
+    //Sum up all squared amplitude deviations with adjustable weight factor
+    SumSq+=(H_data - H_maid).Rho2()/(WEIGHT[i]*WEIGHT[i]);
+    //Sum up squared model amplitude magnitudes (will be used as normalisation factor)
+    MagSq+=H_maid.Rho2();
   }
   return SumSq/MagSq;
 }
