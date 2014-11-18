@@ -1,0 +1,1001 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{afterpage}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage[latin1]{inputenc}
+%\usepackage{times}
+%\usepackage{mathptmx}
+%\usepackage{t1enc}
+%\usepackage{german}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{mathrsfs}
+%\usepackage{oldgerm}
+\usepackage{pifont}
+\usepackage{psfrag}
+\usepackage{rotating}
+%\usepackage{showkeys}
+\usepackage[german]{varioref}
+\usepackage{wrapfig}
+\usepackage{wasysym}
+%\usepackage{txfonts}
+\usepackage{ulem}
+\usepackage[T1]{fontenc} 
+%\usepackage[helvet]{sfmath}
+%\usepackage{helvet}
+\usepackage{eurosym}
+\usepackage{geometry}
+\geometry{left=20mm,right=20mm, top=2cm, bottom=2cm} 
+\parindent=0cm
+
+\def\PWA{\ttfamily PWA\rmfamily\ }
+\def\d{\mathrm{d}}
+\def\cc{^*}
+\def\Re{\mathrm{Re}}
+\def\Im{\mathrm{Im}}
+\def\enn{\mbox{\ttfamily\textit{n}\rmfamily}}
+\def\bl{\phantom{0}}
+\def\tt{\ttfamily}
+\def\rm{\rmfamily}
+\renewcommand{\arraystretch}{1.5}
+
+% Title Page
+\title{Using the Mainz Multipole Fitter \PWA}
+\author{Sven Schumann}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+
+\section{Introduction}
+
+\PWA is a single energy (SE) multipole fitting tool, used to determine electromagnetic multipoles for pseudoscalar
+meson photoproduction ($\pi$, $\eta$, $K$, ...) from experimental cross sections (polarised and unpolarised)
+and/or asymmetry observables. Multipoles are extracted using a standard $\chi^2$ minimisation scheme with the
+possibility to add additional constraints imposed by existing partial wave analyses and models for meson photoproduction
+(MAID, SAID, BnGa, ...). These constraints are implemented using so-called penalty terms, giving an additional
+contribution in the minimisation process.
+
+\section{$\chi^2$ minimisation and multipole extraction}
+
+\PWA determines electromagnetic multipoles as fit parameters in a $\chi^2$ minimisation process with respect to
+experimental photoproduction results in form of the standard photoproduction observables, which are typically
+given in four groups
+\begin{displaymath}
+\begin{array}{ll}
+ \mbox{Group $S$:} &\frac{\d\sigma}{\d\Omega} = \sigma_0, \Sigma, T, P\\
+ \mbox{Group $BT$:}& E, F, G, H\\
+ \mbox{Group $BR$:}& C_{x^\prime}, C_{z^\prime}, O_{x^\prime}, O_{z^\prime}\\
+ \mbox{Group $TR$:}& T_{x^\prime}, T_{z^\prime}, L_{x^\prime}, L_{z^\prime}
+\end{array}
+\end{displaymath}
+Right now, \PWA only supports observable data for groups $S$, $BT$, and $BR$. These observables can be expressed
+in form of the four CGLN amplitudes $F_i$ according to
+\begin{displaymath}\label{frm_Obs}
+\begin{array}{lll}
+\sigma_0 & = & \Re \left\lbrace |F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2  + \frac{1}{2}\sin^2\theta\left[ |F_3|^2 + |F_4|^2 + 2 F_2\cc  F_3    + 2 F_1\cc  F4 + 2\cos\theta F_3\cc F_4\right] \right\rbrace \cdot \rho\\
+\sigma_0 \Sigma& = & - \frac{1}{2}\sin^2\theta\:\Re\left\lbrace|F_3|^2 + |F_4|^2 
+                                               + 2\left[F_2\cc F_3 + F_1\cc F_4 
+                                               + \cos\theta F_3\cc F_4\right]  
+                                               \right\rbrace \cdot \rho\\
+\sigma_0 T     & = & \sin\theta\:\Im \left\lbrace F_1\cc F_3 - F_2\cc F_4 
+                                               + \cos\theta\left(F_1\cc F_4 - F_2\cc F_3\right)
+                                               - \sin^2\theta F_3\cc F_4
+                                               \right\rbrace \cdot \rho\\
+\sigma_0 P     & = & \sin\theta\: \Im\left\lbrace F_2\cc F_4 - 2 F_1\cc F_2 - F_1 F_3
+                                               + \cos\theta\left(F_2\cc F_3 - F_1\cc F_4\right) 
+                                               + \sin^2\theta F_3\cc F_4
+                                               \right\rbrace \cdot \rho\\
+\sigma_0 E     & = & \Re\left\lbrace|F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2
+                                               +\sin^2\theta\left(F_2\cc F_3 + F_1\cc F_4\right)
+                                               \right\rbrace \cdot \rho\\
+\sigma_0 F     & = & \sin\theta \:\Re\left\lbrace F_1\cc F_3 - F_2\cc F_4 
+                                               + \cos\theta\left(F_1\cc F_4 + F_2\cc F_3\right)
+                                                 \right\rbrace \cdot \rho\\
+\sigma_0 G     & = & \sin^2\theta \:\Im\left\lbrace F_2\cc F_3 + F_1\cc F_4\:
+                                                \right\rbrace \cdot \rho\\
+\sigma_0 H\,     & = & \sin\theta \:\Im \left\lbrace 2 F_1\cc F_2 + F_1\cc F_3 
+                                               - F_2\cc F_4 -\cos\theta\left( F_2\cc F_3 - F_1\cc F_4 \right)
+                                                 \right\rbrace \cdot \rho\\
+\sigma_0 O_{x^\prime} & = & -\sin\theta \:\Im \left\lbrace F_1\cc F_4 - F_2\cc F_3
+                                                      + \cos\theta\left(F_1\cc F_3 - F_2\cc F_4\right)
+                                                       \right\rbrace \cdot \rho\\
+\sigma_0 O_{z^\prime} & = & -\sin^2\theta \:\Im \left\lbrace F_1\cc F_3 + F_2\cc F_4\:
+                                                       \right\rbrace \cdot \rho\\
+\sigma_0 C_{x^\prime} & = & \sin\theta \:\Re \left\lbrace |F_1|^2 - |F_2|^2 
+                                                      + F_1\cc F_3 - F_2\cc F_3 
+                                                      +\cos\theta\left(F_1\cc F_3 - F_2\cc F_4\right)
+                                                       \right\rbrace \cdot \rho\\
+\sigma_0 C_{z^\prime} & = & \Re \left\lbrace 2 F_1\cc F_2 
+                                                      +\sin^2\theta\left(F_1\cc F_3 + F_2\cc F_4\right)
+                                                      -\cos\theta\left(|F_1|^2+|F_2|^2\right)
+                                                       \right\rbrace \cdot \rho\\
+\end{array}
+\end{displaymath}
+with a phase space factor $\rho = \frac{q}{k}$ given by pion and photon momenta $q$ and $k$. The CGLN amplitudes
+depend on the electromagnetic multipoles $E_{L\pm}$, $M_{L\pm}$ for multipole orders $L$ up to $L_\mathrm{max}$
+\begin{displaymath}\label{frm_CGLN}
+\begin{array}{l}
+F_1 = \sum\limits_{L\geq 0}^{L_\mathrm{max}} \left\lbrace (L\cdot M_{L+} + E_{L+})P^{\prime}_{L+1} 
++ \left[(L+1)\cdot M_{L-} + E_{L-}\phantom{{}^{\prime}_{L}}\right]P^{\prime}_{L-1} \right\rbrace\\
+F_2 = \sum\limits_{L\geq 1}^{L_\mathrm{max}} \left[(L+1)\cdot M_{L+} + L\cdot M_{L-} \phantom{{}^{\prime}_{L}}  \right]P^{\prime}_{L}\\
+F_3 = \sum\limits_{L\geq 1}^{L_\mathrm{max}} \left[(E_{L+} - M_{L+})P^{\prime\prime}_{L+1}+ (E_{L-} + M_{L-})P^{\prime\prime}_{L-1} \right]\\
+F_4 = \sum\limits_{L\geq 2}^{L_\mathrm{max}}\left( M_{L+} - E_{L+} - M_{L-} - E_{L-}\right)P^{\prime\prime}_{L}
+\end{array}
+\end{displaymath}
+and derivatives of the Legendre polynoms $P_L$ describing the angular dependencies. Using these relations between observables
+and electromagnetic multipoles, it is possible to create a $\chi^2$ function having multipole as fit parameters and physical
+observables as experimental input
+\begin{displaymath}
+\begin{array}{lcl}
+\chi^2
+&=& \sum\limits_i \left(
+\frac
+{\sigma_0^\mathrm{exp}(\theta_i) - \sigma_0^\mathrm{fit}(\theta_i)}
+{\Delta \sigma_0^\mathrm{exp}(\theta_i)}
+\right)^2\\
+&+& \sum\limits_i \left(
+\frac
+{\Sigma^\mathrm{exp}(\theta_i) - \Sigma^\mathrm{fit}(\theta_i)}
+{\Delta \Sigma^\mathrm{exp}(\theta_i)}
+\right)^2
++ \sum\limits_i \left(
+\frac
+{\sigma_\Sigma^\mathrm{exp}(\theta_i) - \sigma_\Sigma^\mathrm{fit}(\theta_i)}
+{\Delta \sigma_\Sigma^\mathrm{exp}(\theta_i)}
+\right)^2\\
+&+& \sum\limits_i \left(
+\frac
+{T^\mathrm{exp}(\theta_i) - T^\mathrm{fit}(\theta_i)}
+{\Delta T^\mathrm{exp}(\theta_i)}
+\right)^2
++ \sum\limits_i \left(
+\frac
+{\sigma_T^\mathrm{exp}(\theta_i) - \sigma_T^\mathrm{fit}(\theta_i)}
+{\Delta \sigma_T^\mathrm{exp}(\theta_i)}
+\right)^2\\
+&+& \sum\limits_i \left(
+\frac
+{P^\mathrm{exp}(\theta_i) - P^\mathrm{fit}(\theta_i)}
+{\Delta P^\mathrm{exp}(\theta_i)}
+\right)^2
++ \sum\limits_i \left(
+\frac
+{\sigma_P^\mathrm{exp}(\theta_i) - \sigma_P^\mathrm{fit}(\theta_i)}
+{\Delta \sigma_P^\mathrm{exp}(\theta_i)}
+\right)^2\\
+&+& \sum\limits_i \left(
+\frac
+{E^\mathrm{exp}(\theta_i) - E^\mathrm{fit}(\theta_i)}
+{\Delta E^\mathrm{exp}(\theta_i)}
+\right)^2
++ \sum\limits_i \left(
+\frac
+{\sigma_E^\mathrm{exp}(\theta_i) - \sigma_E^\mathrm{fit}(\theta_i)}
+{\Delta \sigma_E^\mathrm{exp}(\theta_i)}
+\right)^2\\
+&+& \sum\limits_i \left(
+\frac
+{F^\mathrm{exp}(\theta_i) - F^\mathrm{fit}(\theta_i)}
+{\Delta F^\mathrm{exp}(\theta_i)}
+\right)^2
++ \sum\limits_i \left(
+\frac
+{\sigma_F^\mathrm{exp}(\theta_i) - \sigma_F^\mathrm{fit}(\theta_i)}
+{\Delta \sigma_F^\mathrm{exp}(\theta_i)}
+\right)^2\\
+&+& \sum\limits_i \left(
+\frac
+{G^\mathrm{exp}(\theta_i) - G^\mathrm{fit}(\theta_i)}
+{\Delta G^\mathrm{exp}(\theta_i)}
+\right)^2
++ \sum\limits_i \left(
+\frac
+{\sigma_G^\mathrm{exp}(\theta_i) - \sigma_G^\mathrm{fit}(\theta_i)}
+{\Delta \sigma_G^\mathrm{exp}(\theta_i)}
+\right)^2\\
+&+& \sum\limits_i \left(
+\frac
+{H^\mathrm{exp}(\theta_i) - H^\mathrm{fit}(\theta_i)}
+{\Delta H^\mathrm{exp}(\theta_i)}
+\right)^2
++ \sum\limits_i \left(
+\frac
+{\sigma_H^\mathrm{exp}(\theta_i) - \sigma_H^\mathrm{fit}(\theta_i)}
+{\Delta \sigma_H^\mathrm{exp}(\theta_i)}
+\right)^2
+\end{array}
+\end{displaymath}
+where $\sigma_X^\mathrm{exp}(\theta_i)$, $X^\mathrm{exp}(\theta_i)$ describe experimental cross sections and asymmetries
+at their polar angle positions $\theta_i$, while 
+$\sigma_X^\mathrm{fit}(\theta_i)$, $X^\mathrm{fit}(\theta_i)$ are cross sections and asymmetries as calculated from
+multipole parameters $E_{L\pm}$, $M_{L\pm}$.
+Minimisation of the above $\chi^2$ function will therefore adjust electromagnetic multipole values n order for the best describtion
+of available data.
+\PWA will use asymmetries $X$ as well as polarised cross sections $\sigma_x = \sigma_0\cdot X$ as experimental input,
+so there is no need to transform one type of experimental information to another beforehand.
+
+\section{Penalty terms}
+
+\subsection{Penalty mode \textit{MLP1}}
+\begin{displaymath}
+\begin{array}{lcl}
+ Q_1 &=& \dfrac{q_1}{|\mathcal{M}^\mathrm{sol}|^2}\cdot \dfrac{N_\mathrm{pts}}{N_\mathrm{par}} \cdot \left[
+\sum\limits_L^{L_\mathrm{max}}\left(\Re E_{\ell-}^\mathrm{fit} - \Re E_{\ell-}^\mathrm{sol}\right)^2
++
+\sum\limits_L^{L_\mathrm{max}}\left(\Im E_{\ell-}^\mathrm{fit} - \Im E_{\ell-}^\mathrm{sol}\right)^2\right.\\
+&&\hspace{6.73em}+
+\sum\limits_L^{L_\mathrm{max}}\left(\Re E_{\ell+}^\mathrm{fit} - \Re E_{\ell+}^\mathrm{sol}\right)^2
++
+\sum\limits_L^{L_\mathrm{max}}\left(\Im E_{\ell+}^\mathrm{fit} - \Im E_{\ell+}^\mathrm{sol}\right)^2\\
+&&\hspace{6.73em}+
+\sum\limits_L^{L_\mathrm{max}}\left(\Re M_{\ell-}^\mathrm{fit} - \Re M_{\ell-}^\mathrm{sol}\right)^2
++
+\sum\limits_L^{L_\mathrm{max}}\left(\Im M_{\ell-}^\mathrm{fit} - \Im M_{\ell-}^\mathrm{sol}\right)^2\\
+&&\hspace{6.73em}+\left.
+\sum\limits_L^{L_\mathrm{max}}\left(\Re M_{\ell+}^\mathrm{fit} - \Re M_{\ell+}^\mathrm{sol}\right)^2
++
+\sum\limits_L^{L_\mathrm{max}}\left(\Im M_{\ell+}^\mathrm{fit} - \Im M_{\ell+}^\mathrm{sol}\right)^2
+\right]
+\end{array}
+\end{displaymath}
+
+\subsection{Penalty mode \textit{MLP2}}
+
+\begin{displaymath}
+\begin{array}{lcl}
+ Q_2 &=& q_2\cdot \dfrac{N_\mathrm{pts}}{N_\mathrm{par}} \cdot \left[
+\sum\limits_L^{L_\mathrm{max}}
+\frac{\left(\Re E_{\ell-}^\mathrm{fit} - \Re E_{\ell-}^\mathrm{sol}\right)^2}
+{\left(\Re E_{\ell-}^\mathrm{sol}\right)^2 + \varepsilon^2}
++
+\sum\limits_L^{L_\mathrm{max}}
+\frac{\left(\Im E_{\ell-}^\mathrm{fit} - \Im E_{\ell-}^\mathrm{sol}\right)^2}
+{\left(\Im E_{\ell-}^\mathrm{sol}\right)^2 + \varepsilon^2}\right.\\
+&&\hspace{4.19em}+
+\sum\limits_L^{L_\mathrm{max}}
+\frac{\left(\Re E_{\ell+}^\mathrm{fit} - \Re E_{\ell+}^\mathrm{sol}\right)^2}
+{\left(\Re E_{\ell+}^\mathrm{sol}\right)^2 + \varepsilon^2}
++
+\sum\limits_L^{L_\mathrm{max}}
+\frac{\left(\Im E_{\ell+}^\mathrm{fit} - \Im E_{\ell+}^\mathrm{sol}\right)^2}
+{\left(\Im E_{\ell+}^\mathrm{sol}\right)^2 + \varepsilon^2}\\
+&&\hspace{4.19em}+
+\sum\limits_L^{L_\mathrm{max}}
+\frac{\left(\Re M_{\ell-}^\mathrm{fit} - \Re M_{\ell-}^\mathrm{sol}\right)^2}
+{\left(\Re M_{\ell-}^\mathrm{sol}\right)^2 + \varepsilon^2}
++
+\sum\limits_L^{L_\mathrm{max}}
+\frac{\left(\Im M_{\ell-}^\mathrm{fit} - \Im E_{\ell-}^\mathrm{sol}\right)^2}
+{\left(\Im M_{\ell-}^\mathrm{sol}\right)^2 + \varepsilon^2}\\
+&&\hspace{4.19em}+\left.
+\sum\limits_L^{L_\mathrm{max}}
+\frac{\left(\Re M_{\ell+}^\mathrm{fit} - \Re M_{\ell+}^\mathrm{sol}\right)^2}
+{\left(\Re M_{\ell+}^\mathrm{sol}\right)^2 + \varepsilon^2}
++
+\sum\limits_L^{L_\mathrm{max}}
+\frac{\left(\Im M_{\ell+}^\mathrm{fit} - \Im E_{\ell+}^\mathrm{sol}\right)^2}
+{\left(\Im M_{\ell+}^\mathrm{sol}\right)^2 + \varepsilon^2}
+\right]
+\end{array}
+\end{displaymath}
+
+\subsection{Penalty mode \textit{MLP3}}
+\begin{displaymath}
+Q_3 = Q_1 + Q_2
+\end{displaymath}
+
+
+\subsection{Penalty mode \textit{CGLN}}
+
+\begin{displaymath}
+ Q_4 =\sum_{i=1}^4
+\sum_{j=1}^{N_\mathrm{pts}}
+\frac{|F_i(x_j)^\mathrm{fit} - F_i(x_j)^\mathrm{sol}|^2}{f_i^2}
+\end{displaymath}
+
+\section{Setting up a work directory for \PWA}
+
+It is recommended to set up a special work directory for your \PWA SE fits. This directory should contain
+all necessary experimental data, model inputs used for the fits, and a configuration file for \PWA.
+A typical work directory consists of the follwing entries:
+\begin{itemize}
+\item A directory \tt model\rm\ containing model values for electromagnetic multipoles, which are used
+as start parameters and for penalty calculations during the fitting process.
+It is recommended to have a \tt model\rm\ directory as a symbolic link to one of the models that \PWA provides within 
+its package, e.g. use the command\\
+\tt ln -s /home/\textit{username}/PWA/model/ppi0/MAID model\rm\\
+to use MAID calculations for your $p \pi^0$ SE fits. 
+As the model path has to be given in the \PWA configuration file, it is not required to have a dedicated \tt model\rm\ directory, but
+not having absolute paths in the \PWA configuration file can simplify things.
+
+\item A directory \tt data\rm\ containing experimental datasets for observables you want to use in your fit.
+It is recommended to have a \tt data\rm\ directory as a symbolic link to the datasets that \PWA provides within 
+its package, e.g. use the command\\
+\tt ln -s /home/\textit{username}/PWA/data/ppi0 data\rm\\
+This will make various $p\pi^0$ datasets accessible to your work directory. As filenames for all datasets you want to use for fits
+have to be given in the \PWA configuration file, it is not required to have a dedicated \tt data\rm\ directory, but
+not having absolute paths in the \PWA configuration file can simplify things.
+
+\item A \tt PWA.cfg\rm\ file, holding various configuration options (see section \ref{sc_config}).
+\PWA by default tries to read its configuration from \tt PWA.cfg\rm\ in the current directory, but a different filename
+can be passed as command-line parameter, e.g.\\
+\PWA \tt /home/\textit{username}/cfg/fit.cfg\rm
+
+\item The \PWA executable. Here it is recommended to either create a (symbolic) link to the actual \PWA binary
+which normally can be found under \tt build/bin/PWA\rm\ or to include \PWA  in your search path.
+\end{itemize}
+During the fits \PWA will create additional \tt plots.\textit{n}\rm\ directories holding the fit results.
+The number of \tt plots.\textit{n}\rm\ directories depends on the amount of solutions you want \PWA to store.
+An example of such a work directory for $p \pi^0$ data and fits based on MAID can be found in
+\tt work/ppi0/MAID\rm\ in the main directory of the \PWA package.
+
+\section{Configuration options}\label{sc_config}
+
+The following sections describe the various configuration options for fits with \PWA.
+Options are generally read from the configuration file \tt PWA.cfg\rm\ in your \PWA work directory, if \PWA
+is invoked without additional command-line parameters. However, a different configuration file may be passed as parameter,
+e.g.\\
+\PWA \tt fit.cfg\rm\\
+ All following configuration keywords are case-sensitive, which makes
+\tt OPTION\rm\ different from \tt option\rm, where all keywords have to  be upper case.
+Any non-existing keyword will be ignored, therefore no explicit markup for comments is required.
+
+\subsection{Kinematic parameters}
+
+\begin{itemize}
+\item
+\tt MASS\_MESON \textit{mass}\rm\\
+Sets the mass of the produced final state meson ($\pi^0$, $\pi^\pm$, $\eta$, $\eta^\prime$, $K^\pm$, ...) to the given value
+ (in MeV). This parameter is mandatory for correct calculation of kinematic factors during the fitting process.
+Examples are
+\vspace{-0.5em}\begin{itemize}
+ \item[$\pi^0$\:]          $134.9766$
+ \item[$\pi^+$]            $139.5702$
+ \item[$\eta\phantom{^+}$] $547.8530$
+\end{itemize}
+
+\tt MASS\_INITIAL \textit{mass}\rm\\
+Sets the mass of the inital state baryon ($p$, $n$) to the given value
+ (in MeV). This parameter is mandatory for correct calculation of kinematic factors during the fitting process.
+Examples are
+\vspace{-0.5em}\begin{itemize}
+ \item[$p$\:\:] $938.2720$
+ \item[$n$\:\:] $939.5654$
+\end{itemize}
+
+\tt MASS\_FINAL \textit{mass}\rm\\
+Sets the mass of the produced final state baryon ($p$, $n$, $\Lambda$, $\Sigma$, ...) to the given value
+ (in MeV). This parameter is mandatory for correct calculation of kinematic factors during the fitting process.
+Examples are
+\vspace{-0.5em}\begin{itemize}
+ \item[$p$\:\:] $\phantom{1}938.2720$
+ \item[$n$\:\:] $\phantom{1}939.5654$
+ \item[$\Lambda$\:\:]     $1115.6830$
+\end{itemize}
+\end{itemize}
+
+\subsection{Fitted multipoles}
+
+\begin{itemize}
+\item
+\tt L\_MAX \textit{n}\rm\\
+This sets the maximum multipole order $L_\mathrm{max}$ (which is considered in the calculation of CGLN amplitudes and observables)
+to the given value \tt\textit{n}\rm.
+Note that this does \textbf{not} set the maximum multipole order which is actually fitted, as the fittable multipoles
+can be selected indiviually later on. Any multipole with $L \leq L_\mathrm{max}$ that is not fitted will enter
+the calculation of CGLN amplitudes and observables as a parametrisation using the current model values.
+
+\item
+\tt FIX\_E\textit{n}P 0/1\rm\\
+\tt FIX\_M\textit{n}P 0/1\rm\\
+\tt FIX\_E\textit{n}M 0/1\rm\\
+\tt FIX\_M\textit{n}M 0/1\rm\\
+Any $E_{n+}$, $M_{n+}$, $E_{n-}$, $M_{n-}$ multipole can either be fixed (\tt1\rm) to their model values
+or be used as fit parameters (\tt0\rm).
+Fixing a multipole here fixes both magnitude and phase (or real and imaginary values).
+Hence any fittable multipole will add two parameters to the fitting process.
+
+\item
+\tt FIX\_E\textit{n}P\_PHASE 0/1\rm\\
+\tt FIX\_E\textit{n}M\_PHASE 0/1\rm\\
+\tt FIX\_M\textit{n}P\_PHASE 0/1\rm\\
+\tt FIX\_M\textit{n}M\_PHASE 0/1\rm\\
+For any $E_{n+}$, $M_{n+}$, $E_{n-}$, $M_{n-}$ multipole that was previously set as fittable the individual
+phase can be either fixed (\tt1\rm) to its model value or be used as fit parameter (\tt0\rm). Fixing a phase
+will reduce the number of fit parameters by one and only fit the magnitude for the given multipole.
+
+\end{itemize}
+
+\subsection{Penalty options}
+
+\begin{itemize}
+\item
+\tt PENALTY\_MODE \textit{n}\rm\\
+Selects a penalty mode for use during the minimisation process. Possible values for $\enn$ are
+\vspace{-0.5em}\begin{enumerate}
+\item[0\:\:] No penalty contribution
+\item[1\:\:] \textit{MLP1} penalty mode
+\item[2\:\:] \textit{MLP2} penalty mode
+\item[3\:\:] \textit{MLP3} penalty mode
+\item[4\:\:] \textit{CGLN} penalty mode
+\end{enumerate}
+
+\item
+\tt PENALTY\_MLP1 \textit{value}\rm\\
+Sets the weight factor $q_1$ to the given value. This value will be used for for \textit{MLP1} and \textit{MLP3} penalty modes.
+Typical values are around $q_1 = 2.0$.
+\item
+\tt PENALTY\_MLP2 \textit{value}\rm\\
+Sets the weight factor $q_2$ to the given value. This value will be used for for \textit{MLP2} and \textit{MLP3} penalty modes.
+Typical values are around $q_2 = 0.5$.
+
+\item
+\tt WEIGHT\_F\textit{n} \textit{value}\rm\\
+Sets the individual weight factors for CGLN amplitude $\mbox{\tt\textit{n}\rm} = 1...4$ to the given value. These values will be used
+in CGLN penalty mode only. Typical values are around $f_n = 1.0$.
+
+\item
+\tt PRINT\_PENALTY 0/1\rm\\
+When enabled (\tt1\rm) an additional line will be printed out for each fit giving the individual contributions of $\chi^2$ and
+penalty $Q$ for the found solution.
+
+\end{itemize}
+
+\subsection{Error calculation}
+
+\begin{itemize}
+\item
+\tt ERROR\_MODE \textit{n}\rm\\
+Selects a minimisation function for error calculation through MINUIT. Possible options for $\enn$ are
+\vspace{-0.5em}\begin{enumerate}
+\item[1\:\:] Use only $\chi^2$ function for error determination. This is the mathematically most sound approach, as the definition of
+parameter error ranges is based on the variation of $\chi^2 \rightarrow \chi^2 +1$. However, for a
+minimisation with penalty contributions, the minima for $\chi^2$ only and $\chi^2+Q$ are not necessarily
+identical and the behaviour of $\chi^2$ only around the chosen minimum might result in ill-defined parameter errors.
+\item[2\:\:] Use sum of $\chi^2$ and current penalty $Q$ for error determination. This might in general overestimate
+parameter errors but will always produce well-defined results.
+\item[3\:\:] Use an adaptive mode that prefers the $\chi^2$ only calculation but falls back to the 
+sum of $\chi^2$ and current penalty $Q$ if this produces smaller errors. This is the recommended mode.
+\end{enumerate}
+
+\end{itemize}
+
+\subsection{Multiple fit solutions}
+
+\begin{itemize}
+\item
+\tt ITERATIONS \textit{n}\rm\\
+Indiviual SE fits will be repeated $\enn$ times with small variatons in the starting parameters to find possible additional
+minima in the parameter space. When the given number of iterations has been processed the best solution(s), i.e.
+with lowest $\chi^2+Q$, are selected. Computimg time for the fitting process increases linear with the number of iterations.
+For reasonable performance, $\enn$ should not exceed values of $50...100$.
+
+\item
+\tt SOLUTIONS \textit{n}\rm\\
+Up to $\enn$ unique solutions that have been found during the iterations for each SE fit will be stored (with decreasing fit quality).
+The number of maximum solutions to store may not exceed the number of iterations for the fit process.
+
+\item
+\tt VARIATION\_REL \textit{value}\rm\\
+This will define a \textbf{relative} variation of start parameters for each iteration equally distributed
+in a band around its current model value. The relative size of this band is given by $\pm$\tt\textit{value}\rm. A typical value
+is $0.2$ which will result in parameter variations by $\pm20\%$.  Note that relative and absolute variations will be added.
+
+\item
+\tt VARIATION\_ABS \textit{value}\rm\\
+This will define an \textbf{absolute} variation of start parameters for each iteration equally distributed
+in a band around its current model value. The size of this band is given by $\pm$\tt\textit{value}\rm\ in units of $10^{-3}/m_{\pi^+}$.
+This option is useful to define an absolute minimum of the variation band, which will be effective for very small
+multipoles (where a relative variation would have only a small effect). Note that relative and absolute variations will be added.
+\end{itemize}
+
+\subsection{Energy range for fits}
+
+\begin{itemize}
+\item
+\tt MIN\_ENERGY \textit{value}\rm\\
+\tt MAX\_ENERGY \textit{value}\rm\\
+These options define the range of photon beam energies $\omega$ (in MeV) for which fits are performed.
+\end{itemize}
+
+\subsection{Observable rescaling}
+
+\begin{itemize}
+\item
+\tt FIX\_SCALES 1/0\rm\\
+Experimental observables can be fixed to ther actual values (\tt1\rm) or scaled within their given systematic uncertainty ranges (\tt0\rm)
+during the fit process. This will introduce one additional fit parameter (scaling value) for each observable.
+Note that $X$ and $\sigma_X$ are considered here as different observables.
+
+\item
+\tt SCALING \textit{value}\rm\\
+This is an additional weight factor that is applied to the penalty contribution imposed by the scaling factor variation.
+A small \tt\textit{value}\rm\ (e.g. 0.1) will decrease this contribution and therefore
+give the fitter more freedom to rescale experimental values.
+\end{itemize}
+
+\subsection{Configuration of experimental data}
+
+\begin{itemize}
+\item
+\tt SG0\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGS\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGT\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGP\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGE\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGF\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGG\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGH\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGCX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGCZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGOX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGOZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+Defines the experimental datasets for cross sections (unpolarised $\sigma_0$ and polarised $\sigma_X$). The additional
+parameter \tt\textit{weight}\rm\ is applied to any $\chi^2$ contributions from the corresponding dataset. The additional
+parameter \tt\textit{scale}\rm\ defines an overall scaling factor to the corresponding data and errors, i.e.
+a value of $\mbox{\tt\textit{scale}\rm} = 1.05$ will increase the data by 5\%.
+Multiple lines for observables with more than one dataset are possible (with individual values for
+\tt\textit{weight}\rm\ and \tt\textit{scale}\rm).
+
+\item
+\tt S\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt T\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt P\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt E\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt F\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt G\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt H\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt CX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt CZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt OX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt OZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+Defines the experimental datasets for asymmetry observables. The additional
+parameter \tt\textit{weight}\rm\ is applied to any $\chi^2$ contributions from the corresponding dataset. The additional
+parameter \tt\textit{scale}\rm\ defines an overall scaling factor to the corresponding data and errors, i.e.
+a value of $\mbox{\tt\textit{scale}\rm} = 0.95$ will decrease the data by 5\%.
+Multiple lines for observables with more than one dataset are possible (with individual values for
+\tt\textit{weight}\rm\ and \tt\textit{scale}\rm).
+
+\item
+\tt USE\_PRELIMINARY 0/1\rm\\
+Defines whether datasets tagged as `preliminary' in their respective files should be used (\tt1\rm) or not (\tt0\rm).
+\end{itemize}
+
+\subsection{Configuration of model values}
+
+\begin{itemize}
+\item
+\tt MODEL\_PATH \textit{Path}\rm\\
+Defines the directory containing theoretical values for multipoles. The given directory must hold text files
+following the naming scheme \tt E\textit{l}p.txt\rm,
+\tt E\textit{l}m.txt\rm\ 
+for electric multipoles, and
+\tt M\textit{l}p.txt\rm,
+\tt M\textit{l}m.txt\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity 
+$+$ (\tt p\rm) or $-$ (\tt m\rm).
+
+\end{itemize}
+
+
+\subsection{Special options for $\pi^0$ threshold fits}
+
+\begin{itemize}
+\item
+\tt ONLY\_CROSS\_S 1/0\rm\\
+\tt ONLY\_CROSS\_F 1/0\rm\\
+These options restrict the data used for fitting to $\lbrace\sigma_0,\sigma_\Sigma, \Sigma\rbrace$ or
+$\lbrace\sigma_0,\sigma_F, F\rbrace$. Any other observables are ignored.
+These options are mutually exclusive. Also \tt FIX\_E\textit{n}P\_PHASE\rm\ must be set to \tt0\rm\
+for all $s$ and $p$ wave multipoles.
+
+\tt FIX\_RE\_E0P 1/0\rm\\
+The real part of the $E_{0+}$ multipole can either be fixed (\tt1\rm) to its model value or be used as a fit parameter (\tt0\rm).
+In order to use this option, both \tt FIX\_E0P\rm\ and \tt FIX\_E0P\_PHASE\rm\ must be set to \tt0\rm.
+
+\tt FIX\_IM\_E0P\rm\\
+The imaginary part of the $E_{0+}$ multipole can either be fixed (\tt1\rm) or be used as a fit parameter (\tt0\rm). If $\Im E_{0+}$
+is fixed, a parametrisation according to $\Im E_{0+} = \beta \cdot \frac{q_{\pi^+}}{m_{\pi^+}}$ is used.
+Note that \tt FIX\_IM\_E0P\rm\ can only be used in combination with \tt ONLY\_CROSS\_S\rm\
+or \tt ONLY\_CROSS\_F\rm. Also 
+both \tt FIX\_E0P\rm\ and \tt FIX\_E0P\_PHASE\rm\ must be set to \tt0\rm.
+
+\item
+\tt BETA \textit{value}\rm\\
+This option sets the value for $\beta$ used in the parametrisation of $\Im E_{0+}$. Typical values are
+$\beta = 3.43$ (with isospin symmetry) or $\beta = 3.35$ (with isospin breaking).
+
+\item
+\tt D\_WAVES \textit{n}\rm\\
+Selects which contributions for $d$ waves is used (if supported by the current model). Possible options are
+\vspace{-0.5em}\begin{enumerate}
+\item[1\:\:] Full model calculation
+\item[2\:\:] Born terms only
+\item[3\:\:] Born terms and $\rho/\omega$ exchange
+\end{enumerate}
+\vspace{-0.5em}Right now, only MAID and DMT provide these three different $d$ wave contributions.
+
+\item
+\tt SGT\_ENERGIES 1/0\rm\\
+With this option enabled (\tt1\rm) SE fits are performed at energies given by $\sigma_T$ data instead of $\sigma_0$.
+\end{itemize}
+
+\section{Data formats}
+
+The following sectiosn describe the different text data formats used by PWA for experimental observable data and model multipole values. 
+
+\subsection{Experimental observable data}
+
+Experimental data is organised in separate files for each observable (asymmetries $X$ and polarised cross sections $\sigma_X$
+are considered here as different observables) \textbf{and} for each individual measurement. A file for such an individual experiment
+however can contain data for more than one energy.
+Such an entry for an energy bin consists of general information on the current data as well as of the actual observable data
+for different polar angle positions. A typical file looks like the following:\\
+
+\tt
+E =  683.50 MeV, E\_lo =  667.24 MeV, E\_hi =  699.76 MeV\\
+Systematic = 0.0248, Preliminary = 0, CBELSA\_2014\_Hartmann\_PRL113-062001\\
+163.335\bl\bl\bl -0.2596\bl\bl\bl 0.0976\bl\bl\bl 0.0080\\
+151.045\bl\bl\bl -0.3346\bl\bl\bl 0.0543\bl\bl\bl 0.0086\\
+142.373\bl\bl\bl -0.4980\bl\bl\bl 0.0408\bl\bl\bl 0.0129\\
+135.072\bl\bl\bl -0.6306\bl\bl\bl 0.0347\bl\bl\bl 0.0154\\
+128.682\bl\bl\bl -0.6693\bl\bl\bl 0.0316\bl\bl\bl 0.0168\\
+122.820\bl\bl\bl -0.7317\bl\bl\bl 0.0286\bl\bl\bl 0.0170\\
+117.258\bl\bl\bl -0.8295\bl\bl\bl 0.0338\bl\bl\bl 0.0261\\
+112.024\bl\bl\bl -0.7583\bl\bl\bl 0.0291\bl\bl\bl 0.0170\\
+106.978\bl\bl\bl -0.7793\bl\bl\bl 0.0267\bl\bl\bl 0.0180\\
+102.005\bl\bl\bl -0.7629\bl\bl\bl 0.0263\bl\bl\bl 0.0189\\
+\phantom{1}97.181\bl\bl\bl -0.7808\bl\bl\bl 0.0249\bl\bl\bl 0.0179\\
+\phantom{1}92.407\bl\bl\bl -0.7951\bl\bl\bl 0.0247\bl\bl\bl 0.0193\\
+\phantom{1}87.593\bl\bl\bl -0.7840\bl\bl\bl 0.0251\bl\bl\bl 0.0190\\
+\phantom{1}82.819\bl\bl\bl -0.7738\bl\bl\bl 0.0260\bl\bl\bl 0.0179\\
+\phantom{1}77.995\bl\bl\bl -0.7537\bl\bl\bl 0.0269\bl\bl\bl 0.0188\\
+\phantom{1}73.022\bl\bl\bl -0.7071\bl\bl\bl 0.0278\bl\bl\bl 0.0162\\
+\phantom{1}67.976\bl\bl\bl -0.6379\bl\bl\bl 0.0285\bl\bl\bl 0.0140\\
+\phantom{1}62.742\bl\bl\bl -0.4937\bl\bl\bl 0.0408\bl\bl\bl 0.0125\\
+----------------------------------------------------------------------\\
+E =  715.61 MeV, E\_lo =  699.76 MeV, E\_hi =  731.45 MeV\\
+Systematic = 0.0249, Preliminary = 0, CBELSA\_2014\_Hartmann\_PRL113-062001\\
+163.335\bl\bl\bl -0.1684\bl\bl\bl 0.1025\bl\bl\bl 0.0038\\
+151.045\bl\bl\bl -0.1793\bl\bl\bl 0.0599\bl\bl\bl 0.0053\\
+142.373\bl\bl\bl -0.2888\bl\bl\bl 0.0447\bl\bl\bl 0.0078\\
+135.072\bl\bl\bl -0.3406\bl\bl\bl 0.0414\bl\bl\bl 0.0081\\
+128.682\bl\bl\bl -0.5064\bl\bl\bl 0.0369\bl\bl\bl 0.0130\\
+122.820\bl\bl\bl -0.5747\bl\bl\bl 0.0335\bl\bl\bl 0.0136\\
+117.258\bl\bl\bl -0.6330\bl\bl\bl 0.0405\bl\bl\bl 0.0199\\
+112.024\bl\bl\bl -0.6199\bl\bl\bl 0.0360\bl\bl\bl 0.0147\\
+106.978\bl\bl\bl -0.6730\bl\bl\bl 0.0335\bl\bl\bl 0.0148\\
+102.005\bl\bl\bl -0.6214\bl\bl\bl 0.0312\bl\bl\bl 0.0149\\
+\phantom{1}97.181\bl\bl\bl -0.6742\bl\bl\bl 0.0300\bl\bl\bl 0.0156\\
+\phantom{1}92.407\bl\bl\bl -0.6291\bl\bl\bl 0.0289\bl\bl\bl 0.0149\\
+\phantom{1}87.593\bl\bl\bl -0.6920\bl\bl\bl 0.0289\bl\bl\bl 0.0163\\
+\phantom{1}82.819\bl\bl\bl -0.6456\bl\bl\bl 0.0301\bl\bl\bl 0.0152\\
+\phantom{1}77.995\bl\bl\bl -0.5926\bl\bl\bl 0.0305\bl\bl\bl 0.0143\\
+\phantom{1}73.022\bl\bl\bl -0.5031\bl\bl\bl 0.0321\bl\bl\bl 0.0117\\
+\phantom{1}67.976\bl\bl\bl -0.4865\bl\bl\bl 0.0342\bl\bl\bl 0.0113\\
+\phantom{1}62.742\bl\bl\bl -0.3185\bl\bl\bl 0.0396\bl\bl\bl 0.0073\\
+\phantom{1}57.180\bl\bl\bl -0.2622\bl\bl\bl 0.0765\bl\bl\bl 0.0084\\
+----------------------------------------------------------------------\\
+\rm
+
+The first header line carries energy information for the current dataset: The central (\tt E\rm)
+photon beam energy in lab frame and the lower (\tt E\_lo\rm)
+and upper (\tt E\_hi\rm) beam energy bounds of the current bin. Energies must be in MeV and the units
+must be present in the header lines.
+The second line gives a value for the relative systematic uncertainty (\tt Systematic\rm)
+which should be an average number valid for all polar angle positions within this energy bin. This systematic uncertainty
+is used for the observable rescaling option (see \tt FIX\_SCALES\rm\ configuration option). A value of
+\tt Systematic = 0.05\rm\ would correspond to 5\% systematic uncertainty. 
+The \tt Preliminary\rm\ field indicates whether this dataset is preliminary and/or unpublished and may not be used
+for publications yet. Any data with \tt Preliminary = 1\rm\ will be ignored in fits if the configuration
+option \tt USE\_PRELIMINARY\rm\ is not enabled.
+The final entry in the second header line is a comment that can carry references or other identification
+data for the current dataset. This commment may be up to 255 characters long and must not contain any spaces 
+(use `\tt \_\rm'\ instead).
+
+The following lines contain the actual observable data. Each line can hold up to four values which are\\
+\tt\textit{theta angle\bl\bl\bl\bl observable value\bl\bl\bl\bl  statistical error\bl\bl\bl\bl}
+[\textit{systematic error}]\rm\\
+Polar angle positions have to be given in degrees, observable values\footnote{Asymmetry values must be within a range
+of $[-1,+1]$.} for cross sections in $\mu$b/sr. Statistical and systematic
+errors must be absolute values, e.g. in $\mu$b/sr for cross sections.
+Systematic errors for each datapoint are optional and individual systematic uncertainties at each polar angle position
+are not used by \PWA during the fit procedure.
+Each energy bin entry must be terminated by a sparator line like
+`\tt------------------------------\rm' (do not use blank lines to separate entries).
+Such a separator however may not be present at the very first line of an observable file, but must be on the end of the file
+(terminating the last entry).
+Polar angle positions within an energy bin may be in increasing or decreasing order (or no order at all).
+Multiple energy bins within an observable file are possible, also here the ordering in energy is not important.
+Experimental data files reside in the folders \tt data/ppi0\rm, \tt data/npip\rm, 
+\tt data/peta\rm, ... (depending on the reaction $p \pi^0$, $n\pi^+$, $p\eta$, ...) of your \PWA installation.
+You can add or create additional files in any folder, as data files will be referenced through the 
+\tt PWA.cfg\rm\ file for your fit settings.
+
+\subsection{Model multipoles}
+
+\PWA needs model calculations for electromagnetic multipoles for use as start parameters and (if applicable) in penalty calculations.
+These multipole files must reside in a directory \tt model\rm\ in your \PWA work directory, where
+\tt model\rm\ may be a link to one of the existing model directories in the model repository of the \PWA package.
+Typical multipole files look like the following:\\
+
+\tt
+$\bl$\bl W \bl\bl\bl\bl\bl\bl\bl\bl M1-(p pi0)\\
+(MeV)\bl\bl\bl\bl\bl\bl Re\bl\bl\bl\bl\bl\bl\bl\bl\bl\bl Im\\
+1074.0\bl\bl\bl -0.389350\bl\bl\bl-0.038572\\
+1075.0\bl\bl\bl -0.427039\bl\bl\bl-0.042104\\
+1076.0\bl\bl\bl -0.464727\bl\bl\bl-0.045635\\
+1077.0\bl\bl\bl -0.502415\bl\bl\bl-0.049167\\
+1078.0\bl\bl\bl -0.540103\bl\bl\bl-0.052699\\
+1079.0\bl\bl\bl -0.577792\bl\bl\bl-0.056231\\
+1080.0\bl\bl\bl -0.615480\bl\bl\bl-0.059763\\
+1081.0\bl\bl\bl -0.653168\bl\bl\bl-0.063294\\
+1082.0\bl\bl\bl -0.690856\bl\bl\bl-0.066826\\
+1083.0\bl\bl\bl -0.728545\bl\bl\bl-0.070358\\
+1084.0\bl\bl\bl -0.766233\bl\bl\bl-0.073890\\
+\rm
+
+\PWA ignores the first two lines of each multipole file, so these lines can carry column headers or further descriptions.
+Starting with the third line the actual multipole information has to be present in the form\\
+\tt\textit{center-of-mass energy\bl\bl\bl\bl real part\bl\bl\bl\bl imaginary part}\rm\\
+where the center-of-mass energy $W$ is related to the lab photon beam energy $\omega$ according to
+\begin{displaymath}
+ W^2 = 2M\omega + M^2
+\end{displaymath}
+with the mass $M$ of the target nucleon. Real and imaginary parts of the multipole must be given in units of
+$10^{-3}/m_{\pi^+}$. If any model provides multipoles in units of $10^{-3}\:\mathrm{fm}$ a conversion factor of
+\begin{displaymath}
+ \frac{m_{\pi^+}}{\alpha_\mathrm{em}} =\frac{139.5702\:\mathrm{MeV}}{197.3270\:\mathrm{MeV\cdot fm}}
+\approx \sqrt\frac{1}{2}\:\mathrm{fm^{-1}}
+\end{displaymath}
+has to be applied before using these model calculations with \tt PWA\rm.
+Multipole files have to follow the naming scheme
+\tt E\textit{l}p.txt\rm,
+\tt E\textit{l}m.txt\rm\ 
+for electric multipoles, and
+\tt M\textit{l}p.txt\rm,
+\tt M\textit{l}m.txt\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity 
+$+$ (\tt p\rm) or $-$ (\tt m\rm).
+\PWA supports multipoles up to order $L = 9$.
+The energy steps in multipole files can be arbitrary, however a rather fine step size ($\sim 1\:\mathrm{MeV}$)
+is recommended in order to have reasonably precise multipole information for any SE fit energy available
+(up to now, no interpolation on model values is performed).
+For $d$ wave multipoles additional model values may be provided, carrying only Born term contributions or Bern terms as well as 
+$\rho/\omega$ exchange mechanisms (see configuration option \tt D\_WAVES\rm).
+These files must be named
+\tt E\textit{2}p\_Born.txt\rm,
+\tt E\textit{2}m\_Born.txt\rm,
+\tt M\textit{2}p\_Born.txt\rm,
+\tt M\textit{2}m\_Born.txt\rm,
+and
+\tt E\textit{2}p\_BornRhoOmega.txt\rm,
+\tt E\textit{2}m\_BornRhoOmega.txt\rm,
+\tt M\textit{2}p\_BornRhoOmega.txt\rm,
+\tt M\textit{2}m\_BornRhoOmega.txt\rm,
+respectively.
+All filenames are case-sensitive.
+
+Currently, for $p \pi^0$ the following models are provided: \vspace{-0.25em}\\
+\begin{tabular}{ll}
+\hspace{-0.5em}\tt model/ppi0/BG2011-01\rm & Bonn-Gatchina PWA (solution 2011-01) \cite{Model_BnGa} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/BG2011-02\rm & Bonn-Gatchina PWA (solution 2011-02) \cite{Model_BnGa} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/DMT\rm & DMT model \cite{Model_DMT} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/MAID\rm & MAID 2007 \cite{Model_MAID} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/SAID\rm & SAID CM12 \cite{Model_SAID} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/ThrFit\rm & Empirical fit to $\pi^0$ threshold data \cite{PRL_pi0thres} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/ThrChPT4\rm & $\chi$PT (4$^\mathrm{th}$ order) \cite{Model_ChPT4} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/ThrHBChPT4\rm & Heavy-baryon $\chi$PT (4$^\mathrm{th}$ order) \cite{Model_HBChPT4} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/ThrHDT97\rm & Hanstein, Drechsel, Tiator solution \cite{Model_HDT97} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/ThrLG\rm & Lutz, Gasparyan calculation \cite{Model_LG} \vspace{-0.1em}\\
+\end{tabular}
+
+Any models prefixed with \tt Thr\rm\ are only supposed to be used within the $\pi$ threshold region up to
+$\omega\sim 180\mathrm{MeV}$.
+
+For $n \pi^+$ the following models are provided: \vspace{-0.25em}\\
+\begin{tabular}{ll}
+\hspace{-0.5em}\tt model/ppi0/BG2011-01\rm & Bonn-Gatchina PWA (solution 2011-01) \cite{Model_BnGa} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/BG2011-02\rm & Bonn-Gatchina PWA (solution 2011-02) \cite{Model_BnGa} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/DMT\rm & DMT model \cite{Model_DMT} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/MAID\rm & MAID 2007 \cite{Model_MAID} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/SAID\rm & SAID CM12 \cite{Model_SAID} \vspace{-0.1em}\\
+\end{tabular}
+
+For $p \eta$ the following models are provided: \vspace{-0.25em}\\
+\begin{tabular}{ll}
+\hspace{-0.5em}\tt model/ppi0/BG2011-01\rm & Bonn-Gatchina PWA (solution 2011-01) \cite{Model_BnGa} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/BG2011-02\rm & Bonn-Gatchina PWA (solution 2011-02) \cite{Model_BnGa} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/DMT\rm & DMT model \cite{Model_DMT} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/MAID\rm & $\eta$MAID 2000 \cite{Model_MAID} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/SAID\rm & SAID \cite{Model_SAID} \vspace{-0.1em}\\
+\end{tabular}
+
+
+\section{Macros}
+
+\subsection{Macro functions in  \tt macros/Extract.cpp\rm}
+
+\begin{itemize}
+\item
+\tt Extract(Char\_t* REACT, Int\_t L\_MAX, Int\_t SOLUTIONS=1, Double\_t MASS\_INITIAL=938.2720)\rm
+
+Converts \tt .root\rm\ files from \PWA output to plain text files. \tt Extract()\rm\ will
+create text files for all multipoles up to multipole order \tt L\_MAX\rm\ from fit results in directories
+\tt plots.0\rm\ up to \tt plots.$\lbrace$\textit{SOLUTIONS}-1$\rbrace$\rm.
+\tt REACT\rm\ is an (arbitrary) reaction identifier that will be written in the header lines of output files,
+e.g. \tt ''p pi0''\rm. \tt MASS\_INITIAL\rm\ (in MeV) is used for calculating the center-of-mass energy $W$. This parameter 
+is optional, if it is omitted the proton mass is assumed.
+Output files will be named
+\tt E\textit{l}p.txt\rm,
+\tt E\textit{l}m.txt\rm\ 
+for electric multipoles, and
+\tt M\textit{l}p.txt\rm,
+\tt M\textit{l}m.txt\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
+$+$ (\tt p\rm) or $-$ (\tt m\rm). These files
+will be created in the corresponding 
+\tt plots.\textit{n}\rm\ directories and have the following format:\\
+
+\tt
+$\bl$\bl\bl W \bl\bl\bl\bl\bl\bl\bl\bl\bl\bl\bl\bl\bl\bl\bl E0+(p pi0)\\
+\bl(MeV)\bl\bl\bl\bl\bl\bl Re\bl\bl\bl\bl\bl\bl DRe\bl\bl\bl\bl\bl\bl Im\bl\bl\bl\bl\bl\bl DIm\\
+1074.018\bl\bl\bl -0.837\bl\bl\bl 0.107\bl\bl\bl-0.028\bl\bl\bl 0.195\\
+1075.131\bl\bl\bl -0.793\bl\bl\bl 0.063\bl\bl\bl-0.253\bl\bl\bl 0.325\\
+1076.242\bl\bl\bl -1.670\bl\bl\bl 0.801\bl\bl\bl-0.905\bl\bl\bl 1.106\\
+1077.351\bl\bl\bl -2.188\bl\bl\bl 0.243\bl\bl\bl-0.112\bl\bl\bl 4.192\\
+1078.460\bl\bl\bl -0.541\bl\bl\bl 0.027\bl\bl\bl\bl 0.408\bl\bl\bl 0.243\\
+\rm
+
+Each line consists of the center-of-mass energy $W$ of an SE fit as well as values and errors for real and imaginary
+parts obtained from the fit. \textbf{Note:} After execution of \tt Extract()\rm\ it is recommended to restart
+\tt ROOT\rm\ to avoid problems when drawing \tt TCanvas\rm\ objects. \tt Extract()\rm\ must be executed from your
+work directory (having subdirectories \tt plots.\textit{n}\rm).
+
+\item
+\tt Multipole(Char\_t* Mlp, Int\_t SolLo=0, Int\_t SolHi=0, Bool\_t W=true,\\
+\phantom{Multipole(}Bool\_t SAVE=false, Double\_t Lo=0.0, Double\_t Hi=0.0,\\
+\phantom{Multipole(}Double\_t MASS\_INITIAL=938.2720, Int\_t D\_WAVES=MODEL)\rm
+
+Plots the given multipole (real and imaginary part) \tt Mlp\rm\ for solutions between \tt SolLo\rm\ and \tt SolHi\rm.
+\tt Mlp\rm\ must be given in the form \tt ''E\textit{l}p''\rm,
+\tt ''E\textit{l}m''\rm\ 
+for electric multipoles, and
+\tt ''M\textit{l}p''\rm,
+\tt ''M\textit{l}m''\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
+$+$ (\tt p\rm) or $-$ (\tt m\rm). The plot will contain SE fit results as well as model predictions from the current
+values in the directory \tt model\rm.
+if \tt SAVE\rm\ is true, a PDF file of the plot is created. \tt Lo\rm\ and \tt Hi\rm\ denote the plot range on the $y$-axis, 
+if ommitted or equal 0, the range is automatically adjusted.
+\tt MASS\_INITIAL\rm\ (in MeV) is used for calculating the center-of-mass energy $W$. This parameter 
+is optional, if it is omitted the proton mass is assumed.
+\tt D\_WAVES\rm\ indicates, which $d$ wave contributions are used for plotting model multipoles (if supported by the current model).
+\textbf{Note:} For successful operation of \tt Multipole()\rm\ it is necessary to have produced
+fitted multipole text files with \tt Extract()\rm\ beforehand once. \tt Multipole()\rm\ must be executed from your
+work directory (having subdirectories \tt plots.\textit{n}\rm\ and \tt model\rm).
+
+\item
+\tt Magnitude(Char\_t* Mlp, Int\_t SolLo=0, Int\_t SolHi=0, Bool\_t W=true,\\
+\phantom{Magnitude(}Bool\_t SAVE=false, Double\_t Lo=0.0, Double\_t Hi=0.0,\\
+\phantom{Magnitude(}Double\_t MASS\_INITIAL=938.2720, Int\_t D\_WAVES=MODEL)\rm
+
+Plots the magnitude of the given multipole \tt Mlp\rm\ for solutions between \tt SolLo\rm\ and \tt SolHi\rm.
+\tt Mlp\rm\ must be given in the form \tt ''E\textit{l}p''\rm,
+\tt ''E\textit{l}m''\rm\ 
+for electric multipoles, and
+\tt ''M\textit{l}p''\rm,
+\tt ''M\textit{l}m''\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
+$+$ (\tt p\rm) or $-$ (\tt m\rm). The plot will contain SE fit results as well as model predictions from the current
+values in the directory \tt model\rm.
+if \tt SAVE\rm\ is true, a PDF file of the plot is created. \tt Lo\rm\ and \tt Hi\rm\ denote the plot range on the $y$-axis, 
+if ommitted or equal 0, the range is automatically adjusted.
+\tt MASS\_INITIAL\rm\ (in MeV) is used for calculating the center-of-mass energy $W$. This parameter 
+is optional, if it is omitted the proton mass is assumed.
+\tt D\_WAVES\rm\ indicates, which $d$ wave contributions are used for plotting model multipoles (if supported by the current model).
+\textbf{Note:} For successful operation of \tt Magnitude()\rm\ it is necessary to have produced
+fitted multipole text files with \tt Extract()\rm\ beforehand once. \tt Magnitude()\rm\ must be executed from your
+work directory (having subdirectories \tt plots.\textit{n}\rm\ and \tt model\rm).
+
+\item
+\tt Phase(Char\_t* Mlp, Int\_t SolLo=0, Int\_t SolHi=0, Bool\_t W=true,\\
+\phantom{Phase(}Bool\_t SAVE=false, Double\_t Lo=0.0, Double\_t Hi=0.0,\\
+\phantom{Phase(}Double\_t MASS\_INITIAL=938.2720, Int\_t D\_WAVES=MODEL)\rm
+
+Plots the phase (in radians) of the given multipole \tt Mlp\rm\ for solutions between \tt SolLo\rm\ and \tt SolHi\rm.
+\tt Mlp\rm\ must be given in the form \tt ''E\textit{l}p''\rm,
+\tt ''E\textit{l}m''\rm\ 
+for electric multipoles, and
+\tt ''M\textit{l}p''\rm,
+\tt ''M\textit{l}m''\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
+$+$ (\tt p\rm) or $-$ (\tt m\rm). The plot will contain SE fit results as well as model predictions from the current
+values in the directory \tt model\rm.
+if \tt SAVE\rm\ is true, a PDF file of the plot is created. \tt Lo\rm\ and \tt Hi\rm\ denote the plot range on the $y$-axis, 
+if ommitted or equal 0, the range is automatically adjusted.
+\tt MASS\_INITIAL\rm\ (in MeV) is used for calculating the center-of-mass energy $W$. This parameter 
+is optional, if it is omitted the proton mass is assumed.
+\tt D\_WAVES\rm\ indicates, which $d$ wave contributions are used for plotting model multipoles (if supported by the current model).
+\textbf{Note:} For successful operation of \tt Phase()\rm\ it is necessary to have produced
+fitted multipole text files with \tt Extract()\rm\ beforehand once. \tt Phase()\rm\ must be executed from your
+work directory (having subdirectories \tt plots.\textit{n}\rm\ and \tt model\rm).
+
+\item
+\tt Model(Char\_t* Mlp, Bool\_t W=true, Bool\_t SAVE=false, Double\_t Lo=0.0, Double\_t Hi=0.0,\\
+\phantom{Model(}Double\_t MASS\_INITIAL=938.2720, Int\_t D\_WAVES=MODEL)\rm
+
+Plots model predictions for the given multipole (real and imaginary part) \tt Mlp\rm.
+\tt Mlp\rm\ must be given in the form \tt ''E\textit{l}p''\rm,
+\tt ''E\textit{l}m''\rm\ 
+for electric multipoles, and
+\tt ''M\textit{l}p''\rm,
+\tt ''M\textit{l}m''\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
+$+$ (\tt p\rm) or $-$ (\tt m\rm). The plot will contain only model predictions from the current
+values in the directory \tt model\rm.
+if \tt SAVE\rm\ is true, a PDF file of the plot is created. \tt Lo\rm\ and \tt Hi\rm\ denote the plot range on the $y$-axis, 
+if ommitted or equal 0, the range is automatically adjusted.
+\tt MASS\_INITIAL\rm\ (in MeV) is used for calculating the center-of-mass energy $W$. This parameter 
+is optional, if it is omitted the proton mass is assumed.
+\tt D\_WAVES\rm\ indicates, which $d$ wave contributions are used for plotting model multipoles (if supported by the current model).
+\textbf{Note:}  \tt Model()\rm\ must be executed from your
+work directory (having a subdirectory \tt model\rm).
+
+
+\item
+\tt Chi2(Int\_t SOLUTION=0, Double\_t MASS\_INITIAL=938.2720)\rm
+
+Draws the $\chi^2$ values for the given \tt SOLUTION\rm\ depending on the center-of-mass energy $W$.
+\tt MASS\_INITIAL\rm\ (in MeV) is used for calculating $W$. This parameter 
+is optional, if it is omitted the proton mass is assumed.
+\tt Chi2()\rm\ must be executed from your
+work directory (having subdirectories \tt plots.\textit{n}\rm).
+
+\item
+\tt Penalty(Int\_t SOLUTION=0, Double\_t MASS\_INITIAL=938.2720)\rm
+
+Draws the penalty contributions for the given \tt SOLUTION\rm\ depending on the center-of-mass energy $W$.
+\tt MASS\_INITIAL\rm\ (in MeV) is used for calculating $W$. This parameter 
+is optional, if it is omitted the proton mass is assumed.
+\tt Penalty()\rm\ must be executed from your
+work directory (having subdirectories \tt plots.\textit{n}\rm).
+\end{itemize}
+
+
+
+\begin{thebibliography}{00}
+
+\bibliographystyle{unsrt}
+
+\bibitem{PRL_pi0thres}
+D. Hornidge et al.,
+Phys. Rev. Lett. \textbf{111}, 062004 (2013)
+
+\bibitem{Model_BnGa}
+
+\bibitem{Model_DMT}
+
+\bibitem{Model_MAID}
+
+\bibitem{Model_SAID}
+
+\bibitem{Model_ChPT4}
+
+\bibitem{Model_HBChPT4}
+
+\bibitem{Model_HDT97}
+
+\bibitem{Model_LG}
+
+\end{thebibliography}
+
+\end{document}
+

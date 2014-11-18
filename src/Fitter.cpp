@@ -621,17 +621,17 @@ Bool_t SingleFit()
   FixThreshold();
 
   //Perform minimisation with MIGRAD technique
-  arglist[0] = 1e+09;
-  arglist[1] = 1e-08;
+  arglist[0] = 1e+06;
+  arglist[1] = 1e-03;
   gMinuit->mnexcm("MIGRAD", arglist, 2, ierflg);
   if(ierflg) return false; //MIGRAD failed, fit was unsuccessful
 
   //Calculate covariance matrix
-  arglist[0] = 1e+09;
+  arglist[0] = 1e+06;
   gMinuit->mnexcm("HESSE", arglist, 1, ierflg);
 
   //Try to improve minimisation result
-  arglist[0] = 1e+09;
+  arglist[0] = 1e+06;
   gMinuit->mnexcm("IMPROVE", arglist, 1, ierflg);
 
   //Get fit parameters and use them for multipoles
@@ -704,7 +704,7 @@ Double_t ErrorBase(Double_t* Par, Double_t* Err)
   FixThreshold();
 
   //Calculate covariance matrix
-  arglist[0] = 1e+09;
+  arglist[0] = 1e+06;
   gMinuit->mnexcm("HESSE", arglist, 1, ierflg);
 
   //Get fit parameters and use them for multipoles
@@ -755,13 +755,13 @@ void Fit()
     for(Int_t n=Index; n<ITERATIONS; n++)
     {
       //Consider only iterations close to best chi^2+penalty of current solution
-      if(Quality[n]-Quality[Sol[s]] < 1e-11)
+      if(Quality[n]-Quality[Sol[s]] < 1e-07)
       {
         if(MeanErr[n] < MeanErr[Sol[s]]) //An iteration with lower mean error has been found
           for(Int_t t=s; t<SOLUTIONS; t++) Sol[t] = n; //Select this iteration for current and all upcoming solutions (in case of no other solutions to be found)
       }
       //Fit quality changes significantly in a new group of iterations
-      if(Quality[n]-Quality[Sol[s]] > 1e-01)
+      if(Quality[n]-Quality[Sol[s]] > 1e-02)
       {
         for(Int_t t=s+1; t<SOLUTIONS; t++) Sol[t] = n; //Use this iteration as preliminary result for the next and all upcoming solutions (in case of no other solutions to be found)
         Index = n; //In next loop, begin at first iteration with significantly changed quality...
@@ -783,7 +783,7 @@ void Fit()
   }
   //Store model parameters for graph plots
   StoreModel();
-  return;
+  //return;
 
   //Debug output
   for(Int_t n=0; n<ITERATIONS; n++)
@@ -1278,10 +1278,10 @@ void InitMinuit()
 
   //Set step sizes up to maximum number of multipole parameters
   for(Int_t l=0; l<L_MAX*8; l++)
-    step[l] = 1e-15;
+    step[l] = 1e-06;
   //Set step sizes up to maximum number of observable scale parameters
   for(Int_t o=0; o<OBS; o++)
-    step[L_MAX*8 + o] = 1e-15;
+    step[L_MAX*8 + o] = 1e-06;
 
   //Set error definition (1.0 is recommended in MINUIT manual for chi^2 fits)
   arglist[0] = 1.0;

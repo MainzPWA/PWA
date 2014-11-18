@@ -56,7 +56,7 @@ enum{ SIG_0  =  0,
 static const Int_t EBINS  = 2048;
 static const Int_t THBINS = 256;
 static const Int_t LBINS  = 11;
-static const Int_t FINITE = 256;
+static const Int_t FINITE = 16;
 static const Int_t SOL = 16;
 static const Int_t OBS = 23;
 #endif
