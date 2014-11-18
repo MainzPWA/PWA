@@ -783,7 +783,7 @@ void Fit()
   }
   //Store model parameters for graph plots
   StoreModel();
-  //return;
+  return;
 
   //Debug output
   for(Int_t n=0; n<ITERATIONS; n++)
