@@ -245,6 +245,11 @@ so there is no need to transform one type of experimental information to another
 \right]
 \end{array}
 \end{displaymath}
+with
+\begin{displaymath}
+ |\mathcal{M}^\mathrm{sol}|^2 = \sum\limits_L^{L_\mathrm{max}}
+\left(|E_{\ell-}^\mathrm{sol}|^2 + |E_{\ell+}^\mathrm{sol}|^2 + M_{\ell-}^\mathrm{sol}|^2 + |M_{\ell+}^\mathrm{sol}|^2\right)
+\end{displaymath}
 
 \subsection{Penalty mode \textit{MLP2}}
 
@@ -295,25 +300,35 @@ Q_3 = Q_1 + Q_2
 \subsection{Penalty mode \textit{CGLN}}
 
 \begin{displaymath}
- Q_4 =\sum_{i=1}^4
+ Q_4 =\frac{1}{|\mathcal{F}^\mathrm{sol}|^2}
+\sum_{i=1}^4
 \sum_{j=1}^{N_\mathrm{pts}}
 \frac{|F_i(x_j)^\mathrm{fit} - F_i(x_j)^\mathrm{sol}|^2}{f_i^2}
+\end{displaymath}
+with
+\begin{displaymath}
+ |\mathcal{F}^\mathrm{sol}|^2 = \sum_{i=1}^4\sum_{j=1}^{N_\mathrm{pts}} |F_i(x_j)^\mathrm{sol}|^2
 \end{displaymath}
 
 \subsection{Penalty mode \textit{HELI}}
 
 \begin{displaymath}
- Q_5 =\sum_{i=1}^4
+ Q_5 =\frac{1}{|\mathcal{H}^\mathrm{sol}|^2}
+\sum_{i=1}^4
 \sum_{j=1}^{N_\mathrm{pts}}
 \frac{|H_i(x_j)^\mathrm{fit} - H_i(x_j)^\mathrm{sol}|^2}{h_i^2}
 \end{displaymath}
 with
+\begin{displaymath}
+ |\mathcal{H}^\mathrm{sol}|^2 = \sum_{i=1}^4\sum_{j=1}^{N_\mathrm{pts}} |H_i(x_j)^\mathrm{sol}|^2
+\end{displaymath}
+and
 \begin{displaymath}\label{frm_Heli}
 \begin{array}{l}
-H_1 = -\sqrt{\dfrac{1}{2}}\sin\theta\cos\frac{\theta}{2} \left(F_3 + F_4\right) \\
-H_2 = \sqrt{2}\cos\frac{\theta}{2}\left[ (F_2 - F_1) \right] \\
-H_3 = \phantom{-}\sqrt{\dfrac{1}{2}}\sin\theta\sin\frac{\theta}{2} \left(F_3 - F_4\right) \\
-H_4 = \\
+H_1 =           -\dfrac{1}{\sqrt{2}}\sin\theta\cos\frac{\theta}{2} \left(F_3 + F_4\right) \\
+H_2 = \phantom{-}\sqrt{2}\cos\frac{\theta}{2}\left[\left(F_2 - F_1\right) + \frac{1-\cos\theta}{2}\left(F_3 - F_4\right)\right] \\
+H_3 = \phantom{-}\dfrac{1}{\sqrt{2}}\sin\theta\sin\frac{\theta}{2} \left(F_3 - F_4\right) \\
+H_4 = \phantom{-}\sqrt{2}\sin\frac{\theta}{2}\left[\left(F_1 + F_1\right) + \frac{1+\cos\theta}{2}\left(F_3 + F_4\right)\right]
 \end{array}
 \end{displaymath}
 
