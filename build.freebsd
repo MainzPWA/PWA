@@ -1,6 +1,6 @@
 #!/bin/bash
-export ROOT_LIB=$ROOTSYS/lib
-export ROOT_INC=$ROOTSYS/include
+export ROOT_LIB=$ROOTSYS/lib/root
+export ROOT_INC=$ROOTSYS/include/root
 
 gcc cmake/IncreaseBuild.c -o build/bin/IncreaseBuild
 build/bin/IncreaseBuild src/Build.h
