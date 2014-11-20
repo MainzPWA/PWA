@@ -62,7 +62,9 @@ meson photoproduction ($\pi$, $\eta$, $K$, ...) from experimental cross sections
 and/or asymmetry observables. Multipoles are extracted using a standard $\chi^2$ minimisation scheme with the
 possibility to add additional constraints imposed by existing partial wave analyses and models for meson photoproduction
 (MAID, SAID, BnGa, ...). These constraints are implemented using so-called penalty terms, giving an additional
-contribution in the minimisation process.
+contribution in the minimisation process. The maximum multipole order $L_\mathrm{max}$ which is considered to contribute to
+physical observables can be adjusted up to $L_\mathrm{max} = 10$. Indvidiual multipoles can either be fitted in
+real and imaginary parts, with fixed phases but fittable magnitude, or can be fixed to model predictions completely.
 
 \section{$\chi^2$ minimisation and multipole extraction}
 
@@ -102,9 +104,13 @@ in form of the four CGLN amplitudes $F_i$ according to
                                                  \right\rbrace \cdot \rho\\
 \sigma_0 G     & = & \sin^2\theta \:\Im\left\lbrace F_2\cc F_3 + F_1\cc F_4\:
                                                 \right\rbrace \cdot \rho\\
-\sigma_0 H\,     & = & \sin\theta \:\Im \left\lbrace 2 F_1\cc F_2 + F_1\cc F_3 
+\sigma_0 H_{\phantom{z^\prime}}     & = & \sin\theta \:\Im \left\lbrace 2 F_1\cc F_2 + F_1\cc F_3 
                                                - F_2\cc F_4 -\cos\theta\left( F_2\cc F_3 - F_1\cc F_4 \right)
                                                  \right\rbrace \cdot \rho\\
+\end{array}
+\end{displaymath}
+\begin{displaymath}\label{frm_Obs2}
+\begin{array}{lll}
 \sigma_0 O_{x^\prime} & = & -\sin\theta \:\Im \left\lbrace F_1\cc F_4 - F_2\cc F_3
                                                       + \cos\theta\left(F_1\cc F_3 - F_2\cc F_4\right)
                                                        \right\rbrace \cdot \rho\\
@@ -118,6 +124,8 @@ in form of the four CGLN amplitudes $F_i$ according to
                                                       +\sin^2\theta\left(F_1\cc F_3 + F_2\cc F_4\right)
                                                       -\cos\theta\left(|F_1|^2+|F_2|^2\right)
                                                        \right\rbrace \cdot \rho\\
+
+&&\phantom{\Re \left\lbrace |F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2  + \frac{1}{2}\sin^2\theta\left[ |F_3|^2 + |F_4|^2 + 2 F_2\cc  F_3    + 2 F_1\cc  F4 + 2\cos\theta F_3\cc F_4\right] \right\rbrace \cdot \rho}\vspace{-1.5em}\\
 \end{array}
 \end{displaymath}
 with a phase space factor $\rho = \frac{q}{k}$ given by pion and photon momenta $q$ and $k$. The CGLN amplitudes
