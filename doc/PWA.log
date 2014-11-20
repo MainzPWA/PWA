@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=latex 2012.2.1)  18 NOV 2014 16:05
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=latex 2012.2.1)  20 NOV 2014 17:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -342,58 +342,59 @@ LaTeX Font Info:    Try loading font information for U+wasy on input line 49.
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 ) [1
 
-] [2]
+] [2] [3] [4]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 337.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 343.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 487.
+ [5]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 503.
 
 
 (/usr/share/texmf/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 343.
- [3] [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 671--676
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 678--722
-
- []
-
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 759--763
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 503.
+ [6] [7] [8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 834--839
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 765--779
+Underfull \hbox (badness 10000) in paragraph at lines 841--885
 
  []
 
-[9]
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 922--926
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 928--942
+
+ []
+
+[11]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 859.
-
-Underfull \hbox (badness 10000) in paragraph at lines 865--881
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 883--891
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1018.
+ [12]
+Underfull \hbox (badness 10000) in paragraph at lines 1044--1060
 
  []
 
-[10] [11] [12] (./PWA.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1070
+
+ []
+
+[13] [14] [15] [16] (./PWA.aux) ) 
 Here is how much of TeX's memory you used:
- 3280 strings out of 493634
- 39556 string characters out of 3150863
- 108067 words of memory out of 3500000
- 6468 multiletter control sequences out of 15000+200000
- 27791 words of font info for 88 fonts, out of 3000000 for 9000
+ 3299 strings out of 493634
+ 39746 string characters out of 3150863
+ 106081 words of memory out of 3500000
+ 6480 multiletter control sequences out of 15000+200000
+ 30134 words of font info for 98 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 27i,12n,24p,238b,219s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,12n,24p,238b,259s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on PWA.dvi (12 pages, 66040 bytes).
+Output written on PWA.dvi (16 pages, 92396 bytes).

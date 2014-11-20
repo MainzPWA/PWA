@@ -49,13 +49,15 @@
 \maketitle
 
 \begin{abstract}
-
+\hspace{-1.5em}This document describes details and usage of the Mainz \PWA tool used to determine electromagnetic multipoles
+for pseudoscalar meson photoproduction from experimental results for cross sections and various polarisation
+observables. \PWA performs constrained single energy (SE) fits based on a $\chi^2$ minimisation scheme with additional
+penalty terms.
 \end{abstract}
-
 
 \section{Introduction}
 
-\PWA is a single energy (SE) multipole fitting tool, used to determine electromagnetic multipoles for pseudoscalar
+\PWA is a MINUIT-based single energy (SE) multipole fitting tool, used to determine electromagnetic multipoles for pseudoscalar
 meson photoproduction ($\pi$, $\eta$, $K$, ...) from experimental cross sections (polarised and unpolarised)
 and/or asymmetry observables. Multipoles are extracted using a standard $\chi^2$ minimisation scheme with the
 possibility to add additional constraints imposed by existing partial wave analyses and models for meson photoproduction
@@ -130,7 +132,7 @@ F_4 = \sum\limits_{L\geq 2}^{L_\mathrm{max}}\left( M_{L+} - E_{L+} - M_{L-} - E_
 \end{array}
 \end{displaymath}
 and derivatives of the Legendre polynoms $P_L$ describing the angular dependencies. Using these relations between observables
-and electromagnetic multipoles, it is possible to create a $\chi^2$ function having multipole as fit parameters and physical
+and electromagnetic multipoles, it is possible to create a $\chi^2$ function having multipoles as fit parameters and physical
 observables as experimental input
 \begin{displaymath}
 \begin{array}{lcl}
@@ -216,14 +218,40 @@ where $\sigma_X^\mathrm{exp}(\theta_i)$, $X^\mathrm{exp}(\theta_i)$ describe exp
 at their polar angle positions $\theta_i$, while 
 $\sigma_X^\mathrm{fit}(\theta_i)$, $X^\mathrm{fit}(\theta_i)$ are cross sections and asymmetries as calculated from
 multipole parameters $E_{L\pm}$, $M_{L\pm}$.
-Minimisation of the above $\chi^2$ function will therefore adjust electromagnetic multipole values n order for the best describtion
+Minimisation of the above $\chi^2$ function will therefore adjust electromagnetic multipole values in order for the best description
 of available data.
-\PWA will use asymmetries $X$ as well as polarised cross sections $\sigma_x = \sigma_0\cdot X$ as experimental input,
+\PWA will use asymmetries $X$ as well as polarised cross sections $\sigma_X = \sigma_0\cdot X$ as experimental input,
 so there is no need to transform one type of experimental information to another beforehand.
 
 \section{Penalty terms}
 
+Penalty terms act as an additional contribution to the function to be minimised during the fit process, i.e. fitting with penalty
+no longer mminimises the `pure' $\chi^2$ but instead
+\begin{displaymath}
+ f_\mathrm{FCN} = \chi^2 + Q
+\end{displaymath}
+where $Q$ is typically designed in a way that it gets larger if current fit parameters deviate from a given
+model solution. Hence any deviation from the used model is `penalised' in the fitting. The found solution
+for fit parameters is therefore a compromise between the best description of the available data (contributing to $\chi^2$)
+and an agreement with a given model calculation (contributing to $Q$).
+Penalty terms in the $f_\mathrm{FCN}$ function are useful to ensure that results of SE fits at different energies
+fulfill constraints like a smooth energy dependence and can help to get reasonable fit results
+if experimental data is too scarce (in terms of the number of observables or angular coverage) or has limited precision.
+If however the penalty terms dominate the $f_\mathrm{FCN}$
+function, the found solutions will mainly try to reproduce the initial model calculation. Therefore a penalty-supported fit 
+is never a fully model-independent solution but will always show some bias caused by the used model calculation.
+Proper adjustment of penalty and $\chi^2$ constributions is crucial in order to get meaningful fit results.
+\PWA supports a variety of different penalty implementations that either evaluate model multipoles directly or with
+an intermediate step of meson photoproduction amplitudes.
+
 \subsection{Penalty mode \textit{MLP1}}
+
+The \textit{MLP1} penalty calculation evaluates a penalty term $Q_1$ from the squared sum of all absolute deviations
+between fitted 
+(${E}_{L\pm}^\mathrm{fit}$, ${M}_{L\pm}^\mathrm{fit}$)
+and model
+(${E}_{L\pm}^\mathrm{sol}$, ${M}_{L\pm}^\mathrm{sol}$)
+multipoles, according to
 \begin{displaymath}
 \begin{array}{lcl}
  Q_1 &=& \dfrac{q_1}{|\mathcal{M}^\mathrm{sol}|^2}\cdot \dfrac{N_\mathrm{pts}}{N_\mathrm{par}} \cdot \left[
@@ -245,14 +273,34 @@ so there is no need to transform one type of experimental information to another
 \right]
 \end{array}
 \end{displaymath}
-with
+where
 \begin{displaymath}
  |\mathcal{M}^\mathrm{sol}|^2 = \sum\limits_L^{L_\mathrm{max}}
 \left(|E_{L-}^\mathrm{sol}|^2 + |E_{L+}^\mathrm{sol}|^2 + M_{L-}^\mathrm{sol}|^2 + |M_{L+}^\mathrm{sol}|^2\right)
 \end{displaymath}
+is used as a normalisation value which makes $Q_1$ dimensionless and independent from the absolute magnitude of the multipoles.
+This ensures that the penalty contribution $Q_1$ will not vary significantly even when there are large changes in the size of
+contributing multipoles (e.g. within or beyond the $\Delta(1232)$ region). $Q_1$ is also normalised
+to the number of fit parameters $N_\mathrm{par}$, as the squared sum over real and imaginary parts up to $L_\mathrm{max}$
+is proportional to the number of fitted multipoles (fixed multipoles always stay at their model values and hence do not
+contribute to $Q_1$). Dividing out $N_\mathrm{par}$ and multiplying with the number of experimental data points
+$N_\mathrm{pts}$ results in a $Q_1$ with the same scaling behaviour as $\chi^2$ (which is also proportional to $N_\mathrm{pts}$)
+independent from the number of fit parameters.
+The weight factor $q_1$ is globally adjustable and used to fine-tune the strength of the penalty contribution. Typical
+values are around $q_1 = 1...2$.
+As \textit{MLP1} considers the absolute deviations of multipoles it will mainly try to keep large multipoles close to their model values,
+while small multipoles will be able to accumulate rather large relative deviations. So, when using \textit{MLP1} the
+constraining is somewhat proportional to the size of the multipole. This may be not the best approach in cases where a single multipole
+is vastly dominating, e.g. the $E_{0+}$ wave for $\eta$ production in the $S_{11}(1535)$ region.
 
 \subsection{Penalty mode \textit{MLP2}}
 
+The \textit{MLP2} penalty calculation evaluates a penalty term $Q_2$ from the squared sum of all relative deviations
+between fitted 
+(${E}_{L\pm}^\mathrm{fit}$, ${M}_{L\pm}^\mathrm{fit}$)
+and model
+(${E}_{L\pm}^\mathrm{sol}$, ${M}_{L\pm}^\mathrm{sol}$)
+multipoles, according to
 \begin{displaymath}
 \begin{array}{lcl}
  Q_2 &=& q_2\cdot \dfrac{N_\mathrm{pts}}{N_\mathrm{par}} \cdot \left[
@@ -291,40 +339,64 @@ with
 \end{array}
 \end{displaymath}
 with
-$\varepsilon = \mbox{half the magnitude of the smallest non-zero real or imaginary part of all multipoles}$.
+$\varepsilon = \mbox{half the magnitude of the smallest non-zero real or imaginary part of all multipoles}$,
+which basically represents the numerical precision of the used model values and is applied here to ensure
+non-zero denominators even in cases of vanishing multipoles.
+$Q_2$ is also normalised
+to the number of fit parameters $N_\mathrm{par}$, as the squared sum over real and imaginary parts up to $L_\mathrm{max}$
+is proportional to the number of fitted multipoles (fixed multipoles always stay at their model values and hence do not
+contribute to $Q_2$). Dividing out $N_\mathrm{par}$ and multiplying with the number of experimental data points
+$N_\mathrm{pts}$ results in a $Q_2$ with the same scaling behaviour as $\chi^2$ (which is also proportional to $N_\mathrm{pts}$)
+independent from the number of fit parameters.
+The weight factor $q_2$ is globally adjustable and used to fine-tune the strength of the penalty contribution.
+Values for $q_2$ should be significantly smaller than for $q_1$ in the \textit{MLP1} mode, a typical number
+would be $q_2 \simeq 0.5$.
+As \textit{MLP2} considers relative deviations, large multipoles will be much less constrained compared to \textit{MLP1}.
+This might be difficult if small multipoles that are not very well described by the used model
+will contribute significantly to the penalty and affect larger, well-known multipoles.
 
 \subsection{Penalty mode \textit{MLP3}}
+
+The \textit{MLP3} penalty calculation is a combination of \textit{MLP1} and \textit{MLP2} modes and combines both
+penalties based on absolute and relative deviations. Consequently, the \textit{MLP3} penalty is calculated according to
 \begin{displaymath}
 Q_3 = Q_1 + Q_2
 \end{displaymath}
-
+The individual weight factors $q_1$ and $q_2$ will be used here to adjust the balance between absolute and relative
+constraints to the fitted multipoles. A careful selection of $q_1$ and $q_2$ could therefore mitigate 
+the dominance effects of very large and very small multipoles for \textit{MLP1} and \textit{MLP2} modes.
 
 \subsection{Penalty mode \textit{CGLN}}
 
+The \textit{CGLN} mode calculates a penalty term from the difference between the four
+CGLN amplitudes $F_i^\mathrm{fit}$ obtained from current fit parameters and the model values $F_i^\mathrm{sol}$,
+according to
 \begin{displaymath}
  Q_4 =\frac{1}{|\mathcal{F}^\mathrm{sol}|^2}
 \sum_{i=1}^4
 \sum_{j=1}^{N_\mathrm{pts}}
 \frac{|F_i(x_j)^\mathrm{fit} - F_i(x_j)^\mathrm{sol}|^2}{f_i^2}
 \end{displaymath}
-with
+where
 \begin{displaymath}
  |\mathcal{F}^\mathrm{sol}|^2 = \sum_{i=1}^4\sum_{j=1}^{N_\mathrm{pts}} |F_i(x_j)^\mathrm{sol}|^2
 \end{displaymath}
+is used as a normalisation value which makes $Q_4$ dimensionless and independent from the absolute magnitude of the amplitudes.
+This ensures that the penalty contribution $Q_4$ will not vary significantly even when there are large changes in the size of
+the amplitudes (e.g. within or beyond the $\Delta(1232)$ region).
+CGLN amplitudes are evaluated at $N_\mathrm{pts}$ (the number of experimental data points from all available observables)
+positions for $x_j = \cos\theta_j$ which are distributed equidistant in the range $x = [-1,1]$.
+Evaluating the CGLN amplitudes at $N_\mathrm{pts}$ polar angle positions makes sure that $Q_4$ has the same scaling behaviour
+as $\chi^2$ (which is also proportional to $N_\mathrm{pts}$).
+For each CGLN amplitude $F_i$ an individual weight $f_i$ is applied in the squared sum of deviations. These weights are used
+to adjust the size of the penalty contribution $Q_4$ relative to $\chi^2$. Note that the penalty term $Q_4$ depends on
+four external parameters which allows a high level of flexibility.
 
 \subsection{Penalty mode \textit{HELI}}
 
-\begin{displaymath}
- Q_5 =\frac{1}{|\mathcal{H}^\mathrm{sol}|^2}
-\sum_{i=1}^4
-\sum_{j=1}^{N_\mathrm{pts}}
-\frac{|H_i(x_j)^\mathrm{fit} - H_i(x_j)^\mathrm{sol}|^2}{h_i^2}
-\end{displaymath}
-with
-\begin{displaymath}
- |\mathcal{H}^\mathrm{sol}|^2 = \sum_{i=1}^4\sum_{j=1}^{N_\mathrm{pts}} |H_i(x_j)^\mathrm{sol}|^2
-\end{displaymath}
-and
+The \textit{HELI} mode is basically very similar to the \textit{CGLN} mode, with the only difference being the
+usage of helicity amplitudes $H_i$ instead of CGLN amplitudes $F_i$. For the calculation of helicity amplitudes
+the transformation relations
 \begin{displaymath}\label{frm_Heli}
 \begin{array}{l}
 H_1 =           -\dfrac{1}{\sqrt{2}}\sin\theta\cos\frac{\theta}{2} \left(F_3 + F_4\right) \\
@@ -333,6 +405,94 @@ H_3 = \phantom{-}\dfrac{1}{\sqrt{2}}\sin\theta\sin\frac{\theta}{2} \left(F_3 - F
 H_4 = \phantom{-}\sqrt{2}\sin\frac{\theta}{2}\left[\left(F_1 + F_1\right) + \frac{1+\cos\theta}{2}\left(F_3 + F_4\right)\right]
 \end{array}
 \end{displaymath}
+between $H_i$ and $F_i$ are used and the penalty term is given by
+\begin{displaymath}
+ Q_5 =\frac{1}{|\mathcal{H}^\mathrm{sol}|^2}
+\sum_{i=1}^4
+\sum_{j=1}^{N_\mathrm{pts}}
+\frac{|H_i(x_j)^\mathrm{fit} - H_i(x_j)^\mathrm{sol}|^2}{h_i^2}
+\end{displaymath}
+with a normalisation value
+\begin{displaymath}
+ |\mathcal{H}^\mathrm{sol}|^2 = \sum_{i=1}^4\sum_{j=1}^{N_\mathrm{pts}} |H_i(x_j)^\mathrm{sol}|^2
+\end{displaymath}
+making $Q_5$ dimensionless and independent from the absolute magnitude of the amplitudes. Also in this mode amplitudes
+are evaluated at equidistant $x_j$ positions covering the full angular range. Similar to \textit{CGLN} mode
+the penalty contribution is adjusted by individual weights $h_i$ for each helicity amplitude $H_i$.
+
+\section{SE fits and observable energies}
+
+\PWA performs multipole fits on fixed energy positions which are (with rare exceptions) given by the energy information of
+unpolarised cross section $\sigma_0$ data. Such $\sigma_0$ measurements have typically the finest energy binning as well as
+the highest statistic precision, while polarisation observable data mostly is only available in much wider energy bins and
+with lower statistics.
+Up to now \PWA does not perform any adjustments of energy positions or interpolation schemes for any observables
+but determines multipoles at the \textbf{exact} energies of the $\sigma_0$ dataset, while data points for 
+polarisation observables are considered in the fit, if the current $\sigma_0$ energy position is covered
+by the respective polarisation observable energy bin. This means that a single value for asymmetry observables like
+$\Sigma$, $T$, $P$, $E$, $F$, $G$, $H$ which are given in energy bins of typically $20...100$\:MeV will be used
+for fits at multiple $\sigma_0$ energy positions.
+The rationale for this scheme is that any energy mismatch between the SE fit energy and the $\sigma_0$ energy
+will have a large impact on the fit quality due to the high precision of cross section data, while 
+the larger uncertainties for polarisation observables provide some insensitivity to such energy deviations.
+Also keep in mind that a polarisation observable determined for a $\sim\hspace{-0.4em}50$\:MeV bin always represents an average
+value of all energies within that bin, which justifies the repeated use of such data points for multiple
+cross section energies that are compatible with the polarisation observable bin.
+In the long term a more advanced handling of observable energy mismatches might be desirable,
+however such interpolation schemes are still a rather open question and several different approaches 
+are currently discussed.
+
+\section{Fits with variation of start parameters}
+
+Multipole fits with high orders $L_\mathrm{max}$ operate in a high-dimensional parameter space and
+any found minimum in the $f_\mathrm{FCN}$ funktion is not necessarily the global minimum
+representing the physically correct solution. In order to search for possible multiple
+solutions for an SE fit \PWA can be configured in a way that it repeats the fit process with
+slight variations in the start parameters.
+Such start parameters for the fitting process are typically taken from any existing photoproduction model or
+partial wave analysis. \PWA changes these start parameters for all fittable parameters by random numbers
+from within an adjustable band around the model solution (fixed multipoles that are parametrised in the fit process
+always stay at their exact model values) and repeats every SE fit several times. Unique solutions 
+are identified using their $f_\mathrm{FCN}$ value and a configurable number of found solutions is stored. 
+At the moment \PWA does \textbf{no} further processing on these different solutions, like selecting solutions which 
+have a smooth energy dependence with respect to their neighbouring energy points.
+
+\section{Observable rescaling}
+
+During fits \PWA has the possibility to rescale observable datasets (that is all data points for a given energy)
+within given systematic uncertainties to achieve a better agreement between
+different datasets. Technically this is done by additional fit parameters $s_X$ for scaling each
+observable and a penalty term, which penalises any deviation from the nominal values. This penalty term and the modified $\chi^2$
+contribution (including the scaling parameter) for an observable $X$ (cross sections and asymmetries) are given by
+\begin{displaymath}
+ Q_s = q_s\cdot \sum\limits_X\left[ N_{\mathrm{pts},X} \cdot \left(\frac{s_X - 1}{\delta_X}\right)^2\right]
+\end{displaymath}
+and
+\begin{displaymath}
+\chi_X^2
+= \sum\limits_i \left(
+\frac
+{s_X X^\mathrm{exp}(\theta_i) - X^\mathrm{fit}(\theta_i)}
+{s_X\Delta X^\mathrm{exp}(\theta_i)}
+\right)^2
+\end{displaymath}
+The relative systematic uncertainty (e.g. $5\% = 0.05$) is given by $\delta_X$, while $N_{\mathrm{pts},X}$
+is the number of data points for observable $X$. Making the individual contributions proportional
+to  $N_{\mathrm{pts},X}$ ensures that rescaling observables with many data points gets more `expensive'
+than observables with only very few points, and provides a similar scaling behaviour
+for $Q_s$ as  for $\chi^2$ (which is proportional to $N_\mathrm{pts} = \sum N_{\mathrm{pts},X} $).
+The additional global weight factor $q_s$ can be used to adjust the strength of the rescaling. Small values for
+$q_s$ decrease the penalty contribution and hence give the fitting process more freedom to rescale observables.
+
+\section{\PWA installation}
+
+The current version of the Mainz \PWA package can be obtained from its GitHub repository available under\\
+\tt https://github.com/MainzPWA/PWA\rm \\
+\PWA will run under Linux, FreeBSD, and OS X systems and can be compiled on respective systems using the provided
+scripts \tt build.linux\rm, \tt build.freebsd\rm, and \tt build.macosx\rm. \PWA requires a (recent) \tt ROOT\rm\ installation.
+For successful compilation it might be necessary to adjust the variables \tt \$ROOT\_LIB\rm\ and \tt \$ROOT\_INC\rm\
+in the build scripts to match the directories with libraries and header files of your \tt ROOT\rm\ installation.
+In addition, a \tt CMakeLists.txt\rm\ file for use with the \tt cmake\rm\ build system is provided.
 
 \section{Setting up a work directory for \PWA}
 
@@ -427,21 +587,21 @@ can be selected indiviually later on. Any multipole with $L \leq L_\mathrm{max}$
 the calculation of CGLN amplitudes and observables as a parametrisation using the current model values.
 
 \item
-\tt FIX\_E\textit{n}P 0/1\rm\\
-\tt FIX\_M\textit{n}P 0/1\rm\\
-\tt FIX\_E\textit{n}M 0/1\rm\\
-\tt FIX\_M\textit{n}M 0/1\rm\\
-Any $E_{n+}$, $M_{n+}$, $E_{n-}$, $M_{n-}$ multipole can either be fixed (\tt1\rm) to their model values
+\tt FIX\_E\textit{l}P 0/1\rm\\
+\tt FIX\_M\textit{l}P 0/1\rm\\
+\tt FIX\_E\textit{l}M 0/1\rm\\
+\tt FIX\_M\textit{l}M 0/1\rm\\
+Any $E_{l+}$, $M_{l+}$, $E_{l-}$, $M_{l-}$ multipole can either be fixed (\tt1\rm) to their model values
 or be used as fit parameters (\tt0\rm).
 Fixing a multipole here fixes both magnitude and phase (or real and imaginary values).
 Hence any fittable multipole will add two parameters to the fitting process.
 
 \item
-\tt FIX\_E\textit{n}P\_PHASE 0/1\rm\\
-\tt FIX\_E\textit{n}M\_PHASE 0/1\rm\\
-\tt FIX\_M\textit{n}P\_PHASE 0/1\rm\\
-\tt FIX\_M\textit{n}M\_PHASE 0/1\rm\\
-For any $E_{n+}$, $M_{n+}$, $E_{n-}$, $M_{n-}$ multipole that was previously set as fittable the individual
+\tt FIX\_E\textit{l}P\_PHASE 0/1\rm\\
+\tt FIX\_E\textit{l}M\_PHASE 0/1\rm\\
+\tt FIX\_M\textit{l}P\_PHASE 0/1\rm\\
+\tt FIX\_M\textit{l}M\_PHASE 0/1\rm\\
+For any $E_{l+}$, $M_{l+}$, $E_{l-}$, $M_{l-}$ multipole that was previously set as fittable the individual
 phase can be either fixed (\tt1\rm) to its model value or be used as fit parameter (\tt0\rm). Fixing a phase
 will reduce the number of fit parameters by one and only fit the magnitude for the given multipole.
 
@@ -578,6 +738,7 @@ parameter \tt\textit{scale}\rm\ defines an overall scaling factor to the corresp
 a value of $\mbox{\tt\textit{scale}\rm} = 1.05$ will increase the data by 5\%.
 Multiple lines for observables with more than one dataset are possible (with individual values for
 \tt\textit{weight}\rm\ and \tt\textit{scale}\rm).
+The parameters \tt\textit{weight}\rm\ and \tt\textit{scale}\rm\ must not be omitted.
 
 \item
 \tt S\_FILE\bl\bl \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
@@ -597,10 +758,13 @@ parameter \tt\textit{scale}\rm\ defines an overall scaling factor to the corresp
 a value of $\mbox{\tt\textit{scale}\rm} = 0.95$ will decrease the data by 5\%.
 Multiple lines for observables with more than one dataset are possible (with individual values for
 \tt\textit{weight}\rm\ and \tt\textit{scale}\rm).
+The parameters \tt\textit{weight}\rm\ and \tt\textit{scale}\rm\ must not be omitted.
 
 \item
 \tt USE\_PRELIMINARY 0/1\rm\\
 Defines whether datasets tagged as `preliminary' in their respective files should be used (\tt1\rm) or not (\tt0\rm).
+With this option preliminary datasets need not be removed from the 
+\tt SG\textit{X}\_FILE\rm\ and \tt \textit{X}\_FILE\rm\ lists but their data will be ignored.
 \end{itemize}
 
 \subsection{Configuration of model values}
@@ -618,7 +782,6 @@ for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
 $+$ (\tt p\rm) or $-$ (\tt m\rm).
 
 \end{itemize}
-
 
 \subsection{Special options for $\pi^0$ threshold fits}
 
@@ -664,7 +827,7 @@ With this option enabled (\tt1\rm) SE fits are performed at energies given by $\
 
 \section{Data formats}
 
-The following sectiosn describe the different text data formats used by PWA for experimental observable data and model multipole values. 
+The following sections describe the different text data formats used by PWA for experimental observable data and model multipole values. 
 
 \subsection{Experimental observable data}
 
@@ -741,7 +904,7 @@ The following lines contain the actual observable data. Each line can hold up to
 Polar angle positions have to be given in degrees, observable values\footnote{Asymmetry values must be within a range
 of $[-1,+1]$.} for cross sections in $\mu$b/sr. Statistical and systematic
 errors must be absolute values, e.g. in $\mu$b/sr for cross sections.
-Systematic errors for each datapoint are optional and individual systematic uncertainties at each polar angle position
+Systematic errors for each data point are optional and individual systematic uncertainties at each polar angle position
 are not used by \PWA during the fit procedure.
 Each energy bin entry must be terminated by a sparator line like
 `\tt------------------------------\rm' (do not use blank lines to separate entries).
@@ -800,7 +963,7 @@ for electric multipoles, and
 for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity 
 $+$ (\tt p\rm) or $-$ (\tt m\rm).
 \PWA supports multipoles up to order $L = 9$.
-The energy steps in multipole files can be arbitrary, however a rather fine step size ($\sim 1\:\mathrm{MeV}$)
+The energy steps in multipole files can be arbitrary, however a rather fine step size ($\sim\hspace{-0.4em}1\:\mathrm{MeV}$)
 is recommended in order to have reasonably precise multipole information for any SE fit energy available
 (up to now, no interpolation on model values is performed).
 For $d$ wave multipoles additional model values may be provided, carrying only Born term contributions or Bern terms as well as 
@@ -827,7 +990,7 @@ Currently, for $p \pi^0$ the following models are provided: \vspace{-0.25em}\\
 \hspace{-0.5em}\tt model/ppi0/SAID\rm & SAID CM12 \cite{Model_SAID} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/ThrFit\rm & Empirical fit to $\pi^0$ threshold data \cite{PRL_pi0thres} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/ThrChPT4\rm & $\chi$PT (4$^\mathrm{th}$ order) \cite{Model_ChPT4} \vspace{-0.5em}\\
-\hspace{-0.5em}\tt model/ppi0/ThrHBChPT4\rm & Heavy-baryon $\chi$PT (4$^\mathrm{th}$ order) \cite{Model_HBChPT4} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/ThrHBChPT4\rm & Heavy-baryon $\chi$PT (4$^\mathrm{th}$ order) \cite{Model_ChPT4} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/ThrHDT97\rm & Hanstein, Drechsel, Tiator solution \cite{Model_HDT97} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/ThrLG\rm & Lutz, Gasparyan calculation \cite{Model_LG} \vspace{-0.1em}\\
 \end{tabular}
@@ -848,13 +1011,29 @@ For $p \eta$ the following models are provided: \vspace{-0.25em}\\
 \begin{tabular}{ll}
 \hspace{-0.5em}\tt model/ppi0/BG2011-01\rm & Bonn-Gatchina PWA (solution 2011-01) \cite{Model_BnGa} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/BG2011-02\rm & Bonn-Gatchina PWA (solution 2011-02) \cite{Model_BnGa} \vspace{-0.5em}\\
-\hspace{-0.5em}\tt model/ppi0/DMT\rm & DMT model \cite{Model_DMT} \vspace{-0.5em}\\
-\hspace{-0.5em}\tt model/ppi0/MAID\rm & $\eta$MAID 2000 \cite{Model_MAID} \vspace{-0.5em}\\
-\hspace{-0.5em}\tt model/ppi0/SAID\rm & SAID \cite{Model_SAID} \vspace{-0.1em}\\
+\hspace{-0.5em}\tt model/ppi0/MAID\rm & $\eta$MAID 2000 \cite{Model_etaMAID} \vspace{-0.5em}\\
+\hspace{-0.5em}\tt model/ppi0/SAID\rm & SAID \cite{Model_etaSAID} \vspace{-0.1em}\\
 \end{tabular}
 
+\subsection{\PWA output files}
 
-\section{Macros}
+\PWA will create \tt .root\rm\ files of \tt TCanvas\rm\ objects with \tt TGraph\rm\ representations of fitted multipoles
+and the model parameters used as start parameters during the fit. For each real and imaginary part of all multipoles up to
+$L_\mathrm{max}$ individual files are created in the directories \tt plots.\textit{n}\rm\ for the different found solutions.
+Files are named according to the scheme 
+\tt ReE\textit{l}p.root\rm, \tt ImE\textit{l}p.root\rm,
+\tt ReE\textit{l}m.root\rm, \tt ImE\textit{l}m.root\rm,
+\tt ReM\textit{l}p.root\rm, \tt ImM\textit{l}p.root\rm,
+\tt ReM\textit{l}m.root\rm, and \tt ImM\textit{l}m.root\rm
+for electric and magnetic multipoles of order \tt\textit{l}\rm\ and $+$ (\tt{p}\rm) or $-$ (\tt{m}\rm) parity.
+These files can be displayed directly from within a \tt .root\rm\ \tt TBrowser\rm.
+Further processing (e.g. generating plain text files with multipole results) is possible using the provided macros (see section
+\ref{sec_macros}).
+
+\section{Macros}\label{sec_macros}
+
+\PWA provides different \tt ROOT\rm\ macros for further processing of fit results. This includes macros for generating plain text
+files with multipole data as well as tools for drawing fitted multipoles and model calculations.
 
 \subsection{Macro functions in  \tt macros/Extract.cpp\rm}
 
@@ -908,7 +1087,7 @@ for electric multipoles, and
 for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
 $+$ (\tt p\rm) or $-$ (\tt m\rm). The plot will contain SE fit results as well as model predictions from the current
 values in the directory \tt model\rm.
-if \tt SAVE\rm\ is true, a PDF file of the plot is created. \tt Lo\rm\ and \tt Hi\rm\ denote the plot range on the $y$-axis, 
+if \tt SAVE\rm\ is true, a \tt.pdf\rm\ file of the plot is created. \tt Lo\rm\ and \tt Hi\rm\ denote the plot range on the $y$-axis, 
 if ommitted or equal 0, the range is automatically adjusted.
 \tt MASS\_INITIAL\rm\ (in MeV) is used for calculating the center-of-mass energy $W$. This parameter 
 is optional, if it is omitted the proton mass is assumed.
@@ -1004,6 +1183,138 @@ is optional, if it is omitted the proton mass is assumed.
 work directory (having subdirectories \tt plots.\textit{n}\rm).
 \end{itemize}
 
+\section{Isospin multipoles}
+
+
+\section{Datasets included in \PWA package}
+
+The \PWA package comes with a selection of different experimental datasets for cross sections and polarisation observables
+for $\pi^0$, $\pi^+$, and $\eta$ photoproduction. These datasets consist of recent Mainz, Bonn, and JLabmeasurements as well as
+some additional older results that are also present in the SAID database.
+
+\subsection{$\pi^0$ data}
+Datasets for $\pi^0$ photoproduction observables can be found in the directory 
+\tt data/ppi0\rm\ of the \PWA package. The following datasets for cross sections are provided:
+\begin{itemize}
+\item[$\sigma_0$:\:]
+\tt sg0\_CBMAMI\_2008\_Prakhov\_PRL111-062004.txt\rm \\
+\tt sg0\_CBMAMI\_2014\_Prakhov.txt\rm
+
+\item[$\sigma_T$:\:]
+\tt sgT\_CBMAMI\_2014\_Schumann-Otte.txt\rm
+
+\item[$\sigma_E$:\:]
+\tt sgE\_DAPHNE\_2001\_Preobrajenski.txt\rm
+
+\item[$\sigma_F$:\:]
+\tt sgF\_CBMAMI\_2014\_Schumann-Otte.txt\rm
+\end{itemize}
+The following datasets on polarisation asymmetries are provided:
+\begin{itemize}
+\item[$\Sigma$:\:]
+\tt S\_CBMAMI\_2008\_Prakhov\_PRL111-062004.txt\rm \\
+\tt S\_TAPSA2\_2001\_Leukel.txt\rm \\
+\tt S\_GRAAL\_2005\_Bartalini\_EPJA26-399.txt\rm
+
+\item[$T$:\:]
+\tt T\_CBMAMI\_2014\_Kashevarov.txt\rm \\
+\tt T\_CBELSA\_2014\_Hartmann\_PRL113-062001.txt\rm
+
+\item[$P$:\:]
+\tt P\_CBELSA\_2014\_Hartmann\_PRL113-062001.txt\rm \\
+\tt P\_DNPL\_1972\_Prentice\_NPB41-353.txt\rm \\
+\tt P\_DNPL\_1979\_Bussey\_NPB154-492.txt\rm \\
+\tt P\_KHARKOV\_1976\_Derebchinski\_JETP43-218.txt\rm \\
+\tt P\_KHARKOV\_1978\_Zybalov\_SJNP28-52.txt\rm \\
+\tt P\_KHARKOV\_1980\_Bratashevski\_NPB166-525.txt\rm \\
+\tt P\_KHARKOV\_1983\_Belyaev\_NPB213-201.txt\rm
+
+\item[$E$:\:]
+\tt E\_CBELSA\_2014\_Gottschall\_PRL112-012003.txt\rm
+
+\item[$F$:\:]
+\tt F\_CBMAMI\_2014\_Kashevarov.txt\rm
+
+\item[$G$:\:]
+\tt G\_DAPHNE\_2005\_Ahrens\_EJPA26-135.txt\rm \\
+\tt G\_CBELSA\_2012\_Thiel\_PRL109-102001.txt\rm
+
+\item[$H$:\:]
+\tt H\_CBELSA\_2014\_Hartmann\_PRL113-062001.txt\rm
+\end{itemize}
+
+\subsection{$\pi^+$ data}
+Datasets for $\pi^+$ photoproduction observables can be found in the directory 
+\tt data/npip\rm\ of the \PWA package. The following datasets for cross sections are provided:
+\begin{itemize}
+\item[$\sigma_0$:\:]
+\tt sg0\_JLAB\_2009\_Dugger\_PRC79-065206.txt\rm \\
+\tt sg0\_DAPHNE\_2004\_Ahrens\_EPJA21-323.txt\rm \\
+\tt sg0\_DAPHNE\_2000\_Beck\_PRC61-034604.txt\rm \\
+\tt sg0\_MAMI\_1999\_Branford\_PRC61-014603.txt\rm \\
+\tt sg0\_SAL\_1996\_Fisum\_PRC53-1278.txt\rm \\
+\tt sg0\_SAL\_1999\_Korkmaz\_PRL83-3609.txt\rm \\
+\tt sg0\_PHOENICS\_1994\_Buechler\_NPA570-580.txt\rm \\
+\tt sg0\_TOKYO\_1979\_Fujii\_NPB120-395.txt\rm \\
+\tt sg0\_BONN\_1972\_Fischer\_ZP253-38.txt\rm \\
+\tt sg0\_ORSAY\_1968\_Betourne\_PR172-1343.txt\rm \\
+\tt sg0\_ORSAY\_1962\_Walker\_PRL8-37.txt\rm \\
+\tt sg0\_CALTECH\_1967\_Ecklund\_PR159-1195.txt\rm \\
+\tt sg0\_GLASGOW\_1964\_Leith\_PL8-355.txt\rm
+
+\item[$\sigma_E$:\:]
+\tt sgE\_DAPHNE\_2001\_Preobrajenski.txt\rm
+\end{itemize}
+The following datasets on polarisation asymmetries are provided:
+\begin{itemize}
+\item[$\Sigma$:\:]
+\tt S\_JLAB\_2013\_Dugger\_PRC88-065203.txt\rm \\
+\tt S\_DAPHNE\_2000\_Beck\_PRC61-034604.txt\rm \\
+\tt S\_GRAAL\_2000\_Ajaka\_PLB475-372.txt\rm \\
+\tt S\_GRAAL\_2002\_Bartalini\_PLB544-113.txt\rm \\
+\tt S\_LEGS\_2001\_Blanpied\_PRC64-025203.txt\rm \\
+\tt S\_KHARKOV\_1989\_Getman\_VANT8-3.txt\rm \\
+\tt S\_KHARKOV\_1976\_Ganenko\_SJNP23-52.txt\rm \\
+\tt S\_DNPL\_1979\_Bussey\_NPB154-205.txt\rm \\
+\tt S\_STANFORD\_1963\_Smith\_PR130-2429.txt\rm
+
+\item[$T$:\:]
+\tt T\_PHOENICS\_1996\_Dutz\_NPA601-319.txt\rm \\
+\tt T\_KHARKOV\_1981\_Getman\_NPB188-397.txt\rm \\
+\tt T\_DNPL\_1979\_Bussey\_NPB154-205.txt\rm
+
+\item[$P$:\:]
+\tt P\_KHARKOV\_1981\_Getman\_NPB188-397.txt\rm \\
+\tt P\_DNPL\_1979\_Bussey\_NPB154-205.txt\rm
+
+\item[$G$:\:]
+\tt G\_DAPHNE\_2005\_Ahrens\_EJPA26-135.txt\rm \\
+\tt G\_KHARKOV\_1984\_Belyaev\_SJNP40-83.txt\rm \\
+\tt G\_DNPL\_1980\_Bussey\_NPB169-403.txt\rm
+
+\item[$H$:\:]
+\tt H\_KHARKOV\_1986\_Belyaev\_SNJP43-947.txt\rm \\
+\tt H\_DNPL\_1980\_Bussey\_NPB169-403.txt\rm
+\end{itemize}
+
+\subsection{$\eta$ data}
+Datasets for $\eta$ photoproduction observables can be found in the directory 
+\tt data/peta\rm\ of the \PWA package. The following datasets for cross sections are provided:
+\begin{itemize}
+\item[$\sigma_0$:\:]
+\tt sg0\_CBMAMI\_2010\_McNicoll\_PRC82-035208.txt\rm
+\end{itemize}
+The following datasets on polarisation asymmetries are provided:
+\begin{itemize}
+\item[$\Sigma$:\:]
+\tt S\_GRAAL\_2007\_Bartalini\_EPJA33-169.txt\rm
+
+\item[$T$:\:]
+\tt T\_CBMAMI\_2014\_Kashevarov\_PRL113-102001.txt\rm
+
+\item[$F$:\:]
+\tt F\_CBMAMI\_2014\_Kashevarov\_PRL113-102001.txt\rm
+\end{itemize}
 
 
 \begin{thebibliography}{00}
@@ -1015,20 +1326,34 @@ D. Hornidge et al.,
 Phys. Rev. Lett. \textbf{111}, 062004 (2013)
 
 \bibitem{Model_BnGa}
+\tt http://pwa.hiskp.uni-bonn.de/baryon\_x.htm\rm
 
 \bibitem{Model_DMT}
+\tt http://portal.kph.uni-mainz.de/MAID/dmt/dmt2001.html\rm
 
 \bibitem{Model_MAID}
+\tt http://portal.kph.uni-mainz.de/MAID/maid2007/maid2007.html\rm
 
 \bibitem{Model_SAID}
+\tt http://gwdac.phys.gwu.edu/analysis/pr\_analysis.html\rm
 
 \bibitem{Model_ChPT4}
-
-\bibitem{Model_HBChPT4}
+M. Hilt, S. Scherer, L. Tiator,
+arXiv:1301.5576 [nucl-th]
 
 \bibitem{Model_HDT97}
+O. Hanstein, D. Drechsel, L. Tiator,
+Phys. Lett. B \textbf{399}, 13 (1997)
 
 \bibitem{Model_LG}
+A. Gasparyan, M.F.M. Lutz,
+Nucl. Phys. A \textbf{848}, 126 (2010)
+
+\bibitem{Model_etaMAID}
+\tt http://portal.kph.uni-mainz.de/MAID/eta/etamaid.html\rm
+
+\bibitem{Model_etaSAID}
+\tt http://gwdac.phys.gwu.edu/analysis/pre\_analysis.html\rm
 
 \end{thebibliography}
 
