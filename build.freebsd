@@ -4,4 +4,4 @@ export ROOT_INC=$ROOTSYS/include/root
 
 gcc cmake/IncreaseBuild.c -o build/bin/IncreaseBuild
 build/bin/IncreaseBuild src/Build.h
-gcc src/*.cpp -fPIC -pthread -w -O3 -s -march=native -L$ROOT_LIB -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lGui -pthread -lm -rdynamic -lEG -lstdc++ -I$ROOT_INC -lMinuit -o build/bin/PWA
+gcc src/*.cpp -fPIC -pthread -w -O3 -s -march=native -L$ROOT_LIB -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lGui -lm -rdynamic -lEG -lstdc++ -I$ROOT_INC -lMinuit -o build/bin/PWA
