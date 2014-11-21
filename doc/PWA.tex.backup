@@ -62,7 +62,9 @@ meson photoproduction ($\pi$, $\eta$, $K$, ...) from experimental cross sections
 and/or asymmetry observables. Multipoles are extracted using a standard $\chi^2$ minimisation scheme with the
 possibility to add additional constraints imposed by existing partial wave analyses and models for meson photoproduction
 (MAID, SAID, BnGa, ...). These constraints are implemented using so-called penalty terms, giving an additional
-contribution in the minimisation process.
+contribution in the minimisation process. The maximum multipole order $L_\mathrm{max}$ which is considered to contribute to
+physical observables can be adjusted up to $L_\mathrm{max} = 10$. Indvidiual multipoles can either be fitted in
+real and imaginary parts, with fixed phases but fittable magnitude, or can be fixed to model predictions completely.
 
 \section{$\chi^2$ minimisation and multipole extraction}
 
@@ -102,9 +104,13 @@ in form of the four CGLN amplitudes $F_i$ according to
                                                  \right\rbrace \cdot \rho\\
 \sigma_0 G     & = & \sin^2\theta \:\Im\left\lbrace F_2\cc F_3 + F_1\cc F_4\:
                                                 \right\rbrace \cdot \rho\\
-\sigma_0 H\,     & = & \sin\theta \:\Im \left\lbrace 2 F_1\cc F_2 + F_1\cc F_3 
+\sigma_0 H_{\phantom{z^\prime}}     & = & \sin\theta \:\Im \left\lbrace 2 F_1\cc F_2 + F_1\cc F_3 
                                                - F_2\cc F_4 -\cos\theta\left( F_2\cc F_3 - F_1\cc F_4 \right)
                                                  \right\rbrace \cdot \rho\\
+\end{array}
+\end{displaymath}
+\begin{displaymath}\label{frm_Obs2}
+\begin{array}{lll}
 \sigma_0 O_{x^\prime} & = & -\sin\theta \:\Im \left\lbrace F_1\cc F_4 - F_2\cc F_3
                                                       + \cos\theta\left(F_1\cc F_3 - F_2\cc F_4\right)
                                                        \right\rbrace \cdot \rho\\
@@ -118,6 +124,8 @@ in form of the four CGLN amplitudes $F_i$ according to
                                                       +\sin^2\theta\left(F_1\cc F_3 + F_2\cc F_4\right)
                                                       -\cos\theta\left(|F_1|^2+|F_2|^2\right)
                                                        \right\rbrace \cdot \rho\\
+
+&&\phantom{\Re \left\lbrace |F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2  + \frac{1}{2}\sin^2\theta\left[ |F_3|^2 + |F_4|^2 + 2 F_2\cc  F_3    + 2 F_1\cc  F4 + 2\cos\theta F_3\cc F_4\right] \right\rbrace \cdot \rho}\vspace{-1.5em}\\
 \end{array}
 \end{displaymath}
 with a phase space factor $\rho = \frac{q}{k}$ given by pion and photon momenta $q$ and $k$. The CGLN amplitudes
@@ -459,15 +467,30 @@ have a smooth energy dependence with respect to their neighbouring energy points
 
 \section{Observable rescaling}
 
-During fits \PWA has the possibility to rescale observable datasets (that is all data points for a given energy from
-a single experiment/measurement) within a given systematic uncertainty to achieve a better agreement between
-different datasets. Technically this is done by additional fit parameters for scaling each observable 
-and a penalty term, which penalises any deviation from the nominal values. This penalty term is given by
+During fits \PWA has the possibility to rescale observable datasets (that is all data points for a given energy)
+within given systematic uncertainties to achieve a better agreement between
+different datasets. Technically this is done by additional fit parameters $s_\Omega$ for scaling each
+observable and a penalty term, which penalises any deviation from the nominal values. This penalty term and the modified $\chi^2$
+contribution (including the scaling parameter) for an observable $\Omega$ (cross sections and asymmetries) are given by
 \begin{displaymath}
- S = \sum\limits_X\left[ N_{\mathrm{pts},X} \cdot \frac{(s_X - 1)^2}{\delta_X^2}\right]
+ Q_s = q_s\cdot \sum\limits_\Omega\left[ N_{\mathrm{pts},\Omega} \cdot \left(\frac{s_\Omega - 1}{\delta_\Omega}\right)^2\right]
 \end{displaymath}
-where $X$ denotes the different photoproduction observables (cross sections and asymmetries) while
-$s_X$ represents the additional fit parameter that is used to scale the respective observable $X$.
+and
+\begin{displaymath}
+\chi_\Omega^2
+= \sum\limits_i \left(
+\frac
+{s_\Omega \Omega^\mathrm{exp}(\theta_i) - \Omega^\mathrm{fit}(\theta_i)}
+{s_\Omega\Delta \Omega^\mathrm{exp}(\theta_i)}
+\right)^2
+\end{displaymath}
+The relative systematic uncertainty (e.g. $5\% = 0.05$) is given by $\delta_\Omega$, while $N_{\mathrm{pts},\Omega}$
+is the number of data points for observable $\Omega$. Making the individual contributions proportional
+to  $N_{\mathrm{pts},\Omega}$ ensures that rescaling observables with many data points gets more `expensive'
+than observables with only very few points, and provides a similar scaling behaviour
+for $Q_s$ as  for $\chi^2$ (which is proportional to $N_\mathrm{pts} = \sum N_{\mathrm{pts},\Omega} $).
+The additional global weight factor $q_s$ can be used to adjust the strength of the rescaling. Small values for
+$q_s$ decrease the penalty contribution and hence give the fitting process more freedom to rescale observables.
 
 \section{\PWA installation}
 
@@ -638,7 +661,10 @@ Selects a minimisation function for error calculation through MINUIT. Possible o
 \item[1\:\:] Use only $\chi^2$ function for error determination. This is the mathematically most sound approach, as the definition of
 parameter error ranges is based on the variation of $\chi^2 \rightarrow \chi^2 +1$. However, for a
 minimisation with penalty contributions, the minima for $\chi^2$ only and $\chi^2+Q$ are not necessarily
-identical and the behaviour of $\chi^2$ only around the chosen minimum might result in ill-defined parameter errors.
+identical and the behaviour of $\chi^2$ only around the chosen $\chi^2+Q$ minimum might result in ill-defined parameter
+errors\footnote{When varying $\chi^2$ around a non-minimum position the first derivations of parameters might be negative
+(indicating the possibility to find a lower $\chi^2$ nearby). So the error matrix is not necessarily always positive definite.
+MINUIT tries to estimate errors in such cases, but the results are probably not fully reliable.}.
 \item[2\:\:] Use sum of $\chi^2$ and current penalty $Q$ for error determination. This might in general overestimate
 parameter errors but will always produce well-defined results.
 \item[3\:\:] Use an adaptive mode that prefers the $\chi^2$ only calculation but falls back to the 
@@ -810,6 +836,59 @@ Selects which contributions for $d$ waves is used (if supported by the current m
 With this option enabled (\tt1\rm) SE fits are performed at energies given by $\sigma_T$ data instead of $\sigma_0$.
 \end{itemize}
 
+\section{Fitting with \PWA}
+
+To perform SE fits with \PWA simply execute\\
+\PWA \tt [\textit{PWA.cfg}] \rm \\
+in your work directory. For each SE fit position \PWA will output a summary like
+\begin{verbatim}
+------------------------------------------------------------------------------------
+omega = 727.200 MeV, W = 1498.325 MeV
+Mlp  |  Fit (Chi^2/NDF =  0.828, NDF =  23)       |  Model               |  Chi'^2
+-----+--------------------------------------------+----------------------+----------
+E0+  |  ( -5.440 +- 0.469) + ( -7.175 +- 0.618)i  |   -8.866 + -11.695i  |   53.4906
+E1+  |  (  1.963 +- 0.319) + (  0.542 +- 0.360)i  |   -0.004 +  -0.044i  |   18.2068
+M1+  |  (  1.908 +- 0.317) + (  1.044 +- 0.419)i  |    0.014 +  -0.034i  |   17.2096
+M1-  |  ( -1.410 +- 0.799) + (  7.377 +- 0.826)i  |    0.231 +  -0.315i  |   46.8098
+E2+  |  ( -0.096 +- 0.192) + (  0.313 +- 0.147)i  |   -0.001 +   0.000i  |    1.8285
+E2-  |  (  0.271 +- 0.326) + ( -0.132 +- 0.397)i  |   -0.095 +  -0.160i  |    0.5122
+M2+  |  ( -0.308 +- 0.179) + (  0.270 +- 0.165)i  |    0.008 +  -0.006i  |    2.9562
+M2-  |  ( -0.174 +- 0.293) + ( -0.716 +- 0.266)i  |   -0.040 +  -0.088i  |    2.6338
+E3+  |  ( -0.571 +- 0.105) + (  0.378 +- 0.080)i  |   -0.000 +  -0.000i  |   26.7770
+E3-  |  ( -0.100 +- 0.139) + ( -0.252 +- 0.142)i  |   -0.002 +   0.000i  |    1.8658
+M3+  |  ( -0.437 +- 0.098) + (  0.353 +- 0.098)i  |   -0.000 +  -0.001i  |   16.3666
+M3-  |  (  0.056 +- 0.137) + (  0.373 +- 0.129)i  |   -0.001 +  -0.000i  |    3.9924
+E4+  |  ( -0.312 +- 0.057) + ( -0.097 +- 0.043)i  |    0.000 +   0.000i  |   20.8915
+E4-  |  (  0.094 +- 0.046) + ( -0.134 +- 0.073)i  |   -0.000 +   0.000i  |    3.6069
+M4+  |  ( -0.324 +- 0.053) + ( -0.050 +- 0.046)i  |   -0.000 +  -0.000i  |   21.6926
+M4-  |  ( -0.030 +- 0.041) + (  0.068 +- 0.078)i  |   -0.000 +  -0.000i  |    0.7070
+E5+  |  (  0.000 +- 0.000) + (  0.000 +- 0.000)i  |    0.000 +  -0.000i  |    0.0000
+E5-  |  (  0.000 +- 0.000) + (  0.000 +- 0.000)i  |    0.000 +  -0.000i  |    0.0000
+M5+  |  (  0.000 +- 0.000) + ( -0.000 +- 0.000)i  |    0.000 +  -0.000i  |    0.0000
+M5-  |  ( -0.000 +- 0.000) + (  0.000 +- 0.000)i  |   -0.000 +   0.000i  |    0.0000
+-----+--------------------------------------------+----------------------+----------
+Chi^2 =   19.03, Penalty =    0.00, Scale =  0.00, NPts =  54, NPar = 31, NDF =  23
+------------------------------------------------------------------------------------
+\end{verbatim}
+The last column quantifies the deviation of the fit result compared to the used model prediction 
+for each multipole $\mathcal{M}_{L\pm}$ according to
+\begin{displaymath}
+ \chi^{\prime2} = \frac{|\mathcal{M}_{L\pm}^\mathrm{sol} - \mathcal{M}_{L\pm}^\mathrm{fit}|^2}{|\Delta\mathcal{M}_{L\pm}^\mathrm{fit}|^2}
+\end{displaymath}
+The last line, which only occurs of the configuration option \tt PRINT\_PENALTY\rm\ is set, summarises
+the different contributions ($\chi^2$, penalty $Q_{1...5}$, observable scaling penalty $Q_s$)
+to the $f_\mathrm{FCN}$ funtion, as well as the number of experimental data points ($N_\mathrm{pts}$) for the current energy,
+the number of fit parameters ($N_\mathrm{par}$), and the resulting degrees of freedom (\textit{NDF}).
+The above example was executed with observable rescaling disabled and without penalty.
+If you also want to store these summary printouts, it is recommended to use the output redirection of your Unix shell, e.g. 
+execute\\
+\PWA \tt [\textit{PWA.cfg}] > PWA.out \rm \\
+or\\
+\PWA \tt [\textit{PWA.cfg}]  | tee PWA.out \rm \\
+The second version has the advantage that the \PWA output is written to both the screen and the output file \tt PWA.out\rm.
+In addition to these summary outputs \PWA will also create \tt.root\rm\ files with results for each multipole that can be used
+for further processing (see sections \ref{sec_output} and \ref{sec_macros}).
+
 \section{Data formats}
 
 The following sections describe the different text data formats used by PWA for experimental observable data and model multipole values. 
@@ -902,7 +981,7 @@ Experimental data files reside in the folders \tt data/ppi0\rm, \tt data/npip\rm
 You can add or create additional files in any folder, as data files will be referenced through the 
 \tt PWA.cfg\rm\ file for your fit settings.
 
-\subsection{Model multipoles}
+\subsection{Model multipoles}\label{sec_models}
 
 \PWA needs model calculations for electromagnetic multipoles for use as start parameters and (if applicable) in penalty calculations.
 These multipole files must reside in a directory \tt model\rm\ in your \PWA work directory, where
@@ -1000,7 +1079,7 @@ For $p \eta$ the following models are provided: \vspace{-0.25em}\\
 \hspace{-0.5em}\tt model/ppi0/SAID\rm & SAID \cite{Model_etaSAID} \vspace{-0.1em}\\
 \end{tabular}
 
-\subsection{\PWA output files}
+\subsection{\PWA output files}\label{sec_output}
 
 \PWA will create \tt .root\rm\ files of \tt TCanvas\rm\ objects with \tt TGraph\rm\ representations of fitted multipoles
 and the model parameters used as start parameters during the fit. For each real and imaginary part of all multipoles up to
@@ -1021,6 +1100,11 @@ Further processing (e.g. generating plain text files with multipole results) is 
 files with multipole data as well as tools for drawing fitted multipoles and model calculations.
 
 \subsection{Macro functions in  \tt macros/Extract.cpp\rm}
+
+The file \tt Extract.cpp\rm\ provides a selection of different \tt ROOT\rm\ macros to plot multipole information
+and create plain text files with SE fit results. These macros are made available by executing\\
+\tt .L /home/\textit{username}/PWA/macros/Extract.cpp\rm\\
+from a \tt ROOT\rm\ command line.
 
 \begin{itemize}
 \item
@@ -1063,7 +1147,7 @@ work directory (having subdirectories \tt plots.\textit{n}\rm).
 \phantom{Multipole(}Bool\_t SAVE=false, Double\_t Lo=0.0, Double\_t Hi=0.0,\\
 \phantom{Multipole(}Double\_t MASS\_INITIAL=938.2720, Int\_t D\_WAVES=MODEL)\rm
 
-Plots the given multipole (real and imaginary part) \tt Mlp\rm\ for solutions between \tt SolLo\rm\ and \tt SolHi\rm.
+Plots the given multipole (real and imaginary parts) \tt Mlp\rm\ for solutions between \tt SolLo\rm\ and \tt SolHi\rm.
 \tt Mlp\rm\ must be given in the form \tt ''E\textit{l}p''\rm,
 \tt ''E\textit{l}m''\rm\ 
 for electric multipoles, and
@@ -1131,7 +1215,7 @@ work directory (having subdirectories \tt plots.\textit{n}\rm\ and \tt model\rm)
 \tt Model(Char\_t* Mlp, Bool\_t W=true, Bool\_t SAVE=false, Double\_t Lo=0.0, Double\_t Hi=0.0,\\
 \phantom{Model(}Double\_t MASS\_INITIAL=938.2720, Int\_t D\_WAVES=MODEL)\rm
 
-Plots model predictions for the given multipole (real and imaginary part) \tt Mlp\rm.
+Plots model predictions for the given multipole (real and imaginary parts) \tt Mlp\rm.
 \tt Mlp\rm\ must be given in the form \tt ''E\textit{l}p''\rm,
 \tt ''E\textit{l}m''\rm\ 
 for electric multipoles, and
@@ -1169,6 +1253,119 @@ work directory (having subdirectories \tt plots.\textit{n}\rm).
 \end{itemize}
 
 \section{Isospin multipoles}
+
+During the SE fits \PWA only determines multipole amplitudes for the chosen reaction (e.g. $A_{p \pi^0}$ or $A_{n \pi^+}$).
+For reactions on an initial proton these charge channel multipoles are related to isospin
+$I = {}_p\frac{1}{2}$ and $I = \frac{3}{2}$ multipoles according to
+\begin{displaymath}
+\begin{array}{lll}
+A_{p \pi^0} &=& \phantom{\sqrt{2}}\hspace{0.75em}A_p^{1/2} + \frac{2}{3} A^{3/2}\\
+A_{n \pi^+} &=& \sqrt{2}\left(A_p^{1/2} - \frac{1}{3} A^{3/2}\right)
+\end{array}
+\end{displaymath}
+or the inverted relations
+\begin{displaymath}
+\begin{array}{lll}
+A_p^{1/2} &=& \frac{1}{3}\left(\sqrt{2}A_{n \pi^+} + \phantom{\frac{1}{\sqrt{2}}} A_{p \pi^0}\right)\\
+A^{3/2} &=& \phantom{\frac{1}{3}\sqrt{2}}\hspace{0.77em} A_{p \pi^0} \hspace{0.24em}- \frac{1}{\sqrt{2}} A_{n \pi^+}
+\end{array}
+\end{displaymath}
+The directory \tt isospin\rm\ within the main of the \PWA package contains some tools to create isospin multipoles
+from charge channel multipole fit results.
+
+\subsection{\tt isospin\rm\ directory contents}
+
+The \tt isospin\rm\ directory (which acts as some sort of `isospin working directory') contains several sudirectories
+\begin{itemize}
+\item
+\tt data/ppi0\rm\ and \tt data/npip\rm\\
+These directories hold SE multipole results obtained from \PWA fits on $p\pi^0$ and $n\pi^+$ data. These multipoles
+must have the text format created by the \tt Extract()\rm\ function and follow the naming scheme
+\tt E\textit{l}p.txt\rm,
+\tt E\textit{l}m.txt\rm\ 
+for electric multipoles, and
+\tt M\textit{l}p.txt\rm,
+\tt M\textit{l}m.txt\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
+$+$ (\tt p\rm) or $-$ (\tt m\rm).
+So, basically the \tt data/ppi0\rm\ and \tt data/npip\rm\ directories hold copies of the multipole data created
+by \tt Extract()\rm\ in the \tt plots.\textit{n}\rm\ directories.
+\item
+\tt model/ppi0\rm\ and \tt model/npip\rm\\
+These directories hold files for theoretical model multipoles, that are identical to the file format described in section
+\ref{sec_models}. In fact it is recommended to organise \tt model/ppi0\rm\ and \tt model/npip\rm\ as
+symbolic links to the desired model, e.g. use\\
+\tt ln -s /home/\textit{username}/PWA/model/ppi0/MAID/ /home/\textit{username}/PWA/isospin/model/ppi0\rm\\
+\tt ln -s /home/\textit{username}/PWA/model/npip/MAID/ /home/\textit{username}/PWA/isospin/model/npip\rm\\
+Model values for charge channel multipoles are only used for plotting multipoles, extraction
+of isospin multipoles uses the analytic relations above and is model-independent.
+\item 
+\tt isospin\rm\\
+This directory will hold text files for isospin multipoles determined from $p\pi^0$ and $n\pi^+$ charge
+channel multipoles. These isospin multipole files follow the naming scheme
+\tt E\textit{l}p\_p12.txt\rm,
+\tt E\textit{l}m\_p12.txt\rm\ 
+for electric $_p\frac{1}{2}$ multipoles,
+\tt E\textit{l}p\_32.txt\rm,
+\tt E\textit{l}m\_32.txt\rm\ 
+for electric $\frac{3}{2}$ multipoles,
+\tt M\textit{l}p\_p12.txt\rm,
+\tt M\textit{l}m\_p12.txt\rm\ 
+for magnetic $_p\frac{1}{2}$ multipoles, and
+\tt M\textit{l}p\_32.txt\rm,
+\tt M\textit{l}m\_32.txt\rm\ 
+for magnetic $\frac{3}{2}$ multipoles,
+all with angular momentum \tt\textit{l}\rm, and parity
+$+$ (\tt p\rm) or $-$ (\tt m\rm).
+The isospin multipole file format is identical to the charge channel multipole format created by \tt Extract()\rm\
+and contains a two-line header and multipole data formed by
+center-of-mass energy $W$ as well as values and errors for real and imaginary parts.
+
+\end{itemize}
+
+\subsection{Isospin multipole macros in \tt isospin/macros/IsoExtract.cpp\rm}
+
+The file \tt IsoExtract.cpp\rm\ provides a selection of different \tt ROOT\rm\ macros to create and plot isospin
+multipoles. These macros are made available by executing\\
+\tt .L /home/\textit{username}/PWA/isospin/macros/IsoExtract.cpp\rm\\
+from a \tt ROOT\rm\ command line.
+
+\begin{itemize}
+\item
+\tt IsoExtract(Int\_t L\_MAX = 5, Double\_t W\_LO=0.0, Double\_t W\_HI=2500.0)\rm\\
+Creates isospin $I = {}_p\frac{1}{2}$ and $I = \frac{3}{2}$ multipoles from $p \pi^0$ and
+$n \pi^+$ charge channel multipoles up to order \tt L\_MAX\rm\ for an center-of-mass energy range
+between \tt W\_LO\rm\ and \tt W\_HI\rm. Parameters are optional, if omitted the given defaults are used.
+Charge channel multipoles up to \tt L\_MAX\rm\ \textbf{must} be present in the 
+\tt data/ppi0\rm\ and \tt data/npip\rm\ directories. Output multipole tables will be written to the 
+\tt isospin\rm\ subdirectory.
+\tt IsoExtract()\rm\ will perform multipole calculations on either $p \pi^0$ or $n \pi^+$
+SE fit energies, depending on which channel has more energy points (typically this will be $p \pi^0$).
+If $p \pi^0$ and $n \pi^+$ energies do not match, the closest energy position from the corresponding 
+channel is used without applying any interpolation scheme.
+\item
+\tt IsoMultipole(Char\_t* Mlp, Char\_t* Iso, Bool\_t SAVE=false,\\
+\phantom{IsoMultipole(}Double\_t Lo=0.0, Double\_t Hi=0.0)\rm\\
+Plots the given isospin multipole (real and imaginary parts) \tt Mlp\rm.
+\tt Mlp\rm\ must be given in the form \tt ''E\textit{l}p''\rm,
+\tt ''E\textit{l}m''\rm\ 
+for electric multipoles, and
+\tt ''M\textit{l}p''\rm,
+\tt ''M\textit{l}m''\rm\ 
+for magnetic multipoles, with angular momentum \tt\textit{l}\rm, and parity
+$+$ (\tt p\rm) or $-$ (\tt m\rm). \tt Isospin\rm\ must be given as \tt ''p12''\rm\ and \tt ''32''\rm\
+for isospin $I = {}_p\frac{1}{2}$ and $I = \frac{3}{2}$.
+The plot will contain SE fit results as well as model predictions from the current
+values in the directory \tt model\rm.
+if \tt SAVE\rm\ is true, a \tt.pdf\rm\ file of the plot is created. \tt Lo\rm\ and \tt Hi\rm\ denote the plot range on the $y$-axis, 
+if ommitted or equal 0, the range is automatically adjusted.
+\textbf{Note:} For successful operation of \tt IsoMultipole()\rm\ it is necessary to have produced
+fitted multipole text files with \tt IsoExtract()\rm\ beforehand once. \tt IsoMultipole()\rm\ must be executed from your
+work directory (having subdirectories \tt data\rm\ and \tt model\rm).
+
+
+\end{itemize}
+
 
 
 \section{Datasets included in \PWA package}

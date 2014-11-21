@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=latex 2012.2.1)  20 NOV 2014 18:03
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=latex 2012.2.1)  21 NOV 2014 14:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -354,47 +354,47 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 511.
- [6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 842--847
+ [6] [7] [8] [9] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 898--903
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 849--893
-
- []
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 930--934
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 936--950
+Underfull \hbox (badness 10000) in paragraph at lines 905--949
 
  []
 
 [11]
+Underfull \hbox (badness 10000) in paragraph at lines 986--990
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 992--1006
+
+ []
+
+[12]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1026.
- [12]
-Underfull \hbox (badness 10000) in paragraph at lines 1052--1068
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1082.
+ [13]
+Underfull \hbox (badness 10000) in paragraph at lines 1113--1129
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1070--1078
+Underfull \hbox (badness 10000) in paragraph at lines 1131--1139
 
  []
 
-[13] [14] [15] [16] (./PWA.aux) ) 
+[14] [15] [16] [17] [18] (./PWA.aux) ) 
 Here is how much of TeX's memory you used:
- 3300 strings out of 493634
- 39756 string characters out of 3150863
- 104089 words of memory out of 3500000
- 6481 multiletter control sequences out of 15000+200000
+ 3302 strings out of 493634
+ 39780 string characters out of 3150863
+ 104113 words of memory out of 3500000
+ 6483 multiletter control sequences out of 15000+200000
  30134 words of font info for 98 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 27i,12n,24p,250b,259s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,12n,24p,250b,318s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on PWA.dvi (16 pages, 92808 bytes).
+Output written on PWA.dvi (18 pages, 106284 bytes).
