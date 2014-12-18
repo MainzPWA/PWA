@@ -652,6 +652,25 @@ int main(int argc, char **argv)
   Init();
   Load();
   PWA();
+
+  //for(Int_t e=0; e<maid_bin; e++)
+  //{
+  //  gEnergy = maid_en[e];
+  //  if(gEnergy > 190.0) exit(0);
+  //  Int_t bin = GetEnergyBin_maid();
+  //  for(Int_t l=0; l<3; l++)
+  //  {
+  //    Ep[l] = maid_Ep[l][bin];
+  //    Em[l] = maid_Em[l][bin];
+  //    Mp[l] = maid_Mp[l][bin];
+  //    Mm[l] = maid_Mm[l][bin];
+  //  }
+  //  printf("E =  %7.3f MeV, Wght = 1.00, Syst = 0.000000\n", maid_en[e]);
+  //  for(Double_t t=5.0; t<180.0; t+=10.0)
+  //    //printf("%f %f 0.0000005 0.000000\n", t, sigmaT(t, maid_en[e]));
+  //    printf("%f %f 0.0000005 0.000000\n", t, sigmaF(t, maid_en[e]));
+  //  printf("-----------------------------------------------------\n");
+  //}
 }
 
 //-----------------------------------------------------------------------------
