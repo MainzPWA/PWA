@@ -1,7 +1,7 @@
 static const Double_t MASS_PROTON  = 938.2720;
 static const Double_t MASS_NEUTRON = 939.5654;
 static const Int_t N_MAX = 1024;
-static const Int_t LBINS = 10;
+static const Int_t LBINS = 11;
 static const Int_t SOL = 16;
 
 static const Int_t RED[SOL]  = { kRed+2,  kRed-3,  kRed-6,  kRed-9,  kRed-10, kRed-10, kRed-10, kRed-10,
