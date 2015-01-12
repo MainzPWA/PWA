@@ -310,6 +310,7 @@ Double_t PenaltyCGLN()
   Double_t CosTheta, DCosTheta;
   Double_t SumSq = 0.0;
 
+  if(Nsteps > NSTEPS) Nsteps = NSTEPS;
   DCosTheta = 2.0/Nsteps; //Calculate costheta step size
   for(Int_t n=0; n<Nsteps; n++)
   {
@@ -333,6 +334,7 @@ Double_t PenaltyHELI()
   Double_t CosTheta, DCosTheta;
   Double_t SumSq = 0.0;
 
+  if(Nsteps > NSTEPS) Nsteps = NSTEPS;
   DCosTheta = 2.0/Nsteps; //Calculate costheta step size
   for(Int_t n=0; n<Nsteps; n++)
   {

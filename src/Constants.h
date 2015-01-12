@@ -63,4 +63,5 @@ static const Int_t LBINS  = 11;
 static const Int_t FINITE = 16;
 static const Int_t SOL = 16;
 static const Int_t OBS = 31;
+static const Int_t NSTEPS = 40;
 #endif
