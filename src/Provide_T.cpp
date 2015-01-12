@@ -168,7 +168,7 @@ Double_t GetScale_T()
   Int_t nT = GetEnergyBins_T(eT); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nT; n++) //Process all found bins
-    Scale_T+=(1.0*T_pts[eT[n]])*(f_obs[ASY_T]-1.0)*(f_obs[ASY_T]-1.0)/(T_sy[eT[n]]*T_sy[eT[n]]);
+    Scale_T+=(f_obs[ASY_T]-1.0)*(f_obs[ASY_T]-1.0)*T_pts[eT[n]]/(T_sy[eT[n]]*T_sy[eT[n]]);
 
   return Scale_T;
 }

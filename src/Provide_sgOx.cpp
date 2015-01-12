@@ -168,7 +168,7 @@ Double_t GetScale_sgOx()
   Int_t nOx = GetEnergyBins_sgOx(eOx); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nOx; n++) //Process all found bins
-    Scale_sgOx+=(1.0*sgOx_pts[eOx[n]])*(f_obs[SIG_OX]-1.0)*(f_obs[SIG_OX]-1.0)/(sgOx_sy[eOx[n]]*sgOx_sy[eOx[n]]);
+    Scale_sgOx+=(f_obs[SIG_OX]-1.0)*(f_obs[SIG_OX]-1.0)*sgOx_pts[eOx[n]]/(sgOx_sy[eOx[n]]*sgOx_sy[eOx[n]]);
 
   return Scale_sgOx;
 }

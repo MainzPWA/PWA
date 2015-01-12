@@ -168,7 +168,7 @@ Double_t GetScale_sgT()
   Int_t nT = GetEnergyBins_sgT(eT); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nT; n++) //Process all found bins
-    Scale_sgT+=(1.0*sgT_pts[eT[n]])*(f_obs[SIG_T]-1.0)*(f_obs[SIG_T]-1.0)/(sgT_sy[eT[n]]*sgT_sy[eT[n]]);
+    Scale_sgT+=(f_obs[SIG_T]-1.0)*(f_obs[SIG_T]-1.0)*sgT_pts[eT[n]]/(sgT_sy[eT[n]]*sgT_sy[eT[n]]);
 
   return Scale_sgT;
 }

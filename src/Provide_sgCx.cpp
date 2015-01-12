@@ -168,7 +168,7 @@ Double_t GetScale_sgCx()
   Int_t nCx = GetEnergyBins_sgCx(eCx); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nCx; n++) //Process all found bins
-    Scale_sgCx+=(1.0*sgCx_pts[eCx[n]])*(f_obs[SIG_CX]-1.0)*(f_obs[SIG_CX]-1.0)/(sgCx_sy[eCx[n]]*sgCx_sy[eCx[n]]);
+    Scale_sgCx+=(f_obs[SIG_CX]-1.0)*(f_obs[SIG_CX]-1.0)*sgCx_pts[eCx[n]]/(sgCx_sy[eCx[n]]*sgCx_sy[eCx[n]]);
 
   return Scale_sgCx;
 }
