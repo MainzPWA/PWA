@@ -1,5 +1,5 @@
 E =  920.000 MeV, E_lo =  915.000 MeV, E_hi =  925.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.007003     0.000350
  15.000     0.018353     0.000918
  25.000     0.033050     0.001652
@@ -20,7 +20,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.005281     0.000264
 ----------------------------------------------------------
 E =  930.000 MeV, E_lo =  925.000 MeV, E_hi =  935.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.012449     0.000622
  15.000     0.034695     0.001735
  25.000     0.043210     0.002160
@@ -41,7 +41,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.004261     0.000213
 ----------------------------------------------------------
 E =  940.000 MeV, E_lo =  935.000 MeV, E_hi =  945.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.025452     0.001273
  15.000     0.051482     0.002574
  25.000     0.068827     0.003441
@@ -62,7 +62,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.001795     0.000090
 ----------------------------------------------------------
 E =  950.000 MeV, E_lo =  945.000 MeV, E_hi =  955.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.037621     0.001881
  15.000     0.061279     0.003064
  25.000     0.097967     0.004898
@@ -83,7 +83,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.001654     0.000083
 ----------------------------------------------------------
 E =  960.000 MeV, E_lo =  955.000 MeV, E_hi =  965.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.031311     0.001566
  15.000     0.074575     0.003729
  25.000     0.137137     0.006857
@@ -104,7 +104,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.007730     0.000386
 ----------------------------------------------------------
 E =  970.000 MeV, E_lo =  965.000 MeV, E_hi =  975.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.058736     0.002937
  15.000     0.106158     0.005308
  25.000     0.156024     0.007801
@@ -125,7 +125,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.000676     0.000034
 ----------------------------------------------------------
 E =  980.000 MeV, E_lo =  975.000 MeV, E_hi =  985.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.050278     0.002514
  15.000     0.110411     0.005521
  25.000     0.206347     0.010317
@@ -146,7 +146,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.008995     0.000450
 ----------------------------------------------------------
 E =  990.000 MeV, E_lo =  985.000 MeV, E_hi =  995.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.067713     0.003386
  15.000     0.127653     0.006383
  25.000     0.216294     0.010815
@@ -167,7 +167,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.021185     0.001059
 ----------------------------------------------------------
 E = 1000.000 MeV, E_lo =  995.000 MeV, E_hi = 1005.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.059509     0.002975
  15.000     0.233024     0.011651
  25.000     0.260282     0.013014
@@ -188,7 +188,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.023189     0.001159
 ----------------------------------------------------------
 E = 1010.000 MeV, E_lo = 1005.000 MeV, E_hi = 1015.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.057828     0.002891
  15.000     0.302604     0.015130
  25.000     0.333070     0.016653
@@ -209,7 +209,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.028703     0.001435
 ----------------------------------------------------------
 E = 1020.000 MeV, E_lo = 1015.000 MeV, E_hi = 1025.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.088791     0.004440
  15.000     0.226581     0.011329
  25.000     0.248710     0.012435
@@ -230,7 +230,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.081369     0.004068
 ----------------------------------------------------------
 E = 1030.000 MeV, E_lo = 1025.000 MeV, E_hi = 1035.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.035149     0.001757
  15.000     0.315595     0.015780
  25.000     0.388961     0.019448
@@ -251,7 +251,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.014033     0.000702
 ----------------------------------------------------------
 E = 1040.000 MeV, E_lo = 1035.000 MeV, E_hi = 1045.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.073214     0.003661
  15.000     0.255876     0.012794
  25.000     0.373245     0.018662
@@ -272,7 +272,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.084868     0.004243
 ----------------------------------------------------------
 E = 1050.000 MeV, E_lo = 1045.000 MeV, E_hi = 1055.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.196896     0.009845
  15.000     0.316451     0.015823
  25.000     0.336925     0.016846
@@ -293,7 +293,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.018405     0.000920
 ----------------------------------------------------------
 E = 1060.000 MeV, E_lo = 1055.000 MeV, E_hi = 1065.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.105756     0.005288
  15.000     0.172835     0.008642
  25.000     0.351210     0.017560
@@ -314,7 +314,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.069533     0.003477
 ----------------------------------------------------------
 E = 1070.000 MeV, E_lo = 1065.000 MeV, E_hi = 1075.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.133982     0.006699
  15.000     0.357499     0.017875
  25.000     0.399281     0.019964
@@ -335,7 +335,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.135365     0.006768
 ----------------------------------------------------------
 E = 1080.000 MeV, E_lo = 1075.000 MeV, E_hi = 1085.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.116633     0.005832
  15.000     0.237088     0.011854
  25.000     0.571251     0.028563
@@ -356,7 +356,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.107999     0.005400
 ----------------------------------------------------------
 E = 1090.000 MeV, E_lo = 1085.000 MeV, E_hi = 1095.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.095849     0.004792
  15.000     0.339284     0.016964
  25.000     0.592041     0.029602
@@ -377,7 +377,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.154395     0.007720
 ----------------------------------------------------------
 E = 1100.000 MeV, E_lo = 1095.000 MeV, E_hi = 1105.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.125328     0.006266
  15.000     0.293099     0.014655
  25.000     0.497528     0.024876
@@ -398,7 +398,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.035461     0.001773
 ----------------------------------------------------------
 E = 1110.000 MeV, E_lo = 1105.000 MeV, E_hi = 1115.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.178070     0.008903
  15.000     0.268947     0.013447
  25.000     0.569864     0.028493
@@ -419,7 +419,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.123591     0.006180
 ----------------------------------------------------------
 E = 1120.000 MeV, E_lo = 1115.000 MeV, E_hi = 1125.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.114476     0.005724
  15.000     0.490774     0.024539
  25.000     0.592025     0.029601
@@ -440,7 +440,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.058860     0.002943
 ----------------------------------------------------------
 E = 1130.000 MeV, E_lo = 1125.000 MeV, E_hi = 1135.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.178258     0.008913
  15.000     0.408263     0.020413
  25.000     0.440009     0.022000
@@ -461,7 +461,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.077925     0.003896
 ----------------------------------------------------------
 E = 1140.000 MeV, E_lo = 1135.000 MeV, E_hi = 1145.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.025650     0.001283
  15.000     0.179864     0.008993
  25.000     0.610563     0.030528
@@ -482,7 +482,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.139933     0.006997
 ----------------------------------------------------------
 E = 1150.000 MeV, E_lo = 1145.000 MeV, E_hi = 1155.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.089291     0.004465
  15.000     0.311630     0.015582
  25.000     0.489998     0.024500
@@ -503,7 +503,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.716117     0.035806
 ----------------------------------------------------------
 E = 1160.000 MeV, E_lo = 1155.000 MeV, E_hi = 1165.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.171370     0.008569
  15.000     0.463565     0.023178
  25.000     0.602607     0.030130
@@ -524,7 +524,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.255832     0.012792
 ----------------------------------------------------------
 E = 1170.000 MeV, E_lo = 1165.000 MeV, E_hi = 1175.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.033955     0.001698
  15.000     0.490528     0.024526
  25.000     0.614867     0.030743
@@ -545,7 +545,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.213194     0.010660
 ----------------------------------------------------------
 E = 1180.000 MeV, E_lo = 1175.000 MeV, E_hi = 1185.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.242209     0.012110
  15.000     0.436702     0.021835
  25.000     0.553934     0.027697
@@ -566,7 +566,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.299103     0.014955
 ----------------------------------------------------------
 E = 1190.000 MeV, E_lo = 1185.000 MeV, E_hi = 1195.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.040794     0.002040
  15.000     0.460641     0.023032
  25.000     0.534740     0.026737
@@ -587,7 +587,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.523909     0.026195
 ----------------------------------------------------------
 E = 1200.000 MeV, E_lo = 1195.000 MeV, E_hi = 1205.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.020374     0.001019
  15.000     0.408287     0.020414
  25.000     0.670410     0.033520
@@ -608,7 +608,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.322500     0.016125
 ----------------------------------------------------------
 E = 1210.000 MeV, E_lo = 1205.000 MeV, E_hi = 1215.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.216240     0.010812
  15.000     0.384160     0.019208
  25.000     0.460707     0.023035
@@ -629,7 +629,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.362030     0.018101
 ----------------------------------------------------------
 E = 1220.000 MeV, E_lo = 1215.000 MeV, E_hi = 1225.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.093436     0.004672
  15.000     0.498002     0.024900
  25.000     0.529289     0.026464
@@ -650,7 +650,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.311050     0.015553
 ----------------------------------------------------------
 E = 1230.000 MeV, E_lo = 1225.000 MeV, E_hi = 1235.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.180545     0.009027
  15.000     0.378229     0.018911
  25.000     0.600549     0.030027
@@ -671,7 +671,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.397640     0.019882
 ----------------------------------------------------------
 E = 1240.000 MeV, E_lo = 1235.000 MeV, E_hi = 1245.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.183214     0.009161
  15.000     0.467128     0.023356
  25.000     0.597172     0.029859
@@ -692,7 +692,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.225582     0.011279
 ----------------------------------------------------------
 E = 1250.000 MeV, E_lo = 1245.000 MeV, E_hi = 1255.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.135058     0.006753
  15.000     0.381351     0.019068
  25.000     0.624479     0.031224
@@ -713,7 +713,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.161486     0.008074
 ----------------------------------------------------------
 E = 1260.000 MeV, E_lo = 1255.000 MeV, E_hi = 1265.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.262970     0.013148
  15.000     0.314050     0.015702
  25.000     0.585734     0.029287
@@ -734,7 +734,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.266796     0.013340
 ----------------------------------------------------------
 E = 1270.000 MeV, E_lo = 1265.000 MeV, E_hi = 1275.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.060886     0.003044
  15.000     0.284661     0.014233
  25.000     0.654683     0.032734
@@ -755,7 +755,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.437616     0.021881
 ----------------------------------------------------------
 E = 1280.000 MeV, E_lo = 1275.000 MeV, E_hi = 1285.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.145012     0.007251
  15.000     0.539281     0.026964
  25.000     0.577453     0.028873
@@ -776,7 +776,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.294904     0.014745
 ----------------------------------------------------------
 E = 1290.000 MeV, E_lo = 1285.000 MeV, E_hi = 1295.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.270907     0.013545
  15.000     0.411546     0.020577
  25.000     0.611161     0.030558
@@ -797,7 +797,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.081078     0.004054
 ----------------------------------------------------------
 E = 1300.000 MeV, E_lo = 1295.000 MeV, E_hi = 1305.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.205725     0.010286
  15.000     0.451605     0.022580
  25.000     0.674280     0.033714
@@ -818,7 +818,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.372993     0.018650
 ----------------------------------------------------------
 E = 1310.000 MeV, E_lo = 1305.000 MeV, E_hi = 1315.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.011388     0.000569
  15.000     0.424809     0.021240
  25.000     0.432118     0.021606
@@ -839,7 +839,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.423841     0.021192
 ----------------------------------------------------------
 E = 1320.000 MeV, E_lo = 1315.000 MeV, E_hi = 1325.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.121860     0.006093
  15.000     0.426332     0.021317
  25.000     0.608893     0.030445
@@ -860,7 +860,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.203009     0.010150
 ----------------------------------------------------------
 E = 1330.000 MeV, E_lo = 1325.000 MeV, E_hi = 1335.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.219372     0.010969
  15.000     0.461133     0.023057
  25.000     0.607472     0.030374
@@ -881,7 +881,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.283594     0.014180
 ----------------------------------------------------------
 E = 1340.000 MeV, E_lo = 1335.000 MeV, E_hi = 1345.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.066883     0.003344
  15.000     0.328717     0.016436
  25.000     0.547438     0.027372
@@ -902,7 +902,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.311689     0.015584
 ----------------------------------------------------------
 E = 1350.000 MeV, E_lo = 1345.000 MeV, E_hi = 1355.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.265565     0.013278
  15.000     0.402425     0.020121
  25.000     0.643447     0.032172
@@ -923,7 +923,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.203143     0.010157
 ----------------------------------------------------------
 E = 1360.000 MeV, E_lo = 1355.000 MeV, E_hi = 1365.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.007413     0.000371
  15.000     0.358262     0.017913
  25.000     0.583344     0.029167
@@ -944,7 +944,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.319836     0.015992
 ----------------------------------------------------------
 E = 1370.000 MeV, E_lo = 1365.000 MeV, E_hi = 1375.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.190885     0.009544
  15.000     0.397579     0.019879
  25.000     0.611399     0.030570
@@ -965,7 +965,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.232263     0.011613
 ----------------------------------------------------------
 E = 1380.000 MeV, E_lo = 1375.000 MeV, E_hi = 1385.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.147473     0.007374
  15.000     0.442169     0.022108
  25.000     0.556420     0.027821
@@ -986,7 +986,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.312147     0.015607
 ----------------------------------------------------------
 E = 1390.000 MeV, E_lo = 1385.000 MeV, E_hi = 1395.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.126444     0.006322
  15.000     0.423997     0.021200
  25.000     0.495159     0.024758
@@ -1007,7 +1007,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.351916     0.017596
 ----------------------------------------------------------
 E = 1400.000 MeV, E_lo = 1395.000 MeV, E_hi = 1405.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.036692     0.001835
  15.000     0.490202     0.024510
  25.000     0.601000     0.030050
@@ -1028,7 +1028,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.238345     0.011917
 ----------------------------------------------------------
 E = 1410.000 MeV, E_lo = 1405.000 MeV, E_hi = 1415.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.177348     0.008867
  15.000     0.292943     0.014647
  25.000     0.562228     0.028111
@@ -1049,7 +1049,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.059310     0.002965
 ----------------------------------------------------------
 E = 1420.000 MeV, E_lo = 1415.000 MeV, E_hi = 1425.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.105003     0.005250
  15.000     0.332247     0.016612
  25.000     0.550219     0.027511
@@ -1070,7 +1070,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.139593     0.006980
 ----------------------------------------------------------
 E = 1430.000 MeV, E_lo = 1425.000 MeV, E_hi = 1435.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.155733     0.007787
  15.000     0.326671     0.016334
  25.000     0.606185     0.030309
@@ -1091,7 +1091,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.359945     0.017997
 ----------------------------------------------------------
 E = 1440.000 MeV, E_lo = 1435.000 MeV, E_hi = 1445.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.082717     0.004136
  15.000     0.351847     0.017592
  25.000     0.496438     0.024822
@@ -1112,7 +1112,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.185009     0.009250
 ----------------------------------------------------------
 E = 1450.000 MeV, E_lo = 1445.000 MeV, E_hi = 1455.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.043858     0.002193
  15.000     0.376669     0.018833
  25.000     0.563356     0.028168
@@ -1133,7 +1133,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.122559     0.006128
 ----------------------------------------------------------
 E = 1460.000 MeV, E_lo = 1455.000 MeV, E_hi = 1465.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.149079     0.007454
  15.000     0.438440     0.021922
  25.000     0.538884     0.026944
@@ -1154,7 +1154,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.148708     0.007435
 ----------------------------------------------------------
 E = 1470.000 MeV, E_lo = 1465.000 MeV, E_hi = 1475.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.063714     0.003186
  15.000     0.315494     0.015775
  25.000     0.560726     0.028036
@@ -1175,7 +1175,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.101131     0.005057
 ----------------------------------------------------------
 E = 1480.000 MeV, E_lo = 1475.000 MeV, E_hi = 1485.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.193962     0.009698
  15.000     0.441163     0.022058
  25.000     0.485472     0.024274
@@ -1196,7 +1196,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.052030     0.002602
 ----------------------------------------------------------
 E = 1490.000 MeV, E_lo = 1485.000 MeV, E_hi = 1495.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.160191     0.008010
  15.000     0.457475     0.022874
  25.000     0.530695     0.026535
@@ -1217,7 +1217,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.037614     0.001881
 ----------------------------------------------------------
 E = 1500.000 MeV, E_lo = 1495.000 MeV, E_hi = 1505.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.103655     0.005183
  15.000     0.300201     0.015010
  25.000     0.621404     0.031070
@@ -1238,7 +1238,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.000163     0.000008
 ----------------------------------------------------------
 E = 1510.000 MeV, E_lo = 1505.000 MeV, E_hi = 1515.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.076157     0.003808
  15.000     0.304625     0.015231
  25.000     0.636061     0.031803
@@ -1259,7 +1259,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.065253     0.003263
 ----------------------------------------------------------
 E = 1520.000 MeV, E_lo = 1515.000 MeV, E_hi = 1525.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.073083     0.003654
  15.000     0.353172     0.017659
  25.000     0.521412     0.026071
@@ -1280,7 +1280,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.043968     0.002198
 ----------------------------------------------------------
 E = 1530.000 MeV, E_lo = 1525.000 MeV, E_hi = 1535.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.068031     0.003402
  15.000     0.381128     0.019056
  25.000     0.467670     0.023383
@@ -1301,7 +1301,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.048488     0.002424
 ----------------------------------------------------------
 E = 1540.000 MeV, E_lo = 1535.000 MeV, E_hi = 1545.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.128279     0.006414
  15.000     0.392015     0.019601
  25.000     0.431648     0.021582
@@ -1322,7 +1322,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.100619     0.005031
 ----------------------------------------------------------
 E = 1550.000 MeV, E_lo = 1545.000 MeV, E_hi = 1555.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.077893     0.003895
  15.000     0.337511     0.016876
  25.000     0.704066     0.035203
@@ -1343,7 +1343,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.112236     0.005612
 ----------------------------------------------------------
 E = 1560.000 MeV, E_lo = 1555.000 MeV, E_hi = 1565.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.054801     0.002740
  15.000     0.436413     0.021821
  25.000     0.517860     0.025893
@@ -1364,7 +1364,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.251843     0.012592
 ----------------------------------------------------------
 E = 1570.000 MeV, E_lo = 1565.000 MeV, E_hi = 1575.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.199154     0.009958
  15.000     0.308252     0.015413
  25.000     0.566961     0.028348
@@ -1385,7 +1385,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.197586     0.009879
 ----------------------------------------------------------
 E = 1580.000 MeV, E_lo = 1575.000 MeV, E_hi = 1585.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.044011     0.002201
  15.000     0.393095     0.019655
  25.000     0.549724     0.027486
@@ -1406,7 +1406,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.232460     0.011623
 ----------------------------------------------------------
 E = 1590.000 MeV, E_lo = 1585.000 MeV, E_hi = 1595.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.124705     0.006235
  15.000     0.435272     0.021764
  25.000     0.563770     0.028189
@@ -1427,7 +1427,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.075782     0.003789
 ----------------------------------------------------------
 E = 1600.000 MeV, E_lo = 1595.000 MeV, E_hi = 1605.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.136336     0.006817
  15.000     0.403363     0.020168
  25.000     0.582896     0.029145
@@ -1448,7 +1448,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.229361     0.011468
 ----------------------------------------------------------
 E = 1610.000 MeV, E_lo = 1605.000 MeV, E_hi = 1615.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.195934     0.009797
  15.000     0.400273     0.020014
  25.000     0.591239     0.029562
@@ -1469,7 +1469,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.486184     0.024309
 ----------------------------------------------------------
 E = 1620.000 MeV, E_lo = 1615.000 MeV, E_hi = 1625.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.018336     0.000917
  15.000     0.323423     0.016171
  25.000     0.473755     0.023688
@@ -1490,7 +1490,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.160706     0.008035
 ----------------------------------------------------------
 E = 1630.000 MeV, E_lo = 1625.000 MeV, E_hi = 1635.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.173670     0.008684
  15.000     0.422376     0.021119
  25.000     0.528711     0.026436
@@ -1511,7 +1511,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     1.075569     0.053778
 ----------------------------------------------------------
 E = 1640.000 MeV, E_lo = 1635.000 MeV, E_hi = 1645.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.301547     0.015077
  15.000     0.391352     0.019568
  25.000     0.532564     0.026628
@@ -1532,7 +1532,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.359422     0.017971
 ----------------------------------------------------------
 E = 1650.000 MeV, E_lo = 1645.000 MeV, E_hi = 1655.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.174652     0.008733
  15.000     0.568013     0.028401
  25.000     0.609563     0.030478
@@ -1553,7 +1553,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.403648     0.020182
 ----------------------------------------------------------
 E = 1660.000 MeV, E_lo = 1655.000 MeV, E_hi = 1665.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.113376     0.005669
  15.000     0.359165     0.017958
  25.000     0.595554     0.029778
@@ -1574,7 +1574,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.400314     0.020016
 ----------------------------------------------------------
 E = 1670.000 MeV, E_lo = 1665.000 MeV, E_hi = 1675.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.031200     0.001560
  15.000     0.391826     0.019591
  25.000     0.577179     0.028859
@@ -1595,7 +1595,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.020278     0.001014
 ----------------------------------------------------------
 E = 1680.000 MeV, E_lo = 1675.000 MeV, E_hi = 1685.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.167823     0.008391
  15.000     0.463754     0.023188
  25.000     0.651739     0.032587
@@ -1616,7 +1616,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.703998     0.035200
 ----------------------------------------------------------
 E = 1690.000 MeV, E_lo = 1685.000 MeV, E_hi = 1695.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.205320     0.010266
  15.000     0.435054     0.021753
  25.000     0.692338     0.034617
@@ -1637,7 +1637,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.634673     0.031734
 ----------------------------------------------------------
 E = 1700.000 MeV, E_lo = 1695.000 MeV, E_hi = 1705.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.172041     0.008602
  15.000     0.589061     0.029453
  25.000     0.637833     0.031892
@@ -1658,7 +1658,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.492727     0.024636
 ----------------------------------------------------------
 E = 1710.000 MeV, E_lo = 1705.000 MeV, E_hi = 1715.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.268578     0.013429
  15.000     0.256268     0.012813
  25.000     0.483092     0.024155
@@ -1679,7 +1679,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.985865     0.049293
 ----------------------------------------------------------
 E = 1720.000 MeV, E_lo = 1715.000 MeV, E_hi = 1725.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.315458     0.015773
  15.000     0.599811     0.029991
  25.000     0.684790     0.034240
@@ -1700,7 +1700,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.387411     0.019371
 ----------------------------------------------------------
 E = 1730.000 MeV, E_lo = 1725.000 MeV, E_hi = 1735.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.123978     0.006199
  15.000     0.584551     0.029228
  25.000     0.565814     0.028291
@@ -1721,7 +1721,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.996428     0.049821
 ----------------------------------------------------------
 E = 1740.000 MeV, E_lo = 1735.000 MeV, E_hi = 1745.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.005887     0.000294
  15.000     0.440535     0.022027
  25.000     0.577329     0.028866
@@ -1742,7 +1742,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     1.273372     0.063669
 ----------------------------------------------------------
 E = 1750.000 MeV, E_lo = 1745.000 MeV, E_hi = 1755.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.036352     0.001818
  15.000     0.428313     0.021416
  25.000     0.671239     0.033562
@@ -1763,7 +1763,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.721130     0.036057
 ----------------------------------------------------------
 E = 1760.000 MeV, E_lo = 1755.000 MeV, E_hi = 1765.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.168891     0.008445
  15.000     0.468816     0.023441
  25.000     0.695325     0.034766
@@ -1784,7 +1784,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.935355     0.046768
 ----------------------------------------------------------
 E = 1770.000 MeV, E_lo = 1765.000 MeV, E_hi = 1775.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.083748     0.004187
  15.000     0.493139     0.024657
  25.000     0.595881     0.029794
@@ -1805,7 +1805,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     1.031803     0.051590
 ----------------------------------------------------------
 E = 1780.000 MeV, E_lo = 1775.000 MeV, E_hi = 1785.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.267846     0.013392
  15.000     0.327469     0.016373
  25.000     0.673165     0.033658
@@ -1826,7 +1826,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.566097     0.028305
 ----------------------------------------------------------
 E = 1790.000 MeV, E_lo = 1785.000 MeV, E_hi = 1795.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.054239     0.002712
  15.000     0.412249     0.020612
  25.000     0.599199     0.029960
@@ -1847,7 +1847,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.498671     0.024934
 ----------------------------------------------------------
 E = 1800.000 MeV, E_lo = 1795.000 MeV, E_hi = 1805.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.176988     0.008849
  15.000     0.371901     0.018595
  25.000     0.705712     0.035286
@@ -1868,7 +1868,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.612570     0.030629
 ----------------------------------------------------------
 E = 1810.000 MeV, E_lo = 1805.000 MeV, E_hi = 1815.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.189015     0.009451
  15.000     0.416192     0.020810
  25.000     0.652907     0.032645
@@ -1889,7 +1889,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.359356     0.017968
 ----------------------------------------------------------
 E = 1820.000 MeV, E_lo = 1815.000 MeV, E_hi = 1825.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.126009     0.006300
  15.000     0.453713     0.022686
  25.000     0.740822     0.037041
@@ -1910,7 +1910,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.841694     0.042085
 ----------------------------------------------------------
 E = 1830.000 MeV, E_lo = 1825.000 MeV, E_hi = 1835.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.135012     0.006751
  15.000     0.489997     0.024500
  25.000     0.814320     0.040716
@@ -1931,7 +1931,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     1.371263     0.068563
 ----------------------------------------------------------
 E = 1840.000 MeV, E_lo = 1835.000 MeV, E_hi = 1845.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.092996     0.004650
  15.000     0.507378     0.025369
  25.000     0.657387     0.032869
@@ -1952,7 +1952,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.716640     0.035832
 ----------------------------------------------------------
 E = 1850.000 MeV, E_lo = 1845.000 MeV, E_hi = 1855.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.038174     0.001909
  15.000     0.414973     0.020749
  25.000     0.708572     0.035429
@@ -1973,7 +1973,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.716807     0.035840
 ----------------------------------------------------------
 E = 1860.000 MeV, E_lo = 1855.000 MeV, E_hi = 1865.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.239838     0.011992
  15.000     0.429783     0.021489
  25.000     0.604421     0.030221
@@ -1994,7 +1994,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.186138     0.009307
 ----------------------------------------------------------
 E = 1870.000 MeV, E_lo = 1865.000 MeV, E_hi = 1875.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.041707     0.002085
  15.000     0.349492     0.017475
  25.000     0.605005     0.030250
@@ -2015,7 +2015,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.782998     0.039150
 ----------------------------------------------------------
 E = 1880.000 MeV, E_lo = 1875.000 MeV, E_hi = 1885.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.259774     0.012989
  15.000     0.505194     0.025260
  25.000     0.646270     0.032314
@@ -2036,7 +2036,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.357729     0.017886
 ----------------------------------------------------------
 E = 1890.000 MeV, E_lo = 1885.000 MeV, E_hi = 1895.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.200292     0.010015
  15.000     0.489788     0.024489
  25.000     0.758038     0.037902
@@ -2057,7 +2057,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.192447     0.009622
 ----------------------------------------------------------
 E = 1900.000 MeV, E_lo = 1895.000 MeV, E_hi = 1905.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.146218     0.007311
  15.000     0.479339     0.023967
  25.000     0.625777     0.031289
@@ -2078,7 +2078,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.054930     0.002747
 ----------------------------------------------------------
 E = 1910.000 MeV, E_lo = 1905.000 MeV, E_hi = 1915.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.215086     0.010754
  15.000     0.356844     0.017842
  25.000     0.573561     0.028678
@@ -2099,7 +2099,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.290139     0.014507
 ----------------------------------------------------------
 E = 1920.000 MeV, E_lo = 1915.000 MeV, E_hi = 1925.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.104795     0.005240
  15.000     0.429431     0.021472
  25.000     0.606394     0.030320
@@ -2120,7 +2120,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.228585     0.011429
 ----------------------------------------------------------
 E = 1930.000 MeV, E_lo = 1925.000 MeV, E_hi = 1935.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.322648     0.016132
  15.000     0.473322     0.023666
  25.000     0.639948     0.031997
@@ -2141,7 +2141,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.476519     0.023826
 ----------------------------------------------------------
 E = 1940.000 MeV, E_lo = 1935.000 MeV, E_hi = 1945.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.089694     0.004485
  15.000     0.537576     0.026879
  25.000     0.749235     0.037462
@@ -2162,7 +2162,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.377662     0.018883
 ----------------------------------------------------------
 E = 1950.000 MeV, E_lo = 1945.000 MeV, E_hi = 1955.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.180667     0.009033
  15.000     0.574049     0.028702
  25.000     0.719365     0.035968
@@ -2183,7 +2183,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.103213     0.005161
 ----------------------------------------------------------
 E = 1960.000 MeV, E_lo = 1955.000 MeV, E_hi = 1965.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.196679     0.009834
  15.000     0.460160     0.023008
  25.000     0.660193     0.033010
@@ -2204,7 +2204,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.318132     0.015907
 ----------------------------------------------------------
 E = 1970.000 MeV, E_lo = 1965.000 MeV, E_hi = 1975.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.370069     0.018503
  15.000     0.647335     0.032367
  25.000     0.782842     0.039142
@@ -2225,7 +2225,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.054428     0.002721
 ----------------------------------------------------------
 E = 1980.000 MeV, E_lo = 1975.000 MeV, E_hi = 1985.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.015474     0.000774
  15.000     0.386448     0.019322
  25.000     0.709904     0.035495
@@ -2246,7 +2246,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.040789     0.002039
 ----------------------------------------------------------
 E = 1990.000 MeV, E_lo = 1985.000 MeV, E_hi = 1995.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.004620     0.000231
  15.000     0.443462     0.022173
  25.000     0.676659     0.033833
@@ -2267,7 +2267,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.020984     0.001049
 ----------------------------------------------------------
 E = 2000.000 MeV, E_lo = 1995.000 MeV, E_hi = 2005.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.116518     0.005826
  15.000     0.412458     0.020623
  25.000     0.601043     0.030052
@@ -2288,7 +2288,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.028347     0.001417
 ----------------------------------------------------------
 E = 2010.000 MeV, E_lo = 2005.000 MeV, E_hi = 2015.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.013751     0.000688
  15.000     0.479260     0.023963
  25.000     0.670015     0.033501
@@ -2309,7 +2309,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.000650     0.000032
 ----------------------------------------------------------
 E = 2020.000 MeV, E_lo = 2015.000 MeV, E_hi = 2025.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.266600     0.013330
  15.000     0.336178     0.016809
  25.000     0.640484     0.032024
@@ -2330,7 +2330,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.001428     0.000071
 ----------------------------------------------------------
 E = 2030.000 MeV, E_lo = 2025.000 MeV, E_hi = 2035.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.295512     0.014776
  15.000     0.360866     0.018043
  25.000     0.577304     0.028865
@@ -2351,7 +2351,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.017974     0.000899
 ----------------------------------------------------------
 E = 2040.000 MeV, E_lo = 2035.000 MeV, E_hi = 2045.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.093572     0.004679
  15.000     0.504688     0.025234
  25.000     0.536902     0.026845
@@ -2372,7 +2372,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.026579     0.001329
 ----------------------------------------------------------
 E = 2050.000 MeV, E_lo = 2045.000 MeV, E_hi = 2055.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.141560     0.007078
  15.000     0.387200     0.019360
  25.000     0.629214     0.031461
@@ -2393,7 +2393,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.044396     0.002220
 ----------------------------------------------------------
 E = 2060.000 MeV, E_lo = 2055.000 MeV, E_hi = 2065.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.085513     0.004276
  15.000     0.348430     0.017422
  25.000     0.596798     0.029840
@@ -2414,7 +2414,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.008063     0.000403
 ----------------------------------------------------------
 E = 2070.000 MeV, E_lo = 2065.000 MeV, E_hi = 2075.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.184130     0.009206
  15.000     0.539871     0.026994
  25.000     0.735722     0.036786
@@ -2435,7 +2435,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.141715     0.007086
 ----------------------------------------------------------
 E = 2080.000 MeV, E_lo = 2075.000 MeV, E_hi = 2085.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.140498     0.007025
  15.000     0.427423     0.021371
  25.000     0.578577     0.028929
@@ -2456,7 +2456,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.172670     0.008633
 ----------------------------------------------------------
 E = 2090.000 MeV, E_lo = 2085.000 MeV, E_hi = 2095.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.128509     0.006425
  15.000     0.484319     0.024216
  25.000     0.626168     0.031308
@@ -2477,7 +2477,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.143870     0.007193
 ----------------------------------------------------------
 E = 2100.000 MeV, E_lo = 2095.000 MeV, E_hi = 2105.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.081741     0.004087
  15.000     0.474250     0.023713
  25.000     0.578302     0.028915
@@ -2498,7 +2498,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.137381     0.006869
 ----------------------------------------------------------
 E = 2110.000 MeV, E_lo = 2105.000 MeV, E_hi = 2115.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.093221     0.004661
  15.000     0.320080     0.016004
  25.000     0.688056     0.034403
@@ -2519,7 +2519,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.134084     0.006704
 ----------------------------------------------------------
 E = 2120.000 MeV, E_lo = 2115.000 MeV, E_hi = 2125.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.107446     0.005372
  15.000     0.346805     0.017340
  25.000     0.803977     0.040199
@@ -2540,7 +2540,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.206005     0.010300
 ----------------------------------------------------------
 E = 2130.000 MeV, E_lo = 2125.000 MeV, E_hi = 2135.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.121204     0.006060
  15.000     0.544371     0.027219
  25.000     0.510813     0.025541
@@ -2561,7 +2561,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.240561     0.012028
 ----------------------------------------------------------
 E = 2140.000 MeV, E_lo = 2135.000 MeV, E_hi = 2145.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.165615     0.008281
  15.000     0.444722     0.022236
  25.000     0.719585     0.035979
@@ -2582,7 +2582,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.176747     0.008837
 ----------------------------------------------------------
 E = 2150.000 MeV, E_lo = 2145.000 MeV, E_hi = 2155.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.161463     0.008073
  15.000     0.438876     0.021944
  25.000     0.655030     0.032752
@@ -2603,7 +2603,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.120547     0.006027
 ----------------------------------------------------------
 E = 2160.000 MeV, E_lo = 2155.000 MeV, E_hi = 2165.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.194296     0.009715
  15.000     0.523702     0.026185
  25.000     0.654249     0.032712
@@ -2624,7 +2624,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.250833     0.012542
 ----------------------------------------------------------
 E = 2170.000 MeV, E_lo = 2165.000 MeV, E_hi = 2175.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.164291     0.008215
  15.000     0.371575     0.018579
  25.000     0.593463     0.029673
@@ -2645,7 +2645,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.293935     0.014697
 ----------------------------------------------------------
 E = 2180.000 MeV, E_lo = 2175.000 MeV, E_hi = 2185.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.288260     0.014413
  15.000     0.382976     0.019149
  25.000     0.701841     0.035092
@@ -2666,7 +2666,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.513984     0.025699
 ----------------------------------------------------------
 E = 2190.000 MeV, E_lo = 2185.000 MeV, E_hi = 2195.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.132843     0.006642
  15.000     0.520548     0.026027
  25.000     0.620755     0.031038
@@ -2687,7 +2687,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.458848     0.022942
 ----------------------------------------------------------
 E = 2200.000 MeV, E_lo = 2195.000 MeV, E_hi = 2205.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.165653     0.008283
  15.000     0.546828     0.027341
  25.000     0.607347     0.030367
@@ -2708,7 +2708,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.247041     0.012352
 ----------------------------------------------------------
 E = 2210.000 MeV, E_lo = 2205.000 MeV, E_hi = 2215.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.166770     0.008339
  15.000     0.421603     0.021080
  25.000     0.580053     0.029003
@@ -2729,7 +2729,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.243533     0.012177
 ----------------------------------------------------------
 E = 2220.000 MeV, E_lo = 2215.000 MeV, E_hi = 2225.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.189964     0.009498
  15.000     0.430210     0.021511
  25.000     0.657837     0.032892
@@ -2750,7 +2750,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.224571     0.011229
 ----------------------------------------------------------
 E = 2230.000 MeV, E_lo = 2225.000 MeV, E_hi = 2235.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.204420     0.010221
  15.000     0.464468     0.023223
  25.000     0.541331     0.027067
@@ -2771,7 +2771,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.014315     0.000716
 ----------------------------------------------------------
 E = 2240.000 MeV, E_lo = 2235.000 MeV, E_hi = 2245.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.162031     0.008102
  15.000     0.466185     0.023309
  25.000     0.661563     0.033078
@@ -2792,7 +2792,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.100933     0.005047
 ----------------------------------------------------------
 E = 2250.000 MeV, E_lo = 2245.000 MeV, E_hi = 2255.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.157568     0.007878
  15.000     0.348053     0.017403
  25.000     0.710961     0.035548
@@ -2813,7 +2813,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.247743     0.012387
 ----------------------------------------------------------
 E = 2260.000 MeV, E_lo = 2255.000 MeV, E_hi = 2265.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.158922     0.007946
  15.000     0.533656     0.026683
  25.000     0.599727     0.029986
@@ -2834,7 +2834,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.087223     0.004361
 ----------------------------------------------------------
 E = 2270.000 MeV, E_lo = 2265.000 MeV, E_hi = 2275.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.181005     0.009050
  15.000     0.484487     0.024224
  25.000     0.704665     0.035233
@@ -2855,7 +2855,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.137592     0.006880
 ----------------------------------------------------------
 E = 2280.000 MeV, E_lo = 2275.000 MeV, E_hi = 2285.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.156278     0.007814
  15.000     0.376393     0.018820
  25.000     0.606088     0.030304
@@ -2876,7 +2876,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.211519     0.010576
 ----------------------------------------------------------
 E = 2290.000 MeV, E_lo = 2285.000 MeV, E_hi = 2295.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.140199     0.007010
  15.000     0.382829     0.019141
  25.000     0.648349     0.032417
@@ -2897,7 +2897,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.151498     0.007575
 ----------------------------------------------------------
 E = 2300.000 MeV, E_lo = 2295.000 MeV, E_hi = 2305.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.023930     0.001197
  15.000     0.385677     0.019284
  25.000     0.742123     0.037106
@@ -2918,7 +2918,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.201045     0.010052
 ----------------------------------------------------------
 E = 2310.000 MeV, E_lo = 2305.000 MeV, E_hi = 2315.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.126729     0.006336
  15.000     0.415955     0.020798
  25.000     0.555094     0.027755
@@ -2939,7 +2939,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.265311     0.013266
 ----------------------------------------------------------
 E = 2320.000 MeV, E_lo = 2315.000 MeV, E_hi = 2325.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.003777     0.000189
  15.000     0.441051     0.022053
  25.000     0.512812     0.025641
@@ -2960,7 +2960,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.354010     0.017701
 ----------------------------------------------------------
 E = 2330.000 MeV, E_lo = 2325.000 MeV, E_hi = 2335.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.030439     0.001522
  15.000     0.437029     0.021851
  25.000     0.622304     0.031115
@@ -2981,7 +2981,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.497700     0.024885
 ----------------------------------------------------------
 E = 2340.000 MeV, E_lo = 2335.000 MeV, E_hi = 2345.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.131933     0.006597
  15.000     0.303303     0.015165
  25.000     0.585356     0.029268
@@ -3002,7 +3002,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.035071     0.001754
 ----------------------------------------------------------
 E = 2350.000 MeV, E_lo = 2345.000 MeV, E_hi = 2355.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.188740     0.009437
  15.000     0.532398     0.026620
  25.000     0.557365     0.027868
@@ -3023,7 +3023,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.229743     0.011487
 ----------------------------------------------------------
 E = 2360.000 MeV, E_lo = 2355.000 MeV, E_hi = 2365.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.034501     0.001725
  15.000     0.388539     0.019427
  25.000     0.568218     0.028411
@@ -3044,7 +3044,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.081309     0.004065
 ----------------------------------------------------------
 E = 2370.000 MeV, E_lo = 2365.000 MeV, E_hi = 2375.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.073502     0.003675
  15.000     0.322697     0.016135
  25.000     0.507078     0.025354
@@ -3065,7 +3065,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.199659     0.009983
 ----------------------------------------------------------
 E = 2380.000 MeV, E_lo = 2375.000 MeV, E_hi = 2385.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.192993     0.009650
  15.000     0.433048     0.021652
  25.000     0.514530     0.025727
@@ -3086,7 +3086,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.382755     0.019138
 ----------------------------------------------------------
 E = 2390.000 MeV, E_lo = 2385.000 MeV, E_hi = 2395.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.104423     0.005221
  15.000     0.480345     0.024017
  25.000     0.610886     0.030544
@@ -3107,7 +3107,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.428555     0.021428
 ----------------------------------------------------------
 E = 2400.000 MeV, E_lo = 2395.000 MeV, E_hi = 2405.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.166584     0.008329
  15.000     0.419230     0.020962
  25.000     0.695304     0.034765
@@ -3128,7 +3128,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.558249     0.027912
 ----------------------------------------------------------
 E = 2410.000 MeV, E_lo = 2405.000 MeV, E_hi = 2415.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.236438     0.011822
  15.000     0.391076     0.019554
  25.000     0.533126     0.026656
@@ -3149,7 +3149,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.134476     0.006724
 ----------------------------------------------------------
 E = 2420.000 MeV, E_lo = 2415.000 MeV, E_hi = 2425.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.066328     0.003316
  15.000     0.406942     0.020347
  25.000     0.639022     0.031951
@@ -3170,7 +3170,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.795470     0.039773
 ----------------------------------------------------------
 E = 2430.000 MeV, E_lo = 2425.000 MeV, E_hi = 2435.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.198696     0.009935
  15.000     0.564906     0.028245
  25.000     0.627894     0.031395
@@ -3191,7 +3191,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.312803     0.015640
 ----------------------------------------------------------
 E = 2440.000 MeV, E_lo = 2435.000 MeV, E_hi = 2445.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.145790     0.007289
  15.000     0.412276     0.020614
  25.000     0.665922     0.033296
@@ -3212,7 +3212,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.339144     0.016957
 ----------------------------------------------------------
 E = 2450.000 MeV, E_lo = 2445.000 MeV, E_hi = 2455.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.267432     0.013372
  15.000     0.402147     0.020107
  25.000     0.547603     0.027380
@@ -3233,7 +3233,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.572608     0.028630
 ----------------------------------------------------------
 E = 2460.000 MeV, E_lo = 2455.000 MeV, E_hi = 2465.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.182395     0.009120
  15.000     0.399542     0.019977
  25.000     0.596031     0.029802
@@ -3254,7 +3254,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.502172     0.025109
 ----------------------------------------------------------
 E = 2470.000 MeV, E_lo = 2465.000 MeV, E_hi = 2475.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.047884     0.002394
  15.000     0.393152     0.019658
  25.000     0.609958     0.030498
@@ -3275,7 +3275,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.276152     0.013808
 ----------------------------------------------------------
 E = 2480.000 MeV, E_lo = 2475.000 MeV, E_hi = 2485.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.080310     0.004015
  15.000     0.423919     0.021196
  25.000     0.479847     0.023992
@@ -3296,7 +3296,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.114782     0.005739
 ----------------------------------------------------------
 E = 2490.000 MeV, E_lo = 2485.000 MeV, E_hi = 2495.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.086050     0.004303
  15.000     0.570001     0.028500
  25.000     0.591481     0.029574
@@ -3317,7 +3317,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.318042     0.015902
 ----------------------------------------------------------
 E = 2500.000 MeV, E_lo = 2495.000 MeV, E_hi = 2505.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.044612     0.002231
  15.000     0.485162     0.024258
  25.000     0.664783     0.033239
@@ -3338,7 +3338,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.029435     0.001472
 ----------------------------------------------------------
 E = 2510.000 MeV, E_lo = 2505.000 MeV, E_hi = 2515.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.115453     0.005773
  15.000     0.311771     0.015589
  25.000     0.537434     0.026872
@@ -3359,7 +3359,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.354871     0.017744
 ----------------------------------------------------------
 E = 2520.000 MeV, E_lo = 2515.000 MeV, E_hi = 2525.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.129178     0.006459
  15.000     0.358205     0.017910
  25.000     0.529382     0.026469
@@ -3380,7 +3380,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.164726     0.008236
 ----------------------------------------------------------
 E = 2530.000 MeV, E_lo = 2525.000 MeV, E_hi = 2535.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.151607     0.007580
  15.000     0.336564     0.016828
  25.000     0.555005     0.027750
@@ -3401,7 +3401,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.214658     0.010733
 ----------------------------------------------------------
 E = 2540.000 MeV, E_lo = 2535.000 MeV, E_hi = 2545.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.086593     0.004330
  15.000     0.401757     0.020088
  25.000     0.573037     0.028652
@@ -3422,7 +3422,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.465682     0.023284
 ----------------------------------------------------------
 E = 2550.000 MeV, E_lo = 2545.000 MeV, E_hi = 2555.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.204010     0.010200
  15.000     0.418023     0.020901
  25.000     0.524344     0.026217
@@ -3443,7 +3443,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.444345     0.022217
 ----------------------------------------------------------
 E = 2560.000 MeV, E_lo = 2555.000 MeV, E_hi = 2565.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.317128     0.015856
  15.000     0.302641     0.015132
  25.000     0.510175     0.025509
@@ -3464,7 +3464,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.201359     0.010068
 ----------------------------------------------------------
 E = 2570.000 MeV, E_lo = 2565.000 MeV, E_hi = 2575.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.117304     0.005865
  15.000     0.376628     0.018831
  25.000     0.692888     0.034644
@@ -3485,7 +3485,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.193929     0.009696
 ----------------------------------------------------------
 E = 2580.000 MeV, E_lo = 2575.000 MeV, E_hi = 2585.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.199343     0.009967
  15.000     0.451348     0.022567
  25.000     0.479599     0.023980
@@ -3506,7 +3506,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.584455     0.029223
 ----------------------------------------------------------
 E = 2590.000 MeV, E_lo = 2585.000 MeV, E_hi = 2595.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.079797     0.003990
  15.000     0.465721     0.023286
  25.000     0.673238     0.033662
@@ -3527,7 +3527,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.118374     0.005919
 ----------------------------------------------------------
 E = 2600.000 MeV, E_lo = 2595.000 MeV, E_hi = 2605.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.088701     0.004435
  15.000     0.470687     0.023534
  25.000     0.621451     0.031073
@@ -3548,7 +3548,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.199215     0.009961
 ----------------------------------------------------------
 E = 2610.000 MeV, E_lo = 2605.000 MeV, E_hi = 2615.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.216219     0.010811
  15.000     0.402229     0.020111
  25.000     0.480567     0.024028
@@ -3569,7 +3569,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.428261     0.021413
 ----------------------------------------------------------
 E = 2620.000 MeV, E_lo = 2615.000 MeV, E_hi = 2625.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.205261     0.010263
  15.000     0.455613     0.022781
  25.000     0.670950     0.033547
@@ -3590,7 +3590,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.561156     0.028058
 ----------------------------------------------------------
 E = 2630.000 MeV, E_lo = 2625.000 MeV, E_hi = 2635.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.258594     0.012930
  15.000     0.404561     0.020228
  25.000     0.611820     0.030591
@@ -3611,7 +3611,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.042435     0.002122
 ----------------------------------------------------------
 E = 2640.000 MeV, E_lo = 2635.000 MeV, E_hi = 2645.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.122755     0.006138
  15.000     0.405853     0.020293
  25.000     0.598136     0.029907
@@ -3632,7 +3632,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.639501     0.031975
 ----------------------------------------------------------
 E = 2650.000 MeV, E_lo = 2645.000 MeV, E_hi = 2655.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.285683     0.014284
  15.000     0.503298     0.025165
  25.000     0.472861     0.023643
@@ -3653,7 +3653,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.700428     0.035021
 ----------------------------------------------------------
 E = 2660.000 MeV, E_lo = 2655.000 MeV, E_hi = 2665.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.390967     0.019548
  15.000     0.562313     0.028116
  25.000     0.609972     0.030499
@@ -3674,7 +3674,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.286885     0.014344
 ----------------------------------------------------------
 E = 2670.000 MeV, E_lo = 2665.000 MeV, E_hi = 2675.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.221650     0.011083
  15.000     0.417017     0.020851
  25.000     0.585080     0.029254
@@ -3695,7 +3695,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.381406     0.019070
 ----------------------------------------------------------
 E = 2680.000 MeV, E_lo = 2675.000 MeV, E_hi = 2685.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.032923     0.001646
  15.000     0.438018     0.021901
  25.000     0.574332     0.028717
@@ -3716,7 +3716,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.596072     0.029804
 ----------------------------------------------------------
 E = 2690.000 MeV, E_lo = 2685.000 MeV, E_hi = 2695.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000    -0.043703     0.002185
  15.000     0.455502     0.022775
  25.000     0.464012     0.023201
@@ -3737,7 +3737,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.614748     0.030737
 ----------------------------------------------------------
 E = 2700.000 MeV, E_lo = 2695.000 MeV, E_hi = 2705.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.087906     0.004395
  15.000     0.481029     0.024051
  25.000     0.534688     0.026734
@@ -3758,7 +3758,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.628506     0.031425
 ----------------------------------------------------------
 E = 2710.000 MeV, E_lo = 2705.000 MeV, E_hi = 2715.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.201567     0.010078
  15.000     0.498021     0.024901
  25.000     0.607933     0.030397
@@ -3779,7 +3779,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.750544     0.037527
 ----------------------------------------------------------
 E = 2720.000 MeV, E_lo = 2715.000 MeV, E_hi = 2725.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.202579     0.010129
  15.000     0.444630     0.022231
  25.000     0.476095     0.023805
@@ -3800,7 +3800,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.041920     0.002096
 ----------------------------------------------------------
 E = 2730.000 MeV, E_lo = 2725.000 MeV, E_hi = 2735.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.133566     0.006678
  15.000     0.399049     0.019952
  25.000     0.528493     0.026425
@@ -3821,7 +3821,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.425144     0.021257
 ----------------------------------------------------------
 E = 2740.000 MeV, E_lo = 2735.000 MeV, E_hi = 2745.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.285151     0.014258
  15.000     0.428768     0.021438
  25.000     0.559947     0.027997
@@ -3842,7 +3842,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.766703     0.038335
 ----------------------------------------------------------
 E = 2750.000 MeV, E_lo = 2745.000 MeV, E_hi = 2755.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.311182     0.015559
  15.000     0.370897     0.018545
  25.000     0.607611     0.030381
@@ -3863,7 +3863,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.039073     0.001954
 ----------------------------------------------------------
 E = 2760.000 MeV, E_lo = 2755.000 MeV, E_hi = 2765.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.039421     0.001971
  15.000     0.386579     0.019329
  25.000     0.578593     0.028930
@@ -3884,7 +3884,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.404446     0.020222
 ----------------------------------------------------------
 E = 2770.000 MeV, E_lo = 2765.000 MeV, E_hi = 2775.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.082802     0.004140
  15.000     0.296528     0.014826
  25.000     0.618058     0.030903
@@ -3905,7 +3905,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.477683     0.023884
 ----------------------------------------------------------
 E = 2780.000 MeV, E_lo = 2775.000 MeV, E_hi = 2785.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.235582     0.011779
  15.000     0.494335     0.024717
  25.000     0.585477     0.029274
@@ -3926,7 +3926,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.963306     0.048165
 ----------------------------------------------------------
 E = 2790.000 MeV, E_lo = 2785.000 MeV, E_hi = 2795.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.032856     0.001643
  15.000     0.455516     0.022776
  25.000     0.468934     0.023447
@@ -3947,7 +3947,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.508319     0.025416
 ----------------------------------------------------------
 E = 2800.000 MeV, E_lo = 2795.000 MeV, E_hi = 2805.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.096832     0.004842
  15.000     0.492283     0.024614
  25.000     0.524911     0.026246
@@ -3968,7 +3968,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.273943     0.013697
 ----------------------------------------------------------
 E = 2810.000 MeV, E_lo = 2805.000 MeV, E_hi = 2815.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.207821     0.010391
  15.000     0.470994     0.023550
  25.000     0.615598     0.030780
@@ -3989,7 +3989,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.379403     0.018970
 ----------------------------------------------------------
 E = 2820.000 MeV, E_lo = 2815.000 MeV, E_hi = 2825.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.113408     0.005670
  15.000     0.406889     0.020344
  25.000     0.617148     0.030857
@@ -4010,7 +4010,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.332805     0.016640
 ----------------------------------------------------------
 E = 2830.000 MeV, E_lo = 2825.000 MeV, E_hi = 2835.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.114860     0.005743
  15.000     0.443654     0.022183
  25.000     0.540577     0.027029
@@ -4031,7 +4031,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.401670     0.020083
 ----------------------------------------------------------
 E = 2840.000 MeV, E_lo = 2835.000 MeV, E_hi = 2845.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.043086     0.002154
  15.000     0.513300     0.025665
  25.000     0.523580     0.026179
@@ -4052,7 +4052,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000    -0.141373     0.007069
 ----------------------------------------------------------
 E = 2850.000 MeV, E_lo = 2845.000 MeV, E_hi = 2855.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.082787     0.004139
  15.000     0.613841     0.030692
  25.000     0.610208     0.030510
@@ -4073,7 +4073,7 @@ Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
 175.000     0.177931     0.008897
 ----------------------------------------------------------
 E = 2860.000 MeV, E_lo = 2855.000 MeV, E_hi = 2865.000 MeV
-Systematic = 0.050000, Preliminary = 0, RPR2011_Pseudodata
+Systematic = 0.050000, Preliminary = 0, PSEUDO_RPR2011
   5.000     0.161260     0.008063
  15.000     0.501270     0.025063
  25.000     0.548558     0.027428
