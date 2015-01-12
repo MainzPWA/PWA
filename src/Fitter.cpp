@@ -247,7 +247,7 @@ Double_t PenaltyMLP1()
   //account (i.e. normalise the penalty to a single parameter case) and multiplied by
   //the number of data points (NPts) that are used for chi^2. Also, it is normalised
   //to an average magnitude^2 of a single real (or imaginary) part of model multipoles.
-  return PENALTY[MLP1]*(SumSq/MagSq)*(NPts()/NMlp());
+  return PENALTY[MLP1]*SumSq*NPts()/(MagSq*NMlp());
 }
 
 //-----------------------------------------------------------------------------
@@ -298,7 +298,7 @@ Double_t PenaltyMLP2()
   //So, it is divided by the number of multipole parameters (NMlp) that are taken into
   //account (i.e. normalise the penalty to a single parameter case) and multiplied by
   //the number of data points (NPts) that are used for chi^2.
-  return PENALTY[MLP2]*SumSq*(NPts()/NMlp());
+  return PENALTY[MLP2]*SumSq*NPts()/NMlp();
 }
 
 //-----------------------------------------------------------------------------
@@ -306,11 +306,14 @@ Double_t PenaltyMLP2()
 Double_t PenaltyCGLN()
 {
   Int_t eM = GetEnergyBin_maid();
-  Int_t Nsteps = NPts();
+  Int_t Npts = NPts();
+  Int_t Nsteps;
   Double_t CosTheta, DCosTheta;
   Double_t SumSq = 0.0;
 
-  if(Nsteps > NSTEPS) Nsteps = NSTEPS;
+  Nsteps = Npts;
+  if(Nsteps > NSTEPS) Nsteps = NSTEPS; //Limit number of step for reasonable performance
+
   DCosTheta = 2.0/Nsteps; //Calculate costheta step size
   for(Int_t n=0; n<Nsteps; n++)
   {
@@ -322,7 +325,9 @@ Double_t PenaltyCGLN()
   //Here it is summed up to the number of theta points from all observables
   //(i.e. NPts costheta positions are used) and EvaluateCGLN() normalises to
   //the sum of F1...F4 magnitudes. Hence, no further normalisation is required.
-  return SumSq;
+  //Note: The number of steps is limited, hence for large number of points,
+  //a correction is required.
+  return SumSq*Npts/Nsteps;
 }
 
 //-----------------------------------------------------------------------------
@@ -330,11 +335,14 @@ Double_t PenaltyCGLN()
 Double_t PenaltyHELI()
 {
   Int_t eM = GetEnergyBin_maid();
-  Int_t Nsteps = NPts();
+  Int_t Npts = NPts();
+  Int_t Nsteps;
   Double_t CosTheta, DCosTheta;
   Double_t SumSq = 0.0;
 
-  if(Nsteps > NSTEPS) Nsteps = NSTEPS;
+  Nsteps = Npts;
+  if(Nsteps > NSTEPS) Nsteps = NSTEPS; //Limit number of step for reasonable performance
+
   DCosTheta = 2.0/Nsteps; //Calculate costheta step size
   for(Int_t n=0; n<Nsteps; n++)
   {
@@ -346,7 +354,9 @@ Double_t PenaltyHELI()
   //Here it is summed up to the number of theta points from all observables
   //(i.e. NPts costheta positions are used) and EvaluateHELI() normalises to
   //the sum of H1...H4 magnitudes. Hence, no further normalisation is required.
-  return SumSq;
+  //Note: The number of steps is limited, hence for large number of points,
+  //a correction is required.
+  return SumSq*Npts/Nsteps;
 }
 
 //-----------------------------------------------------------------------------
