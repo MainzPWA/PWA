@@ -78,6 +78,7 @@ Double_t ChiSq()
   Double_t ChiSq_0,  ChiSq_S,  ChiSq_T,  ChiSq_P;
   Double_t ChiSq_E,  ChiSq_F,  ChiSq_G,  ChiSq_H;
   Double_t ChiSq_Cx, ChiSq_Cz, ChiSq_Ox, ChiSq_Oz;
+  Double_t ChiSq_Lx, ChiSq_Lz, ChiSq_Tx, ChiSq_Tz;
 
   //Get chi^2 for all observables for given global energy
   ChiSq_0  = GetChiSq_sg0();
@@ -92,10 +93,17 @@ Double_t ChiSq()
   ChiSq_Cz = GetChiSq_sgCz() + GetChiSq_Cz();
   ChiSq_Ox = GetChiSq_sgOx() + GetChiSq_Ox();
   ChiSq_Oz = GetChiSq_sgOz() + GetChiSq_Oz();
+  ChiSq_Lx = GetChiSq_sgLx() + GetChiSq_Lx();
+  ChiSq_Lz = GetChiSq_sgLz() + GetChiSq_Lz();
+  ChiSq_Tx = GetChiSq_sgTx() + GetChiSq_Tx();
+  ChiSq_Tz = GetChiSq_sgTz() + GetChiSq_Tz();
 
   if(ONLY_CROSS_S) return (ChiSq_0 + ChiSq_S);
   if(ONLY_CROSS_F) return (ChiSq_0 + ChiSq_F);
-  return (ChiSq_0 + ChiSq_S + ChiSq_T + ChiSq_P + ChiSq_E + ChiSq_F + ChiSq_G + ChiSq_H + ChiSq_Cx + ChiSq_Cz + ChiSq_Ox + ChiSq_Oz);
+  return (ChiSq_0  + ChiSq_S  + ChiSq_T  + ChiSq_P  +
+          ChiSq_E  + ChiSq_F  + ChiSq_G  + ChiSq_H  +
+          ChiSq_Cx + ChiSq_Cz + ChiSq_Ox + ChiSq_Oz +
+          ChiSq_Lx + ChiSq_Lz + ChiSq_Tx + ChiSq_Tz);
 }
 
 //-----------------------------------------------------------------------------
@@ -107,6 +115,7 @@ Double_t Scale()
   Double_t Scale_0,  Scale_S,  Scale_T,  Scale_P;
   Double_t Scale_E,  Scale_F,  Scale_G,  Scale_H;
   Double_t Scale_Cx, Scale_Cz, Scale_Ox, Scale_Oz;
+  Double_t Scale_Lx, Scale_Lz, Scale_Tx, Scale_Tz;
 
   Scale_0  = GetScale_sg0();
   Scale_S  = GetScale_sgS()  + GetScale_S();
@@ -120,6 +129,10 @@ Double_t Scale()
   Scale_Cz = GetScale_sgCz() + GetScale_Cz();
   Scale_Ox = GetScale_sgOx() + GetScale_Ox();
   Scale_Oz = GetScale_sgOz() + GetScale_Oz();
+  Scale_Lx = GetScale_sgLx() + GetScale_Lx();
+  Scale_Lz = GetScale_sgLz() + GetScale_Lz();
+  Scale_Tx = GetScale_sgTx() + GetScale_Tx();
+  Scale_Tz = GetScale_sgTz() + GetScale_Tz();
 
   if(ONLY_CROSS_S) return SCALING*(Scale_0 + Scale_S)/NSca();
   if(ONLY_CROSS_F) return SCALING*(Scale_0 + Scale_F)/NSca();
@@ -128,7 +141,10 @@ Double_t Scale()
   //So, it is divided by the number of scaling parameters (NSca) that are taken into
   //account (i.e. normalise the penalty to a single parameter case). The number of data
   //points is already considered when calculating the individual contributions.
-  return SCALING*(Scale_0 + Scale_S + Scale_T + Scale_P + Scale_E + Scale_F + Scale_G + Scale_H + Scale_Cx + Scale_Cz + Scale_Ox + Scale_Oz)/NSca();
+  return SCALING*(Scale_0  + Scale_S  + Scale_T  + Scale_P  +
+                  Scale_E  + Scale_F  + Scale_G  + Scale_H  +
+                  Scale_Cx + Scale_Cz + Scale_Ox + Scale_Oz +
+                  Scale_Lx + Scale_Lz + Scale_Tx + Scale_Tz)/NSca();
 }
 
 //-----------------------------------------------------------------------------
@@ -338,6 +354,7 @@ Int_t NPts()
   Int_t NPts_0,  NPts_S,  NPts_T,  NPts_P;
   Int_t NPts_E,  NPts_F,  NPts_G,  NPts_H;
   Int_t NPts_Cx, NPts_Cz, NPts_Ox, NPts_Oz;
+  Int_t NPts_Lx, NPts_Lz, NPts_Tx, NPts_Tz;
 
   NPts_0  = GetNPts_sg0();
   NPts_S  = GetNPts_sgS()  + GetNPts_S();
@@ -351,11 +368,18 @@ Int_t NPts()
   NPts_Cz = GetNPts_sgCz() + GetNPts_Cz();
   NPts_Ox = GetNPts_sgOx() + GetNPts_Ox();
   NPts_Oz = GetNPts_sgOz() + GetNPts_Oz();
+  NPts_Lx = GetNPts_sgLx() + GetNPts_Lx();
+  NPts_Lz = GetNPts_sgLz() + GetNPts_Lz();
+  NPts_Tx = GetNPts_sgTx() + GetNPts_Tx();
+  NPts_Tz = GetNPts_sgTz() + GetNPts_Tz();
 
   if(ONLY_CROSS_S) return (NPts_0 + NPts_S);
   if(ONLY_CROSS_F) return (NPts_0 + NPts_F);
 
-  return (NPts_0 + NPts_S + NPts_T + NPts_P + NPts_E + NPts_F + NPts_G + NPts_H + NPts_Cx + NPts_Cz + NPts_Ox + NPts_Oz);
+  return (NPts_0  + NPts_S  + NPts_T  + NPts_P  +
+          NPts_E  + NPts_F  + NPts_G  + NPts_H  +
+          NPts_Cx + NPts_Cz + NPts_Ox + NPts_Oz +
+          NPts_Lx + NPts_Lz + NPts_Tx + NPts_Tz);
 }
 
 //-----------------------------------------------------------------------------
@@ -429,6 +453,10 @@ Int_t NSca()
   if(GetNPts_sgCz()) NSca+=1;
   if(GetNPts_sgOx()) NSca+=1;
   if(GetNPts_sgOz()) NSca+=1;
+  if(GetNPts_sgLx()) NSca+=1;
+  if(GetNPts_sgLz()) NSca+=1;
+  if(GetNPts_sgTx()) NSca+=1;
+  if(GetNPts_sgTz()) NSca+=1;
   if(GetNPts_S())    NSca+=1;
   if(GetNPts_T())    NSca+=1;
   if(GetNPts_P())    NSca+=1;
@@ -440,6 +468,10 @@ Int_t NSca()
   if(GetNPts_Cz())   NSca+=1;
   if(GetNPts_Ox())   NSca+=1;
   if(GetNPts_Oz())   NSca+=1;
+  if(GetNPts_Lx())   NSca+=1;
+  if(GetNPts_Lz())   NSca+=1;
+  if(GetNPts_Tx())   NSca+=1;
+  if(GetNPts_Tz())   NSca+=1;
 
   return NSca;
 }
@@ -1286,6 +1318,10 @@ void FixScalings()
     if(!sgCz_pts[GetEnergyBins_sgCz()]) gMinuit->FixParameter(8*L_MAX + SIG_CZ);
     if(!sgOx_pts[GetEnergyBins_sgOx()]) gMinuit->FixParameter(8*L_MAX + SIG_OX);
     if(!sgOz_pts[GetEnergyBins_sgOz()]) gMinuit->FixParameter(8*L_MAX + SIG_OZ);
+    if(!sgCx_pts[GetEnergyBins_sgLx()]) gMinuit->FixParameter(8*L_MAX + SIG_LX);
+    if(!sgCz_pts[GetEnergyBins_sgLz()]) gMinuit->FixParameter(8*L_MAX + SIG_LZ);
+    if(!sgOx_pts[GetEnergyBins_sgTx()]) gMinuit->FixParameter(8*L_MAX + SIG_TX);
+    if(!sgOz_pts[GetEnergyBins_sgTz()]) gMinuit->FixParameter(8*L_MAX + SIG_TZ);
     if(!S_pts[GetEnergyBins_S()])       gMinuit->FixParameter(8*L_MAX + ASY_S);
     if(!T_pts[GetEnergyBins_T()])       gMinuit->FixParameter(8*L_MAX + ASY_T);
     if(!P_pts[GetEnergyBins_P()])       gMinuit->FixParameter(8*L_MAX + ASY_P);
@@ -1297,6 +1333,10 @@ void FixScalings()
     if(!Cz_pts[GetEnergyBins_Cz()])     gMinuit->FixParameter(8*L_MAX + ASY_CZ);
     if(!Ox_pts[GetEnergyBins_Ox()])     gMinuit->FixParameter(8*L_MAX + ASY_OX);
     if(!Oz_pts[GetEnergyBins_Oz()])     gMinuit->FixParameter(8*L_MAX + ASY_OZ);
+    if(!Cx_pts[GetEnergyBins_Lx()])     gMinuit->FixParameter(8*L_MAX + ASY_LX);
+    if(!Cz_pts[GetEnergyBins_Lz()])     gMinuit->FixParameter(8*L_MAX + ASY_LZ);
+    if(!Ox_pts[GetEnergyBins_Tx()])     gMinuit->FixParameter(8*L_MAX + ASY_TX);
+    if(!Oz_pts[GetEnergyBins_Tz()])     gMinuit->FixParameter(8*L_MAX + ASY_TZ);
   }
 }
 

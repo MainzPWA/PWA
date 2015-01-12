@@ -205,6 +205,74 @@ Char_t sgOz_id[EBINS][256];
 
 //-----------------------------------------------------------------------------
 
+Double_t sgLx_val[EBINS][THBINS];
+Double_t sgLx_err[EBINS][THBINS];
+Double_t sgLx_unc[EBINS][THBINS];
+Double_t sgLx_th[EBINS][THBINS];
+Double_t sgLx_lo[EBINS];
+Double_t sgLx_en[EBINS];
+Double_t sgLx_hi[EBINS];
+Double_t sgLx_wt[EBINS];
+Double_t sgLx_sy[EBINS];
+Double_t sgLx_sc[EBINS];
+Bool_t sgLx_pre[EBINS];
+Int_t sgLx_pts[EBINS];
+Int_t sgLx_bin;
+Char_t sgLx_id[EBINS][256];
+
+//-----------------------------------------------------------------------------
+
+Double_t sgLz_val[EBINS][THBINS];
+Double_t sgLz_err[EBINS][THBINS];
+Double_t sgLz_unc[EBINS][THBINS];
+Double_t sgLz_th[EBINS][THBINS];
+Double_t sgLz_lo[EBINS];
+Double_t sgLz_en[EBINS];
+Double_t sgLz_hi[EBINS];
+Double_t sgLz_wt[EBINS];
+Double_t sgLz_sy[EBINS];
+Double_t sgLz_sc[EBINS];
+Bool_t sgLz_pre[EBINS];
+Int_t sgLz_pts[EBINS];
+Int_t sgLz_bin;
+Char_t sgLz_id[EBINS][256];
+
+//-----------------------------------------------------------------------------
+
+Double_t sgTx_val[EBINS][THBINS];
+Double_t sgTx_err[EBINS][THBINS];
+Double_t sgTx_unc[EBINS][THBINS];
+Double_t sgTx_th[EBINS][THBINS];
+Double_t sgTx_lo[EBINS];
+Double_t sgTx_en[EBINS];
+Double_t sgTx_hi[EBINS];
+Double_t sgTx_wt[EBINS];
+Double_t sgTx_sy[EBINS];
+Double_t sgTx_sc[EBINS];
+Bool_t sgTx_pre[EBINS];
+Int_t sgTx_pts[EBINS];
+Int_t sgTx_bin;
+Char_t sgTx_id[EBINS][256];
+
+//-----------------------------------------------------------------------------
+
+Double_t sgTz_val[EBINS][THBINS];
+Double_t sgTz_err[EBINS][THBINS];
+Double_t sgTz_unc[EBINS][THBINS];
+Double_t sgTz_th[EBINS][THBINS];
+Double_t sgTz_lo[EBINS];
+Double_t sgTz_en[EBINS];
+Double_t sgTz_hi[EBINS];
+Double_t sgTz_wt[EBINS];
+Double_t sgTz_sy[EBINS];
+Double_t sgTz_sc[EBINS];
+Bool_t sgTz_pre[EBINS];
+Int_t sgTz_pts[EBINS];
+Int_t sgTz_bin;
+Char_t sgTz_id[EBINS][256];
+
+//-----------------------------------------------------------------------------
+
 Double_t S_val[EBINS][THBINS];
 Double_t S_err[EBINS][THBINS];
 Double_t S_unc[EBINS][THBINS];
@@ -389,6 +457,74 @@ Bool_t Oz_pre[EBINS];
 Int_t Oz_pts[EBINS];
 Int_t Oz_bin;
 Char_t Oz_id[EBINS][256];
+
+//-----------------------------------------------------------------------------
+
+Double_t Lx_val[EBINS][THBINS];
+Double_t Lx_err[EBINS][THBINS];
+Double_t Lx_unc[EBINS][THBINS];
+Double_t Lx_th[EBINS][THBINS];
+Double_t Lx_lo[EBINS];
+Double_t Lx_en[EBINS];
+Double_t Lx_hi[EBINS];
+Double_t Lx_wt[EBINS];
+Double_t Lx_sy[EBINS];
+Double_t Lx_sc[EBINS];
+Bool_t Lx_pre[EBINS];
+Int_t Lx_pts[EBINS];
+Int_t Lx_bin;
+Char_t Lx_id[EBINS][256];
+
+//-----------------------------------------------------------------------------
+
+Double_t Lz_val[EBINS][THBINS];
+Double_t Lz_err[EBINS][THBINS];
+Double_t Lz_unc[EBINS][THBINS];
+Double_t Lz_th[EBINS][THBINS];
+Double_t Lz_lo[EBINS];
+Double_t Lz_en[EBINS];
+Double_t Lz_hi[EBINS];
+Double_t Lz_wt[EBINS];
+Double_t Lz_sy[EBINS];
+Double_t Lz_sc[EBINS];
+Bool_t Lz_pre[EBINS];
+Int_t Lz_pts[EBINS];
+Int_t Lz_bin;
+Char_t Lz_id[EBINS][256];
+
+//-----------------------------------------------------------------------------
+
+Double_t Tx_val[EBINS][THBINS];
+Double_t Tx_err[EBINS][THBINS];
+Double_t Tx_unc[EBINS][THBINS];
+Double_t Tx_th[EBINS][THBINS];
+Double_t Tx_lo[EBINS];
+Double_t Tx_en[EBINS];
+Double_t Tx_hi[EBINS];
+Double_t Tx_wt[EBINS];
+Double_t Tx_sy[EBINS];
+Double_t Tx_sc[EBINS];
+Bool_t Tx_pre[EBINS];
+Int_t Tx_pts[EBINS];
+Int_t Tx_bin;
+Char_t Tx_id[EBINS][256];
+
+//-----------------------------------------------------------------------------
+
+Double_t Tz_val[EBINS][THBINS];
+Double_t Tz_err[EBINS][THBINS];
+Double_t Tz_unc[EBINS][THBINS];
+Double_t Tz_th[EBINS][THBINS];
+Double_t Tz_lo[EBINS];
+Double_t Tz_en[EBINS];
+Double_t Tz_hi[EBINS];
+Double_t Tz_wt[EBINS];
+Double_t Tz_sy[EBINS];
+Double_t Tz_sc[EBINS];
+Bool_t Tz_pre[EBINS];
+Int_t Tz_pts[EBINS];
+Int_t Tz_bin;
+Char_t Tz_id[EBINS][256];
 
 //-----------------------------------------------------------------------------
 

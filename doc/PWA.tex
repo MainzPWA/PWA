@@ -79,53 +79,65 @@ given in four groups
  \mbox{Group $TR$:}& T_{x^\prime}, T_{z^\prime}, L_{x^\prime}, L_{z^\prime}
 \end{array}
 \end{displaymath}
-Right now, \PWA only supports observable data for groups $S$, $BT$, and $BR$. These observables can be expressed
+\PWA supports observable data for all groups $S$, $BT$, $BR$, and $TR$. These observables can be expressed
 in form of the four CGLN amplitudes $F_i$ according to
 \begin{displaymath}\label{frm_Obs}
-\begin{array}{lll}
-\sigma_0 & = & \Re \left\lbrace |F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2  + \frac{1}{2}\sin^2\theta\left[ |F_3|^2 + |F_4|^2 + 2 F_2\cc  F_3    + 2 F_1\cc  F4 + 2\cos\theta F_3\cc F_4\right] \right\rbrace \cdot \rho\\
-\sigma_0 \Sigma& = & - \frac{1}{2}\sin^2\theta\:\Re\left\lbrace|F_3|^2 + |F_4|^2 
-                                               + 2\left[F_2\cc F_3 + F_1\cc F_4 
-                                               + \cos\theta F_3\cc F_4\right]  
+\begin{array}{lcl}
+\sigma_0 &\hspace{-0.67em}=&\hspace{-0.5em} \Re \left\lbrace |F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2  + \frac{1}{2}\sin^2\theta\left( |F_3|^2 + |F_4|^2 + 2 F_2\cc  F_3    + 2 F_1\cc  F4 + 2\cos\theta F_3\cc F_4\right) \right\rbrace \cdot \rho\\
+\sigma_0 \Sigma &\hspace{-0.67em}=&\hspace{-0.5em} - \frac{1}{2}\sin^2\theta\:\Re\left\lbrace|F_3|^2 + |F_4|^2 
+                                               + 2\left(F_2\cc F_3 + F_1\cc F_4 
+                                               + \cos\theta F_3\cc F_4\right)  
                                                \right\rbrace \cdot \rho\\
-\sigma_0 T     & = & \sin\theta\:\Im \left\lbrace F_1\cc F_3 - F_2\cc F_4 
+\sigma_0 T     &\hspace{-0.67em}=&\hspace{-0.5em} \sin\theta\:\Im \left\lbrace F_1\cc F_3 - F_2\cc F_4 
                                                + \cos\theta\left(F_1\cc F_4 - F_2\cc F_3\right)
                                                - \sin^2\theta F_3\cc F_4
                                                \right\rbrace \cdot \rho\\
-\sigma_0 P     & = & \sin\theta\: \Im\left\lbrace F_2\cc F_4 - 2 F_1\cc F_2 - F_1 F_3
+\sigma_0 P     &\hspace{-0.67em}=&\hspace{-0.5em} \sin\theta\: \Im\left\lbrace F_2\cc F_4 - 2 F_1\cc F_2 - F_1 F_3
                                                + \cos\theta\left(F_2\cc F_3 - F_1\cc F_4\right) 
                                                + \sin^2\theta F_3\cc F_4
                                                \right\rbrace \cdot \rho\\
-\sigma_0 E     & = & \Re\left\lbrace|F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2
+\sigma_0 E     &\hspace{-0.67em}=&\hspace{-0.5em} \Re\left\lbrace|F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2
                                                +\sin^2\theta\left(F_2\cc F_3 + F_1\cc F_4\right)
                                                \right\rbrace \cdot \rho\\
-\sigma_0 F     & = & \sin\theta \:\Re\left\lbrace F_1\cc F_3 - F_2\cc F_4 
+\sigma_0 F     &\hspace{-0.67em}=&\hspace{-0.5em} \sin\theta \:\Re\left\lbrace F_1\cc F_3 - F_2\cc F_4 
                                                + \cos\theta\left(F_1\cc F_4 + F_2\cc F_3\right)
                                                  \right\rbrace \cdot \rho\\
-\sigma_0 G     & = & \sin^2\theta \:\Im\left\lbrace F_2\cc F_3 + F_1\cc F_4\:
+\sigma_0 G     &\hspace{-0.67em}=&\hspace{-0.5em} \sin^2\theta \:\Im\left\lbrace F_2\cc F_3 + F_1\cc F_4\:
                                                 \right\rbrace \cdot \rho\\
-\sigma_0 H_{\phantom{z^\prime}}     & = & \sin\theta \:\Im \left\lbrace 2 F_1\cc F_2 + F_1\cc F_3 
+\sigma_0 H_{\phantom{z^\prime}} &\hspace{-0.67em}=&\hspace{-0.5em} \sin\theta \:\Im \left\lbrace 2 F_1\cc F_2 + F_1\cc F_3 
                                                - F_2\cc F_4 -\cos\theta\left( F_2\cc F_3 - F_1\cc F_4 \right)
                                                  \right\rbrace \cdot \rho\\
+&\hspace{-0.67em}&\hspace{-0.5em}\phantom{\Re\left\lbrace 2F_1\cc F_2 - \cos\theta\left(|F_1|^2  + |F_2|^2\right)
+           + \sin^2\theta\left(F_1\cc F_3 + F_2\cc F_4 + F_3\cc F_4\right)
+           + \frac{1}{2}\cos\theta\sin^2\theta\left(|F_3|^2 + |F_4|^2\right) \right\rbrace \cdot \rho}\vspace{-1.5em}\\
 \end{array}
 \end{displaymath}
 \begin{displaymath}\label{frm_Obs2}
-\begin{array}{lll}
-\sigma_0 O_{x^\prime} & = & -\sin\theta \:\Im \left\lbrace F_1\cc F_4 - F_2\cc F_3
+\begin{array}{lcl}
+\sigma_0 O_{x^\prime} &\hspace{-0.67em}=&\hspace{-0.5em} -\sin\theta \:\Im \left\lbrace F_1\cc F_4 - F_2\cc F_3
                                                       + \cos\theta\left(F_1\cc F_3 - F_2\cc F_4\right)
                                                        \right\rbrace \cdot \rho\\
-\sigma_0 O_{z^\prime} & = & -\sin^2\theta \:\Im \left\lbrace F_1\cc F_3 + F_2\cc F_4\:
+\sigma_0 O_{z^\prime} &\hspace{-0.67em}=&\hspace{-0.5em} -\sin^2\theta \:\Im \left\lbrace F_1\cc F_3 + F_2\cc F_4\:
                                                        \right\rbrace \cdot \rho\\
-\sigma_0 C_{x^\prime} & = & \sin\theta \:\Re \left\lbrace |F_1|^2 - |F_2|^2 
+\sigma_0 C_{x^\prime} &\hspace{-0.67em}=&\hspace{-0.5em} \sin\theta \:\Re \left\lbrace |F_1|^2 - |F_2|^2 
                                                       + F_1\cc F_3 - F_2\cc F_3 
                                                       +\cos\theta\left(F_1\cc F_3 - F_2\cc F_4\right)
                                                        \right\rbrace \cdot \rho\\
-\sigma_0 C_{z^\prime} & = & \Re \left\lbrace 2 F_1\cc F_2 
+\sigma_0 C_{z^\prime} &\hspace{-0.67em}=&\hspace{-0.5em} \Re \left\lbrace 2 F_1\cc F_2 
                                                       +\sin^2\theta\left(F_1\cc F_3 + F_2\cc F_4\right)
                                                       -\cos\theta\left(|F_1|^2+|F_2|^2\right)
                                                        \right\rbrace \cdot \rho\\
-
-&&\phantom{\Re \left\lbrace |F_1|^2 + |F_2|^2 - 2\cos\theta F_1\cc F_2  + \frac{1}{2}\sin^2\theta\left[ |F_3|^2 + |F_4|^2 + 2 F_2\cc  F_3    + 2 F_1\cc  F4 + 2\cos\theta F_3\cc F_4\right] \right\rbrace \cdot \rho}\vspace{-1.5em}\\
+\sigma_0 L_{x^\prime} &\hspace{-0.67em}=&\hspace{-0.5em} -\sin\theta \:\Re\left\lbrace |F_1|^2 - |F_2|^2 - F_2\cc F_3  + F_1\cc F_4
+                            + \frac{1}{2}\sin^2\theta \left( |F_4|^2 - |F_3|^2\right) 
+                            + \cos\theta \left(F_1\cc F_3 - F_2\cc F_4\right) \right\rbrace \cdot \rho\\
+\sigma_0 L_{z^\prime} &\hspace{-0.67em}=&\hspace{-0.5em} \Re\left\lbrace 2F_1\cc F_2 - \cos\theta\left(|F_1|^2  + |F_2|^2\right)
+                             + \sin^2\theta\left(F_1\cc F_3 + F_2\cc F_4 + F_3\cc F_4\right)
+                             + \frac{1}{2}\cos\theta\sin^2\theta\left(|F_3|^2 + |F_4|^2\right) \right\rbrace \cdot \rho\\
+\sigma_0 T_{x^\prime} &\hspace{-0.67em}=&\hspace{-0.5em} -\sin^2\theta\:\Re \left\lbrace F_1\cc F_3 + F_2\cc F_4 + F_3\cc F_4
+                            +\frac{1}{2}\cos\theta\left(|F_3|^2 + |F_4|^2\right) \right\rbrace \cdot \rho\\
+\sigma_0 T_{z^\prime} &\hspace{-0.67em}=&\hspace{-0.5em} \sin\theta\:\Re \left\lbrace F_1\cc F_4 - F_2\cc F_3
+                            + \cos\theta\left(F_1\cc F_3 - F_2\cc F_4\right)
+                            +\frac{1}{2}\sin^2\theta\left(F_4||^ - |F_3|^2\right)\right\rbrace \cdot \rho\\
 \end{array}
 \end{displaymath}
 with a phase space factor $\rho = \frac{q}{k}$ given by pion and photon momenta $q$ and $k$. The CGLN amplitudes
@@ -743,6 +755,10 @@ give the fitter more freedom to rescale experimental values.
 \tt SGCZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
 \tt SGOX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
 \tt SGOZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGLX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGLZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGTX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt SGTZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
 Defines the experimental datasets for cross sections (unpolarised $\sigma_0$ and polarised $\sigma_X$). The additional
 parameter \tt\textit{weight}\rm\ is applied to any $\chi^2$ contributions from the corresponding dataset. The additional
 parameter \tt\textit{scale}\rm\ defines an overall scaling factor to the corresponding data and errors, i.e.
@@ -763,6 +779,10 @@ The parameters \tt\textit{weight}\rm\ and \tt\textit{scale}\rm\ must not be omit
 \tt CZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
 \tt OX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
 \tt OZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt LX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt LZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt TX\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
+\tt TZ\_FILE\bl   \textit{Path/Filename}\bl \textit{weight}\bl \textit{scale}\rm\\
 Defines the experimental datasets for asymmetry observables. The additional
 parameter \tt\textit{weight}\rm\ is applied to any $\chi^2$ contributions from the corresponding dataset. The additional
 parameter \tt\textit{scale}\rm\ defines an overall scaling factor to the corresponding data and errors, i.e.
@@ -1082,6 +1102,11 @@ For $p \eta$ the following models are provided: \vspace{-0.25em}\\
 \hspace{-0.5em}\tt model/ppi0/MAID2000\rm & $\eta$MAID 2000 \cite{Model_etaMAID} \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/MAID2014\rm & $\eta$MAID 2014 \vspace{-0.5em}\\
 \hspace{-0.5em}\tt model/ppi0/SAID\rm & SAID \cite{Model_etaSAID} \vspace{-0.1em}\\
+\end{tabular}
+
+For $\Lambda K^+$ the following model is provided: \vspace{-0.25em}\\
+\begin{tabular}{ll}
+\hspace{-0.5em}\tt model/LambdaKp/RPR2011\rm & Gent RPR-2011 model\vspace{-0.1em}\\
 \end{tabular}
 
 \subsection{\PWA output files}\label{sec_output}

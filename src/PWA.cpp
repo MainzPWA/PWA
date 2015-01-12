@@ -14,6 +14,10 @@
 #include "Provide_sgCz.h"
 #include "Provide_sgOx.h"
 #include "Provide_sgOz.h"
+#include "Provide_sgLx.h"
+#include "Provide_sgLz.h"
+#include "Provide_sgTx.h"
+#include "Provide_sgTz.h"
 #include "Provide_S.h"
 #include "Provide_T.h"
 #include "Provide_P.h"
@@ -25,6 +29,10 @@
 #include "Provide_Cz.h"
 #include "Provide_Ox.h"
 #include "Provide_Oz.h"
+#include "Provide_Lx.h"
+#include "Provide_Lz.h"
+#include "Provide_Tx.h"
+#include "Provide_Tz.h"
 #include "Parse_MAID.h"
 #include "PWA.h"
 #include "Version.h"
@@ -609,6 +617,10 @@ void Load()
     if(sscanf(Buffer, "SGCZ_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgCz(Filename, Weight, Scale);
     if(sscanf(Buffer, "SGOX_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgOx(Filename, Weight, Scale);
     if(sscanf(Buffer, "SGOZ_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgOz(Filename, Weight, Scale);
+    if(sscanf(Buffer, "SGLX_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgLx(Filename, Weight, Scale);
+    if(sscanf(Buffer, "SGLZ_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgLz(Filename, Weight, Scale);
+    if(sscanf(Buffer, "SGTX_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgTx(Filename, Weight, Scale);
+    if(sscanf(Buffer, "SGTZ_FILE %s %lf %lf", Filename, &Weight, &Scale)==3) Load_sgTz(Filename, Weight, Scale);
 
     if(sscanf(Buffer, "S_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_S(Filename,  Weight, Scale);
     if(sscanf(Buffer, "T_FILE %s %lf %lf",    Filename, &Weight, &Scale)==3) Load_T(Filename,  Weight, Scale);
@@ -621,6 +633,10 @@ void Load()
     if(sscanf(Buffer, "CZ_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Cz(Filename, Weight, Scale);
     if(sscanf(Buffer, "OX_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Ox(Filename, Weight, Scale);
     if(sscanf(Buffer, "OZ_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Oz(Filename, Weight, Scale);
+    if(sscanf(Buffer, "LX_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Lx(Filename, Weight, Scale);
+    if(sscanf(Buffer, "LZ_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Lz(Filename, Weight, Scale);
+    if(sscanf(Buffer, "TX_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Tx(Filename, Weight, Scale);
+    if(sscanf(Buffer, "TZ_FILE %s %lf %lf",   Filename, &Weight, &Scale)==3) Load_Tz(Filename, Weight, Scale);
 
     if(sscanf(Buffer, "MODEL_PATH %s", Pathname)==1) Parse_MAID(Pathname);
   }
@@ -667,8 +683,8 @@ int main(int argc, char **argv)
   //  }
   //  printf("E =  %7.3f MeV, Wght = 1.00, Syst = 0.000000\n", maid_en[e]);
   //  for(Double_t t=5.0; t<180.0; t+=10.0)
-  //    //printf("%f %f 0.0000005 0.000000\n", t, sigmaT(t, maid_en[e]));
-  //    printf("%f %f 0.0000005 0.000000\n", t, sigmaF(t, maid_en[e]));
+  //    printf("%f %f 0.0000005 0.000000\n", t, sigmaT(t, maid_en[e]));
+  //    //printf("%f %f 0.0000005 0.000000\n", t, sigmaF(t, maid_en[e]));
   //  printf("-----------------------------------------------------\n");
   //}
 }
