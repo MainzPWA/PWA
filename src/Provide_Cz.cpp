@@ -102,8 +102,8 @@ Double_t GetChiSq_Cz()
     for(Int_t th=0; th<Cz_pts[eCz[n]]; th++) //Process all data points in current bin
     {
       Theta = Cz_th[eCz[n]][th];
-      Meas  = Cz_sc[eCz[n]]*Cz_val[eCz[n]][th]*f_obs[SIG_0];
-      Error = Cz_sc[eCz[n]]*Cz_err[eCz[n]][th]*f_obs[SIG_0];
+      Meas  = Cz_sc[eCz[n]]*Cz_val[eCz[n]][th]*f_obs[ASY_CZ];
+      Error = Cz_sc[eCz[n]]*Cz_err[eCz[n]][th]*f_obs[ASY_CZ];
       Theo  = Cz(Theta, Omega);
       //printf("Cz: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
       ChiSq_Cz+=(Cz_wt[eCz[n]]*((Meas-Theo)*(Meas-Theo)/(Error*Error)));
@@ -168,7 +168,7 @@ Double_t GetScale_Cz()
   Int_t nCz = GetEnergyBins_Cz(eCz); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nCz; n++) //Process all found bins
-    Scale_Cz+=(1.0*Cz_pts[eCz[n]])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(Cz_sy[eCz[n]]*Cz_sy[eCz[n]]);
+    Scale_Cz+=(1.0*Cz_pts[eCz[n]])*(f_obs[ASY_CZ]-1.0)*(f_obs[ASY_CZ]-1.0)/(Cz_sy[eCz[n]]*Cz_sy[eCz[n]]);
 
   return Scale_Cz;
 }

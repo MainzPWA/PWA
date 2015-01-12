@@ -102,8 +102,8 @@ Double_t GetChiSq_sgS()
     for(Int_t th=0; th<sgS_pts[eS[n]]; th++) //Process all data points in current bin
     {
       Theta = sgS_th[eS[n]][th];
-      Meas  = sgS_sc[eS[n]]*sgS_val[eS[n]][th]*f_obs[SIG_0];
-      Error = sgS_sc[eS[n]]*sgS_err[eS[n]][th]*f_obs[SIG_0];
+      Meas  = sgS_sc[eS[n]]*sgS_val[eS[n]][th]*f_obs[SIG_S];
+      Error = sgS_sc[eS[n]]*sgS_err[eS[n]][th]*f_obs[SIG_S];
       Theo  = sigmaS(Theta, Omega);
       //printf("sgS: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
       ChiSq_sgS+=(sgS_wt[eS[n]]*((Meas-Theo)*(Meas-Theo)/(Error*Error)));
@@ -168,7 +168,7 @@ Double_t GetScale_sgS()
   Int_t nS = GetEnergyBins_sgS(eS); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nS; n++) //Process all found bins
-    Scale_sgS+=(1.0*sgS_pts[eS[n]])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(sgS_sy[eS[n]]*sgS_sy[eS[n]]);
+    Scale_sgS+=(1.0*sgS_pts[eS[n]])*(f_obs[SIG_S]-1.0)*(f_obs[SIG_S]-1.0)/(sgS_sy[eS[n]]*sgS_sy[eS[n]]);
 
   return Scale_sgS;
 }

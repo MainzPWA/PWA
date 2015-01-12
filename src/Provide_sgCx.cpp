@@ -102,8 +102,8 @@ Double_t GetChiSq_sgCx()
     for(Int_t th=0; th<sgCx_pts[eCx[n]]; th++) //Process all data points in current bin
     {
       Theta = sgCx_th[eCx[n]][th];
-      Meas  = sgCx_sc[eCx[n]]*sgCx_val[eCx[n]][th]*f_obs[SIG_0];
-      Error = sgCx_sc[eCx[n]]*sgCx_err[eCx[n]][th]*f_obs[SIG_0];
+      Meas  = sgCx_sc[eCx[n]]*sgCx_val[eCx[n]][th]*f_obs[SIG_CX];
+      Error = sgCx_sc[eCx[n]]*sgCx_err[eCx[n]][th]*f_obs[SIG_CX];
       Theo  = sigmaCx(Theta, Omega);
       //printf("sgCx: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
       ChiSq_sgCx+=(sgCx_wt[eCx[n]]*((Meas-Theo)*(Meas-Theo)/(Error*Error)));
@@ -168,7 +168,7 @@ Double_t GetScale_sgCx()
   Int_t nCx = GetEnergyBins_sgCx(eCx); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nCx; n++) //Process all found bins
-    Scale_sgCx+=(1.0*sgCx_pts[eCx[n]])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(sgCx_sy[eCx[n]]*sgCx_sy[eCx[n]]);
+    Scale_sgCx+=(1.0*sgCx_pts[eCx[n]])*(f_obs[SIG_CX]-1.0)*(f_obs[SIG_CX]-1.0)/(sgCx_sy[eCx[n]]*sgCx_sy[eCx[n]]);
 
   return Scale_sgCx;
 }

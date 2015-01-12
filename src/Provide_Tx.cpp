@@ -102,8 +102,8 @@ Double_t GetChiSq_Tx()
     for(Int_t th=0; th<Tx_pts[eTx[n]]; th++) //Process all data points in current bin
     {
       Theta = Tx_th[eTx[n]][th];
-      Meas  = Tx_sc[eTx[n]]*Tx_val[eTx[n]][th]*f_obs[SIG_0];
-      Error = Tx_sc[eTx[n]]*Tx_err[eTx[n]][th]*f_obs[SIG_0];
+      Meas  = Tx_sc[eTx[n]]*Tx_val[eTx[n]][th]*f_obs[ASY_TX];
+      Error = Tx_sc[eTx[n]]*Tx_err[eTx[n]][th]*f_obs[ASY_TX];
       Theo  = Tx(Theta, Omega);
       //printf("Tx: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
       ChiSq_Tx+=(Tx_wt[eTx[n]]*((Meas-Theo)*(Meas-Theo)/(Error*Error)));
@@ -168,7 +168,7 @@ Double_t GetScale_Tx()
   Int_t nTx = GetEnergyBins_Tx(eTx); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nTx; n++) //Process all found bins
-    Scale_Tx+=(1.0*Tx_pts[eTx[n]])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(Tx_sy[eTx[n]]*Tx_sy[eTx[n]]);
+    Scale_Tx+=(1.0*Tx_pts[eTx[n]])*(f_obs[ASY_TX]-1.0)*(f_obs[ASY_TX]-1.0)/(Tx_sy[eTx[n]]*Tx_sy[eTx[n]]);
 
   return Scale_Tx;
 }

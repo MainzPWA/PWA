@@ -102,8 +102,8 @@ Double_t GetChiSq_P()
     for(Int_t th=0; th<P_pts[eP[n]]; th++) //Process all data points in current bin
     {
       Theta = P_th[eP[n]][th];
-      Meas  = P_sc[eP[n]]*P_val[eP[n]][th]*f_obs[SIG_0];
-      Error = P_sc[eP[n]]*P_err[eP[n]][th]*f_obs[SIG_0];
+      Meas  = P_sc[eP[n]]*P_val[eP[n]][th]*f_obs[ASY_P];
+      Error = P_sc[eP[n]]*P_err[eP[n]][th]*f_obs[ASY_P];
       Theo  = P(Theta, Omega);
       //printf("P: %f: %f %f  = %f\n", Theta, Theo, Meas, Theo/Meas);
       ChiSq_P+=(P_wt[eP[n]]*((Meas-Theo)*(Meas-Theo)/(Error*Error)));
@@ -168,7 +168,7 @@ Double_t GetScale_P()
   Int_t nP = GetEnergyBins_P(eP); //Get list of all energy bins covering given global energy
 
   for(Int_t n=0; n<nP; n++) //Process all found bins
-    Scale_P+=(1.0*P_pts[eP[n]])*(f_obs[SIG_0]-1.0)*(f_obs[SIG_0]-1.0)/(P_sy[eP[n]]*P_sy[eP[n]]);
+    Scale_P+=(1.0*P_pts[eP[n]])*(f_obs[ASY_P]-1.0)*(f_obs[ASY_P]-1.0)/(P_sy[eP[n]]*P_sy[eP[n]]);
 
   return Scale_P;
 }
