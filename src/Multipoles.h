@@ -563,31 +563,31 @@ inline Double_t Oz(Double_t Theta, Double_t Omega)
 
 //-----------------------------------------------------------------------------
 
-inline Double_t Lx(Double_t Theta, Double_t Omega)
-{
-  return sigmaLx(Theta, Omega)/sigma0(Theta, Omega);
-}
+  inline Double_t Lx(Double_t Theta, Double_t Omega)
+  {
+    return sigmaLx(Theta, Omega)/sigma0(Theta, Omega);
+  }
 
-//-----------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------
 
-inline Double_t Lz(Double_t Theta, Double_t Omega)
-{
-  return sigmaLz(Theta, Omega)/sigma0(Theta, Omega);
-}
+  inline Double_t Lz(Double_t Theta, Double_t Omega)
+  {
+    return sigmaLz(Theta, Omega)/sigma0(Theta, Omega);
+  }
 
-//-----------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------
 
-inline Double_t Tx(Double_t Theta, Double_t Omega)
-{
-  return sigmaTx(Theta, Omega)/sigma0(Theta, Omega);
-}
+  inline Double_t Tx(Double_t Theta, Double_t Omega)
+  {
+    return sigmaTx(Theta, Omega)/sigma0(Theta, Omega);
+  }
 
-//-----------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------
 
-inline Double_t Tz(Double_t Theta, Double_t Omega)
-{
-  return sigmaTz(Theta, Omega)/sigma0(Theta, Omega);
-}
+  inline Double_t Tz(Double_t Theta, Double_t Omega)
+  {
+    return sigmaTz(Theta, Omega)/sigma0(Theta, Omega);
+  }
 
 //-----------------------------------------------------------------------------
 
