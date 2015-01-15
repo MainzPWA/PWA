@@ -131,7 +131,10 @@ void Sort_T(Int_t l, Int_t r) //Quicksort implementation on T data arrays
      Swap(&T_hi[i],  &T_hi[j]);
      Swap(&T_wt[i],  &T_wt[j]);
      Swap(&T_sy[i],  &T_sy[j]);
+     Swap(&T_sc[i],  &T_sc[j]);
      Swap(&T_pts[i], &T_pts[j]);
+     Swap(&T_pre[i], &T_pre[j]);
+     Swap(T_id[i],   T_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&T_val[i][n], &T_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_T(Int_t l, Int_t r) //Quicksort implementation on T data arrays
    Swap(&T_hi[i],  &T_hi[r]);
    Swap(&T_wt[i],  &T_wt[r]);
    Swap(&T_sy[i],  &T_sy[r]);
+   Swap(&T_sc[i],  &T_sc[r]);
    Swap(&T_pts[i], &T_pts[r]);
+   Swap(&T_pre[i], &T_pre[r]);
+   Swap(T_id[i],   T_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&T_val[i][n], &T_val[r][n]);

@@ -131,7 +131,10 @@ void Sort_Tx(Int_t l, Int_t r) //Quicksort implementation on Tx data arrays
      Swap(&Tx_hi[i],  &Tx_hi[j]);
      Swap(&Tx_wt[i],  &Tx_wt[j]);
      Swap(&Tx_sy[i],  &Tx_sy[j]);
+     Swap(&Tx_sc[i],  &Tx_sc[j]);
      Swap(&Tx_pts[i], &Tx_pts[j]);
+     Swap(&Tx_pre[i], &Tx_pre[j]);
+     Swap(Tx_id[i],   Tx_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&Tx_val[i][n], &Tx_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_Tx(Int_t l, Int_t r) //Quicksort implementation on Tx data arrays
    Swap(&Tx_hi[i],  &Tx_hi[r]);
    Swap(&Tx_wt[i],  &Tx_wt[r]);
    Swap(&Tx_sy[i],  &Tx_sy[r]);
+   Swap(&Tx_sc[i],  &Tx_sc[r]);
    Swap(&Tx_pts[i], &Tx_pts[r]);
+   Swap(&Tx_pre[i], &Tx_pre[r]);
+   Swap(Tx_id[i],   Tx_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&Tx_val[i][n], &Tx_val[r][n]);

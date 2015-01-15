@@ -131,7 +131,10 @@ void Sort_sgE(Int_t l, Int_t r) //Quicksort implementation on sgE data arrays
      Swap(&sgE_hi[i],  &sgE_hi[j]);
      Swap(&sgE_wt[i],  &sgE_wt[j]);
      Swap(&sgE_sy[i],  &sgE_sy[j]);
+     Swap(&sgE_sc[i],  &sgE_sc[j]);
      Swap(&sgE_pts[i], &sgE_pts[j]);
+     Swap(&sgE_pre[i], &sgE_pre[j]);
+     Swap(sgE_id[i],   sgE_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&sgE_val[i][n], &sgE_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_sgE(Int_t l, Int_t r) //Quicksort implementation on sgE data arrays
    Swap(&sgE_hi[i],  &sgE_hi[r]);
    Swap(&sgE_wt[i],  &sgE_wt[r]);
    Swap(&sgE_sy[i],  &sgE_sy[r]);
+   Swap(&sgE_sc[i],  &sgE_sc[r]);
    Swap(&sgE_pts[i], &sgE_pts[r]);
+   Swap(&sgE_pre[i], &sgE_pre[r]);
+   Swap(sgE_id[i],   sgE_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&sgE_val[i][n], &sgE_val[r][n]);

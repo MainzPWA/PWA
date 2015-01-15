@@ -131,7 +131,10 @@ void Sort_sgOz(Int_t l, Int_t r) //Quicksort implementation on sgOz data arrays
      Swap(&sgOz_hi[i],  &sgOz_hi[j]);
      Swap(&sgOz_wt[i],  &sgOz_wt[j]);
      Swap(&sgOz_sy[i],  &sgOz_sy[j]);
+     Swap(&sgOz_sc[i],  &sgOz_sc[j]);
      Swap(&sgOz_pts[i], &sgOz_pts[j]);
+     Swap(&sgOz_pre[i], &sgOz_pre[j]);
+     Swap(sgOz_id[i],   sgOz_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&sgOz_val[i][n], &sgOz_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_sgOz(Int_t l, Int_t r) //Quicksort implementation on sgOz data arrays
    Swap(&sgOz_hi[i],  &sgOz_hi[r]);
    Swap(&sgOz_wt[i],  &sgOz_wt[r]);
    Swap(&sgOz_sy[i],  &sgOz_sy[r]);
+   Swap(&sgOz_sc[i],  &sgOz_sc[r]);
    Swap(&sgOz_pts[i], &sgOz_pts[r]);
+   Swap(&sgOz_pre[i], &sgOz_pre[r]);
+   Swap(sgOz_id[i],   sgOz_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&sgOz_val[i][n], &sgOz_val[r][n]);

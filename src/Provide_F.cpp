@@ -131,7 +131,10 @@ void Sort_F(Int_t l, Int_t r) //Quicksort implementation on F data arrays
      Swap(&F_hi[i],  &F_hi[j]);
      Swap(&F_wt[i],  &F_wt[j]);
      Swap(&F_sy[i],  &F_sy[j]);
+     Swap(&F_sc[i],  &F_sc[j]);
      Swap(&F_pts[i], &F_pts[j]);
+     Swap(&F_pre[i], &F_pre[j]);
+     Swap(F_id[i],   F_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&F_val[i][n], &F_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_F(Int_t l, Int_t r) //Quicksort implementation on F data arrays
    Swap(&F_hi[i],  &F_hi[r]);
    Swap(&F_wt[i],  &F_wt[r]);
    Swap(&F_sy[i],  &F_sy[r]);
+   Swap(&F_sc[i],  &F_sc[r]);
    Swap(&F_pts[i], &F_pts[r]);
+   Swap(&F_pre[i], &F_pre[r]);
+   Swap(F_id[i],   F_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&F_val[i][n], &F_val[r][n]);

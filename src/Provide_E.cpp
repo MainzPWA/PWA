@@ -131,7 +131,10 @@ void Sort_E(Int_t l, Int_t r) //Quicksort implementation on E data arrays
      Swap(&E_hi[i],  &E_hi[j]);
      Swap(&E_wt[i],  &E_wt[j]);
      Swap(&E_sy[i],  &E_sy[j]);
+     Swap(&E_sc[i],  &E_sc[j]);
      Swap(&E_pts[i], &E_pts[j]);
+     Swap(&E_pre[i], &E_pre[j]);
+     Swap(E_id[i],   E_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&E_val[i][n], &E_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_E(Int_t l, Int_t r) //Quicksort implementation on E data arrays
    Swap(&E_hi[i],  &E_hi[r]);
    Swap(&E_wt[i],  &E_wt[r]);
    Swap(&E_sy[i],  &E_sy[r]);
+   Swap(&E_sc[i],  &E_sc[r]);
    Swap(&E_pts[i], &E_pts[r]);
+   Swap(&E_pre[i], &E_pre[r]);
+   Swap(E_id[i],   E_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&E_val[i][n], &E_val[r][n]);

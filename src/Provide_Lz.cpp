@@ -131,7 +131,10 @@ void Sort_Lz(Int_t l, Int_t r) //Quicksort implementation on Lz data arrays
      Swap(&Lz_hi[i],  &Lz_hi[j]);
      Swap(&Lz_wt[i],  &Lz_wt[j]);
      Swap(&Lz_sy[i],  &Lz_sy[j]);
+     Swap(&Lz_sc[i],  &Lz_sc[j]);
      Swap(&Lz_pts[i], &Lz_pts[j]);
+     Swap(&Lz_pre[i], &Lz_pre[j]);
+     Swap(Lz_id[i],   Lz_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&Lz_val[i][n], &Lz_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_Lz(Int_t l, Int_t r) //Quicksort implementation on Lz data arrays
    Swap(&Lz_hi[i],  &Lz_hi[r]);
    Swap(&Lz_wt[i],  &Lz_wt[r]);
    Swap(&Lz_sy[i],  &Lz_sy[r]);
+   Swap(&Lz_sc[i],  &Lz_sc[r]);
    Swap(&Lz_pts[i], &Lz_pts[r]);
+   Swap(&Lz_pre[i], &Lz_pre[r]);
+   Swap(Lz_id[i],   Lz_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&Lz_val[i][n], &Lz_val[r][n]);

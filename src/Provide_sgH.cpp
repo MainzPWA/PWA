@@ -131,7 +131,10 @@ void Sort_sgH(Int_t l, Int_t r) //Quicksort implementation on sgH data arrays
      Swap(&sgH_hi[i],  &sgH_hi[j]);
      Swap(&sgH_wt[i],  &sgH_wt[j]);
      Swap(&sgH_sy[i],  &sgH_sy[j]);
+     Swap(&sgH_sc[i],  &sgH_sc[j]);
      Swap(&sgH_pts[i], &sgH_pts[j]);
+     Swap(&sgH_pre[i], &sgH_pre[j]);
+     Swap(sgH_id[i],   sgH_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&sgH_val[i][n], &sgH_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_sgH(Int_t l, Int_t r) //Quicksort implementation on sgH data arrays
    Swap(&sgH_hi[i],  &sgH_hi[r]);
    Swap(&sgH_wt[i],  &sgH_wt[r]);
    Swap(&sgH_sy[i],  &sgH_sy[r]);
+   Swap(&sgH_sc[i],  &sgH_sc[r]);
    Swap(&sgH_pts[i], &sgH_pts[r]);
+   Swap(&sgH_pre[i], &sgH_pre[r]);
+   Swap(sgH_id[i],   sgH_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&sgH_val[i][n], &sgH_val[r][n]);

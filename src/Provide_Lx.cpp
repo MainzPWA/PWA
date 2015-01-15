@@ -131,7 +131,10 @@ void Sort_Lx(Int_t l, Int_t r) //Quicksort implementation on Lx data arrays
      Swap(&Lx_hi[i],  &Lx_hi[j]);
      Swap(&Lx_wt[i],  &Lx_wt[j]);
      Swap(&Lx_sy[i],  &Lx_sy[j]);
+     Swap(&Lx_sc[i],  &Lx_sc[j]);
      Swap(&Lx_pts[i], &Lx_pts[j]);
+     Swap(&Lx_pre[i], &Lx_pre[j]);
+     Swap(Lx_id[i],   Lx_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&Lx_val[i][n], &Lx_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_Lx(Int_t l, Int_t r) //Quicksort implementation on Lx data arrays
    Swap(&Lx_hi[i],  &Lx_hi[r]);
    Swap(&Lx_wt[i],  &Lx_wt[r]);
    Swap(&Lx_sy[i],  &Lx_sy[r]);
+   Swap(&Lx_sc[i],  &Lx_sc[r]);
    Swap(&Lx_pts[i], &Lx_pts[r]);
+   Swap(&Lx_pre[i], &Lx_pre[r]);
+   Swap(Lx_id[i],   Lx_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&Lx_val[i][n], &Lx_val[r][n]);

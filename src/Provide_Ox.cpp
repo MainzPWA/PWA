@@ -131,7 +131,10 @@ void Sort_Ox(Int_t l, Int_t r) //Quicksort implementation on Ox data arrays
      Swap(&Ox_hi[i],  &Ox_hi[j]);
      Swap(&Ox_wt[i],  &Ox_wt[j]);
      Swap(&Ox_sy[i],  &Ox_sy[j]);
+     Swap(&Ox_sc[i],  &Ox_sc[j]);
      Swap(&Ox_pts[i], &Ox_pts[j]);
+     Swap(&Ox_pre[i], &Ox_pre[j]);
+     Swap(Ox_id[i],   Ox_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&Ox_val[i][n], &Ox_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_Ox(Int_t l, Int_t r) //Quicksort implementation on Ox data arrays
    Swap(&Ox_hi[i],  &Ox_hi[r]);
    Swap(&Ox_wt[i],  &Ox_wt[r]);
    Swap(&Ox_sy[i],  &Ox_sy[r]);
+   Swap(&Ox_sc[i],  &Ox_sc[r]);
    Swap(&Ox_pts[i], &Ox_pts[r]);
+   Swap(&Ox_pre[i], &Ox_pre[r]);
+   Swap(Ox_id[i],   Ox_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&Ox_val[i][n], &Ox_val[r][n]);

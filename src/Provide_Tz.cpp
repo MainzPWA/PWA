@@ -131,7 +131,10 @@ void Sort_Tz(Int_t l, Int_t r) //Quicksort implementation on Tz data arrays
      Swap(&Tz_hi[i],  &Tz_hi[j]);
      Swap(&Tz_wt[i],  &Tz_wt[j]);
      Swap(&Tz_sy[i],  &Tz_sy[j]);
+     Swap(&Tz_sc[i],  &Tz_sc[j]);
      Swap(&Tz_pts[i], &Tz_pts[j]);
+     Swap(&Tz_pre[i], &Tz_pre[j]);
+     Swap(Tz_id[i],   Tz_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&Tz_val[i][n], &Tz_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_Tz(Int_t l, Int_t r) //Quicksort implementation on Tz data arrays
    Swap(&Tz_hi[i],  &Tz_hi[r]);
    Swap(&Tz_wt[i],  &Tz_wt[r]);
    Swap(&Tz_sy[i],  &Tz_sy[r]);
+   Swap(&Tz_sc[i],  &Tz_sc[r]);
    Swap(&Tz_pts[i], &Tz_pts[r]);
+   Swap(&Tz_pre[i], &Tz_pre[r]);
+   Swap(Tz_id[i],   Tz_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&Tz_val[i][n], &Tz_val[r][n]);

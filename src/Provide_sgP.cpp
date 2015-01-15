@@ -131,7 +131,10 @@ void Sort_sgP(Int_t l, Int_t r) //Quicksort implementation on sgP data arrays
      Swap(&sgP_hi[i],  &sgP_hi[j]);
      Swap(&sgP_wt[i],  &sgP_wt[j]);
      Swap(&sgP_sy[i],  &sgP_sy[j]);
+     Swap(&sgP_sc[i],  &sgP_sc[j]);
      Swap(&sgP_pts[i], &sgP_pts[j]);
+     Swap(&sgP_pre[i], &sgP_pre[j]);
+     Swap(sgP_id[i],   sgP_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&sgP_val[i][n], &sgP_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_sgP(Int_t l, Int_t r) //Quicksort implementation on sgP data arrays
    Swap(&sgP_hi[i],  &sgP_hi[r]);
    Swap(&sgP_wt[i],  &sgP_wt[r]);
    Swap(&sgP_sy[i],  &sgP_sy[r]);
+   Swap(&sgP_sc[i],  &sgP_sc[r]);
    Swap(&sgP_pts[i], &sgP_pts[r]);
+   Swap(&sgP_pre[i], &sgP_pre[r]);
+   Swap(sgP_id[i],   sgP_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&sgP_val[i][n], &sgP_val[r][n]);

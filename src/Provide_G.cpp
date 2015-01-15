@@ -131,7 +131,10 @@ void Sort_G(Int_t l, Int_t r) //Quicksort implementation on G data arrays
      Swap(&G_hi[i],  &G_hi[j]);
      Swap(&G_wt[i],  &G_wt[j]);
      Swap(&G_sy[i],  &G_sy[j]);
+     Swap(&G_sc[i],  &G_sc[j]);
      Swap(&G_pts[i], &G_pts[j]);
+     Swap(&G_pre[i], &G_pre[j]);
+     Swap(G_id[i],   G_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&G_val[i][n], &G_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_G(Int_t l, Int_t r) //Quicksort implementation on G data arrays
    Swap(&G_hi[i],  &G_hi[r]);
    Swap(&G_wt[i],  &G_wt[r]);
    Swap(&G_sy[i],  &G_sy[r]);
+   Swap(&G_sc[i],  &G_sc[r]);
    Swap(&G_pts[i], &G_pts[r]);
+   Swap(&G_pre[i], &G_pre[r]);
+   Swap(G_id[i],   G_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&G_val[i][n], &G_val[r][n]);

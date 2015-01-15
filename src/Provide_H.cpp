@@ -131,7 +131,10 @@ void Sort_H(Int_t l, Int_t r) //Quicksort implementation on H data arrays
      Swap(&H_hi[i],  &H_hi[j]);
      Swap(&H_wt[i],  &H_wt[j]);
      Swap(&H_sy[i],  &H_sy[j]);
+     Swap(&H_sc[i],  &H_sc[j]);
      Swap(&H_pts[i], &H_pts[j]);
+     Swap(&H_pre[i], &H_pre[j]);
+     Swap(H_id[i],   H_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&H_val[i][n], &H_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_H(Int_t l, Int_t r) //Quicksort implementation on H data arrays
    Swap(&H_hi[i],  &H_hi[r]);
    Swap(&H_wt[i],  &H_wt[r]);
    Swap(&H_sy[i],  &H_sy[r]);
+   Swap(&H_sc[i],  &H_sc[r]);
    Swap(&H_pts[i], &H_pts[r]);
+   Swap(&H_pre[i], &H_pre[r]);
+   Swap(H_id[i],   H_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&H_val[i][n], &H_val[r][n]);

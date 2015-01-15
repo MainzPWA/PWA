@@ -131,7 +131,10 @@ void Sort_Cx(Int_t l, Int_t r) //Quicksort implementation on Cx data arrays
      Swap(&Cx_hi[i],  &Cx_hi[j]);
      Swap(&Cx_wt[i],  &Cx_wt[j]);
      Swap(&Cx_sy[i],  &Cx_sy[j]);
+     Swap(&Cx_sc[i],  &Cx_sc[j]);
      Swap(&Cx_pts[i], &Cx_pts[j]);
+     Swap(&Cx_pre[i], &Cx_pre[j]);
+     Swap(Cx_id[i],   Cx_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&Cx_val[i][n], &Cx_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_Cx(Int_t l, Int_t r) //Quicksort implementation on Cx data arrays
    Swap(&Cx_hi[i],  &Cx_hi[r]);
    Swap(&Cx_wt[i],  &Cx_wt[r]);
    Swap(&Cx_sy[i],  &Cx_sy[r]);
+   Swap(&Cx_sc[i],  &Cx_sc[r]);
    Swap(&Cx_pts[i], &Cx_pts[r]);
+   Swap(&Cx_pre[i], &Cx_pre[r]);
+   Swap(Cx_id[i],   Cx_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&Cx_val[i][n], &Cx_val[r][n]);

@@ -131,7 +131,10 @@ void Sort_Oz(Int_t l, Int_t r) //Quicksort implementation on Oz data arrays
      Swap(&Oz_hi[i],  &Oz_hi[j]);
      Swap(&Oz_wt[i],  &Oz_wt[j]);
      Swap(&Oz_sy[i],  &Oz_sy[j]);
+     Swap(&Oz_sc[i],  &Oz_sc[j]);
      Swap(&Oz_pts[i], &Oz_pts[j]);
+     Swap(&Oz_pre[i], &Oz_pre[j]);
+     Swap(Oz_id[i],   Oz_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&Oz_val[i][n], &Oz_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_Oz(Int_t l, Int_t r) //Quicksort implementation on Oz data arrays
    Swap(&Oz_hi[i],  &Oz_hi[r]);
    Swap(&Oz_wt[i],  &Oz_wt[r]);
    Swap(&Oz_sy[i],  &Oz_sy[r]);
+   Swap(&Oz_sc[i],  &Oz_sc[r]);
    Swap(&Oz_pts[i], &Oz_pts[r]);
+   Swap(&Oz_pre[i], &Oz_pre[r]);
+   Swap(Oz_id[i],   Oz_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&Oz_val[i][n], &Oz_val[r][n]);

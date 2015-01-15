@@ -131,7 +131,10 @@ void Sort_sgOx(Int_t l, Int_t r) //Quicksort implementation on sgOx data arrays
      Swap(&sgOx_hi[i],  &sgOx_hi[j]);
      Swap(&sgOx_wt[i],  &sgOx_wt[j]);
      Swap(&sgOx_sy[i],  &sgOx_sy[j]);
+     Swap(&sgOx_sc[i],  &sgOx_sc[j]);
      Swap(&sgOx_pts[i], &sgOx_pts[j]);
+     Swap(&sgOx_pre[i], &sgOx_pre[j]);
+     Swap(sgOx_id[i],   sgOx_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&sgOx_val[i][n], &sgOx_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_sgOx(Int_t l, Int_t r) //Quicksort implementation on sgOx data arrays
    Swap(&sgOx_hi[i],  &sgOx_hi[r]);
    Swap(&sgOx_wt[i],  &sgOx_wt[r]);
    Swap(&sgOx_sy[i],  &sgOx_sy[r]);
+   Swap(&sgOx_sc[i],  &sgOx_sc[r]);
    Swap(&sgOx_pts[i], &sgOx_pts[r]);
+   Swap(&sgOx_pre[i], &sgOx_pre[r]);
+   Swap(sgOx_id[i],   sgOx_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&sgOx_val[i][n], &sgOx_val[r][n]);

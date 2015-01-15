@@ -131,7 +131,10 @@ void Sort_P(Int_t l, Int_t r) //Quicksort implementation on P data arrays
      Swap(&P_hi[i],  &P_hi[j]);
      Swap(&P_wt[i],  &P_wt[j]);
      Swap(&P_sy[i],  &P_sy[j]);
+     Swap(&P_sc[i],  &P_sc[j]);
      Swap(&P_pts[i], &P_pts[j]);
+     Swap(&P_pre[i], &P_pre[j]);
+     Swap(P_id[i],   P_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&P_val[i][n], &P_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_P(Int_t l, Int_t r) //Quicksort implementation on P data arrays
    Swap(&P_hi[i],  &P_hi[r]);
    Swap(&P_wt[i],  &P_wt[r]);
    Swap(&P_sy[i],  &P_sy[r]);
+   Swap(&P_sc[i],  &P_sc[r]);
    Swap(&P_pts[i], &P_pts[r]);
+   Swap(&P_pre[i], &P_pre[r]);
+   Swap(P_id[i],   P_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&P_val[i][n], &P_val[r][n]);

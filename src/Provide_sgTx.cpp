@@ -131,7 +131,10 @@ void Sort_sgTx(Int_t l, Int_t r) //Quicksort implementation on sgTx data arrays
      Swap(&sgTx_hi[i],  &sgTx_hi[j]);
      Swap(&sgTx_wt[i],  &sgTx_wt[j]);
      Swap(&sgTx_sy[i],  &sgTx_sy[j]);
+     Swap(&sgTx_sc[i],  &sgTx_sc[j]);
      Swap(&sgTx_pts[i], &sgTx_pts[j]);
+     Swap(&sgTx_pre[i], &sgTx_pre[j]);
+     Swap(sgTx_id[i],   sgTx_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&sgTx_val[i][n], &sgTx_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_sgTx(Int_t l, Int_t r) //Quicksort implementation on sgTx data arrays
    Swap(&sgTx_hi[i],  &sgTx_hi[r]);
    Swap(&sgTx_wt[i],  &sgTx_wt[r]);
    Swap(&sgTx_sy[i],  &sgTx_sy[r]);
+   Swap(&sgTx_sc[i],  &sgTx_sc[r]);
    Swap(&sgTx_pts[i], &sgTx_pts[r]);
+   Swap(&sgTx_pre[i], &sgTx_pre[r]);
+   Swap(sgTx_id[i],   sgTx_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&sgTx_val[i][n], &sgTx_val[r][n]);

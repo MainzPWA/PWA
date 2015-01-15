@@ -131,7 +131,10 @@ void Sort_sgCz(Int_t l, Int_t r) //Quicksort implementation on sgCz data arrays
      Swap(&sgCz_hi[i],  &sgCz_hi[j]);
      Swap(&sgCz_wt[i],  &sgCz_wt[j]);
      Swap(&sgCz_sy[i],  &sgCz_sy[j]);
+     Swap(&sgCz_sc[i],  &sgCz_sc[j]);
      Swap(&sgCz_pts[i], &sgCz_pts[j]);
+     Swap(&sgCz_pre[i], &sgCz_pre[j]);
+     Swap(sgCz_id[i],   sgCz_id[j]);
      for(Int_t n=0; n<THBINS; n++)
      {
         Swap(&sgCz_val[i][n], &sgCz_val[j][n]);
@@ -145,7 +148,10 @@ void Sort_sgCz(Int_t l, Int_t r) //Quicksort implementation on sgCz data arrays
    Swap(&sgCz_hi[i],  &sgCz_hi[r]);
    Swap(&sgCz_wt[i],  &sgCz_wt[r]);
    Swap(&sgCz_sy[i],  &sgCz_sy[r]);
+   Swap(&sgCz_sc[i],  &sgCz_sc[r]);
    Swap(&sgCz_pts[i], &sgCz_pts[r]);
+   Swap(&sgCz_pre[i], &sgCz_pre[r]);
+   Swap(sgCz_id[i],   sgCz_id[r]);
    for(Int_t n=0; n<THBINS; n++)
    {
       Swap(&sgCz_val[i][n], &sgCz_val[r][n]);
