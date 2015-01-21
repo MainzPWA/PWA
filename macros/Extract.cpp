@@ -88,6 +88,10 @@ void Extract(Char_t* REACT, Int_t L_MAX, Int_t SOLUTIONS=1, Double_t MASS_INITIA
       fclose(Out);
     }
   }
+
+  //Create and destroy a canvas to bring plotting back in order...
+  TCanvas* Canvas = new TCanvas();
+  Canvas->Close();
 }
 
 //-----------------------------------------------------------------------------
