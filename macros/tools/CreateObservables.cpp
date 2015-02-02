@@ -172,17 +172,17 @@ void Parse_MAID()
   printf("Loading model multipoles... ");
 
   //Open s,p waves
-  MAID_Ep[0] = fopen("model/E0p.txt", "r");
-  MAID_Ep[1] = fopen("model/E1p.txt", "r");
-  MAID_Mp[1] = fopen("model/M1p.txt", "r");
-  MAID_Mm[1] = fopen("model/M1m.txt", "r");
+  MAID_Ep[0] = fopen("multipoles/E0p.txt", "r");
+  MAID_Ep[1] = fopen("multipoles/E1p.txt", "r");
+  MAID_Mp[1] = fopen("multipoles/M1p.txt", "r");
+  MAID_Mm[1] = fopen("multipoles/M1m.txt", "r");
   //Open d,f,g,... waves
   for(Int_t l=2; l<L_MAX+1; l++)
   {
-    sprintf(Buffer, "model/E%dp.txt", l); MAID_Ep[l] = fopen(Buffer, "r");
-    sprintf(Buffer, "model/E%dm.txt", l); MAID_Em[l] = fopen(Buffer, "r");
-    sprintf(Buffer, "model/M%dp.txt", l); MAID_Mp[l] = fopen(Buffer, "r");
-    sprintf(Buffer, "model/M%dm.txt", l); MAID_Mm[l] = fopen(Buffer, "r");
+    sprintf(Buffer, "multipoles/E%dp.txt", l); MAID_Ep[l] = fopen(Buffer, "r");
+    sprintf(Buffer, "multipoles/E%dm.txt", l); MAID_Em[l] = fopen(Buffer, "r");
+    sprintf(Buffer, "multipoles/M%dp.txt", l); MAID_Mp[l] = fopen(Buffer, "r");
+    sprintf(Buffer, "multipoles/M%dm.txt", l); MAID_Mm[l] = fopen(Buffer, "r");
   }
 
   //Load E0+ multipole
@@ -320,7 +320,7 @@ void Parse_MAID()
 
   //Debug output
   printf("EBins: %d\n", maid_bin);
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
     printf("%d (%f MeV)\n", e, maid_en[e]);
     printf("%f %f %f %f %f %f %f %f\n",
@@ -490,6 +490,61 @@ Double_t sigmaOz(Double_t Theta, Int_t e)
 
 //-----------------------------------------------------------------------------
 
+Double_t sigmaLx(Double_t Theta, Int_t e)
+{
+  Double_t SinTheta = Sin(Theta*DegToRad());
+  Double_t CosTheta = Cos(Theta*DegToRad());
+  Double_t Sin2Theta = SinTheta*SinTheta;
+
+  TComplex Complex = F1(CosTheta, e).Rho2() - F2(CosTheta, e).Rho2() - F2cc(CosTheta, e)*F3(CosTheta, e) + F1cc(CosTheta, e)*F4(CosTheta, e)
+                   + 0.5*Sin2Theta*(F4(CosTheta, e).Rho2() - F3(CosTheta, e).Rho2())
+                   + CosTheta*(F1cc(CosTheta, e)*F3(CosTheta, e) - F2cc(CosTheta, e)*F4(CosTheta, e));
+  return -SinTheta*Complex.Re()*rho(maid_en[e])*UNIT;
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t sigmaLz(Double_t Theta, Int_t e)
+{
+  Double_t SinTheta = Sin(Theta*DegToRad());
+  Double_t CosTheta = Cos(Theta*DegToRad());
+  Double_t Sin2Theta = SinTheta*SinTheta;
+
+  TComplex Complex = 2.0*F1cc(CosTheta, e)*F2(CosTheta, e) - CosTheta*(F1(CosTheta, e).Rho2() + F2(CosTheta, e).Rho2())
+                   + Sin2Theta*(F1cc(CosTheta, e)*F3(CosTheta, e) + F2cc(CosTheta, e)*F4(CosTheta, e) + F3cc(CosTheta, e)*F4(CosTheta, e))
+                   + 0.5*CosTheta*Sin2Theta*(F3(CosTheta, e).Rho2() + F4(CosTheta, e).Rho2());
+  return Complex.Re()*rho(maid_en[e])*UNIT;
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t sigmaTx(Double_t Theta, Int_t e)
+{
+  Double_t SinTheta = Sin(Theta*DegToRad());
+  Double_t CosTheta = Cos(Theta*DegToRad());
+  Double_t Sin2Theta = SinTheta*SinTheta;
+
+  TComplex Complex = F1cc(CosTheta, e)*F3(CosTheta, e) + F2cc(CosTheta, e)*F4(CosTheta, e) + F3cc(CosTheta, e)*F4(CosTheta, e)
+                   + 0.5*CosTheta*(F3(CosTheta, e).Rho2() + F4(CosTheta, e).Rho2());
+  return -Sin2Theta*Complex.Re()*rho(maid_en[e])*UNIT;
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t sigmaTz(Double_t Theta, Int_t e)
+{
+  Double_t SinTheta = Sin(Theta*DegToRad());
+  Double_t CosTheta = Cos(Theta*DegToRad());
+  Double_t Sin2Theta = SinTheta*SinTheta;
+
+  TComplex Complex = F1cc(CosTheta, e)*F4(CosTheta, e) - F2cc(CosTheta, e)*F3(CosTheta, e)
+                   + CosTheta*(F1cc(CosTheta, e)*F3(CosTheta, e) - F2cc(CosTheta, e)*F4(CosTheta, e))
+                   + 0.5*Sin2Theta*(F4(CosTheta, e).Rho2() - F3(CosTheta, e).Rho2());
+  return SinTheta*Complex.Re()*rho(maid_en[e])*UNIT;
+}
+
+//-----------------------------------------------------------------------------
+
 Double_t S(Double_t Theta, Int_t e)
 {
   return sigmaS(Theta, e)/sigma0(Theta, e);
@@ -567,6 +622,34 @@ Double_t Oz(Double_t Theta, Int_t e)
 
 //-----------------------------------------------------------------------------
 
+Double_t Lx(Double_t Theta, Int_t e)
+{
+  return sigmaLx(Theta, e)/sigma0(Theta, e);
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t Lz(Double_t Theta, Int_t e)
+{
+  return sigmaLz(Theta, e)/sigma0(Theta, e);
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t Tx(Double_t Theta, Int_t e)
+{
+  return sigmaTx(Theta, e)/sigma0(Theta, e);
+}
+
+//-----------------------------------------------------------------------------
+
+Double_t Tz(Double_t Theta, Int_t e)
+{
+  return sigmaTz(Theta, e)/sigma0(Theta, e);
+}
+
+//-----------------------------------------------------------------------------
+
 void Print_sg0()
 {
   FILE* Out = fopen("sg0.txt", "w");
@@ -575,17 +658,22 @@ void Print_sg0()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = sigma0(th, e);
+      Obs = sigma0(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -600,17 +688,22 @@ void Print_S()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = S(th, e);
+      Obs = S(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -625,17 +718,22 @@ void Print_T()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = T(th, e);
+      Obs = T(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -650,17 +748,22 @@ void Print_P()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = P(th, e);
+      Obs = P(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -675,17 +778,22 @@ void Print_E()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = E(th, e);
+      Obs = E(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -700,17 +808,22 @@ void Print_F()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = F(th, e);
+      Obs = F(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -725,17 +838,22 @@ void Print_G()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = G(th, e);
+      Obs = G(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -750,17 +868,22 @@ void Print_H()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = H(th, e);
+      Obs = H(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -775,17 +898,22 @@ void Print_Cx()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = Cx(th, e);
+      Obs = Cx(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -800,17 +928,21 @@ void Print_Cz()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = Cz(th, e);
+      Obs = Cz(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -825,17 +957,22 @@ void Print_Ox()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = Ox(th, e);
+      Obs = Ox(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
@@ -850,19 +987,145 @@ void Print_Oz()
 
   Parse_MAID();
 
-  for(Int_t e=0; e<maid_bin; e++)
+  for(Int_t e=1; e<maid_bin-1; e++)
   {
-    fprintf(Out, "E = %8.3f MeV, Wght = 1.00, Syst = 0.05\n", maid_en[e]);
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
     for(Int_t t=0; t<18; t++)
     {
       th = 10.0*t + 5.0;
-      Obs  = Oz(th, e);
+      Obs = Oz(th, e);
       Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
-      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
     }
-    fprintf(Out, "------------------------------------------\n");
+    fprintf(Out, "----------------------------------------------------------\n");
   }
   fclose(Out);
 }
 
 //-----------------------------------------------------------------------------
+
+void Print_Lx()
+{
+  FILE* Out = fopen("Lx.txt", "w");
+  Double_t th;
+  Double_t Obs, Obs_meas;
+
+  Parse_MAID();
+
+  for(Int_t e=1; e<maid_bin-1; e++)
+  {
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
+    for(Int_t t=0; t<18; t++)
+    {
+      th = 10.0*t + 5.0;
+      Obs = Lx(th, e);
+      Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
+    }
+    fprintf(Out, "----------------------------------------------------------\n");
+  }
+  fclose(Out);
+}
+
+//-----------------------------------------------------------------------------
+
+void Print_Lz()
+{
+  FILE* Out = fopen("Lz.txt", "w");
+  Double_t th;
+  Double_t Obs, Obs_meas;
+
+  Parse_MAID();
+
+  for(Int_t e=1; e<maid_bin-1; e++)
+  {
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
+    for(Int_t t=0; t<18; t++)
+    {
+      th = 10.0*t + 5.0;
+      Obs = Lz(th, e);
+      Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
+    }
+    fprintf(Out, "----------------------------------------------------------\n");
+  }
+  fclose(Out);
+}
+
+//-----------------------------------------------------------------------------
+
+void Print_Tx()
+{
+  FILE* Out = fopen("Tx.txt", "w");
+  Double_t th;
+  Double_t Obs, Obs_meas;
+
+  Parse_MAID();
+
+  for(Int_t e=1; e<maid_bin-1; e++)
+  {
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
+    for(Int_t t=0; t<18; t++)
+    {
+      th = 10.0*t + 5.0;
+      Obs = Tx(th, e);
+      Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
+    }
+    fprintf(Out, "----------------------------------------------------------\n");
+  }
+  fclose(Out);
+}
+
+//-----------------------------------------------------------------------------
+
+void Print_Tz()
+{
+  FILE* Out = fopen("Tz.txt", "w");
+  Double_t th;
+  Double_t Obs, Obs_meas;
+
+  Parse_MAID();
+
+  for(Int_t e=1; e<maid_bin-1; e++)
+  {
+    Double_t lo = maid_en[e]-maid_en[e-1];
+    Double_t hi = maid_en[e+1]-maid_en[e];
+    fprintf(Out, "E = %8.3f MeV, E_lo = %8.3f MeV, E_hi = %8.3f MeV\n", maid_en[e], maid_en[e]-lo/2.0, maid_en[e]+hi/2.0);
+    fprintf(Out, "Systematic = 0.05, Preliminary = 0, PSEUDO_RPR2011\n");
+
+    for(Int_t t=0; t<18; t++)
+    {
+      th = 10.0*t + 5.0;
+      Obs = Tz(th, e);
+      Obs_meas = Obs*(1.0 + gRandom->Gaus(0.0, 0.05/Sin(th*DegToRad())));
+      //fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs_meas, fabs(Obs)*0.05/Sin(th*DegToRad()));
+      fprintf(Out, "%7.3f  %10.6f  %10.6f\n", th, Obs, 0.000001);
+    }
+    fprintf(Out, "----------------------------------------------------------\n");
+  }
+  fclose(Out);
+}
+
+//-----------------------------------------------------------------------------
+
