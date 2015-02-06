@@ -171,11 +171,12 @@ void IsoMultipole(Char_t* Mlp, Char_t* Iso, Bool_t SAVE=false, Double_t Lo=0.0, 
   Double_t MoRe_p[N_MAX];
   Double_t MoIm_0[N_MAX];
   Double_t MoIm_p[N_MAX];
+  Double_t MoW_0[N_MAX];
+  Double_t MoW_p[N_MAX];
   Double_t MoRe[N_MAX];
   Double_t MoIm[N_MAX];
-  Double_t MoW[N_MAX];
   Int_t PlPts;
-  Int_t MoPts;
+  Int_t MoPts_0, MoPts_p;
   Double_t W, Re, DRe, Im, DIm;
   Double_t Min = 0.0;
   Double_t Max = 0.0;
@@ -263,15 +264,15 @@ void IsoMultipole(Char_t* Mlp, Char_t* Iso, Bool_t SAVE=false, Double_t Lo=0.0, 
   fgets(Buffer, sizeof(Buffer), InModel_0);
   fgets(Buffer, sizeof(Buffer), InModel_0);
   //Read multipole model values from file
-  MoPts = 0;
+  MoPts_0 = 0;
   while(!feof(InModel_0))
   {
     if(fscanf(InModel_0, "%lf %lf %lf", &W, &Re, &Im)==3)
     {
-      MoW[MoPts] = W;
-      MoRe_0[MoPts] = Re;
-      MoIm_0[MoPts] = Im;
-      MoPts++;
+      MoW_0[MoPts_0]  = W;
+      MoRe_0[MoPts_0] = Re;
+      MoIm_0[MoPts_0] = Im;
+      MoPts_0++;
     }
   }
   //Close file with model values
@@ -284,30 +285,35 @@ void IsoMultipole(Char_t* Mlp, Char_t* Iso, Bool_t SAVE=false, Double_t Lo=0.0, 
   fgets(Buffer, sizeof(Buffer), InModel_p);
   fgets(Buffer, sizeof(Buffer), InModel_p);
   //Read multipole model values from file
-  MoPts = 0;
+  MoPts_p = 0;
   while(!feof(InModel_p))
   {
     if(fscanf(InModel_p, "%lf %lf %lf", &W, &Re, &Im)==3)
     {
-      MoW[MoPts] = W;
-      MoRe_p[MoPts] = Re;
-      MoIm_p[MoPts] = Im;
-      MoPts++;
+      MoW_p[MoPts_p]  = W;
+      MoRe_p[MoPts_p] = Re;
+      MoIm_p[MoPts_p] = Im;
+      MoPts_p++;
     }
   }
   //Close file with model values
   fclose(InModel_p);
 
   //Create selected isospin multipole from p pi0 and n pi+ multipoles
-  for(Int_t w=0; w<MoPts; w++)
+  for(Int_t wp=0; wp<MoPts_p; wp++)
   {
-    if(!strcmp(Iso, "32"))  { MoRe[w] = A_32(MoRe_0[w], MoRe_p[w]); MoIm[w] = A_32(MoIm_0[w], MoIm_p[w]); }
-    if(!strcmp(Iso, "p12")) { MoRe[w] = A_12(MoRe_0[w], MoRe_p[w]); MoIm[w] = A_12(MoIm_0[w], MoIm_p[w]); }
+    //Find corresponding energy bin between n pi+ and p pi0 multipoles
+    Int_t w0;
+    for(Int_t w0=0; w0<MoPts_0; w0++)
+      if(MoW_p[wp]==MoW_0[w0]) break;
+    //Create isospin multipoles
+    if(!strcmp(Iso, "32"))  { MoRe[wp] = A_32(MoRe_0[w0], MoRe_p[wp]); MoIm[wp] = A_32(MoIm_0[w0], MoIm_p[wp]); }
+    if(!strcmp(Iso, "p12")) { MoRe[wp] = A_12(MoRe_0[w0], MoRe_p[wp]); MoIm[wp] = A_12(MoIm_0[w0], MoIm_p[wp]); }
   }
 
   //Create graphs for real and imaginary parts of model multipole
-  ModelRe = new TGraph(MoPts, MoW, MoRe);
-  ModelIm = new TGraph(MoPts, MoW, MoIm);
+  ModelRe = new TGraph(MoPts_p, MoW_p, MoRe);
+  ModelIm = new TGraph(MoPts_p, MoW_p, MoIm);
 
   //Color, line size adjustments
   ModelRe->SetLineColor(kRed);
@@ -341,7 +347,7 @@ void IsoMultipole(Char_t* Mlp, Char_t* Iso, Bool_t SAVE=false, Double_t Lo=0.0, 
   }
 
   if(SAVE) PlotsRe->SetTitle("");
-  if(SAVE) sprintf(Buffer, "isospin/%s_%s.pdf", Mlp, Iso);
+  if(SAVE) sprintf(Buffer, "isospin/%s_%s.eps", Mlp, Iso);
   if(SAVE) Canvas->SaveAs(Buffer);
 }
 
